@@ -1,0 +1,295 @@
+lang	id	kind	text
+es	0	sentence	¡Hola, buenos días!
+es	1	sentence	¿Cómo estás?
+es	2	sentence	Estoy bien, gracias. ¿Y tú?
+es	3	sentence	Me llamo Ana. ¿Cómo te llamas?
+es	4	sentence	Mucho gusto.
+es	5	sentence	No entiendo. ¿Puede hablar más despacio?
+es	6	sentence	Un café con leche, por favor.
+es	7	sentence	Quisiera una botella de agua.
+es	8	sentence	¿Cuánto es?
+es	9	sentence	¿Puedo pagar con tarjeta?
+es	10	sentence	¿Tienen wifi?
+es	11	sentence	La cuenta, por favor.
+es	12	sentence	Perdone, ¿dónde está la estación de tren?
+es	13	sentence	¿Está lejos de aquí?
+es	14	sentence	Gire a la izquierda en la próxima calle.
+es	15	sentence	Siga todo recto.
+es	16	sentence	Un billete al centro, por favor.
+es	17	sentence	¿A qué hora sale el autobús?
+es	18	sentence	Tengo una reserva a nombre de Weber.
+es	19	sentence	¿El desayuno está incluido?
+es	20	sentence	¿A qué hora tenemos que dejar la habitación?
+es	21	sentence	El aire acondicionado no funciona.
+es	22	sentence	¿Me puede llamar un taxi?
+es	23	sentence	¿Puedo dejar mi equipaje aquí?
+es	24	sentence	Solo estoy mirando, gracias.
+es	25	sentence	¿Tiene esto en una talla más grande?
+es	26	sentence	Cuesta veinte euros.
+es	27	sentence	Es demasiado caro.
+es	28	sentence	¿Dónde me lo puedo probar?
+es	29	sentence	Me lo llevo.
+es	30	sentence	Una mesa para dos, por favor.
+es	31	sentence	¿Qué me recomienda?
+es	32	sentence	Soy vegetariano.
+es	33	sentence	Soy alérgico a los frutos secos.
+es	34	sentence	¡Estaba delicioso!
+es	35	sentence	¿Nos trae un poco más de pan?
+es	36	sentence	¿De dónde eres?
+es	37	sentence	Soy de Alemania.
+es	38	sentence	Trabajo como ingeniero de software.
+es	39	sentence	¿Qué haces en tu tiempo libre?
+es	40	sentence	Llevo dos meses aprendiendo tu idioma.
+es	41	sentence	Hoy hace muy buen tiempo.
+es	42	sentence	Necesito un médico.
+es	43	sentence	Me duele la cabeza.
+es	44	sentence	¿Dónde está la farmacia más cercana?
+es	45	sentence	¿Tiene algo para el resfriado?
+es	46	sentence	Tengo fiebre desde ayer.
+es	47	sentence	¡Llame a una ambulancia!
+es	48	sentence	¿Qué hora es?
+es	49	sentence	¿Quedamos mañana a las ocho?
+es	50	sentence	Llego diez minutos tarde.
+es	51	sentence	¿Estás libre el sábado?
+es	52	sentence	Lo siento, hoy no puedo.
+es	53	sentence	¡Hasta luego!
+es	54	sentence	He perdido mi móvil.
+es	55	sentence	¿Me puede ayudar, por favor?
+es	56	sentence	Mi tarjeta no funciona.
+es	57	sentence	He perdido mi vuelo.
+es	58	sentence	¿Cómo se dice eso?
+es	59	sentence	¿Qué significa esta palabra?
+es	60	sentence	Dos cafés y una ración de churros, por favor.
+es	61	sentence	¿Para tomar aquí o para llevar?
+es	62	sentence	Para tomar aquí, por favor.
+es	63	sentence	¿Tiene chocolate caliente?
+es	64	sentence	¡Todavía están calentitos!
+es	65	sentence	¿Me pone también un vaso de agua?
+es	66	sentence	¿Qué tren va a Toledo?
+es	67	sentence	Dos billetes de ida y vuelta, por favor.
+es	68	sentence	¿Cuánto cuesta la entrada al museo?
+es	69	sentence	¿Hay descuento para estudiantes?
+es	70	sentence	¿Dónde se coge el autobús al casco antiguo?
+es	71	sentence	¿Se pueden hacer fotos dentro del museo?
+es	84	sentence	Un café con leche grande para llevar, por favor.
+es	85	sentence	Con leche de avena, por favor.
+es	86	sentence	Sin azúcar.
+es	87	sentence	¿Me da una tapa, por favor?
+es	88	sentence	¿A nombre de quién?
+es	89	sentence	Tengo un poco de prisa.
+es	90	sentence	¿Tienen mesa para seis?
+es	91	sentence	¿Cuánto hay que esperar?
+es	92	sentence	Podemos esperar en la barra.
+es	93	sentence	¿Podemos sentarnos fuera?
+es	94	sentence	Vienen dos amigos más.
+es	95	sentence	¿Podemos pagar por separado?
+es	96	sentence	¿Necesita bolsa?
+es	97	sentence	No, gracias, tengo mi bolsa.
+es	98	sentence	¿Tiene tarjeta de cliente?
+es	99	sentence	¿Con tarjeta o en efectivo?
+es	100	sentence	Introduzca la tarjeta, por favor.
+es	101	sentence	¿Quiere el tique?
+es	102	sentence	¿Qué es esto?
+es	103	sentence	¿Cómo funciona?
+es	104	sentence	¿Está abierto los domingos?
+es	105	sentence	¿Por qué está cerrado?
+es	106	sentence	¿A quién puedo preguntar?
+es	107	sentence	¿Cuál me recomienda?
+es	108	sentence	La mesa está al lado de la ventana.
+es	109	sentence	¿Está libre esta silla?
+es	110	sentence	Mi portátil está en el escritorio.
+es	111	sentence	Las llaves están en el cajón.
+es	112	sentence	¿Dónde está el interruptor de la luz?
+es	113	sentence	La cama es muy cómoda.
+es	114	sentence	Quiero pan, queso y jamón.
+es	115	sentence	¿Tiene pescado fresco hoy?
+es	116	sentence	Un kilo de tomates, por favor.
+es	117	sentence	No como carne.
+es	118	sentence	Arroz con pollo y verduras.
+es	119	sentence	Los huevos y la leche están allí.
+es	120	sentence	Los lunes trabajo desde casa.
+es	121	sentence	Normalmente me levanto a las siete.
+es	122	sentence	Anoche dormí fatal.
+es	123	sentence	Ahora mismo estoy trabajando.
+es	124	sentence	Me voy a la cama, estoy muy cansado.
+es	125	sentence	Después del trabajo salgo a correr.
+es	126	sentence	Se tarda unos veinte minutos.
+es	127	sentence	La tienda abre a las nueve y cierra a las ocho.
+es	128	sentence	Voy a estar aquí una semana.
+es	129	sentence	Son las tres y media.
+es	130	sentence	Llevo una hora esperando.
+es	131	sentence	Nos vemos dentro de dos días.
+es	132	sentence	Quisiera alquilar un coche para tres días.
+es	133	sentence	¿El seguro está incluido?
+es	134	sentence	Aquí tiene mi carné de conducir.
+es	135	sentence	¿Tengo que devolverlo con el depósito lleno?
+es	136	sentence	¿Es manual o automático?
+es	137	sentence	¿Dónde puedo aparcar?
+es	g0	passage	¡Hola! Perdona, ¿eres el amigo de Lucía? Ella me ha dicho que llegabas hoy. Yo soy Marta, su compañera de piso. Lucía todavía está en el trabajo, pero vuelve sobre las siete.
+es	g2	passage	Lo siento, la máquina de tarjetas no funciona ahora mismo. Si quiere, puede pagar en efectivo, o hay un cajero justo al lado de la farmacia, a dos minutos.
+es	g4	passage	Atención, por favor. El tren con destino a Valencia, que tenía prevista su salida a las diez y cuarto, saldrá con veinte minutos de retraso por la vía cuatro. Disculpen las molestias.
+es	g6	passage	Su habitación todavía no está lista, porque la limpieza termina a las dos. Mientras tanto, puede dejar las maletas aquí en recepción y, por la espera, el desayuno de hoy corre de nuestra cuenta.
+es	g8	passage	Esta talla ya no la tenemos en tienda, pero se la podemos pedir y llega en tres o cuatro días. Si no, creo que en la tienda del centro comercial todavía les quedan.
+es	g10	passage	Hoy el pescado del día es dorada a la plancha, viene con patatas y ensalada. El cordero se nos ha acabado, lo siento. Y de postre, la tarta de queso es casera, la recomiendo mucho.
+es	g12	passage	Pues yo nací en Sevilla, pero llevo casi diez años viviendo en Madrid por el trabajo. Me gusta la ciudad, aunque echo de menos el sol y, sobre todo, la comida de mi madre.
+es	g14	passage	Tómese una pastilla cada ocho horas, siempre después de comer, durante cinco días. Si mañana todavía tiene fiebre o le duele más la garganta, vuelva o vaya directamente al centro de salud.
+es	g16	passage	Oye, al final no puedo el sábado por la tarde, tengo que ayudar a mi hermano con la mudanza. ¿Te viene bien el domingo por la mañana? Podríamos ir al Rastro y luego tomar algo.
+es	g18	passage	Para bloquear la tarjeta tiene que llamar a su banco, el número está en la aplicación. Y para el móvil, lo mejor es poner una denuncia en la comisaría; la más cercana está en esta misma calle, al fondo.
+es	g20	passage	Los churros salen ahora mismo, en cinco minutillos los tienen. El chocolate es bastante espeso, si lo prefiere más ligero le pongo un café con leche. Siéntense donde quieran, que se lo llevo a la mesa.
+es	g22	passage	Las entradas para la catedral se compran en la taquilla de enfrente, no aquí. Los miércoles por la tarde es gratis para los residentes, pero para los turistas cuesta doce euros, con la audioguía incluida.
+es	g24	passage	¿El café con leche lo quiere grande o normal? La leche de avena cuesta cincuenta céntimos más. Ahora mismo hay un poco de cola, así que serán unos cinco minutos. ¿A nombre de quién lo pongo?
+es	g26	passage	Para seis personas ahora mismo no tenemos nada dentro, pero en la terraza se queda libre una mesa en unos quince minutos. Si quieren, pueden esperar en la barra y les aviso.
+es	g28	passage	Son veintitrés con cuarenta. ¿Tiene tarjeta de cliente? Con ella hoy tiene un diez por ciento de descuento en la fruta. Las bolsas cuestan diez céntimos cada una.
+es	g30	passage	Esta máquina es para recargar la tarjeta de transporte. Primero eliges el idioma, luego pones la tarjeta aquí encima y pagas. Si te da error, pregunta en la ventanilla, que está abierta hasta las diez.
+es	g32	passage	El piso es pequeño pero muy práctico. En el salón tienes un sofá cama y un escritorio junto a la ventana para trabajar. Las toallas están en el armario del pasillo y la llave del buzón, en el cajón de la cocina.
+es	g34	passage	Hoy el pescado está muy bien, la merluza ha llegado esta mañana. Las fresas también están de oferta, a dos euros la caja. Lo que no me queda es pan integral, solo el blanco.
+es	g36	passage	Esta semana estoy fatal. Trabajo de nueve a siete, luego voy al gimnasio y llego a casa tardísimo. Ayer me acosté a la una y hoy me he levantado a las seis. Necesito dormir un fin de semana entero.
+es	g38	passage	El museo abre de martes a domingo, de diez a seis, pero la última entrada es a las cinco. La visita completa dura más o menos hora y media, así que yo vendría como muy tarde a las cuatro.
+es	g40	passage	El coche tiene el depósito lleno y hay que devolverlo igual. El seguro básico está incluido, pero si quiere el seguro a todo riesgo son quince euros más al día. Lo puede dejar en el aeropuerto sin coste adicional.
+pt	0	sentence	Olá, bom dia!
+pt	1	sentence	Como estás?
+pt	2	sentence	Estou bem, obrigado. E tu?
+pt	3	sentence	Chamo-me Ana. Como te chamas?
+pt	4	sentence	Muito prazer.
+pt	5	sentence	Não percebo. Pode falar mais devagar?
+pt	6	sentence	Um café com leite, por favor.
+pt	7	sentence	Queria uma garrafa de água.
+pt	8	sentence	Quanto é?
+pt	9	sentence	Posso pagar com cartão?
+pt	10	sentence	Têm Wi-Fi?
+pt	11	sentence	A conta, por favor.
+pt	12	sentence	Desculpe, onde fica a estação de comboios?
+pt	13	sentence	Fica longe daqui?
+pt	14	sentence	Vire à esquerda na próxima rua.
+pt	15	sentence	Siga em frente.
+pt	16	sentence	Um bilhete para o centro, por favor.
+pt	17	sentence	A que horas parte o autocarro?
+pt	18	sentence	Tenho uma reserva em nome de Weber.
+pt	19	sentence	O pequeno-almoço está incluído?
+pt	20	sentence	A que horas temos de deixar o quarto?
+pt	21	sentence	O ar condicionado não funciona.
+pt	22	sentence	Pode chamar-me um táxi?
+pt	23	sentence	Posso deixar a bagagem aqui?
+pt	24	sentence	Estou só a ver, obrigado.
+pt	25	sentence	Tem isto num tamanho maior?
+pt	26	sentence	Custa vinte euros.
+pt	27	sentence	É demasiado caro.
+pt	28	sentence	Onde posso experimentar?
+pt	29	sentence	Vou levar.
+pt	30	sentence	Uma mesa para dois, por favor.
+pt	31	sentence	O que me recomenda?
+pt	32	sentence	Sou vegetariano.
+pt	33	sentence	Sou alérgico a frutos secos.
+pt	34	sentence	Estava delicioso!
+pt	35	sentence	Pode trazer-nos mais pão?
+pt	36	sentence	De onde és?
+pt	37	sentence	Sou da Alemanha.
+pt	38	sentence	Trabalho como engenheiro de software.
+pt	39	sentence	O que fazes nos tempos livres?
+pt	40	sentence	Estou a aprender a tua língua há dois meses.
+pt	41	sentence	Hoje está um tempo ótimo.
+pt	42	sentence	Preciso de um médico.
+pt	43	sentence	Dói-me a cabeça.
+pt	44	sentence	Onde fica a farmácia mais próxima?
+pt	45	sentence	Tem alguma coisa para a constipação?
+pt	46	sentence	Tenho febre desde ontem.
+pt	47	sentence	Chame uma ambulância!
+pt	48	sentence	Que horas são?
+pt	49	sentence	Encontramo-nos amanhã às oito?
+pt	50	sentence	Vou chegar dez minutos atrasado.
+pt	51	sentence	Estás livre no sábado?
+pt	52	sentence	Desculpa, hoje não posso.
+pt	53	sentence	Até logo!
+pt	54	sentence	Perdi o meu telemóvel.
+pt	55	sentence	Pode ajudar-me, por favor?
+pt	56	sentence	O meu cartão não está a funcionar.
+pt	57	sentence	Perdi o meu voo.
+pt	58	sentence	Como se diz isso?
+pt	59	sentence	O que significa esta palavra?
+pt	72	sentence	Duas bicas e dois pastéis de nata, por favor.
+pt	73	sentence	É para comer aqui ou para levar?
+pt	74	sentence	Para comer aqui, se faz favor.
+pt	75	sentence	Tem canela?
+pt	76	sentence	Ainda estão quentinhos!
+pt	77	sentence	Pode dar-me também um copo de água?
+pt	78	sentence	Qual é o comboio que vai para Sintra?
+pt	79	sentence	Dois bilhetes de ida e volta, por favor.
+pt	80	sentence	Quanto custa a entrada no palácio?
+pt	81	sentence	Há desconto para estudantes?
+pt	82	sentence	Onde apanho o autocarro para o Palácio da Pena?
+pt	83	sentence	Posso tirar fotografias dentro do museu?
+pt	84	sentence	Um galão grande para levar, por favor.
+pt	85	sentence	Com leite de aveia, por favor.
+pt	86	sentence	Sem açúcar.
+pt	87	sentence	Pode dar-me uma tampa, por favor?
+pt	88	sentence	Em nome de quem?
+pt	89	sentence	Estou com um bocado de pressa.
+pt	90	sentence	Têm mesa para seis?
+pt	91	sentence	Quanto tempo é preciso esperar?
+pt	92	sentence	Podemos esperar ao balcão.
+pt	93	sentence	Podemos sentar-nos lá fora?
+pt	94	sentence	Vêm mais dois amigos.
+pt	95	sentence	Podemos pagar em separado?
+pt	96	sentence	Precisa de saco?
+pt	97	sentence	Não, obrigado, tenho o meu saco.
+pt	98	sentence	Tem cartão de cliente?
+pt	99	sentence	Cartão ou dinheiro?
+pt	100	sentence	Introduza o cartão, por favor.
+pt	101	sentence	Quer o talão?
+pt	102	sentence	O que é isto?
+pt	103	sentence	Como é que funciona?
+pt	104	sentence	Está aberto ao domingo?
+pt	105	sentence	Porque é que está fechado?
+pt	106	sentence	A quem posso perguntar?
+pt	107	sentence	Qual me recomenda?
+pt	108	sentence	A mesa está ao lado da janela.
+pt	109	sentence	Esta cadeira está livre?
+pt	110	sentence	O meu portátil está na secretária.
+pt	111	sentence	As chaves estão na gaveta.
+pt	112	sentence	Onde está o interruptor da luz?
+pt	113	sentence	A cama é muito confortável.
+pt	114	sentence	Queria pão, queijo e fiambre.
+pt	115	sentence	Tem peixe fresco hoje?
+pt	116	sentence	Um quilo de tomates, por favor.
+pt	117	sentence	Não como carne.
+pt	118	sentence	Arroz com frango e legumes.
+pt	119	sentence	Os ovos e o leite estão ali.
+pt	120	sentence	Às segundas trabalho a partir de casa.
+pt	121	sentence	Normalmente levanto-me às sete.
+pt	122	sentence	Dormi muito mal esta noite.
+pt	123	sentence	Neste momento estou a trabalhar.
+pt	124	sentence	Vou para a cama, estou muito cansado.
+pt	125	sentence	Depois do trabalho vou correr.
+pt	126	sentence	Demora uns vinte minutos.
+pt	127	sentence	A loja abre às nove e fecha às oito.
+pt	128	sentence	Vou ficar cá uma semana.
+pt	129	sentence	São três e meia.
+pt	130	sentence	Estou à espera há uma hora.
+pt	131	sentence	Vemo-nos daqui a dois dias.
+pt	132	sentence	Queria alugar um carro por três dias.
+pt	133	sentence	O seguro está incluído?
+pt	134	sentence	Aqui está a minha carta de condução.
+pt	135	sentence	Tenho de o devolver com o depósito cheio?
+pt	136	sentence	É manual ou automático?
+pt	137	sentence	Onde posso estacionar?
+pt	g1	passage	Olá! Desculpa, és o amigo da Inês? Ela disse-me que chegavas hoje. Eu sou a Rita, vivo com ela. A Inês ainda está no trabalho, mas volta por volta das sete.
+pt	g3	passage	Peço desculpa, a máquina do multibanco não está a funcionar neste momento. Se quiser, pode pagar em dinheiro, ou há uma caixa multibanco mesmo ao lado da farmácia, a dois minutos.
+pt	g5	passage	Atenção, por favor. O comboio com destino ao Porto, com partida prevista para as dez e um quarto, vai sair com vinte minutos de atraso da linha quatro. Pedimos desculpa pelo incómodo.
+pt	g7	passage	O seu quarto ainda não está pronto, porque a limpeza só termina às duas. Entretanto, pode deixar as malas aqui na receção e, pela espera, o pequeno-almoço de hoje fica por nossa conta.
+pt	g9	passage	Este tamanho já não temos em loja, mas podemos encomendar e chega daqui a três ou quatro dias. Senão, acho que a loja do centro comercial ainda tem.
+pt	g11	passage	Hoje o peixe do dia é dourada grelhada, vem com batatas e salada. O borrego já acabou, peço desculpa. E de sobremesa, o bolo de bolacha é feito cá em casa, recomendo muito.
+pt	g13	passage	Olha, eu nasci no Porto, mas já vivo em Lisboa há quase dez anos por causa do trabalho. Gosto da cidade, mas tenho saudades da família e, sobretudo, da comida da minha mãe.
+pt	g15	passage	Tome um comprimido de oito em oito horas, sempre depois das refeições, durante cinco dias. Se amanhã ainda tiver febre ou se a garganta piorar, volte cá ou vá diretamente ao centro de saúde.
+pt	g17	passage	Olha, afinal não posso no sábado à tarde, tenho de ajudar o meu irmão com a mudança. Dá-te jeito domingo de manhã? Podíamos ir à Feira da Ladra e depois beber qualquer coisa.
+pt	g19	passage	Para cancelar o cartão tem de ligar para o seu banco, o número está na aplicação. Quanto ao telemóvel, o melhor é fazer queixa na esquadra; a mais próxima fica nesta mesma rua, lá ao fundo.
+pt	g21	passage	Os pastéis acabaram de sair do forno, estão a escaldar, cuidado! A canela e o açúcar estão ali no balcão. Se quiserem sentar-se lá fora, há uma mesa livre, e eu levo-lhes as bicas.
+pt	g23	passage	Para o Palácio da Pena, o melhor é apanhar o autocarro 434 aqui à frente da estação. Os bilhetes compram-se online ou na entrada, mas ao fim de semana há muita fila, por isso convém ir cedo.
+pt	g25	passage	Quer o galão grande ou normal? O leite de aveia custa mais cinquenta cêntimos. Agora há um bocadinho de fila, por isso são uns cinco minutos. Em nome de quem é?
+pt	g27	passage	Para seis pessoas agora não temos nada lá dentro, mas na esplanada vai ficar uma mesa livre daqui a uns quinze minutos. Se quiserem, podem esperar ao balcão e eu aviso.
+pt	g29	passage	São vinte e três e quarenta. Tem cartão de cliente? Com o cartão hoje tem dez por cento de desconto na fruta. Os sacos custam dez cêntimos cada.
+pt	g31	passage	Esta máquina é para carregar o cartão de transportes. Primeiro escolhe a língua, depois põe o cartão aqui em cima e paga. Se der erro, pergunte na bilheteira, que está aberta até às dez.
+pt	g33	passage	O apartamento é pequeno mas muito prático. Na sala tem um sofá-cama e uma secretária ao pé da janela para trabalhar. As toalhas estão no armário do corredor e a chave da caixa do correio está na gaveta da cozinha.
+pt	g35	passage	Hoje o peixe está muito bom, a pescada chegou esta manhã. Os morangos também estão em promoção, a dois euros a caixa. O que já não tenho é pão integral, só o branco.
+pt	g37	passage	Esta semana está a ser terrível. Trabalho das nove às sete, depois vou ao ginásio e chego a casa tardíssimo. Ontem deitei-me à uma e hoje levantei-me às seis. Preciso de dormir um fim de semana inteiro.
+pt	g39	passage	O museu abre de terça a domingo, das dez às seis, mas a última entrada é às cinco. A visita completa demora mais ou menos hora e meia, por isso eu vinha o mais tardar às quatro.
+pt	g41	passage	O carro tem o depósito cheio e tem de o devolver da mesma forma. O seguro básico está incluído, mas se quiser o seguro contra todos os riscos são mais quinze euros por dia. Pode deixá-lo no aeroporto sem custo adicional.

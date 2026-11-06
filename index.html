@@ -1,0 +1,1454 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="Learn practical Spanish and European Portuguese sentence by sentence: audio, spaced repetition, a skill tree of real-life scenes.">
+<meta name="theme-color" content="#E8EDFB" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0E1330" media="(prefers-color-scheme: dark)">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Frase a Frase">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<style>html{color-scheme:light}:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font:14px/1.4 system-ui,-apple-system,sans-serif}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Frase a Frase</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Atkinson+Hyperlegible:wght@400;700&family=Literata:opsz,wght@7..72,500;7..72,600&display=swap">
+<style>
+/* Layout: phone column — sticky header, mascot hero card, zig-zag game map of unit coins, tactile full-screen exercise sessions */
+:root{
+  --bg:#E8EDFB; --bg-glow1:#D6E0FF; --bg-glow2:#FFE3D3; --surface:#FFFFFF; --surface-2:#F4F6FE;
+  --ink:#18213D; --muted:#5A6588; --line:#D3DAEF; --line-deep:#BCC5E2;
+  --btn:#3A5BE0; --btn-deep:#2238A8; --btn-hi:#5A79F2; --on-btn:#FFFFFF;
+  --soft:#E0E6FD; --accent:#3A5BE0;
+  --gold:#FFB627; --gold-deep:#D08600; --gold-hi:#FFD36B;
+  --coral:#FF7A59;
+  --ok:#1E9A5B; --ok-deep:#137043; --ok-soft:#DDF4E7;
+  --bad:#DC463D; --bad-deep:#A12D26; --bad-soft:#FDE2E0;
+  --lock:#C9D0E6; --lock-deep:#A9B2CE;
+  --sc-sky:#CFE6FF; --sc-ground:#BFD0EE; --sc-wall:#FBE7D3; --sc-wood:#D19563; --sc-wood-d:#9E673F; --sc-metal:#D3DAE8; --sc-metal-d:#9AA4BE;
+  --sc-glass:#E6F3FF; --sc-frame:#FFFFFF; --sc-win:#FFFFFF; --sc-build:#A9BCE6; --sc-sun:#FFC23F; --sc-moon:#DDE3F5; --sc-hill:#9DD8A8; --sc-hill2:#7CC48C;
+  --sc-road:#5D6380; --sc-rail:#8A93AE; --sc-bubble:#FFFFFF; --sc-line:#C9D2EA; --sc-tag:#18213D; --sc-tagtext:#FFFFFF; --sc-steam:#FFFFFF; --sc-cup:#FFFFFF;
+  --sc-board:#2E3A5E; --sc-boardtext:#FFFFFF; --sc-shirt:#5A6588; --sc-cloth:#FF9E86; --sc-plate:#FFFFFF; --sc-palace1:#F4C542; --sc-palace2:#E05A4A; --sc-star-o:0;
+  --sc-crust:#E9A23B; --sc-custard:#FFE08A; --sc-crust-d:#A8611A; --c-skin:#F1C29B; --c-hair:#3B2A20;
+  --br-food:#FF7A59; --br-travel:#3A9BE0; --br-people:#22A060; --br-life:#9B5DE5; --br-words:#E0548E;
+  --shadow:0 1px 0 rgba(255,255,255,.7) inset, 0 10px 30px -12px rgba(34,56,168,.35);
+  /* character colors (same in both themes) */
+  --c-ink:#1D1A33; --c-sun:#FFB627; --c-sun-deep:#F08A00; --c-cheek:#FF7A59; --c-fish:#7FA8E8; --c-fish-deep:#4C76C2; --c-belly:#E4EEFF; --c-white:#FFFFFF;
+  --f-display:"Bricolage Grotesque","Segoe UI",system-ui,sans-serif;
+  --f-body:"Atkinson Hyperlegible",system-ui,-apple-system,sans-serif;
+  --f-phrase:"Literata",Georgia,"Times New Roman",serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0E1330; --bg-glow1:#1E2A6B; --bg-glow2:#3A1F3A; --surface:#1A2250; --surface-2:#141B42;
+  --ink:#EEF1FF; --muted:#A4AED8; --line:#2D3874; --line-deep:#222B5E;
+  --btn:#4D68EE; --btn-deep:#2A3CA6; --btn-hi:#6E86FF; --on-btn:#FFFFFF;
+  --soft:#252F6E; --accent:#8CA2FF;
+  --gold:#FFC23F; --gold-deep:#B57A06; --gold-hi:#FFDA80; --coral:#FF8C6E;
+  --ok:#3DD68A; --ok-deep:#1E8A55; --ok-soft:#14392A;
+  --bad:#FF6B62; --bad-deep:#B13B34; --bad-soft:#43202C;
+  --lock:#333D78; --lock-deep:#252D5E;
+  --shadow:0 1px 0 rgba(255,255,255,.06) inset, 0 14px 30px -14px rgba(0,0,0,.7);
+  --sc-sky:#18204A; --sc-ground:#262F62; --sc-wall:#2E2648; --sc-wood:#6E4A35; --sc-wood-d:#4E3424; --sc-metal:#59638E; --sc-metal-d:#3F4874;
+  --sc-glass:#2C3B73; --sc-frame:#46528A; --sc-win:#FFD66B; --sc-build:#222A5A; --sc-sun:#F4E3A1; --sc-moon:#DDE3F5; --sc-hill:#2A5E4A; --sc-hill2:#1E4638;
+  --sc-road:#1F2340; --sc-rail:#39416B; --sc-bubble:#F2F4FF; --sc-line:#8C96C4; --sc-tag:#FFD66B; --sc-tagtext:#18213D; --sc-steam:#C9D2EA; --sc-cup:#E8ECFA;
+  --sc-board:#11162E; --sc-boardtext:#FFD66B; --sc-shirt:#8C96C4; --sc-cloth:#B85A48; --sc-plate:#DDE3F5; --sc-palace1:#C99A2E; --sc-palace2:#A8423A; --sc-star-o:1;
+  color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0E1330; --bg-glow1:#1E2A6B; --bg-glow2:#3A1F3A; --surface:#1A2250; --surface-2:#141B42;
+  --ink:#EEF1FF; --muted:#A4AED8; --line:#2D3874; --line-deep:#222B5E;
+  --btn:#4D68EE; --btn-deep:#2A3CA6; --btn-hi:#6E86FF; --on-btn:#FFFFFF;
+  --soft:#252F6E; --accent:#8CA2FF;
+  --gold:#FFC23F; --gold-deep:#B57A06; --gold-hi:#FFDA80; --coral:#FF8C6E;
+  --ok:#3DD68A; --ok-deep:#1E8A55; --ok-soft:#14392A;
+  --bad:#FF6B62; --bad-deep:#B13B34; --bad-soft:#43202C;
+  --lock:#333D78; --lock-deep:#252D5E;
+  --shadow:0 1px 0 rgba(255,255,255,.06) inset, 0 14px 30px -14px rgba(0,0,0,.7);
+  --sc-sky:#18204A; --sc-ground:#262F62; --sc-wall:#2E2648; --sc-wood:#6E4A35; --sc-wood-d:#4E3424; --sc-metal:#59638E; --sc-metal-d:#3F4874;
+  --sc-glass:#2C3B73; --sc-frame:#46528A; --sc-win:#FFD66B; --sc-build:#222A5A; --sc-sun:#F4E3A1; --sc-moon:#DDE3F5; --sc-hill:#2A5E4A; --sc-hill2:#1E4638;
+  --sc-road:#1F2340; --sc-rail:#39416B; --sc-bubble:#F2F4FF; --sc-line:#8C96C4; --sc-tag:#FFD66B; --sc-tagtext:#18213D; --sc-steam:#C9D2EA; --sc-cup:#E8ECFA;
+  --sc-board:#11162E; --sc-boardtext:#FFD66B; --sc-shirt:#8C96C4; --sc-cloth:#B85A48; --sc-plate:#DDE3F5; --sc-palace1:#C99A2E; --sc-palace2:#A8423A; --sc-star-o:1;
+  color-scheme:dark}
+
+html,body{height:100%}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.5;overflow-x:hidden;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+.backdrop{position:fixed;inset:0;z-index:-1;pointer-events:none;
+  background:
+    radial-gradient(60vmax 40vmax at 100% 0%, var(--bg-glow2), transparent 60%),
+    radial-gradient(70vmax 50vmax at 0% 30%, var(--bg-glow1), transparent 60%),
+    var(--bg)}
+.backdrop::after{content:"";position:absolute;inset:0;opacity:.35;
+  background-image:radial-gradient(var(--line) 1.2px, transparent 1.4px);background-size:22px 22px}
+.app{max-width:560px;margin:0 auto;padding-bottom:48px;position:relative}
+button{font:inherit;color:inherit;cursor:pointer;-webkit-tap-highlight-color:transparent}
+button:focus-visible,select:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+
+/* chunky 3D button */
+.chunky{--f:var(--btn);--d:var(--btn-deep);--h:var(--btn-hi);
+  border:0;border-radius:16px;padding:14px 20px;font-family:var(--f-display);font-weight:800;font-size:17px;letter-spacing:.01em;
+  color:var(--on-btn);background:linear-gradient(180deg,var(--h),var(--f) 55%);box-shadow:0 5px 0 var(--d), 0 10px 18px -8px var(--d);
+  transform:translateY(0);text-transform:uppercase}
+.chunky:active:not(:disabled){transform:translateY(4px);box-shadow:0 1px 0 var(--d)}
+.chunky:disabled{--f:var(--lock);--d:var(--lock-deep);--h:var(--lock);color:var(--muted);cursor:default}
+.chunky.ok{--f:var(--ok);--d:var(--ok-deep);--h:var(--ok)}
+.chunky.bad{--f:var(--bad);--d:var(--bad-deep);--h:var(--bad)}
+.chunky.gold{--f:var(--gold);--d:var(--gold-deep);--h:var(--gold-hi);color:var(--c-ink)}
+.full{width:100%}
+
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;display:flex;align-items:center;justify-content:space-between;gap:10px;padding-block:12px 10px;
+  background:linear-gradient(var(--bg) 70%, transparent)}
+.brand{font-family:var(--f-display);font-weight:800;font-size:22px;letter-spacing:-.02em;line-height:1}
+.brand em{font-style:normal;color:var(--coral)}
+.hright{display:flex;gap:6px;align-items:center}
+.seg{display:flex;background:var(--surface);border-radius:999px;padding:4px;box-shadow:var(--shadow)}
+.seg button{border:0;background:none;padding:6px 12px;border-radius:999px;font-family:var(--f-display);font-weight:800;font-size:14px;color:var(--muted)}
+.seg button[aria-pressed="true"]{background:var(--btn);color:var(--on-btn);box-shadow:0 3px 0 var(--btn-deep)}
+.icon-btn{border:0;background:var(--surface);border-radius:999px;width:40px;height:40px;display:grid;place-items:center;box-shadow:var(--shadow)}
+.icon-btn svg{width:19px;height:19px}
+
+/* hero */
+.hero{position:relative;background:linear-gradient(160deg,var(--surface),var(--surface-2));border-radius:26px;padding:18px;box-shadow:var(--shadow);margin-top:4px;
+  display:grid;grid-template-columns:104px 1fr;gap:14px;align-items:center;overflow:hidden}
+.hero::after{content:"";position:absolute;right:-40px;top:-40px;width:160px;height:160px;border-radius:50%;background:var(--soft);opacity:.7;z-index:0}
+.hero > *{position:relative;z-index:1;min-width:0}
+.hero .mascot{width:104px;height:104px}
+.hero h2{margin:0;font-family:var(--f-display);font-weight:800;font-size:21px;line-height:1.15;text-wrap:balance}
+.bubble{position:relative;display:inline-block;background:var(--surface);border:2px solid var(--line);border-radius:14px;padding:4px 10px;
+  font-family:var(--f-phrase);font-weight:600;font-size:15px;margin-bottom:8px;box-shadow:0 3px 0 var(--line)}
+.bubble::before{content:"";position:absolute;left:-9px;top:50%;width:12px;height:12px;background:var(--surface);border-left:2px solid var(--line);border-bottom:2px solid var(--line);transform:translateY(-50%) rotate(45deg)}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 12px}
+.chip{display:inline-flex;align-items:center;gap:5px;background:var(--surface-2);border:1px solid var(--line);border-radius:999px;padding:3px 10px 3px 6px;font-size:13px;font-weight:700;font-variant-numeric:tabular-nums}
+.chip svg{width:16px;height:16px}
+.chip.fire svg{color:var(--coral)} .chip.star svg{color:var(--gold)} .chip.due svg{color:var(--accent)}
+.lvl{grid-column:1/-1;display:flex;align-items:center;gap:10px;font-size:12px;color:var(--muted);font-weight:700}
+.lvl .badge{background:linear-gradient(180deg,var(--gold-hi),var(--gold));color:var(--c-ink);border-radius:10px;padding:2px 8px;font-family:var(--f-display);box-shadow:0 2px 0 var(--gold-deep)}
+.xpbar{flex:1;height:10px;border-radius:9px;background:var(--surface-2);border:1px solid var(--line);overflow:hidden}
+.xpbar i{display:block;height:100%;background:linear-gradient(90deg,var(--gold),var(--coral));border-radius:9px}
+
+/* skill tree */
+.map-head{display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin:28px 4px 4px;flex-wrap:wrap}
+.map-head h3{margin:0;font-family:var(--f-display);font-weight:800;font-size:14px;text-transform:uppercase;letter-spacing:.1em;color:var(--muted)}
+.map-head small{color:var(--muted);font-size:13px}
+.legend{display:flex;gap:12px;flex-wrap:wrap;margin:0 4px 6px;font-size:12px;color:var(--muted)}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:5px;vertical-align:-1px}
+.tree{position:relative;margin-top:6px}
+.links{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none}
+.links path{fill:none;stroke:var(--line-deep);stroke-width:4;stroke-linecap:round;stroke-dasharray:2 9;vector-effect:non-scaling-stroke}
+.links path.open{stroke:var(--accent);stroke-dasharray:none;opacity:.55}
+.links path.done{stroke:var(--gold);stroke-dasharray:none;stroke-width:5}
+.node{position:absolute;width:86px;margin-left:-43px;display:flex;flex-direction:column;align-items:center}
+.coin-wrap{position:relative}
+.ring{width:72px;height:72px;border-radius:50%;padding:5px;background:conic-gradient(var(--br) calc(var(--p) * 1%), var(--line) 0);display:grid;place-items:center}
+.coin{width:62px;height:62px;border-radius:50%;border:0;display:grid;place-items:center;color:var(--on-btn);
+  background:radial-gradient(circle at 35% 28%, var(--btn-hi), var(--btn) 60%);box-shadow:0 5px 0 var(--btn-deep), 0 10px 18px -8px var(--btn-deep)}
+.coin svg{width:28px;height:28px}
+.coin:active{transform:translateY(4px);box-shadow:0 1px 0 var(--btn-deep)}
+.node.done .coin{background:radial-gradient(circle at 35% 28%, var(--gold-hi), var(--gold) 60%);box-shadow:0 5px 0 var(--gold-deep), 0 10px 18px -8px var(--gold-deep);color:var(--c-ink)}
+.node.locked .coin{background:var(--lock);box-shadow:0 5px 0 var(--lock-deep);color:var(--muted)}
+.node.locked .ring{background:var(--line)}
+.node.shake .coin{animation:shake .4s}
+.node .scen{position:absolute;right:-6px;top:-4px;background:linear-gradient(180deg,var(--gold-hi),var(--gold));color:var(--c-ink);font-family:var(--f-display);font-weight:800;font-size:10px;letter-spacing:.06em;border-radius:7px;padding:1px 5px;box-shadow:0 2px 0 var(--gold-deep);z-index:2}
+.side-mascot{position:absolute;top:-20px;width:40px;height:40px;z-index:2;pointer-events:none}
+.side-mascot.r{right:-16px} .side-mascot.l{left:-16px;transform:scaleX(-1)}
+.label{margin-top:8px;text-align:center;width:100%}
+.label b{display:block;font-family:var(--f-display);font-weight:800;font-size:13px;line-height:1.15;text-wrap:balance}
+.label span{font-size:11px;color:var(--muted);font-variant-numeric:tabular-nums}
+.node.locked .label{opacity:.55}
+.unit-sheet .lv{display:inline-block;font-size:11px;font-weight:800;letter-spacing:.08em;color:var(--coral)}
+.unit-sheet h3{font-size:24px;line-height:1.15}
+.unit-sheet .desc{margin:0;color:var(--muted)}
+.unit-sheet .preview{display:grid;gap:6px;margin:0;padding:12px 14px;background:var(--surface-2);border-radius:14px;list-style:none}
+.unit-sheet .preview li{font-family:var(--f-phrase);font-size:15px}
+.unit-sheet .preview li span{display:block;font-family:var(--f-body);font-size:12px;color:var(--muted)}
+.needs{font-size:14px;color:var(--muted);margin:0}
+
+/* session */
+.session{display:flex;flex-direction:column;min-height:calc(100vh - 40px)}
+.s-top{display:flex;align-items:center;gap:12px;padding-block:12px 16px}
+.close{border:0;background:none;padding:6px;color:var(--muted);font-size:20px;line-height:1}
+.pbar{flex:1;height:16px;border-radius:12px;background:var(--surface);box-shadow:inset 0 2px 3px rgba(0,0,0,.12);overflow:hidden}
+.pbar i{display:block;height:100%;border-radius:12px;background:linear-gradient(180deg,var(--ok),var(--ok-deep));position:relative;transition:width .4s cubic-bezier(.3,1.4,.5,1)}
+.pbar i::after{content:"";position:absolute;left:8px;right:8px;top:3px;height:4px;border-radius:4px;background:rgba(255,255,255,.4)}
+.combo{display:inline-flex;align-items:center;gap:3px;font-family:var(--f-display);font-weight:800;color:var(--coral);font-variant-numeric:tabular-nums;min-width:44px}
+.combo svg{width:20px;height:20px}
+.combo.pop{animation:pop .4s}
+.q-head{display:flex;gap:12px;align-items:flex-end;margin-bottom:14px}
+.q-head .mini{width:70px;height:70px;flex:none}
+.q-head .qt{min-width:0}
+.kind{font-size:12px;text-transform:uppercase;letter-spacing:.1em;color:var(--accent);font-weight:800;font-family:var(--f-display)}
+.prompt{font-family:var(--f-display);font-weight:800;font-size:21px;margin:2px 0 0;line-height:1.2;text-wrap:balance}
+.stage{background:var(--surface);border-radius:22px;padding:18px;box-shadow:var(--shadow)}
+.phrase{font-family:var(--f-phrase);font-weight:600;font-size:26px;line-height:1.3;margin:0;text-wrap:balance}
+.phrase .gap{display:inline-block;min-width:3.2em;border-bottom:4px dashed var(--gold);height:1em;vertical-align:-2px}
+.en{color:var(--muted);font-size:16px;margin-top:8px}
+.audio-row{display:flex;gap:10px;margin-top:14px;flex-wrap:wrap}
+.play{display:inline-flex;align-items:center;gap:7px;border:0;background:var(--soft);color:var(--accent);font-weight:700;border-radius:999px;padding:9px 15px;box-shadow:0 3px 0 var(--line)}
+.play:active{transform:translateY(2px);box-shadow:0 1px 0 var(--line)}
+.play svg{width:18px;height:18px}
+.big-play{width:104px;height:104px;border-radius:50%;border:0;color:var(--on-btn);display:grid;place-items:center;margin:4px auto 6px;
+  background:radial-gradient(circle at 35% 28%, var(--btn-hi), var(--btn) 60%);box-shadow:0 7px 0 var(--btn-deep), 0 14px 24px -10px var(--btn-deep)}
+.big-play:active{transform:translateY(6px);box-shadow:0 1px 0 var(--btn-deep)}
+.big-play svg{width:44px;height:44px}
+.big-play.talking{animation:pulse 1s ease-in-out infinite}
+.center{text-align:center}
+.opts{display:grid;gap:11px;margin-top:16px}
+.opt{text-align:left;border:2px solid var(--line);border-bottom-width:5px;background:var(--surface);border-radius:16px;padding:13px 15px;font-size:16px;line-height:1.35;display:flex;gap:12px;align-items:flex-start}
+.opt .k{flex:none;width:26px;height:26px;border-radius:8px;border:2px solid var(--line);display:grid;place-items:center;font-size:12px;color:var(--muted);font-weight:800}
+.opt.tgt{font-family:var(--f-phrase);font-size:17px}
+.opt:active:not(:disabled){transform:translateY(3px);border-bottom-width:2px;margin-top:3px}
+.opt.right{border-color:var(--ok);background:var(--ok-soft);animation:pop .35s}
+.opt.right .k{border-color:var(--ok);color:var(--ok)}
+.opt.wrong{border-color:var(--bad);background:var(--bad-soft);animation:shake .4s}
+.opt:disabled{cursor:default}
+.opts.words{grid-template-columns:1fr 1fr}
+.words .opt{font-family:var(--f-phrase);justify-content:center;text-align:center}
+.words .opt .k{display:none}
+
+.answer-line{min-height:70px;margin-top:18px;padding:10px 4px;display:flex;flex-wrap:wrap;gap:8px;align-content:flex-start;
+  background:repeating-linear-gradient(transparent 0 53px, var(--line) 53px 55px)}
+.answer-line.right .tile-w{border-color:var(--ok);background:var(--ok-soft);color:var(--ok)}
+.answer-line.wrong{animation:shake .4s}
+.answer-line.wrong .tile-w{border-color:var(--bad);background:var(--bad-soft);color:var(--bad)}
+.placeholder{color:var(--muted);font-size:14px;align-self:center;padding-left:4px}
+.bank{display:flex;flex-wrap:wrap;gap:9px;margin-top:16px;justify-content:center}
+.tile-w{font-family:var(--f-phrase);font-weight:500;font-size:18px;border:2px solid var(--line);border-bottom-width:5px;background:var(--surface);border-radius:12px;padding:7px 13px;min-height:46px}
+.tile-w:active:not(:disabled){transform:translateY(3px);border-bottom-width:2px}
+.bank .tile-w:disabled{background:var(--line);color:transparent;border-color:var(--line);cursor:default}
+.answer-line .tile-w{animation:drop .22s ease-out}
+
+.feedback{margin-top:auto;padding-top:18px}
+.fb{border-radius:22px;padding:14px 16px 16px;display:grid;gap:6px;animation:rise .28s cubic-bezier(.3,1.3,.5,1)}
+.fb.ok{background:var(--ok-soft)} .fb.no{background:var(--bad-soft)}
+.fb-top{display:flex;align-items:center;gap:10px}
+.fb-top .mini{width:64px;height:64px;flex:none}
+.fb-top strong{display:block;font-family:var(--f-display);font-weight:800;font-size:20px;line-height:1.1}
+.fb.ok strong{color:var(--ok)} .fb.no strong{color:var(--bad)}
+.fb-top small{font-family:var(--f-phrase);font-size:15px}
+.xp-pop{margin-left:auto;font-family:var(--f-display);font-weight:800;color:var(--gold-deep);background:var(--surface);border-radius:999px;padding:3px 10px;animation:floatup .9s ease-out}
+.fb .phrase{font-size:20px}
+.grades{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-top:10px}
+.grade{padding:10px 4px;display:grid;gap:1px;font-size:15px}
+.grade small{font-family:var(--f-body);font-weight:700;font-size:12px;opacity:.85;text-transform:none;font-variant-numeric:tabular-nums}
+.fb .chunky.full{margin-top:8px}
+
+.intro-tag{display:inline-block;background:linear-gradient(180deg,var(--gold-hi),var(--gold));color:var(--c-ink);font-family:var(--f-display);font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;border-radius:8px;padding:3px 9px;margin-bottom:10px;box-shadow:0 2px 0 var(--gold-deep)}
+.note{font-size:14px;color:var(--muted);margin-top:12px}
+.done-wrap{text-align:center;padding-top:30px;display:grid;justify-items:center;gap:6px}
+.done-wrap .big{width:170px;height:170px}
+.done-wrap h2{font-family:var(--f-display);font-weight:800;font-size:30px;margin:0}
+.done-stats{display:flex;gap:10px;justify-content:center;margin:12px 0 18px;flex-wrap:wrap}
+.dstat{background:var(--surface);border-radius:18px;padding:10px 16px;box-shadow:var(--shadow);min-width:92px}
+.dstat b{display:block;font-family:var(--f-display);font-weight:800;font-size:26px;font-variant-numeric:tabular-nums;line-height:1.1}
+.dstat span{font-size:12px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.06em}
+.dstat.g b{color:var(--gold-deep)} .dstat.o b{color:var(--ok)}
+.cold-stage{background:linear-gradient(160deg,var(--surface),var(--soft))}
+.cold-tag{background:linear-gradient(180deg,var(--br-travel),var(--btn));color:var(--on-btn);box-shadow:0 2px 0 var(--btn-deep)}
+.transcript{font-family:var(--f-phrase);font-weight:500;font-size:18px;line-height:1.45;text-align:left;margin:14px 0 0}
+.cold-q{margin-top:18px}
+.chunky.cold-btn{--f:var(--br-travel);--h:var(--br-travel);--d:var(--btn-deep)}
+/* scenes */
+.scene{position:relative;width:100%;max-width:100%;aspect-ratio:3/1;max-height:170px;border-radius:22px;overflow:hidden;box-shadow:var(--shadow);margin-bottom:14px;background:var(--sc-sky)}
+.scene-svg{display:block;width:100%;height:100%}
+.scene-label{position:absolute;left:10px;top:8px;background:var(--br);color:var(--on-btn);font-family:var(--f-display);font-weight:800;font-size:11px;letter-spacing:.08em;text-transform:uppercase;border-radius:8px;padding:2px 8px;box-shadow:0 2px 0 rgba(0,0,0,.18)}
+.sheet-scene{margin:-4px 0 0}
+.scene.quiet .sc-bubble{display:none}
+.sc-text{font-family:var(--f-display);font-weight:800;font-size:12px;fill:var(--c-ink)}
+.sc-tagtext{font-family:var(--f-body);font-weight:700;font-size:11px;fill:var(--sc-tagtext)}
+.sc-board{font-family:var(--f-display);font-weight:800;font-size:13px;letter-spacing:.06em;fill:var(--sc-boardtext)}
+.sc-q{font-family:var(--f-display);font-weight:800;font-size:18px;fill:var(--accent)}
+.sc-star{opacity:var(--sc-star-o);animation:twinkle 2.4s ease-in-out infinite}
+.sc-bob{animation:bob 2.6s ease-in-out infinite}
+.sc-wave{animation:wavearm .5s ease-in-out infinite alternate}
+.sc-bubble{transform-box:fill-box;transform-origin:center bottom;animation:bubin 4.4s ease-in-out infinite both}
+.sc-steam{animation:steam 2.1s ease-out infinite}
+.sc-slide{animation:slide 5s ease-in-out infinite}
+.sc-pop{transform-box:fill-box;transform-origin:center;animation:popin 3s ease-in-out infinite}
+.sc-flame{transform-box:fill-box;transform-origin:center bottom;animation:flick .22s ease-in-out infinite alternate}
+.sc-walk{animation:walkx 6s ease-in-out infinite}
+.sc-scroll{animation:scroll 6s linear infinite}
+.sc-scroll.slow{animation-duration:14s} .sc-scroll.fast{animation-duration:1.6s}
+.sc-rattle{animation:rattle .32s ease-in-out infinite alternate}
+.sc-wheel{animation:spin .5s linear infinite}
+.sc-drive{animation:drive 8s linear infinite}
+.sc-flag{transform-box:fill-box;transform-origin:left center;animation:flag .6s ease-in-out infinite alternate}
+.sc-swing{animation:swingp 2s ease-in-out infinite alternate}
+.sc-ding{transform-box:fill-box;transform-origin:center bottom;animation:ding 3s ease-in-out infinite}
+.sc-belt{animation:belt .6s linear infinite}
+.sc-items{animation:items 4.5s ease-in-out infinite}
+.sc-blink{animation:blinkop 1.2s steps(2) infinite}
+.sc-buzz{transform-box:fill-box;transform-origin:center;animation:buzz 2.4s ease-in-out infinite}
+.sc-float{animation:floatq 2.4s ease-out infinite}
+.sc-screen,.sc-winb{animation:glow 2.6s ease-in-out infinite alternate}
+.sc-glow{animation:lamp 2.6s ease-in-out infinite alternate}
+@keyframes lamp{from{opacity:.12}to{opacity:.38}}
+.sc-orbit{animation:spin 12s linear infinite}
+.sc-hand-m{animation:spin 3s linear infinite} .sc-hand-h{animation:spin 36s linear infinite}
+.sc-flip{animation:flipg 4s ease-in-out infinite}
+.sc-sun{transform-box:fill-box;transform-origin:center;animation:ripple 3s ease-in-out infinite}
+.scene .mascot{overflow:visible}
+@keyframes twinkle{0%,100%{opacity:calc(var(--sc-star-o) * .3)}50%{opacity:var(--sc-star-o)}}
+@keyframes wavearm{from{transform:rotate(-25deg)}to{transform:rotate(20deg)}}
+@keyframes bubin{0%{opacity:0;transform:scale(.6)}8%,44%{opacity:1;transform:scale(1)}52%,100%{opacity:0;transform:scale(.9)}}
+@keyframes steam{0%{opacity:0;transform:translateY(4px)}30%{opacity:.9}100%{opacity:0;transform:translateY(-12px)}}
+@keyframes slide{0%,20%{transform:translateX(0)}50%,70%{transform:translateX(-60px)}100%{transform:translateX(0)}}
+@keyframes popin{0%,100%{transform:scale(1)}50%{transform:scale(1.12)}}
+@keyframes flick{from{transform:scaleY(.85)}to{transform:scaleY(1.12)}}
+@keyframes walkx{0%,15%{transform:translateX(0)}45%,60%{transform:translateX(-46px)}90%,100%{transform:translateX(0)}}
+@keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-360px)}}
+@keyframes rattle{from{transform:translateY(0)}to{transform:translateY(1.5px)}}
+@keyframes drive{from{transform:translateX(-80px)}to{transform:translateX(420px)}}
+@keyframes flag{from{transform:skewY(-8deg)}to{transform:skewY(8deg)}}
+@keyframes swingp{from{transform:rotate(-8deg)}to{transform:rotate(8deg)}}
+@keyframes ding{0%,80%,100%{transform:translateY(0)}86%{transform:translateY(-4px)}92%{transform:translateY(0)}}
+@keyframes belt{from{transform:translateX(0)}to{transform:translateX(16px)}}
+@keyframes items{0%{transform:translateX(-10px);opacity:0}10%{opacity:1}80%{transform:translateX(100px);opacity:1}100%{transform:translateX(110px);opacity:0}}
+@keyframes blinkop{0%{opacity:1}50%{opacity:.35}}
+@keyframes buzz{0%,70%,100%{transform:rotate(0)}74%{transform:rotate(-12deg)}78%{transform:rotate(12deg)}82%{transform:rotate(-8deg)}86%{transform:rotate(0)}}
+@keyframes floatq{0%{opacity:0;transform:translateY(6px)}30%{opacity:1}100%{opacity:0;transform:translateY(-14px)}}
+@keyframes glow{from{opacity:.65}to{opacity:1}}
+@keyframes flipg{0%,40%{transform:rotate(0)}60%,100%{transform:rotate(180deg)}}
+#toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(20px + env(safe-area-inset-bottom,0px));z-index:40;max-width:min(92vw,440px);
+  background:var(--ink);color:var(--bg);border-radius:14px;padding:10px 14px;font-size:14px;box-shadow:0 10px 30px rgba(0,0,0,.3)}
+#confetti{position:fixed;inset:0;pointer-events:none;z-index:30;width:100%;height:100%}
+
+/* settings */
+.sheet{position:fixed;inset:auto 0 0;z-index:20;background:var(--surface);border-radius:26px 26px 0 0;box-shadow:0 -10px 40px rgba(0,0,0,.25);
+  padding:20px max(16px,env(safe-area-inset-right,0px)) calc(20px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px))}
+.sheet-in{max-width:560px;margin:0 auto;display:grid;gap:14px}
+.sheet h3{margin:0;font-family:var(--f-display);font-weight:800}
+.row{display:grid;gap:6px}
+.row label{font-weight:700;font-size:14px}
+select{font:inherit;padding:11px;border-radius:12px;border:2px solid var(--line);background:var(--surface-2);color:var(--ink);width:100%}
+.ghost{border:2px solid var(--line);border-bottom-width:4px;background:var(--surface);border-radius:14px;padding:11px 16px;font-weight:700}
+.danger{color:var(--bad)}
+.scrim{position:fixed;inset:0;z-index:19;background:rgba(10,14,40,.45)}
+
+/* mascots */
+.mascot{overflow:visible;display:block}
+.mascot .whole{transform-origin:60px 100px;animation:bob 2.8s ease-in-out infinite}
+.mascot .eyes{transform-origin:60px 56px;animation:blink 4.2s infinite}
+.mascot .rays{transform-origin:60px 62px;animation:spin 18s linear infinite}
+.mascot .tail{transform-origin:94px 62px;animation:wiggle 1.1s ease-in-out infinite}
+.mascot .fin{transform-origin:62px 76px;animation:wiggle 1.6s ease-in-out infinite}
+.mascot.happy .whole{animation:hop .55s cubic-bezier(.3,1.6,.5,1) 2, bob 2.8s ease-in-out 1.1s infinite}
+.mascot.happy .rays{animation-duration:3s}
+.mascot.happy .tail{animation-duration:.35s}
+.mascot.sad .whole{animation:droop 1s ease-out forwards}
+.mascot.cheer .whole{animation:hop .6s cubic-bezier(.3,1.6,.5,1) infinite}
+.mascot.cheer .tail{animation-duration:.3s}
+.mascot.cheer .rays{animation-duration:2s}
+.mascot .shadow{transform-origin:60px 108px;animation:shadow 2.8s ease-in-out infinite}
+
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+@keyframes shadow{0%,100%{transform:scaleX(1);opacity:.25}50%{transform:scaleX(.85);opacity:.15}}
+@keyframes blink{0%,92%,100%{transform:scaleY(1)}95%{transform:scaleY(.1)}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes wiggle{0%,100%{transform:rotate(-10deg)}50%{transform:rotate(10deg)}}
+@keyframes hop{0%,100%{transform:translateY(0) scale(1,1)}30%{transform:translateY(0) scale(1.08,.92)}60%{transform:translateY(-16px) scale(.95,1.06)}}
+@keyframes droop{to{transform:translateY(4px) rotate(-6deg) scale(1,.96)}}
+@keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-7px)}40%{transform:translateX(7px)}60%{transform:translateX(-5px)}80%{transform:translateX(4px)}}
+@keyframes pop{0%{transform:scale(1)}40%{transform:scale(1.05)}100%{transform:scale(1)}}
+@keyframes rise{from{transform:translateY(24px);opacity:0}to{transform:none;opacity:1}}
+@keyframes drop{from{transform:translateY(-10px) scale(.9);opacity:.3}to{transform:none;opacity:1}}
+@keyframes floatup{from{transform:translateY(10px);opacity:0}to{transform:none;opacity:1}}
+@keyframes pulse{0%,100%{box-shadow:0 7px 0 var(--btn-deep),0 0 0 0 var(--soft)}50%{box-shadow:0 7px 0 var(--btn-deep),0 0 0 14px var(--soft)}}
+@keyframes ripple{0%,100%{transform:scale(1)}50%{transform:scale(1.06)}}
+.node.open .coin{animation:ripple 1.6s ease-in-out infinite}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="backdrop" aria-hidden="true"></div>
+<div class="app" id="app"></div>
+<div class="scrim" id="scrim" hidden></div>
+<div class="sheet" id="sheet" hidden></div>
+<canvas id="confetti" hidden></canvas>
+
+<script>
+const LANGS={
+  es:{name:'Spanish',native:'Español',code:'es-ES',buddy:'Sol',city:'Madrid'},
+  pt:{name:'Portuguese',native:'Português (PT)',code:'pt-PT',buddy:'Sardi',city:'Lisboa'}
+};
+const LINES={
+  es:{idle:['¡Vamos!','¿Listo?','Poco a poco.','¡A practicar!'],happy:['¡Muy bien!','¡Genial!','¡Eso es!','¡Perfecto!','¡Olé!'],sad:['¡Casi!','No pasa nada.','Otra vez.'],done:['¡Increíble!','¡Qué crack!']},
+  pt:{idle:['Vamos lá!','Pronto?','Devagar se vai ao longe.','Vamos praticar!'],happy:['Muito bem!','Boa!','Isso mesmo!','Perfeito!','Espetacular!'],sad:['Quase!','Não faz mal.','Outra vez.'],done:['Fantástico!','Que maravilha!']}
+};
+// Skill tree: col 0..3 (fractions allowed), row = depth. parents must all be finished to unlock.
+const BR={core:'--btn',food:'--br-food',travel:'--br-travel',people:'--br-people',life:'--br-life',words:'--br-words'};
+const UNITS=[
+ {t:'First words',sh:'First words',s:'Greet, introduce yourself, get unstuck',lv:'A1',br:'core',tree:'main',col:1.5,row:0,parents:[],ic:'M4 5h16v10H10l-6 4z'},
+ {t:'At the café',sh:'Café',s:'Order, ask the price, pay',lv:'A1',br:'food',tree:'main',col:0,row:1,parents:[0],ic:'M5 9h11v4a5 5 0 0 1-5 5h-1a5 5 0 0 1-5-5zM16 10h1.5a2.5 2.5 0 0 1 0 5H16M8 3.5v2.5M12 3.5v2.5'},
+ {t:'Getting around',sh:'Getting around',s:'Ask the way, buy a ticket',lv:'A1',br:'travel',tree:'main',col:1,row:1,parents:[0],ic:'M12 21s-6.5-6-6.5-11a6.5 6.5 0 0 1 13 0c0 5-6.5 11-6.5 11zM12 12.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z'},
+ {t:'At the hotel',sh:'Hotel',s:'Check in, report a problem, get a taxi',lv:'A2',br:'travel',tree:'main',col:1,row:3,parents:[11],ic:'M3 19V6M3 15h18v4M21 15v-2a3 3 0 0 0-3-3h-7v5M7 12.5a1.8 1.8 0 1 0 0-3.6 1.8 1.8 0 0 0 0 3.6z'},
+ {t:'Shopping',sh:'Shopping',s:'Sizes, prices, deciding',lv:'A1',br:'life',tree:'main',col:3,row:1,parents:[0],ic:'M5.5 8h13l-1 12.5h-11zM9 8a3 3 0 0 1 6 0'},
+ {t:'Dinner out',sh:'Dinner out',s:'Diet needs, recommendations, compliments',lv:'A2',br:'food',tree:'main',col:.5,row:5,parents:[13,3],ic:'M7 3v18M4.5 3v5a2.5 2.5 0 0 0 5 0V3M16.5 21V3c-2.5 1.5-3 6-3 8h3'},
+ {t:'Small talk',sh:'Small talk',s:'Where you are from, work, free time',lv:'A1',br:'people',tree:'main',col:2,row:2,parents:[15],ic:'M3 5h11v7H8l-5 3.5zM10 15h4.5l4.5 3.5V15h2V8.5h-4.5'},
+ {t:'Health',sh:'Health',s:'Pharmacy, symptoms, emergencies',lv:'A2',br:'life',tree:'main',col:3,row:3,parents:[14],ic:'M9.5 3.5h5v6h6v5h-6v6h-5v-6h-6v-5h6z'},
+ {t:'Making plans',sh:'Plans',s:'Times, meeting up, saying no',lv:'A2',br:'people',tree:'main',col:2,row:3,parents:[6],ic:'M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18zM12 7v5l3.5 2'},
+ {t:'When things go wrong',sh:'Trouble',s:'Lost phone, card problems, asking for help',lv:'A2',br:'life',tree:'main',col:2.5,row:4,parents:[8,7],ic:'M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18zM12 16a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM5.6 5.6l3.6 3.6M14.8 14.8l3.6 3.6M18.4 5.6l-3.6 3.6M9.2 14.8l-3.6 3.6'},
+ {t:{es:'Churros & café con leche',pt:'Bica & pastel de nata'},sh:{es:'Churros',pt:'Bica & nata'},s:{es:'A chocolatería morning in Madrid',pt:'A pastelaria stop in Lisboa'},lv:'A2',br:'food',tree:'main',col:0,row:3,parents:[12],scen:true,ic:'M4 14h16l-1.5 5h-13zM7 14c0-3 2-5 5-5s5 2 5 5M9 6c.8-1 .8-2 0-3M13 6c.8-1 .8-2 0-3'},
+ {t:{es:'Day trip to Toledo',pt:'Day trip to Sintra'},sh:{es:'Toledo trip',pt:'Sintra trip'},s:{es:'Train, tickets and a museum near Madrid',pt:'Train, tickets and a palace museum near Lisboa'},lv:'A2',br:'travel',tree:'main',col:1,row:2,parents:[2],scen:true,ic:'M3 20h18M5 20V10l7-5 7 5v10M9 20v-5h6v5M12 5V2'},
+ {t:'Coffee to go',sh:'Coffee to go',s:'Takeaway orders, milk, size, your name on the cup',lv:'A1',br:'food',tree:'main',col:0,row:2,parents:[1],ic:'M7 7h10l-1.2 13.5h-7.6zM6 7h12M8.5 4h7l1 3h-9z'},
+ {t:'Table for a group',sh:'Group table',s:'Seats for six, waiting, splitting the bill',lv:'A2',br:'food',tree:'main',col:0,row:4,parents:[10],ic:'M3 10h18M6 10v9M18 10v9M8 6a1.5 1.5 0 1 0 0-.01M12 5a1.5 1.5 0 1 0 0-.01M16 6a1.5 1.5 0 1 0 0-.01'},
+ {t:'Supermarket checkout',sh:'Supermarket',s:'Bags, loyalty cards, paying, receipts',lv:'A1',br:'life',tree:'main',col:3,row:2,parents:[4],ic:'M3 4h2.5l2 11h10.5l2-8H6.5M9 20a1.2 1.2 0 1 0 0-.01M17 20a1.2 1.2 0 1 0 0-.01'},
+ {t:'Asking questions',sh:'Questions',s:'What, how, why, who, which: asking about things',lv:'A1',br:'people',tree:'main',col:2,row:1,parents:[0],ic:'M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18zM9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .8-1 1.5v.7M12 17v.01'},
+ {t:'Things around you',sh:'Things',s:'Table, chair, desk, bed, keys, drawer',lv:'A1',br:'words',tree:'words',col:1.5,row:0,parents:[0],ic:'M4 11h16M6 11v8M18 11v8M8 11V6h8v5'},
+ {t:'Food words',sh:'Food words',s:'Bread, cheese, fish, rice, eggs, vegetables',lv:'A1',br:'words',tree:'words',col:.5,row:1,parents:[16],ic:'M5 13a7 7 0 0 0 14 0zM3 13h18M12 6c0-2 1.5-3 3-3M9 9c.5-1 1.5-1.5 3-1.5'},
+ {t:'Daily routine',sh:'Daily routine',s:'Working, sleeping, getting up, going out',lv:'A1',br:'words',tree:'words',col:2.5,row:1,parents:[16],ic:'M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z'},
+ {t:'Time & durations',sh:'Time',s:'Clock times, opening hours, how long things take',lv:'A2',br:'words',tree:'words',col:1.5,row:2,parents:[17,18],ic:'M7 3h10M7 21h10M8 3c0 5 8 5 8 9s-8 4-8 9M16 3c0 5-8 5-8 9s8 4 8 9'},
+ {t:'Renting a car',sh:'Rental car',s:'Licence, insurance, fuel, parking',lv:'A2',br:'travel',tree:'main',col:1.5,row:4,parents:[3],ic:'M4 16l1.6-5.2A2 2 0 0 1 7.5 9.4h9a2 2 0 0 1 1.9 1.4L20 16v3h-2.5M4 16v3h2.5M4 16h16M8 19.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3zM16 19.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z'}
+];
+const uTxt=(u,k)=>{const v=UNITS[u][k];return typeof v==='object'?v[st.lang]:v};
+// [unit, English, Spanish, Portuguese (Portugal)] — null = not in that language
+const S=[
+ [0,'Hello, good morning!','¡Hola, buenos días!','Olá, bom dia!'],
+ [0,'How are you?','¿Cómo estás?','Como estás?'],
+ [0,"I'm fine, thank you. And you?",'Estoy bien, gracias. ¿Y tú?','Estou bem, obrigado. E tu?'],
+ [0,"My name is Ana. What's your name?",'Me llamo Ana. ¿Cómo te llamas?','Chamo-me Ana. Como te chamas?'],
+ [0,'Nice to meet you.','Mucho gusto.','Muito prazer.'],
+ [0,"I don't understand. Can you speak more slowly?",'No entiendo. ¿Puede hablar más despacio?','Não percebo. Pode falar mais devagar?'],
+ [1,'A coffee with milk, please.','Un café con leche, por favor.','Um café com leite, por favor.'],
+ [1,'I would like a bottle of water.','Quisiera una botella de agua.','Queria uma garrafa de água.'],
+ [1,'How much is it?','¿Cuánto es?','Quanto é?'],
+ [1,'Can I pay by card?','¿Puedo pagar con tarjeta?','Posso pagar com cartão?'],
+ [1,'Do you have Wi-Fi?','¿Tienen wifi?','Têm Wi-Fi?'],
+ [1,'The bill, please.','La cuenta, por favor.','A conta, por favor.'],
+ [2,'Excuse me, where is the train station?','Perdone, ¿dónde está la estación de tren?','Desculpe, onde fica a estação de comboios?'],
+ [2,'Is it far from here?','¿Está lejos de aquí?','Fica longe daqui?'],
+ [2,'Turn left at the next street.','Gire a la izquierda en la próxima calle.','Vire à esquerda na próxima rua.'],
+ [2,'Go straight ahead.','Siga todo recto.','Siga em frente.'],
+ [2,'A ticket to the city centre, please.','Un billete al centro, por favor.','Um bilhete para o centro, por favor.'],
+ [2,'What time does the bus leave?','¿A qué hora sale el autobús?','A que horas parte o autocarro?'],
+ [3,'I have a reservation under the name Weber.','Tengo una reserva a nombre de Weber.','Tenho uma reserva em nome de Weber.'],
+ [3,'Is breakfast included?','¿El desayuno está incluido?','O pequeno-almoço está incluído?'],
+ [3,'What time do we have to check out?','¿A qué hora tenemos que dejar la habitación?','A que horas temos de deixar o quarto?'],
+ [3,"The air conditioning doesn't work.",'El aire acondicionado no funciona.','O ar condicionado não funciona.'],
+ [3,'Could you call a taxi for me?','¿Me puede llamar un taxi?','Pode chamar-me um táxi?'],
+ [3,'Can I leave my luggage here?','¿Puedo dejar mi equipaje aquí?','Posso deixar a bagagem aqui?'],
+ [4,"I'm just looking, thanks.",'Solo estoy mirando, gracias.','Estou só a ver, obrigado.'],
+ [4,'Do you have this in a bigger size?','¿Tiene esto en una talla más grande?','Tem isto num tamanho maior?'],
+ [4,'It costs twenty euros.','Cuesta veinte euros.','Custa vinte euros.'],
+ [4,"That's too expensive.",'Es demasiado caro.','É demasiado caro.'],
+ [4,'Where can I try it on?','¿Dónde me lo puedo probar?','Onde posso experimentar?'],
+ [4,"I'll take it.",'Me lo llevo.','Vou levar.'],
+ [5,'A table for two, please.','Una mesa para dos, por favor.','Uma mesa para dois, por favor.'],
+ [5,'What do you recommend?','¿Qué me recomienda?','O que me recomenda?'],
+ [5,"I'm vegetarian.",'Soy vegetariano.','Sou vegetariano.'],
+ [5,"I'm allergic to nuts.",'Soy alérgico a los frutos secos.','Sou alérgico a frutos secos.'],
+ [5,'It was delicious!','¡Estaba delicioso!','Estava delicioso!'],
+ [5,'Could you bring us some more bread?','¿Nos trae un poco más de pan?','Pode trazer-nos mais pão?'],
+ [6,'Where are you from?','¿De dónde eres?','De onde és?'],
+ [6,"I'm from Germany.",'Soy de Alemania.','Sou da Alemanha.'],
+ [6,'I work as a software engineer.','Trabajo como ingeniero de software.','Trabalho como engenheiro de software.'],
+ [6,'What do you do in your free time?','¿Qué haces en tu tiempo libre?','O que fazes nos tempos livres?'],
+ [6,"I've been learning your language for two months.",'Llevo dos meses aprendiendo tu idioma.','Estou a aprender a tua língua há dois meses.'],
+ [6,'The weather is lovely today.','Hoy hace muy buen tiempo.','Hoje está um tempo ótimo.'],
+ [7,'I need a doctor.','Necesito un médico.','Preciso de um médico.'],
+ [7,'I have a headache.','Me duele la cabeza.','Dói-me a cabeça.'],
+ [7,'Where is the nearest pharmacy?','¿Dónde está la farmacia más cercana?','Onde fica a farmácia mais próxima?'],
+ [7,'Do you have something for a cold?','¿Tiene algo para el resfriado?','Tem alguma coisa para a constipação?'],
+ [7,"I've had a fever since yesterday.",'Tengo fiebre desde ayer.','Tenho febre desde ontem.'],
+ [7,'Call an ambulance!','¡Llame a una ambulancia!','Chame uma ambulância!'],
+ [8,'What time is it?','¿Qué hora es?','Que horas são?'],
+ [8,'Shall we meet tomorrow at eight?','¿Quedamos mañana a las ocho?','Encontramo-nos amanhã às oito?'],
+ [8,"I'm running ten minutes late.",'Llego diez minutos tarde.','Vou chegar dez minutos atrasado.'],
+ [8,'Are you free on Saturday?','¿Estás libre el sábado?','Estás livre no sábado?'],
+ [8,"Sorry, I can't today.",'Lo siento, hoy no puedo.','Desculpa, hoje não posso.'],
+ [8,'See you later!','¡Hasta luego!','Até logo!'],
+ [9,"I've lost my phone.",'He perdido mi móvil.','Perdi o meu telemóvel.'],
+ [9,'Can you help me, please?','¿Me puede ayudar, por favor?','Pode ajudar-me, por favor?'],
+ [9,"My card isn't working.",'Mi tarjeta no funciona.','O meu cartão não está a funcionar.'],
+ [9,'I missed my flight.','He perdido mi vuelo.','Perdi o meu voo.'],
+ [9,'How do you say that?','¿Cómo se dice eso?','Como se diz isso?'],
+ [9,'What does this word mean?','¿Qué significa esta palabra?','O que significa esta palavra?'],
+ // Spanish scenarios
+ [10,'Two coffees and a portion of churros, please.','Dos cafés y una ración de churros, por favor.',null],
+ [10,'For here or to take away?','¿Para tomar aquí o para llevar?',null],
+ [10,'For here, please.','Para tomar aquí, por favor.',null],
+ [10,'Do you have hot chocolate?','¿Tiene chocolate caliente?',null],
+ [10,"They're still warm!",'¡Todavía están calentitos!',null],
+ [10,'Could I have a glass of water too?','¿Me pone también un vaso de agua?',null],
+ [11,'Which train goes to Toledo?','¿Qué tren va a Toledo?',null],
+ [11,'Two return tickets, please.','Dos billetes de ida y vuelta, por favor.',null],
+ [11,'How much is the entrance to the museum?','¿Cuánto cuesta la entrada al museo?',null],
+ [11,'Is there a discount for students?','¿Hay descuento para estudiantes?',null],
+ [11,'Where do I catch the bus to the old town?','¿Dónde se coge el autobús al casco antiguo?',null],
+ [11,'Can you take photos inside the museum?','¿Se pueden hacer fotos dentro del museo?',null],
+ // Portuguese scenarios
+ [10,'Two espressos and two pastéis de nata, please.',null,'Duas bicas e dois pastéis de nata, por favor.'],
+ [10,'Is it to eat here or to take away?',null,'É para comer aqui ou para levar?'],
+ [10,'To eat here, please.',null,'Para comer aqui, se faz favor.'],
+ [10,'Do you have cinnamon?',null,'Tem canela?'],
+ [10,"They're still warm!",null,'Ainda estão quentinhos!'],
+ [10,'Can I have a glass of water too?',null,'Pode dar-me também um copo de água?'],
+ [11,'Which train goes to Sintra?',null,'Qual é o comboio que vai para Sintra?'],
+ [11,'Two return tickets, please.',null,'Dois bilhetes de ida e volta, por favor.'],
+ [11,'How much is the entrance to the palace?',null,'Quanto custa a entrada no palácio?'],
+ [11,'Is there a discount for students?',null,'Há desconto para estudantes?'],
+ [11,'Where do I catch the bus to Pena Palace?',null,'Onde apanho o autocarro para o Palácio da Pena?'],
+ [11,'Can I take photos inside the museum?',null,'Posso tirar fotografias dentro do museu?']
+ ,[12,'A large milky coffee to go, please.','Un café con leche grande para llevar, por favor.','Um galão grande para levar, por favor.'],
+ [12,'With oat milk, please.','Con leche de avena, por favor.','Com leite de aveia, por favor.'],
+ [12,'Without sugar.','Sin azúcar.','Sem açúcar.'],
+ [12,'Can I have a lid, please?','¿Me da una tapa, por favor?','Pode dar-me uma tampa, por favor?'],
+ [12,'What name is it for?','¿A nombre de quién?','Em nome de quem?'],
+ [12,"I'm in a bit of a hurry.",'Tengo un poco de prisa.','Estou com um bocado de pressa.'],
+ [13,'Do you have a table for six?','¿Tienen mesa para seis?','Têm mesa para seis?'],
+ [13,'How long is the wait?','¿Cuánto hay que esperar?','Quanto tempo é preciso esperar?'],
+ [13,'We can wait at the bar.','Podemos esperar en la barra.','Podemos esperar ao balcão.'],
+ [13,'Can we sit outside?','¿Podemos sentarnos fuera?','Podemos sentar-nos lá fora?'],
+ [13,'Two more friends are coming.','Vienen dos amigos más.','Vêm mais dois amigos.'],
+ [13,'Can we pay separately?','¿Podemos pagar por separado?','Podemos pagar em separado?'],
+ [14,'Do you need a bag?','¿Necesita bolsa?','Precisa de saco?'],
+ [14,'No thanks, I have my own bag.','No, gracias, tengo mi bolsa.','Não, obrigado, tenho o meu saco.'],
+ [14,'Do you have a loyalty card?','¿Tiene tarjeta de cliente?','Tem cartão de cliente?'],
+ [14,'Card or cash?','¿Con tarjeta o en efectivo?','Cartão ou dinheiro?'],
+ [14,'Insert your card, please.','Introduzca la tarjeta, por favor.','Introduza o cartão, por favor.'],
+ [14,'Do you want the receipt?','¿Quiere el tique?','Quer o talão?'],
+ [15,'What is this?','¿Qué es esto?','O que é isto?'],
+ [15,'How does it work?','¿Cómo funciona?','Como é que funciona?'],
+ [15,'Is it open on Sundays?','¿Está abierto los domingos?','Está aberto ao domingo?'],
+ [15,'Why is it closed?','¿Por qué está cerrado?','Porque é que está fechado?'],
+ [15,'Who can I ask?','¿A quién puedo preguntar?','A quem posso perguntar?'],
+ [15,'Which one do you recommend?','¿Cuál me recomienda?','Qual me recomenda?'],
+ [16,'The table is next to the window.','La mesa está al lado de la ventana.','A mesa está ao lado da janela.'],
+ [16,'Is this chair free?','¿Está libre esta silla?','Esta cadeira está livre?'],
+ [16,'My laptop is on the desk.','Mi portátil está en el escritorio.','O meu portátil está na secretária.'],
+ [16,'The keys are in the drawer.','Las llaves están en el cajón.','As chaves estão na gaveta.'],
+ [16,'Where is the light switch?','¿Dónde está el interruptor de la luz?','Onde está o interruptor da luz?'],
+ [16,'The bed is very comfortable.','La cama es muy cómoda.','A cama é muito confortável.'],
+ [17,"I'd like bread, cheese and ham.",'Quiero pan, queso y jamón.','Queria pão, queijo e fiambre.'],
+ [17,'Do you have fresh fish today?','¿Tiene pescado fresco hoy?','Tem peixe fresco hoje?'],
+ [17,'A kilo of tomatoes, please.','Un kilo de tomates, por favor.','Um quilo de tomates, por favor.'],
+ [17,"I don't eat meat.",'No como carne.','Não como carne.'],
+ [17,'Rice with chicken and vegetables.','Arroz con pollo y verduras.','Arroz com frango e legumes.'],
+ [17,'The eggs and the milk are over there.','Los huevos y la leche están allí.','Os ovos e o leite estão ali.'],
+ [18,'I work from home on Mondays.','Los lunes trabajo desde casa.','Às segundas trabalho a partir de casa.'],
+ [18,'I usually get up at seven.','Normalmente me levanto a las siete.','Normalmente levanto-me às sete.'],
+ [18,'I slept really badly last night.','Anoche dormí fatal.','Dormi muito mal esta noite.'],
+ [18,"I'm working right now.",'Ahora mismo estoy trabajando.','Neste momento estou a trabalhar.'],
+ [18,"I'm going to bed, I'm very tired.",'Me voy a la cama, estoy muy cansado.','Vou para a cama, estou muito cansado.'],
+ [18,'After work I go for a run.','Después del trabajo salgo a correr.','Depois do trabalho vou correr.'],
+ [19,'It takes about twenty minutes.','Se tarda unos veinte minutos.','Demora uns vinte minutos.'],
+ [19,'The shop opens at nine and closes at eight.','La tienda abre a las nueve y cierra a las ocho.','A loja abre às nove e fecha às oito.'],
+ [19,"I'll be here for a week.",'Voy a estar aquí una semana.','Vou ficar cá uma semana.'],
+ [19,"It's half past three.",'Son las tres y media.','São três e meia.'],
+ [19,"I've been waiting for an hour.",'Llevo una hora esperando.','Estou à espera há uma hora.'],
+ [19,'See you in two days.','Nos vemos dentro de dos días.','Vemo-nos daqui a dois dias.'],
+ [20,"I'd like to rent a car for three days.",'Quisiera alquilar un coche para tres días.','Queria alugar um carro por três dias.'],
+ [20,'Is insurance included?','¿El seguro está incluido?','O seguro está incluído?'],
+ [20,'Here is my driving licence.','Aquí tiene mi carné de conducir.','Aqui está a minha carta de condução.'],
+ [20,'Do I have to return it with a full tank?','¿Tengo que devolverlo con el depósito lleno?','Tenho de o devolver com o depósito cheio?'],
+ [20,'Is it manual or automatic?','¿Es manual o automático?','É manual ou automático?'],
+ [20,'Where can I park?','¿Dónde puedo aparcar?','Onde posso estacionar?']
+];
+const tgt=(id,l=st.lang)=>S[id][l==='es'?2:3];
+const allIds=(l=st.lang)=>S.map((_,i)=>i).filter(i=>S[i][l==='es'?2:3]);
+// "Cold water" passages: natural speed, words beyond the unit, gist question in English. id = 'g'+index
+const GIST=[
+ {u:0,l:'es',t:'¡Hola! Perdona, ¿eres el amigo de Lucía? Ella me ha dicho que llegabas hoy. Yo soy Marta, su compañera de piso. Lucía todavía está en el trabajo, pero vuelve sobre las siete.',
+  en:"Hi! Sorry, are you Lucía's friend? She told me you were arriving today. I'm Marta, her flatmate. Lucía is still at work, but she'll be back around seven.",
+  q:'Who is talking to you, and where is Lucía?',a:"Lucía's flatmate. Lucía is still at work until about seven.",d:["Lucía's sister. Lucía is waiting at the station.","A neighbour. Lucía is away on holiday.","Lucía's boss. Lucía has gone home early."]},
+ {u:0,l:'pt',t:'Olá! Desculpa, és o amigo da Inês? Ela disse-me que chegavas hoje. Eu sou a Rita, vivo com ela. A Inês ainda está no trabalho, mas volta por volta das sete.',
+  en:"Hi! Sorry, are you Inês's friend? She told me you were arriving today. I'm Rita, I live with her. Inês is still at work, but she'll be back around seven.",
+  q:'Who is talking to you, and where is Inês?',a:"Inês's flatmate. Inês is still at work until about seven.",d:["Inês's sister. Inês is waiting at the station.","A neighbour. Inês is away on holiday.","Inês's boss. Inês has gone home early."]},
+ {u:1,l:'es',t:'Lo siento, la máquina de tarjetas no funciona ahora mismo. Si quiere, puede pagar en efectivo, o hay un cajero justo al lado de la farmacia, a dos minutos.',
+  en:"Sorry, the card machine isn't working right now. If you like, you can pay cash, or there's a cash machine right next to the pharmacy, two minutes away.",
+  q:'What is the problem, and what does the waiter suggest?',a:'The card machine is broken. Pay cash, or use the cash machine nearby.',d:['The kitchen is closed. Come back in two minutes.','They have run out of coffee. Try the pharmacy café.','The bill is wrong. They will bring a new one.']},
+ {u:1,l:'pt',t:'Peço desculpa, a máquina do multibanco não está a funcionar neste momento. Se quiser, pode pagar em dinheiro, ou há uma caixa multibanco mesmo ao lado da farmácia, a dois minutos.',
+  en:"Sorry, the card machine isn't working at the moment. If you like, you can pay cash, or there's a cash machine right next to the pharmacy, two minutes away.",
+  q:'What is the problem, and what does the waiter suggest?',a:'The card machine is broken. Pay cash, or use the cash machine nearby.',d:['The kitchen is closed. Come back in two minutes.','They have run out of coffee. Try the pharmacy café.','The bill is wrong. They will bring a new one.']},
+ {u:2,l:'es',t:'Atención, por favor. El tren con destino a Valencia, que tenía prevista su salida a las diez y cuarto, saldrá con veinte minutos de retraso por la vía cuatro. Disculpen las molestias.',
+  en:'Attention, please. The train to Valencia, scheduled to leave at quarter past ten, will depart twenty minutes late from platform four. We apologise for the inconvenience.',
+  q:'What is happening with the Valencia train?',a:'It leaves twenty minutes late, from platform four.',d:['It is cancelled. Passengers should take a bus.','It leaves on time from platform twenty.','It now leaves from a different station.']},
+ {u:2,l:'pt',t:'Atenção, por favor. O comboio com destino ao Porto, com partida prevista para as dez e um quarto, vai sair com vinte minutos de atraso da linha quatro. Pedimos desculpa pelo incómodo.',
+  en:'Attention, please. The train to Porto, scheduled to leave at quarter past ten, will depart twenty minutes late from platform four. We apologise for the inconvenience.',
+  q:'What is happening with the Porto train?',a:'It leaves twenty minutes late, from platform four.',d:['It is cancelled. Passengers should take a bus.','It leaves on time from platform twenty.','It now leaves from a different station.']},
+ {u:3,l:'es',t:'Su habitación todavía no está lista, porque la limpieza termina a las dos. Mientras tanto, puede dejar las maletas aquí en recepción y, por la espera, el desayuno de hoy corre de nuestra cuenta.',
+  en:"Your room isn't ready yet, because cleaning finishes at two. Meanwhile you can leave your bags here at reception and, for the wait, today's breakfast is on us.",
+  q:'What does the receptionist tell you?',a:'The room is ready at two. Leave your bags, and breakfast is free today.',d:['Your booking was cancelled. Try another hotel.','The room is ready now, but breakfast costs extra.','You must pay extra to check in before two.']},
+ {u:3,l:'pt',t:'O seu quarto ainda não está pronto, porque a limpeza só termina às duas. Entretanto, pode deixar as malas aqui na receção e, pela espera, o pequeno-almoço de hoje fica por nossa conta.',
+  en:"Your room isn't ready yet, because cleaning only finishes at two. Meanwhile you can leave your bags here at reception and, for the wait, today's breakfast is on us.",
+  q:'What does the receptionist tell you?',a:'The room is ready at two. Leave your bags, and breakfast is free today.',d:['Your booking was cancelled. Try another hotel.','The room is ready now, but breakfast costs extra.','You must pay extra to check in before two.']},
+ {u:4,l:'es',t:'Esta talla ya no la tenemos en tienda, pero se la podemos pedir y llega en tres o cuatro días. Si no, creo que en la tienda del centro comercial todavía les quedan.',
+  en:"We don't have this size in the shop any more, but we can order it and it arrives in three or four days. Otherwise, I think the shop in the shopping centre still has some.",
+  q:'What are your options?',a:'Order it (three or four days) or try their shop in the shopping centre.',d:['Buy it today only, because the sale ends.','Come back in three minutes when the stock arrives.','Nothing. They cannot order it at all.']},
+ {u:4,l:'pt',t:'Este tamanho já não temos em loja, mas podemos encomendar e chega daqui a três ou quatro dias. Senão, acho que a loja do centro comercial ainda tem.',
+  en:"We don't have this size in the shop any more, but we can order it and it arrives in three or four days. Otherwise, I think the shop in the shopping centre still has it.",
+  q:'What are your options?',a:'Order it (three or four days) or try their shop in the shopping centre.',d:['Buy it today only, because the sale ends.','Come back in three minutes when the stock arrives.','Nothing. They cannot order it at all.']},
+ {u:5,l:'es',t:'Hoy el pescado del día es dorada a la plancha, viene con patatas y ensalada. El cordero se nos ha acabado, lo siento. Y de postre, la tarta de queso es casera, la recomiendo mucho.',
+  en:"Today's fish is grilled sea bream, served with potatoes and salad. We've run out of lamb, sorry. And for dessert, the cheesecake is homemade, I highly recommend it.",
+  q:'Which statement is true?',a:'There is no lamb left today.',d:['The lamb is the dish of the day.','The fish comes with rice and beans.','The cheesecake is sold out.']},
+ {u:5,l:'pt',t:'Hoje o peixe do dia é dourada grelhada, vem com batatas e salada. O borrego já acabou, peço desculpa. E de sobremesa, o bolo de bolacha é feito cá em casa, recomendo muito.',
+  en:"Today's fish is grilled sea bream, served with potatoes and salad. The lamb has run out, sorry. And for dessert, the biscuit cake is homemade, I highly recommend it.",
+  q:'Which statement is true?',a:'There is no lamb left today.',d:['The lamb is the dish of the day.','The fish comes with rice and beans.','The biscuit cake is sold out.']},
+ {u:6,l:'es',t:'Pues yo nací en Sevilla, pero llevo casi diez años viviendo en Madrid por el trabajo. Me gusta la ciudad, aunque echo de menos el sol y, sobre todo, la comida de mi madre.',
+  en:"Well, I was born in Seville, but I've been living in Madrid for almost ten years because of work. I like the city, although I miss the sun and, above all, my mother's cooking.",
+  q:'What do you learn about this person?',a:"Born in Seville, in Madrid for about ten years for work, misses home.",d:['Born in Madrid, moving to Seville next year.',"Has lived in Seville for ten years with their mother.",'Moved to Madrid for the weather.']},
+ {u:6,l:'pt',t:'Olha, eu nasci no Porto, mas já vivo em Lisboa há quase dez anos por causa do trabalho. Gosto da cidade, mas tenho saudades da família e, sobretudo, da comida da minha mãe.',
+  en:"Well, I was born in Porto, but I've been living in Lisbon for almost ten years because of work. I like the city, but I miss my family and, above all, my mother's cooking.",
+  q:'What do you learn about this person?',a:'Born in Porto, in Lisbon for about ten years for work, misses home.',d:['Born in Lisbon, moving to Porto next year.','Has lived in Porto for ten years with their mother.','Moved to Lisbon for the weather.']},
+ {u:7,l:'es',t:'Tómese una pastilla cada ocho horas, siempre después de comer, durante cinco días. Si mañana todavía tiene fiebre o le duele más la garganta, vuelva o vaya directamente al centro de salud.',
+  en:"Take one tablet every eight hours, always after eating, for five days. If you still have a fever tomorrow or your throat hurts more, come back or go straight to the health centre.",
+  q:'What are the instructions?',a:'One tablet every eight hours after meals for five days. Come back if it gets worse.',d:['Eight tablets a day, before meals.','One tablet at night only, for eight days.','Go to hospital right away.']},
+ {u:7,l:'pt',t:'Tome um comprimido de oito em oito horas, sempre depois das refeições, durante cinco dias. Se amanhã ainda tiver febre ou se a garganta piorar, volte cá ou vá diretamente ao centro de saúde.',
+  en:"Take one tablet every eight hours, always after meals, for five days. If you still have a fever tomorrow or your throat gets worse, come back or go straight to the health centre.",
+  q:'What are the instructions?',a:'One tablet every eight hours after meals for five days. Come back if it gets worse.',d:['Eight tablets a day, before meals.','One tablet at night only, for eight days.','Go to hospital right away.']},
+ {u:8,l:'es',t:'Oye, al final no puedo el sábado por la tarde, tengo que ayudar a mi hermano con la mudanza. ¿Te viene bien el domingo por la mañana? Podríamos ir al Rastro y luego tomar algo.',
+  en:"Hey, in the end I can't do Saturday afternoon, I have to help my brother move house. Does Sunday morning work for you? We could go to the Rastro flea market and then have a drink.",
+  q:'What does your friend want?',a:'To move your plan from Saturday afternoon to Sunday morning.',d:['Your help moving house on Sunday.','To cancel and not meet at all.','To meet on Saturday morning instead.']},
+ {u:8,l:'pt',t:'Olha, afinal não posso no sábado à tarde, tenho de ajudar o meu irmão com a mudança. Dá-te jeito domingo de manhã? Podíamos ir à Feira da Ladra e depois beber qualquer coisa.',
+  en:"Listen, in the end I can't do Saturday afternoon, I have to help my brother move house. Does Sunday morning suit you? We could go to the Feira da Ladra flea market and then have a drink.",
+  q:'What does your friend want?',a:'To move your plan from Saturday afternoon to Sunday morning.',d:['Your help moving house on Sunday.','To cancel and not meet at all.','To meet on Saturday morning instead.']},
+ {u:9,l:'es',t:'Para bloquear la tarjeta tiene que llamar a su banco, el número está en la aplicación. Y para el móvil, lo mejor es poner una denuncia en la comisaría; la más cercana está en esta misma calle, al fondo.',
+  en:"To block the card you have to call your bank, the number is in the app. And for the phone, it's best to report it at the police station; the nearest one is at the end of this same street.",
+  q:'What two things should you do?',a:'Call your bank to block the card, and report the phone at the police station down this street.',d:['Visit a bank branch, then buy a new phone.','Call the police about the card, and wait for the phone.','Go back to your hotel and wait for a call.']},
+ {u:9,l:'pt',t:'Para cancelar o cartão tem de ligar para o seu banco, o número está na aplicação. Quanto ao telemóvel, o melhor é fazer queixa na esquadra; a mais próxima fica nesta mesma rua, lá ao fundo.',
+  en:"To cancel the card you have to call your bank, the number is in the app. As for the phone, it's best to report it at the police station; the nearest one is at the far end of this same street.",
+  q:'What two things should you do?',a:'Call your bank to cancel the card, and report the phone at the police station down this street.',d:['Visit a bank branch, then buy a new phone.','Call the police about the card, and wait for the phone.','Go back to your hotel and wait for a call.']},
+ {u:10,l:'es',t:'Los churros salen ahora mismo, en cinco minutillos los tienen. El chocolate es bastante espeso, si lo prefiere más ligero le pongo un café con leche. Siéntense donde quieran, que se lo llevo a la mesa.',
+  en:"The churros are coming out right now, you'll have them in about five minutes. The chocolate is quite thick; if you'd prefer something lighter I'll make you a café con leche. Sit wherever you like, I'll bring it to the table.",
+  q:'What does the waiter tell you?',a:'Churros in about five minutes. Sit anywhere, they will bring it over.',d:['The churros are sold out for today.','Pay at the bar first, then collect your order.','The chocolate is too thin, so add milk.']},
+ {u:10,l:'pt',t:'Os pastéis acabaram de sair do forno, estão a escaldar, cuidado! A canela e o açúcar estão ali no balcão. Se quiserem sentar-se lá fora, há uma mesa livre, e eu levo-lhes as bicas.',
+  en:"The pastries have just come out of the oven, they're scalding hot, careful! The cinnamon and sugar are over there on the counter. If you'd like to sit outside, there's a free table, and I'll bring you the espressos.",
+  q:'What does the waiter tell you?',a:'The pastries are very hot. Cinnamon is on the counter, and there is a free table outside.',d:['The pastries are sold out until tomorrow.','Cinnamon costs extra and must be ordered.','All tables outside are taken.']},
+ {u:11,l:'es',t:'Las entradas para la catedral se compran en la taquilla de enfrente, no aquí. Los miércoles por la tarde es gratis para los residentes, pero para los turistas cuesta doce euros, con la audioguía incluida.',
+  en:"Tickets for the cathedral are bought at the ticket office opposite, not here. On Wednesday afternoons it's free for residents, but for tourists it costs twelve euros, audio guide included.",
+  q:'Which is true for you as a tourist?',a:'Buy tickets at the office opposite. Twelve euros, audio guide included.',d:['It is free for everyone on Wednesday afternoon.','The audio guide costs extra.','Buy your ticket here at this counter.']},
+ {u:11,l:'pt',t:'Para o Palácio da Pena, o melhor é apanhar o autocarro 434 aqui à frente da estação. Os bilhetes compram-se online ou na entrada, mas ao fim de semana há muita fila, por isso convém ir cedo.',
+  en:"For Pena Palace, it's best to catch the 434 bus here in front of the station. Tickets are bought online or at the entrance, but at weekends there's a long queue, so it's best to go early.",
+  q:'What is the advice?',a:'Take bus 434 from outside the station, and go early at the weekend.',d:['Walk up, because no buses go there.','Tickets are only sold at the train station.','Weekends are quiet, so go then.']}
+ ,{u:12,l:'es',t:'¿El café con leche lo quiere grande o normal? La leche de avena cuesta cincuenta céntimos más. Ahora mismo hay un poco de cola, así que serán unos cinco minutos. ¿A nombre de quién lo pongo?',
+  en:"Do you want the latte large or regular? Oat milk costs fifty cents more. There's a bit of a queue right now, so it'll be about five minutes. What name shall I put?",
+  q:'What does the barista tell you?',a:'Oat milk costs fifty cents extra, and it will take about five minutes.',d:['Oat milk is free, and your coffee is ready now.','They only have the regular size today.','You can only pay in cash.']},
+ {u:12,l:'pt',t:'Quer o galão grande ou normal? O leite de aveia custa mais cinquenta cêntimos. Agora há um bocadinho de fila, por isso são uns cinco minutos. Em nome de quem é?',
+  en:"Do you want the latte large or regular? Oat milk is fifty cents more. There's a bit of a queue now, so it's about five minutes. What name is it for?",
+  q:'What does the barista tell you?',a:'Oat milk costs fifty cents extra, and it will take about five minutes.',d:['Oat milk is free, and your coffee is ready now.','They only have the regular size today.','You can only pay in cash.']},
+ {u:13,l:'es',t:'Para seis personas ahora mismo no tenemos nada dentro, pero en la terraza se queda libre una mesa en unos quince minutos. Si quieren, pueden esperar en la barra y les aviso.',
+  en:"For six people we have nothing inside right now, but a table on the terrace will be free in about fifteen minutes. If you like, you can wait at the bar and I'll let you know.",
+  q:'Where and when can your group sit?',a:'On the terrace, in about fifteen minutes.',d:['Inside, right away.','Nowhere, because they are fully booked tonight.','At the bar, in about fifty minutes.']},
+ {u:13,l:'pt',t:'Para seis pessoas agora não temos nada lá dentro, mas na esplanada vai ficar uma mesa livre daqui a uns quinze minutos. Se quiserem, podem esperar ao balcão e eu aviso.',
+  en:"For six people we have nothing inside right now, but a table on the terrace will be free in about fifteen minutes. If you like, you can wait at the counter and I'll let you know.",
+  q:'Where and when can your group sit?',a:'On the terrace, in about fifteen minutes.',d:['Inside, right away.','Nowhere, because they are fully booked tonight.','At the counter, in about fifty minutes.']},
+ {u:14,l:'es',t:'Son veintitrés con cuarenta. ¿Tiene tarjeta de cliente? Con ella hoy tiene un diez por ciento de descuento en la fruta. Las bolsas cuestan diez céntimos cada una.',
+  en:"That's twenty-three forty. Do you have a loyalty card? With it you get ten percent off fruit today. Bags cost ten cents each.",
+  q:'Which statement is true?',a:'With a loyalty card, fruit is ten percent cheaper today.',d:['Bags are free today.','The total is thirty-two euros forty.','Everything is ten percent off, card or not.']},
+ {u:14,l:'pt',t:'São vinte e três e quarenta. Tem cartão de cliente? Com o cartão hoje tem dez por cento de desconto na fruta. Os sacos custam dez cêntimos cada.',
+  en:"That's twenty-three forty. Do you have a loyalty card? With the card you get ten percent off fruit today. Bags cost ten cents each.",
+  q:'Which statement is true?',a:'With a loyalty card, fruit is ten percent cheaper today.',d:['Bags are free today.','The total is thirty-two euros forty.','Everything is ten percent off, card or not.']},
+ {u:15,l:'es',t:'Esta máquina es para recargar la tarjeta de transporte. Primero eliges el idioma, luego pones la tarjeta aquí encima y pagas. Si te da error, pregunta en la ventanilla, que está abierta hasta las diez.',
+  en:"This machine is for topping up the transport card. First you choose the language, then you put the card on top here and pay. If you get an error, ask at the counter, which is open until ten.",
+  q:'What is the machine for, and what if it fails?',a:'Topping up a transport card. If it fails, ask at the counter (open until ten).',d:['Buying concert tickets. If it fails, call a phone number.','Taking out cash. If it fails, come back after ten.','Printing receipts. If it fails, ask the police.']},
+ {u:15,l:'pt',t:'Esta máquina é para carregar o cartão de transportes. Primeiro escolhe a língua, depois põe o cartão aqui em cima e paga. Se der erro, pergunte na bilheteira, que está aberta até às dez.',
+  en:"This machine is for topping up the transport card. First choose the language, then put the card on top here and pay. If you get an error, ask at the ticket office, which is open until ten.",
+  q:'What is the machine for, and what if it fails?',a:'Topping up a transport card. If it fails, ask at the ticket office (open until ten).',d:['Buying concert tickets. If it fails, call a phone number.','Taking out cash. If it fails, come back after ten.','Printing receipts. If it fails, ask the police.']},
+ {u:16,l:'es',t:'El piso es pequeño pero muy práctico. En el salón tienes un sofá cama y un escritorio junto a la ventana para trabajar. Las toallas están en el armario del pasillo y la llave del buzón, en el cajón de la cocina.',
+  en:"The flat is small but very practical. In the living room you have a sofa bed and a desk by the window for working. The towels are in the hallway cupboard and the mailbox key is in the kitchen drawer.",
+  q:'Where is the mailbox key?',a:'In the kitchen drawer.',d:['In the hallway cupboard.','On the desk by the window.','Under the sofa bed.']},
+ {u:16,l:'pt',t:'O apartamento é pequeno mas muito prático. Na sala tem um sofá-cama e uma secretária ao pé da janela para trabalhar. As toalhas estão no armário do corredor e a chave da caixa do correio está na gaveta da cozinha.',
+  en:"The flat is small but very practical. In the living room there's a sofa bed and a desk by the window for working. The towels are in the hallway cupboard and the mailbox key is in the kitchen drawer.",
+  q:'Where is the mailbox key?',a:'In the kitchen drawer.',d:['In the hallway cupboard.','On the desk by the window.','Under the sofa bed.']},
+ {u:17,l:'es',t:'Hoy el pescado está muy bien, la merluza ha llegado esta mañana. Las fresas también están de oferta, a dos euros la caja. Lo que no me queda es pan integral, solo el blanco.',
+  en:"The fish is really good today, the hake came in this morning. Strawberries are on offer too, two euros a box. What I don't have left is wholemeal bread, only white.",
+  q:'What can you NOT buy today?',a:'Wholemeal bread.',d:['Fresh hake.','Strawberries.','White bread.']},
+ {u:17,l:'pt',t:'Hoje o peixe está muito bom, a pescada chegou esta manhã. Os morangos também estão em promoção, a dois euros a caixa. O que já não tenho é pão integral, só o branco.',
+  en:"The fish is really good today, the hake came in this morning. Strawberries are on offer too, two euros a box. What I don't have any more is wholemeal bread, only white.",
+  q:'What can you NOT buy today?',a:'Wholemeal bread.',d:['Fresh hake.','Strawberries.','White bread.']},
+ {u:18,l:'es',t:'Esta semana estoy fatal. Trabajo de nueve a siete, luego voy al gimnasio y llego a casa tardísimo. Ayer me acosté a la una y hoy me he levantado a las seis. Necesito dormir un fin de semana entero.',
+  en:"This week is awful. I work from nine to seven, then I go to the gym and get home really late. Yesterday I went to bed at one and today I got up at six. I need to sleep for a whole weekend.",
+  q:'How is this person doing?',a:'Exhausted: long work days, the gym, and very little sleep.',d:['Relaxed, because they are on holiday this week.','Out of work and sleeping a lot.','Working only mornings, with a nap after lunch.']},
+ {u:18,l:'pt',t:'Esta semana está a ser terrível. Trabalho das nove às sete, depois vou ao ginásio e chego a casa tardíssimo. Ontem deitei-me à uma e hoje levantei-me às seis. Preciso de dormir um fim de semana inteiro.',
+  en:"This week has been terrible. I work from nine to seven, then I go to the gym and get home really late. Yesterday I went to bed at one and today I got up at six. I need to sleep for a whole weekend.",
+  q:'How is this person doing?',a:'Exhausted: long work days, the gym, and very little sleep.',d:['Relaxed, because they are on holiday this week.','Out of work and sleeping a lot.','Working only mornings, with a nap after lunch.']},
+ {u:19,l:'es',t:'El museo abre de martes a domingo, de diez a seis, pero la última entrada es a las cinco. La visita completa dura más o menos hora y media, así que yo vendría como muy tarde a las cuatro.',
+  en:"The museum is open Tuesday to Sunday, ten to six, but last entry is at five. The full visit takes about an hour and a half, so I'd come at four at the latest.",
+  q:'What is the advice?',a:'Arrive by four, because the full visit takes about an hour and a half.',d:['Come on Monday, when it is quiet.','Arrive at five for last entry, because the visit is quick.','It opens at six, so come in the evening.']},
+ {u:19,l:'pt',t:'O museu abre de terça a domingo, das dez às seis, mas a última entrada é às cinco. A visita completa demora mais ou menos hora e meia, por isso eu vinha o mais tardar às quatro.',
+  en:"The museum is open Tuesday to Sunday, ten to six, but last entry is at five. The full visit takes about an hour and a half, so I'd come at four at the latest.",
+  q:'What is the advice?',a:'Arrive by four, because the full visit takes about an hour and a half.',d:['Come on Monday, when it is quiet.','Arrive at five for last entry, because the visit is quick.','It opens at six, so come in the evening.']},
+ {u:20,l:'es',t:'El coche tiene el depósito lleno y hay que devolverlo igual. El seguro básico está incluido, pero si quiere el seguro a todo riesgo son quince euros más al día. Lo puede dejar en el aeropuerto sin coste adicional.',
+  en:"The car has a full tank and you have to return it the same way. Basic insurance is included, but if you want fully comprehensive cover it's fifteen euros more per day. You can drop it off at the airport at no extra cost.",
+  q:'Which statement is true?',a:'Basic insurance is included. Full cover costs fifteen euros extra per day.',d:['Return it empty, because the fuel is prepaid.','Dropping it off at the airport costs extra.','No insurance is included at all.']},
+ {u:20,l:'pt',t:'O carro tem o depósito cheio e tem de o devolver da mesma forma. O seguro básico está incluído, mas se quiser o seguro contra todos os riscos são mais quinze euros por dia. Pode deixá-lo no aeroporto sem custo adicional.',
+  en:"The car has a full tank and you have to return it the same way. Basic insurance is included, but if you want fully comprehensive cover it's fifteen euros more per day. You can leave it at the airport at no extra cost.",
+  q:'Which statement is true?',a:'Basic insurance is included. Full cover costs fifteen euros extra per day.',d:['Return it empty, because the fuel is prepaid.','Dropping it off at the airport costs extra.','No insurance is included at all.']}
+];
+const gistsFor=(u,l=st.lang)=>GIST.map((g,i)=>({...g,id:'g'+i})).filter(g=>g.u===u&&g.l===l);
+const gistById=id=>GIST[+String(id).slice(1)];
+const textOf=id=>typeof id==='string'&&id[0]==='g'?gistById(id).t:tgt(id);
+const DAY=864e5, MIN=6e4;
+
+/* ---------- storage ---------- */
+const KEY='frase-a-frase-v1';
+let st={lang:'es',theme:'auto',recVoice:{es:'mix',pt:'mix'},cards:{es:{},pt:{}},slow:false,sfx:true,xp:{es:0,pt:0},voice:{es:'',pt:''},streak:{last:'',n:0}};
+try{const raw=localStorage.getItem(KEY);if(raw){const p=JSON.parse(raw);st={...st,...p,cards:{es:{},pt:{},...(p.cards||{})},voice:{es:'',pt:'',...(p.voice||{})},recVoice:{es:'mix',pt:'mix',...(p.recVoice||{})},xp:{es:0,pt:0,...(p.xp||{})}}}}catch(e){}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(st))}catch(e){}}
+function applyTheme(){const r=document.documentElement;if(st.theme==='light'||st.theme==='dark')r.dataset.theme=st.theme;else delete r.dataset.theme}
+applyTheme();
+const THEMES=['auto','light','dark'];
+const cards=()=>st.cards[st.lang];
+const pick=a=>a[Math.random()*a.length|0];
+
+/* ---------- SM-2 scheduler ---------- */
+function nextState(c,g){ // g: 0 again,1 hard,2 good,3 easy
+  c={ef:2.5,iv:0,reps:0,lapses:0,...c};
+  const now=Date.now();
+  if(g===0)return {...c,reps:0,iv:0,lapses:c.lapses+1,ef:Math.max(1.3,c.ef-.2),due:now+MIN};
+  let iv,ef=c.ef;
+  if(g===1){iv=c.reps===0?1:Math.max(c.iv+1,Math.round(c.iv*1.2));ef=Math.max(1.3,ef-.15)}
+  else if(g===2){iv=c.reps===0?1:c.reps===1?3:Math.round(c.iv*ef)}
+  else{iv=c.reps===0?4:Math.round(Math.max(c.iv,1)*ef*1.3);ef+=.15}
+  return {...c,ef,reps:c.reps+1,iv,due:now+iv*DAY};
+}
+const fmtIv=d=>d<30?d+'d':d<365?Math.round(d/30)+'mo':(d/365).toFixed(1)+'y';
+const dueList=()=>Object.entries(cards()).filter(([,c])=>c.due<=Date.now()).map(([id])=>+id);
+
+/* ---------- XP / level ---------- */
+const lvlOf=xp=>Math.floor(Math.sqrt(xp/40))+1;
+const xpFor=l=>40*(l-1)*(l-1);
+
+/* ---------- speech + sfx ---------- */
+const hasTTS='speechSynthesis' in window;
+let voices=[];
+function loadVoices(){if(!hasTTS)return;try{voices=speechSynthesis.getVoices()}catch(e){voices=[]}}
+if(hasTTS){loadVoices();try{speechSynthesis.onvoiceschanged=()=>{loadVoices();if(sheetOpen)renderSheet()}}catch(e){}}
+const langVoices=(l=st.lang)=>voices.filter(v=>v.lang.toLowerCase().replace('_','-').startsWith(l));
+function pickVoice(l=st.lang){
+  const vs=langVoices(l),code=LANGS[l].code.toLowerCase();
+  return vs.find(v=>v.name===st.voice[l])||vs.find(v=>v.lang.toLowerCase().replace('_','-')===code)||vs[0]||null;
+}
+let ttsUnlocked=false,lastUtter=null,ttsLog='not tried yet';
+function unlockTTS(){
+  if(ttsUnlocked||!hasTTS)return;ttsUnlocked=true;
+  try{const u=new SpeechSynthesisUtterance(' ');u.volume=0;speechSynthesis.speak(u);loadVoices()}catch(e){ttsLog='unlock failed: '+e.message}
+}
+document.addEventListener('pointerdown',unlockTTS,{capture:true});
+document.addEventListener('keydown',unlockTTS,{capture:true});
+function toast(msg){
+  let t=$('#toast');if(!t){t=document.createElement('div');t.id='toast';document.body.appendChild(t)}
+  t.textContent=msg;t.hidden=false;clearTimeout(toast.h);toast.h=setTimeout(()=>t.hidden=true,4500);
+}
+function ttsSpeak(text,slow=st.slow){
+  if(!hasTTS){ttsLog='speechSynthesis missing';return}
+  try{
+    if(speechSynthesis.speaking||speechSynthesis.pending)speechSynthesis.cancel();
+    speechSynthesis.resume();
+    const u=new SpeechSynthesisUtterance(text);
+    u.lang=LANGS[st.lang].code;const v=pickVoice();if(v)u.voice=v;
+    u.rate=slow?.62:.95;u.volume=1;
+    lastUtter=u; // keep a reference, some browsers drop it otherwise
+    const bp=document.querySelector('.big-play');
+    u.onstart=()=>{ttsLog='playing ('+(v?v.name:'default voice')+')';bp&&bp.classList.add('talking')};
+    u.onend=()=>{bp&&bp.classList.remove('talking')};
+    u.onerror=e=>{bp&&bp.classList.remove('talking');
+      if(e.error==='interrupted'||e.error==='canceled')return;
+      ttsLog='error: '+e.error;toast('Device speech unavailable here ('+e.error+'). Recorded voices fix this: see Settings.')};
+    speechSynthesis.speak(u);
+    ttsLog='queued, '+voices.length+' voices on device';
+  }catch(e){ttsLog='exception: '+e.message;toast('Audio failed: '+e.message)}
+}
+/* recorded audio, described by audio/manifest.json
+   v2 (several voices): {"ext":"m4a","voices":{"es":{"female":["0","1","g0"],"male":[...]},"pt":{...}}}
+                        -> audio/<lang>/<voice>/<id>.<ext>
+   v1 (one voice):      {"ext":"m4a","es":["0","1"],"pt":[...]} -> audio/<lang>/<id>.<ext> */
+let manifest=null,curAudio=null,warnedTTS=false;
+function parseManifest(m){
+  const out={ext:/^[a-z0-9]{2,4}$/.test(m.ext||'')?m.ext:'m4a',voices:{es:{},pt:{}}};
+  for(const l of ['es','pt']){
+    if(m.voices&&m.voices[l])for(const [v,ids] of Object.entries(m.voices[l])){if(/^[a-z0-9_-]{1,24}$/i.test(v)&&Array.isArray(ids))out.voices[l][v]=new Set(ids.map(String))}
+    else if(Array.isArray(m[l]))out.voices[l]['']=new Set(m[l].map(String));
+  }
+  return out;
+}
+fetch('audio/manifest.json',{cache:'no-store'}).then(r=>r.ok?r.json():null).then(m=>{if(m){manifest=parseManifest(m);if(!session&&!sheetOpen)renderHome()}}).catch(()=>{});
+const recVoices=(l=st.lang)=>manifest?Object.keys(manifest.voices[l]).filter(v=>manifest.voices[l][v].size):[];
+const recorded=(l=st.lang)=>Math.max(0,...recVoices(l).map(v=>manifest.voices[l][v].size));
+function clipFor(id){
+  const l=st.lang,key=String(id),has=recVoices(l).filter(v=>manifest.voices[l][v].has(key));
+  if(!has.length)return null;
+  const pref=st.recVoice[l]||'mix';
+  const v=pref==='mix'?has[[...key].reduce((a,c)=>a+c.charCodeAt(0),0)%has.length]:has.includes(pref)?pref:has[0];
+  return `audio/${l}/${v?v+'/':''}${encodeURIComponent(key)}.${manifest.ext}`;
+}
+const audioLabel=()=>{const v=recVoices();return v.length?`recorded ${v.filter(Boolean).length>1?v.length+' voices':'voice'} · ${recorded()} clips`:'device speech'};
+function speak(id,slow=st.slow){
+  const bp=document.querySelector('.big-play');
+  if(curAudio){try{curAudio.pause()}catch(e){}curAudio=null}
+  const clip=manifest&&clipFor(id);
+  if(clip){
+    try{
+      if(hasTTS)speechSynthesis.cancel();
+      const a=new Audio(clip);
+      a.preservesPitch=true;a.playbackRate=slow?.72:1;curAudio=a;
+      a.onplay=()=>bp&&bp.classList.add('talking');
+      a.onended=a.onpause=()=>bp&&bp.classList.remove('talking');
+      a.play().then(()=>{ttsLog='recorded clip playing'}).catch(e=>{ttsLog='clip failed: '+e.name;ttsSpeak(textOf(id),slow)});
+      return;
+    }catch(e){ttsLog='clip error: '+e.message}
+  }
+  ttsSpeak(textOf(id),slow);
+  if(hasTTS&&!warnedTTS){
+    setTimeout(()=>{if(!/^playing/.test(ttsLog)&&!warnedTTS){warnedTTS=true;toast('Device speech is silent here. Recorded voices fix this: see Settings.')}},2500);
+  }
+}
+let actx=null;
+function sfx(kind){
+  if(!st.sfx)return;
+  try{
+    actx=actx||new (window.AudioContext||window.webkitAudioContext)();
+    const notes=kind==='ok'?[660,880]:kind==='bad'?[220,165]:kind==='tap'?[520]:[523,659,784,1046];
+    notes.forEach((f,i)=>{
+      const o=actx.createOscillator(),g=actx.createGain(),t=actx.currentTime+i*.09;
+      o.type=kind==='bad'?'triangle':'sine';o.frequency.value=f;
+      g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(kind==='tap'?.05:.12,t+.01);g.gain.exponentialRampToValueAtTime(.001,t+.22);
+      o.connect(g).connect(actx.destination);o.start(t);o.stop(t+.25);
+    });
+  }catch(e){}
+}
+
+/* ---------- mascots ---------- */
+function mascot(lang=st.lang,mood='idle',cls=''){
+  const shadow='<ellipse class="shadow" cx="60" cy="110" rx="28" ry="5" fill="var(--c-ink)" opacity=".2"/>';
+  if(lang==='es'){
+    const mouth=mood==='happy'||mood==='cheer'
+      ?'<path d="M47 70 Q60 90 73 70 Z" fill="var(--c-ink)"/><path d="M53 79 Q60 84 67 79 Q60 76 53 79Z" fill="var(--c-cheek)"/>'
+      :mood==='sad'?'<path d="M50 80 Q60 71 70 80" stroke="var(--c-ink)" stroke-width="4" fill="none" stroke-linecap="round"/>'
+      :'<path d="M49 72 Q60 82 71 72" stroke="var(--c-ink)" stroke-width="4" fill="none" stroke-linecap="round"/>';
+    const brows=mood==='sad'?'<path d="M41 45 L52 48 M79 45 L68 48" stroke="var(--c-ink)" stroke-width="3" stroke-linecap="round"/>':'';
+    const rays=Array.from({length:12},(_,i)=>`<rect x="57" y="12" width="6" height="14" rx="3" fill="var(--c-sun-deep)" transform="rotate(${i*30} 60 62)"/>`).join('');
+    return `<svg class="mascot ${mood} ${cls}" viewBox="0 0 120 120" aria-label="Sol, the Spanish buddy" role="img">${shadow}
+      <g class="whole"><g class="rays">${rays}</g>
+      <circle cx="60" cy="62" r="33" fill="var(--c-sun)"/><path d="M33 52 A33 33 0 0 1 80 34" stroke="var(--c-white)" stroke-width="5" fill="none" stroke-linecap="round" opacity=".45"/>
+      <circle cx="42" cy="70" r="6" fill="var(--c-cheek)" opacity=".55"/><circle cx="78" cy="70" r="6" fill="var(--c-cheek)" opacity=".55"/>
+      ${brows}<g class="eyes"><ellipse cx="49" cy="56" rx="4.5" ry="6" fill="var(--c-ink)"/><ellipse cx="71" cy="56" rx="4.5" ry="6" fill="var(--c-ink)"/>
+      <circle cx="50.5" cy="53.5" r="1.6" fill="var(--c-white)"/><circle cx="72.5" cy="53.5" r="1.6" fill="var(--c-white)"/></g>${mouth}</g></svg>`;
+  }
+  const mouth=mood==='happy'||mood==='cheer'
+    ?'<path d="M22 66 Q28 78 37 68 Z" fill="var(--c-ink)"/>'
+    :mood==='sad'?'<path d="M23 72 Q29 66 35 71" stroke="var(--c-ink)" stroke-width="3.5" fill="none" stroke-linecap="round"/>'
+    :'<path d="M23 67 Q29 74 35 68" stroke="var(--c-ink)" stroke-width="3.5" fill="none" stroke-linecap="round"/>';
+  const brow=mood==='sad'?'<path d="M30 44 L44 47" stroke="var(--c-ink)" stroke-width="3" stroke-linecap="round"/>':'';
+  return `<svg class="mascot ${mood} ${cls}" viewBox="0 0 120 120" aria-label="Sardi, the Portuguese buddy" role="img">${shadow}
+    <g class="whole">
+    <g class="tail"><path d="M92 62 L116 44 Q110 62 116 80 Z" fill="var(--c-fish-deep)"/></g>
+    <path d="M58 38 Q68 26 80 40" fill="var(--c-fish-deep)"/>
+    <ellipse cx="57" cy="62" rx="40" ry="24" fill="var(--c-fish)"/>
+    <path d="M22 68 Q57 92 94 66 Q60 78 22 68Z" fill="var(--c-belly)"/>
+    <path d="M66 46 Q70 62 66 78 M76 48 Q80 62 76 76 M85 52 Q88 62 85 72" stroke="var(--c-fish-deep)" stroke-width="2.5" fill="none" opacity=".5"/>
+    <path d="M30 50 A40 24 0 0 1 70 39" stroke="var(--c-white)" stroke-width="4" fill="none" stroke-linecap="round" opacity=".5"/>
+    <g class="fin"><path d="M58 72 Q66 88 74 76 Z" fill="var(--c-fish-deep)"/></g>
+    <circle cx="50" cy="68" r="5" fill="var(--c-cheek)" opacity=".45"/>
+    ${brow}<g class="eyes"><circle cx="37" cy="55" r="9" fill="var(--c-white)"/><circle cx="35" cy="56" r="5" fill="var(--c-ink)"/><circle cx="36.5" cy="54" r="1.6" fill="var(--c-white)"/></g>
+    ${mouth}</g></svg>`;
+}
+
+/* ---------- animated scenes (viewBox 360x120, ground at y=96) ---------- */
+const B=(es,pt)=>st.lang==='es'?es:pt;
+const tw=s=>Math.round(s.length*6.6+18);
+function bubble(x,y,text,delay=0,side='l'){
+  const w=tw(text),tx=Math.max(4,Math.min(356-w,side==='l'?x:x-w));
+  return `<g class="sc-bubble" style="animation-delay:${delay}s"><rect x="${tx}" y="${y}" width="${w}" height="22" rx="11" fill="var(--sc-bubble)" stroke="var(--sc-line)" stroke-width="1.5"/>
+    <path d="M${side==='l'?tx+14:tx+w-14} ${y+21} l${side==='l'?-4:4} 7 l${side==='l'?10:-10} -7z" fill="var(--sc-bubble)"/>
+    <text x="${tx+w/2}" y="${y+15}" text-anchor="middle" class="sc-text">${esc(text)}</text></g>`;
+}
+function tag(x,y,text){
+  const w=tw(text)-4;
+  return `<g class="sc-tag"><rect x="${x-w/2}" y="${y}" width="${w}" height="18" rx="6" fill="var(--sc-tag)"/><text x="${x}" y="${y+13}" text-anchor="middle" class="sc-tagtext">${esc(text)}</text></g>`;
+}
+function npc(x,y,shirt,o={}){
+  const skin=o.skin||'var(--c-skin)',hair=o.hair||'var(--c-hair)';
+  const arm=o.wave?`<g class="sc-wave" style="transform-origin:${x+14}px ${y+2}px"><rect x="${x+12}" y="${y-14}" width="7" height="20" rx="3.5" fill="${shirt}"/><circle cx="${x+15.5}" cy="${y-16}" r="4.5" fill="${skin}"/></g>`:'';
+  return `<g class="${o.cls||'sc-bob'}">${arm}
+    <rect x="${x-16}" y="${y-6}" width="32" height="36" rx="14" fill="${shirt}"/>
+    ${o.apron?`<rect x="${x-10}" y="${y+2}" width="20" height="26" rx="5" fill="${o.apron}"/>`:''}
+    <circle cx="${x}" cy="${y-19}" r="14" fill="${skin}"/>
+    <path d="M${x-14} ${y-21} Q${x} ${y-42} ${x+14} ${y-21} Q${x+7} ${y-30} ${x} ${y-30} Q${x-7} ${y-30} ${x-14} ${y-21}z" fill="${hair}"/>
+    <g class="eyes" style="transform-origin:${x}px ${y-18}px"><circle cx="${x-5}" cy="${y-18}" r="1.9" fill="var(--c-ink)"/><circle cx="${x+5}" cy="${y-18}" r="1.9" fill="var(--c-ink)"/></g>
+    <path d="M${x-5} ${y-11} Q${x} ${y-7} ${x+5} ${y-11}" stroke="var(--c-ink)" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+    ${o.hat||''}</g>`;
+}
+const hero=(x,y,size,mood)=>`<g class="sc-hero">${mascot(st.lang,mood).replace('<svg class="mascot',`<svg x="${x}" y="${y}" width="${size}" height="${size}" class="mascot`)}</g>`;
+const stars=()=>[[30,14],[80,30],[140,10],[210,24],[300,12],[335,34]].map(([x,y],i)=>`<circle class="sc-star" style="animation-delay:${i*.4}s" cx="${x}" cy="${y}" r="1.4" fill="var(--sc-win)"/>`).join('');
+const base=(wall)=>`<rect width="360" height="120" fill="${wall||'var(--sc-sky)'}"/>${wall?'':stars()}<rect y="96" width="360" height="24" fill="var(--sc-ground)"/>`;
+const counter=(y=78)=>`<rect x="150" y="${y}" width="210" height="${96-y}" fill="var(--sc-wood)"/><rect x="146" y="${y-4}" width="214" height="7" rx="2" fill="var(--sc-wood-d)"/>`;
+const steam=(x,y)=>[0,.7,1.4].map((d,i)=>`<path class="sc-steam" style="animation-delay:${d}s" d="M${x+i*5-5} ${y} q-4 -6 0 -11 q4 -5 0 -10" stroke="var(--sc-steam)" stroke-width="2.4" fill="none" stroke-linecap="round"/>`).join('');
+const windowR=(x,y,w,h)=>`<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="4" fill="var(--sc-glass)" stroke="var(--sc-frame)" stroke-width="3"/><path d="M${x+w/2} ${y} v${h} M${x} ${y+h/2} h${w}" stroke="var(--sc-frame)" stroke-width="2"/>`;
+
+const SCENES={
+ greet:m=>`${base()}
+   <g fill="var(--sc-build)"><rect x="150" y="34" width="50" height="62"/><rect x="205" y="18" width="60" height="78"/><rect x="270" y="44" width="46" height="52"/><rect x="320" y="28" width="40" height="68"/></g>
+   ${[[160,44],[180,44],[160,64],[215,30],[240,30],[215,52],[240,52],[280,56],[298,56],[330,40],[330,62]].map(([x,y],i)=>`<rect class="sc-winb" style="animation-delay:${i*.3}s" x="${x}" y="${y}" width="10" height="12" rx="2" fill="var(--sc-win)"/>`).join('')}
+   <circle class="sc-sun" cx="60" cy="26" r="13" fill="var(--sc-sun)"/>
+   ${npc(250,70,'var(--br-people)',{wave:true})}${bubble(262,10,B('¡Hola! ¿Qué tal?','Olá! Tudo bem?'),0,'l')}
+   ${hero(70,44,58,m)}`,
+ cafe:m=>`${base('var(--sc-wall)')}${windowR(18,14,70,52)}
+   <rect x="300" y="20" width="44" height="30" rx="4" fill="var(--sc-board)"/><text x="322" y="39" text-anchor="middle" class="sc-board">${B('CAFÉ','CAFÉ')}</text>
+   ${npc(255,66,'var(--sc-shirt)',{apron:'var(--br-food)'})}${counter()}
+   <rect x="168" y="46" width="44" height="30" rx="5" fill="var(--sc-metal)"/><rect x="176" y="40" width="28" height="8" rx="3" fill="var(--sc-metal-d)"/>
+   <rect x="183" y="58" width="14" height="12" rx="3" fill="var(--sc-cup)"/>${steam(190,56)}
+   <g class="sc-slide"><rect x="300" y="60" width="16" height="15" rx="3" fill="var(--sc-cup)"/><rect x="298" y="57" width="20" height="4" rx="2" fill="var(--br-food)"/></g>
+   ${bubble(230,8,B('¿Para llevar?','É para levar?'),0,'l')}${hero(60,46,56,m)}`,
+ bakery:m=>`${base('var(--sc-wall)')}
+   <g class="sc-awning">${[0,1,2,3,4,5,6,7,8].map(i=>`<path d="M${i*40} 0 h40 v16 q-10 8 -20 0 q-10 8 -20 0z" fill="${i%2?'var(--br-food)':'var(--sc-bubble)'}"/>`).join('')}</g>
+   ${npc(270,66,'var(--sc-shirt)',{apron:'var(--sc-bubble)',hat:`<rect x="257" y="35" width="26" height="9" rx="4" fill="var(--sc-bubble)"/>`})}
+   <rect x="150" y="62" width="210" height="34" rx="4" fill="var(--sc-glass)" stroke="var(--sc-frame)" stroke-width="3"/>
+   ${[170,198,226,254,282,310,338].map((x,i)=>`<g class="sc-pop" style="animation-delay:${i*.15}s"><ellipse cx="${x}" cy="84" rx="11" ry="6" fill="var(--sc-crust)"/><ellipse cx="${x}" cy="82" rx="7" ry="3.5" fill="var(--sc-custard)"/><circle cx="${x-2}" cy="81" r="1.4" fill="var(--sc-crust-d)"/></g>`).join('')}
+   ${steam(198,74)}${bubble(225,22,B('¡Recién hechos!','Acabados de sair!'),0,'l')}${hero(55,46,56,m)}`,
+ restaurant:m=>`${base('var(--sc-wall)')}
+   <rect x="40" y="16" width="44" height="32" rx="3" fill="var(--sc-frame)"/><rect x="45" y="21" width="34" height="22" fill="var(--sc-hill)"/><circle cx="70" cy="28" r="4" fill="var(--sc-sun)"/>
+   <rect x="120" y="74" width="140" height="8" rx="3" fill="var(--sc-cloth)"/><path d="M128 82 v14 M252 82 v14" stroke="var(--sc-wood-d)" stroke-width="5"/>
+   <ellipse cx="160" cy="73" rx="16" ry="4" fill="var(--sc-plate)"/><ellipse cx="220" cy="73" rx="16" ry="4" fill="var(--sc-plate)"/>
+   <rect x="187" y="58" width="6" height="14" rx="2" fill="var(--sc-bubble)"/><path class="sc-flame" d="M190 50 q4 5 0 9 q-4 -4 0 -9z" fill="var(--sc-sun)"/>
+   <g class="sc-walk">${npc(310,66,'var(--sc-shirt)',{apron:'var(--c-ink)',cls:'sc-none'})}<rect x="318" y="44" width="30" height="4" rx="2" fill="var(--sc-metal-d)"/><ellipse cx="333" cy="42" rx="10" ry="4" fill="var(--sc-plate)"/></g>
+   ${bubble(240,6,B('¿Mesa para seis?','Mesa para seis?'),0,'l')}${hero(40,46,56,m)}`,
+ train:m=>`${base()}<circle class="sc-sun" cx="320" cy="22" r="11" fill="var(--sc-sun)"/>
+   <g class="sc-scroll slow"><path d="M0 80 q45 -34 90 0 t90 0 t90 0 t90 0 t90 0 t90 0 t90 0 t90 0 v20 h-720z" fill="var(--sc-hill2)"/></g>
+   <g class="sc-scroll"><path d="M0 90 q30 -18 60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0 v10 h-720z" fill="var(--sc-hill)"/>
+     ${[20,120,220,320,380,480,580,680].map(x=>`<rect x="${x}" y="58" width="3" height="38" fill="var(--sc-frame)"/>`).join('')}</g>
+   <rect y="96" width="360" height="5" fill="var(--sc-rail)"/>
+   <g class="sc-rattle"><rect x="70" y="52" width="230" height="40" rx="12" fill="var(--br-travel)"/><rect x="70" y="80" width="230" height="5" fill="var(--sc-bubble)" opacity=".7"/>
+     ${[118,166,214,262].map(x=>`<rect x="${x}" y="60" width="32" height="16" rx="4" fill="var(--sc-glass)"/>`).join('')}
+     <circle cx="105" cy="94" r="5" fill="var(--c-ink)"/><circle cx="270" cy="94" r="5" fill="var(--c-ink)"/></g>
+   ${hero(76,40,48,m)}`,
+ palace:m=>`${base()}<circle class="sc-sun" cx="40" cy="24" r="11" fill="var(--sc-sun)"/>
+   <path d="M120 96 q80 -70 180 -10 q30 16 60 10z" fill="var(--sc-hill)"/>
+   <g><rect x="210" y="34" width="60" height="34" fill="var(--sc-palace1)"/><rect x="200" y="26" width="16" height="42" fill="var(--sc-palace2)"/><circle cx="208" cy="24" r="9" fill="var(--sc-palace2)"/>
+     <rect x="262" y="20" width="18" height="48" fill="var(--sc-palace1)"/><path d="M262 20 l9 -12 l9 12z" fill="var(--sc-palace2)"/>
+     ${[220,236,252].map(x=>`<rect x="${x}" y="44" width="8" height="12" rx="4" fill="var(--sc-win)"/>`).join('')}
+     <path class="sc-flag" d="M271 8 v-8 l10 3 l-10 3" fill="var(--br-food)"/></g>
+   <g class="sc-drive"><rect x="0" y="72" width="62" height="20" rx="7" fill="var(--br-travel)"/><rect x="6" y="76" width="50" height="8" rx="2" fill="var(--sc-glass)"/><text x="50" y="90" class="sc-tagtext" fill="var(--sc-bubble)">434</text><circle cx="12" cy="94" r="4" fill="var(--c-ink)"/><circle cx="50" cy="94" r="4" fill="var(--c-ink)"/></g>
+   ${bubble(110,6,B('¡Una entrada, por favor!','Uma entrada, por favor!'),0,'l')}${hero(86,46,50,m)}`,
+ car:m=>`${base()}<circle class="sc-sun" cx="300" cy="22" r="11" fill="var(--sc-sun)"/>
+   <g class="sc-scroll slow">${[0,90,180,270,360,450,540,630].map(x=>`<g><rect x="${x+20}" y="62" width="5" height="30" fill="var(--sc-wood-d)"/><circle cx="${x+22}" cy="56" r="14" fill="var(--sc-hill2)"/></g>`).join('')}</g>
+   <rect y="92" width="360" height="28" fill="var(--sc-road)"/>
+   <g class="sc-scroll fast">${[0,60,120,180,240,300,360,420,480,540,600,660].map(x=>`<rect x="${x}" y="104" width="30" height="4" rx="2" fill="var(--sc-win)"/>`).join('')}</g>
+   <g class="sc-rattle"><path d="M110 92 v-18 q0 -6 6 -7 l22 -3 l18 -16 h48 l20 18 q22 2 24 12 v14z" fill="var(--br-food)"/>
+     <path d="M146 64 l12 -11 h40 l14 12z" fill="var(--sc-glass)"/>
+     <g class="sc-wheel" style="transform-origin:136px 94px"><circle cx="136" cy="94" r="10" fill="var(--c-ink)"/><path d="M130 94 h12" stroke="var(--sc-metal)" stroke-width="2"/></g>
+     <g class="sc-wheel" style="transform-origin:216px 94px"><circle cx="216" cy="94" r="10" fill="var(--c-ink)"/><path d="M210 94 h12" stroke="var(--sc-metal)" stroke-width="2"/></g></g>
+   ${hero(158,30,38,m)}${bubble(240,8,B('¡Con el depósito lleno!','Com o depósito cheio!'),0,'l')}`,
+ hotel:m=>`${base('var(--sc-wall)')}
+   <rect x="196" y="14" width="80" height="40" rx="4" fill="var(--sc-wood-d)"/>
+   ${[0,1,2,3].map(i=>`<g class="sc-swing" style="transform-origin:${210+i*18}px 22px;animation-delay:${i*.3}s"><path d="M${210+i*18} 22 v10" stroke="var(--sc-metal)" stroke-width="2"/><circle cx="${210+i*18}" cy="36" r="4" fill="var(--sc-sun)"/></g>`).join('')}
+   ${npc(300,66,'var(--br-travel)')}${counter(76)}
+   <g class="sc-ding"><path d="M178 72 q8 -14 16 0z" fill="var(--sc-sun)"/><rect x="174" y="71" width="24" height="3" rx="1.5" fill="var(--sc-metal-d)"/></g>
+   ${bubble(150,2,B('¿A nombre de quién?','Em nome de quem?'),0,'l')}${hero(50,46,56,m)}`,
+ shop:m=>`${base('var(--sc-wall)')}
+   <rect x="160" y="22" width="150" height="5" rx="2" fill="var(--sc-metal-d)"/><path d="M170 27 v70 M300 27 v70" stroke="var(--sc-metal-d)" stroke-width="4"/>
+   ${['var(--br-food)','var(--br-travel)','var(--br-people)','var(--br-life)','var(--sc-sun)'].map((c,i)=>`<g class="sc-swing" style="transform-origin:${185+i*26}px 25px;animation-delay:${i*.25}s"><path d="M${185+i*26} 25 v6" stroke="var(--sc-metal-d)" stroke-width="2"/><path d="M${173+i*26} 34 l12 -4 l12 4 l4 10 h-6 v20 h-20 v-20 h-6z" fill="${c}"/></g>`).join('')}
+   ${npc(330,66,'var(--sc-shirt)')}
+   <rect x="20" y="20" width="34" height="70" rx="17" fill="var(--sc-glass)" stroke="var(--sc-frame)" stroke-width="3"/>
+   ${bubble(230,72,B('¿Qué talla?','Que tamanho?'),0,'l')}${hero(76,46,56,m)}`,
+ market:m=>`${base('var(--sc-wall)')}
+   <rect x="20" y="10" width="110" height="22" rx="4" fill="var(--br-life)"/><text x="75" y="25" text-anchor="middle" class="sc-board" fill="var(--sc-bubble)">${B('CAJA 3','CAIXA 3')}</text>
+   <rect x="110" y="70" width="190" height="26" fill="var(--sc-metal)"/>
+   <g class="sc-belt">${Array.from({length:14},(_,i)=>`<rect x="${100+i*16}" y="66" width="10" height="5" fill="var(--sc-metal-d)"/>`).join('')}</g>
+   <g class="sc-items"><circle cx="130" cy="60" r="7" fill="var(--br-food)"/><rect x="150" y="46" width="10" height="21" rx="3" fill="var(--br-travel)"/><rect x="172" y="52" width="20" height="15" rx="2" fill="var(--sc-sun)"/></g>
+   <rect x="250" y="56" width="20" height="12" rx="2" fill="var(--c-ink)"/><rect class="sc-blink" x="252" y="66" width="16" height="3" fill="var(--br-food)"/>
+   ${npc(320,64,'var(--br-life)')}${bubble(240,8,B('¿Necesita bolsa?','Precisa de saco?'),0,'l')}${hero(36,46,56,m)}`,
+ pharmacy:m=>`${base('var(--sc-wall)')}
+   <g class="sc-blink"><path d="M58 10 h14 v14 h14 v14 h-14 v14 h-14 v-14 h-14 v-14 h14z" fill="var(--br-people)"/></g>
+   ${[0,1].map(r=>`<rect x="160" y="${22+r*24}" width="190" height="4" fill="var(--sc-wood-d)"/>${[0,1,2,3,4,5,6].map(i=>`<rect x="${166+i*26}" y="${8+r*24}" width="18" height="14" rx="2" fill="${['var(--br-travel)','var(--sc-bubble)','var(--br-food)','var(--br-life)'][(i+r)%4]}"/>`).join('')}`).join('')}
+   ${npc(270,70,'var(--sc-bubble)')}${counter(80)}
+   ${bubble(140,56,B('¿Qué le pasa?','O que se passa?'),0,'l')}${hero(40,46,56,m)}`,
+ talk:m=>`${base()}<circle class="sc-sun" cx="40" cy="22" r="11" fill="var(--sc-sun)"/>
+   <circle cx="320" cy="50" r="26" fill="var(--sc-hill2)"/><rect x="317" y="70" width="6" height="26" fill="var(--sc-wood-d)"/>
+   <rect x="110" y="80" width="150" height="6" rx="3" fill="var(--sc-wood)"/><path d="M118 86 v10 M252 86 v10" stroke="var(--sc-wood-d)" stroke-width="4"/>
+   ${npc(215,62,'var(--br-people)')}
+   ${bubble(180,4,B('¿De dónde eres?','De onde és?'),0,'l')}${bubble(170,28,B('¡De Alemania!','Da Alemanha!'),2.2,'r')}
+   ${hero(118,36,54,m)}`,
+ plans:m=>`${base('var(--sc-wall)')}
+   <rect x="230" y="14" width="80" height="64" rx="6" fill="var(--sc-bubble)" stroke="var(--sc-frame)" stroke-width="3"/><rect x="230" y="14" width="80" height="16" rx="6" fill="var(--br-people)"/>
+   ${Array.from({length:12},(_,i)=>`<rect x="${238+(i%4)*17}" y="${36+Math.floor(i/4)*13}" width="12" height="9" rx="2" fill="${i===9?'var(--br-food)':'var(--sc-line)'}" ${i===9?'class="sc-blink"':''}/>`).join('')}
+   <text x="270" y="27" text-anchor="middle" class="sc-tagtext" fill="var(--sc-bubble)">${B('SÁBADO','SÁBADO')}</text>
+   ${npc(170,66,'var(--br-travel)')}<g class="sc-buzz"><rect x="186" y="56" width="10" height="17" rx="2" fill="var(--c-ink)"/></g>
+   ${bubble(110,6,B('¿Quedamos el domingo?','Combinamos domingo?'),0,'l')}${hero(40,46,56,m)}`,
+ trouble:m=>`${base()}
+   <g fill="var(--sc-build)"><rect x="200" y="30" width="60" height="66"/><rect x="266" y="16" width="44" height="80"/><rect x="314" y="40" width="46" height="56"/></g>
+   ${npc(160,66,'var(--br-life)')}
+   ${['?','?','!'].map((q,i)=>`<text class="sc-float sc-q" style="animation-delay:${i*.6}s" x="${150+i*14}" y="36">${q}</text>`).join('')}
+   <g class="sc-buzz"><rect x="232" y="72" width="16" height="24" rx="3" fill="var(--c-ink)"/><rect x="235" y="75" width="10" height="15" fill="var(--br-food)"/></g>
+   ${bubble(200,8,B('¿Me puede ayudar?','Pode ajudar-me?'),0,'l')}${hero(50,46,56,m)}`,
+ info:m=>`${base('var(--sc-wall)')}
+   <circle cx="300" cy="28" r="16" fill="var(--br-people)"/><text x="300" y="35" text-anchor="middle" class="sc-board" fill="var(--sc-bubble)">i</text>
+   <rect x="180" y="30" width="56" height="66" rx="6" fill="var(--sc-metal)"/><rect class="sc-screen" x="188" y="38" width="40" height="26" rx="3" fill="var(--br-travel)"/>
+   <rect x="196" y="70" width="24" height="6" rx="2" fill="var(--c-ink)"/>
+   ${npc(300,70,'var(--br-people)')}
+   ${bubble(110,6,B('¿Cómo funciona?','Como é que funciona?'),0,'l')}${hero(70,46,56,m)}`,
+ room:m=>`${base('var(--sc-wall)')}${windowR(150,12,60,46)}
+   <rect x="40" y="62" width="100" height="6" rx="2" fill="var(--sc-wood)"/><path d="M48 68 v28 M132 68 v28" stroke="var(--sc-wood-d)" stroke-width="5"/>
+   <rect x="96" y="44" width="30" height="18" rx="2" fill="var(--c-ink)"/><rect x="92" y="60" width="38" height="3" fill="var(--sc-metal-d)"/>
+   <path d="M60 62 v-18 M60 44 l-10 -8 h20z" stroke="var(--sc-metal-d)" stroke-width="3" fill="var(--sc-sun)"/><circle class="sc-glow" cx="60" cy="40" r="14" fill="var(--sc-sun)" opacity=".25"/>
+   <path d="M180 66 v30 M204 66 v30 M178 72 h28 M200 40 v32" stroke="var(--sc-wood-d)" stroke-width="5" stroke-linecap="round"/>
+   <rect x="240" y="70" width="110" height="20" rx="6" fill="var(--br-travel)"/><rect x="244" y="62" width="30" height="12" rx="5" fill="var(--sc-bubble)"/><path d="M240 90 v6 M350 90 v6" stroke="var(--sc-wood-d)" stroke-width="5"/>
+   ${tag(90,30,B('el escritorio','a secretária'))}${tag(192,98,B('la silla','a cadeira'))}${tag(296,46,B('la cama','a cama'))}${tag(180,62,B('la ventana','a janela'))}
+   ${hero(282,22,40,m)}`,
+ stall:m=>`${base()}
+   <g>${[0,1,2,3,4,5,6].map(i=>`<path d="M${70+i*36} 14 h36 v14 q-9 7 -18 0 q-9 7 -18 0z" fill="${i%2?'var(--br-people)':'var(--sc-bubble)'}"/>`).join('')}</g>
+   <path d="M74 28 v68 M318 28 v68" stroke="var(--sc-wood-d)" stroke-width="4"/>
+   <rect x="80" y="70" width="232" height="26" fill="var(--sc-wood)"/>
+   ${[100,114,128].map((x,i)=>`<circle class="sc-pop" style="animation-delay:${i*.2}s" cx="${x}" cy="66" r="7" fill="var(--br-food)"/>`).join('')}
+   <g class="sc-pop" style="animation-delay:.5s"><path d="M168 66 q18 -12 36 0 q-18 10 -36 0z M204 66 l8 -6 v12z" fill="var(--sc-metal)"/></g>
+   <g class="sc-pop" style="animation-delay:.8s"><ellipse cx="254" cy="64" rx="18" ry="8" fill="var(--sc-crust)"/><path d="M244 60 l4 6 M254 58 l4 6 M264 60 l4 6" stroke="var(--sc-crust-d)" stroke-width="2"/></g>
+   ${tag(114,80,B('los tomates','os tomates'))}${tag(186,80,B('el pescado','o peixe'))}${tag(256,80,B('el pan','o pão'))}
+   ${hero(10,46,56,m)}`,
+ daynight:m=>`${base('var(--sc-wall)')}
+   <defs><clipPath id="dnclip"><rect x="200" y="12" width="110" height="60" rx="5"/></clipPath></defs><g><rect x="200" y="12" width="110" height="60" rx="5" fill="var(--sc-sky)" stroke="var(--sc-frame)" stroke-width="3"/>
+     <g clip-path="url(#dnclip)"><g class="sc-orbit" style="transform-origin:255px 70px"><circle cx="255" cy="28" r="9" fill="var(--sc-sun)"/><circle cx="255" cy="112" r="8" fill="var(--sc-moon)"/></g></g></g>
+   <rect x="20" y="66" width="120" height="22" rx="6" fill="var(--br-life)"/><rect x="24" y="58" width="30" height="12" rx="5" fill="var(--sc-bubble)"/><path d="M20 88 v8 M140 88 v8" stroke="var(--sc-wood-d)" stroke-width="5"/>
+   ${['z','z','Z'].map((z,i)=>`<text class="sc-float sc-q" style="animation-delay:${i*.7}s" x="${64+i*10}" y="46">${z}</text>`).join('')}
+   <rect x="250" y="76" width="90" height="5" rx="2" fill="var(--sc-wood)"/><path d="M256 81 v15 M334 81 v15" stroke="var(--sc-wood-d)" stroke-width="4"/><rect x="290" y="60" width="26" height="16" rx="2" fill="var(--c-ink)"/>
+   ${tag(80,98,B('dormir','dormir'))}${tag(300,98,B('trabajar','trabalhar'))}
+   ${hero(34,26,46,m)}`,
+ clock:m=>`${base('var(--sc-wall)')}
+   <circle cx="240" cy="54" r="38" fill="var(--sc-bubble)" stroke="var(--sc-frame)" stroke-width="5"/>
+   ${Array.from({length:12},(_,i)=>`<rect x="239" y="20" width="2" height="6" fill="var(--sc-line)" transform="rotate(${i*30} 240 54)"/>`).join('')}
+   <rect class="sc-hand-h" x="238" y="34" width="4" height="22" rx="2" fill="var(--c-ink)" style="transform-origin:240px 54px"/>
+   <rect class="sc-hand-m" x="239" y="24" width="2" height="32" rx="1" fill="var(--br-food)" style="transform-origin:240px 54px"/>
+   <circle cx="240" cy="54" r="3" fill="var(--c-ink)"/>
+   <g class="sc-flip" style="transform-origin:330px 66px"><path d="M318 44 h24 l-12 22 l12 22 h-24 l12 -22z" fill="var(--sc-glass)" stroke="var(--sc-frame)" stroke-width="3"/><path d="M324 84 h12 l-6 -8z" fill="var(--sc-sun)"/></g>
+   ${tag(240,98,B('las tres y media','três e meia'))}${bubble(110,8,B('¿Cuánto se tarda?','Quanto tempo demora?'),0,'l')}${hero(60,46,56,m)}`
+};
+const UNIT_SCENE=['greet','cafe','train','hotel','shop','restaurant','talk','pharmacy','plans','trouble','bakery','palace','cafe','restaurant','market','info','room','stall','daynight','clock','car'];
+function sceneSVG(u,mood='idle'){
+  const key=UNIT_SCENE[u]||'greet',sk=SCENES[key];
+  return `<svg class="scene-svg" viewBox="0 0 360 120" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Scene: ${esc(uTxt(u,'t'))}">${sk(mood)}</svg>`;
+}
+function itemUnit(it){return it.type==='cold'?gistById(it.id).u:S[it.id][0]}
+function sceneStrip(it){
+  const u=itemUnit(it);
+  return `<div class="scene ${it.type==='intro'?'':'quiet'}" id="scene" data-u="${u}">${sceneSVG(u)}</div>`;
+}
+function setSceneMood(mood){const s=$('#scene');if(s){s.classList.remove('quiet');s.innerHTML=sceneSVG(+s.dataset.u,mood)}}
+
+/* ---------- helpers ---------- */
+const $=s=>document.querySelector(s);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const shuffle=a=>{a=[...a];for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]]}return a};
+const unitIds=u=>allIds().filter(i=>S[i][0]===u);
+const ICON={
+ play:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3A4.5 4.5 0 0 0 14 7.97v8.05A4.5 4.5 0 0 0 16.5 12zM14 3.23v2.06a7 7 0 0 1 0 13.42v2.06a9 9 0 0 0 0-17.54z"/></svg>',
+ slow:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>',
+ gear:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg>',
+ fire:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c1 4 5 5.5 5 11a5 5 0 0 1-10 0c0-2.5 1.3-4 2.5-5 .2 1.8 1 2.7 2 3-.5-3 .2-6 .5-9z"/></svg>',
+ star:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 6 6.6.8-4.9 4.5 1.3 6.5L12 17l-5.9 3.3 1.3-6.5L2.5 9.3l6.6-.8z"/></svg>',
+ clock:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>',
+ lock:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><rect x="5" y="11" width="14" height="10" rx="2.5"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>',
+ sun:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8"/></svg>',
+ moon:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z"/></svg>',
+ auto:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="8.5"/><path d="M12 3.5a8.5 8.5 0 0 1 0 17z" fill="currentColor"/></svg>',
+ check:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>'
+};
+const unitIcon=u=>`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="${UNITS[u].ic}"/></svg>`;
+
+/* ---------- unit progress ---------- */
+function unitInfo(u){
+  const ids=unitIds(u),cs=cards();
+  const seen=ids.filter(i=>cs[i]).length;
+  const strength=ids.reduce((a,i)=>a+(cs[i]?Math.min((cs[i].iv||0)/21,1):0),0)/ids.length;
+  return {ids,seen,total:ids.length,strength,done:seen===ids.length};
+}
+const unlocked=u=>UNITS[u].parents.every(p=>unitInfo(p).done)||unitInfo(u).seen>0;
+
+/* ---------- home ---------- */
+function streakNow(){
+  const today=new Date().toISOString().slice(0,10),yest=new Date(Date.now()-DAY).toISOString().slice(0,10);
+  return (st.streak.last===today||st.streak.last===yest)?st.streak.n:0;
+}
+const openUnits=()=>UNITS.map((_,u)=>u).filter(u=>unlocked(u)&&!unitInfo(u).done).sort((a,b)=>UNITS[a].row-UNITS[b].row||UNITS[a].col-UNITS[b].col);
+const ROW=178, TOP=30;
+function renderHome(){
+  session=null;
+  const due=dueList().length,learned=Object.keys(cards()).length,total=allIds().length;
+  const open=openUnits();
+  const L=LANGS[st.lang],xp=st.xp[st.lang],lv=lvlOf(xp),lo=xpFor(lv),hi=xpFor(lv+1);
+  const headline=due?`${due} sentence${due>1?'s':''} ready to review`
+    :open.length>1?`${open.length} paths open. Where to next?`
+    :open.length?`Next: ${esc(uTxt(open[0],'t'))}`:'Tree complete. Keep your streak alive.';
+  $('#app').innerHTML=`
+  ${headerHTML()}
+  <section class="hero">
+    <div>${mascot(st.lang,'idle')}</div>
+    <div>
+      <div class="bubble">${esc(pick(LINES[st.lang].idle))}</div>
+      <h2>${headline}</h2>
+      <div class="chips">
+        <span class="chip fire">${ICON.fire}${streakNow()} day${streakNow()===1?'':'s'}</span>
+        <span class="chip star">${ICON.star}${learned}/${total}</span>
+        <span class="chip due">${ICON.clock}${due} due</span>
+      </div>
+      <button class="chunky ${due?'gold':''}" id="go" ${!due&&!open.length?'disabled':''}>${due?'Review':open.length>1?'Pick a branch':'Start lesson'}</button>
+    </div>
+    <div class="lvl"><span class="badge">Lv ${lv}</span><div class="xpbar"><i style="width:${Math.round((xp-lo)/(hi-lo)*100)}%"></i></div><span>${xp} XP</span></div>
+  </section>
+  <div class="map-head" id="treeHead"><h3>${L.native} skill tree</h3><small>${audioLabel()}</small></div>
+  <div class="legend"><span><i style="background:var(--br-food)"></i>Food</span><span><i style="background:var(--br-travel)"></i>Travel</span><span><i style="background:var(--br-people)"></i>People</span><span><i style="background:var(--br-life)"></i>Everyday</span><span><i style="background:var(--br-words)"></i>Words</span><span><i style="background:var(--gold)"></i>${L.city} scenario</span></div>
+  ${treeHTML('main',open)}
+  <div class="map-head"><h3>Word packs</h3><small>Everyday nouns, verbs and times</small></div>
+  ${treeHTML('words',open)}`;
+  bindHeader();
+  $('#go').onclick=()=>{sfx('tap');if(due)return startReview();if(open.length===1)return startUnit(open[0]);$('#treeHead').scrollIntoView({behavior:'smooth',block:'start'})};
+  document.querySelectorAll('.coin').forEach(b=>b.onclick=()=>{
+    const u=+b.dataset.unit;
+    if(!unlocked(u)){const s=b.closest('.node');s.classList.remove('shake');void s.offsetWidth;s.classList.add('shake');sfx('bad')}
+    else sfx('tap');
+    openUnitSheet(u);
+  });
+}
+function treeHTML(kind,open){
+  const ids=UNITS.map((_,i)=>i).filter(i=>(UNITS[i].tree||'main')===kind);
+  const rows=Math.max(...ids.map(i=>UNITS[i].row))+1,H=TOP+(rows-1)*ROW+128;
+  const X=u=>(UNITS[u].col+.5)/4*100, Y=u=>TOP+UNITS[u].row*ROW;
+  const L=LANGS[st.lang];
+  const links=ids.flatMap(c=>UNITS[c].parents.filter(p=>ids.includes(p)).map(p=>{
+    const x1=X(p),y1=Y(p)+138,x2=X(c),y2=Y(c)+2,m=(y1+y2)/2;
+    const cls=unitInfo(c).done?'done':unlocked(c)?'open':'';
+    return `<path class="${cls}" d="M${x1} ${y1} C${x1} ${m} ${x2} ${m} ${x2} ${y2}"/>`;
+  })).join('');
+  const firstOpen=open.find(u=>ids.includes(u));
+  return `<div class="tree" style="height:${H}px">
+    <svg class="links" viewBox="0 0 100 ${H}" preserveAspectRatio="none" aria-hidden="true">${links}</svg>
+    ${ids.map(i=>{
+      const u=UNITS[i],inf=unitInfo(i),lock=!unlocked(i),isOpen=!lock&&!inf.done;
+      const cls=lock?'locked':inf.done?'done':'open';
+      const p=lock?0:Math.round(inf.done?Math.max(inf.strength*100,8):inf.seen/inf.total*100);
+      const icon=lock?ICON.lock:inf.done?ICON.check:unitIcon(i);
+      return `<div class="node ${cls}" style="left:${X(i)}%;top:${Y(i)}px;--br:var(${BR[u.br]})">
+        <div class="coin-wrap">
+          ${u.scen?`<span class="scen">${esc(L.city.toUpperCase())}</span>`:''}
+          ${isOpen&&i===firstOpen&&kind==='main'?mascot(st.lang,'idle','side-mascot '+(u.col<2?'r':'l')):''}
+          <div class="ring" style="--p:${p}"><button class="coin" data-unit="${i}" aria-label="${esc(uTxt(i,'t'))}${lock?' (locked)':''}">${icon}</button></div>
+        </div>
+        <div class="label"><b>${esc(uTxt(i,'sh'))}</b><span>${lock?u.lv+' · locked':inf.done?Math.round(inf.strength*100)+'% strong':inf.seen+'/'+inf.total}</span></div>
+      </div>`}).join('')}
+  </div>`;
+}
+function openUnitSheet(u){
+  sheetOpen=true;$('#sheet').hidden=false;$('#scrim').hidden=false;
+  const inf=unitInfo(u),lock=!unlocked(u),U=UNITS[u];
+  const sample=inf.ids.slice(0,3);
+  const needs=U.parents.filter(p=>!unitInfo(p).done).map(p=>uTxt(p,'t'));
+  $('#sheet').innerHTML=`<div class="sheet-in unit-sheet">
+    <div class="scene sheet-scene" style="--br:var(${BR[U.br]})">${sceneSVG(u)}</div>
+    <div><span class="lv">${U.lv}${U.scen?' · '+esc(LANGS[st.lang].city)+' scenario':''}</span><h3>${esc(uTxt(u,'t'))}</h3></div>
+    <p class="desc">${esc(uTxt(u,'s'))} · ${inf.total} sentences${inf.seen?` · ${inf.seen} learned`:''}</p>
+    <ul class="preview">${sample.map(i=>`<li>${esc(tgt(i))}<span>${esc(S[i][1])}</span></li>`).join('')}</ul>
+    ${lock?`<p class="needs">Finish ${needs.map(esc).join(' and ')} to unlock this.</p><button class="chunky" id="uClose">OK</button>`
+      :`<button class="chunky ${inf.done?'':'gold'}" id="uStart">${inf.done?'Practise':inf.seen?'Continue':'Start'}</button>${gistsFor(u).length?`<button class="chunky cold-btn" id="uCold">Jump in: cold water</button><p class="needs" style="margin-top:-6px">A real-life passage at natural speed. Get the gist, not every word.</p>`:''}<button class="ghost" id="uClose">Not now</button>`}
+  </div>`;
+  const s=$('#uStart');if(s)s.onclick=()=>{sfx('tap');sheetOpen=false;$('#sheet').hidden=true;$('#scrim').hidden=true;startUnit(u)};
+  const c=$('#uCold');if(c)c.onclick=()=>{sfx('tap');sheetOpen=false;$('#sheet').hidden=true;$('#scrim').hidden=true;newSession('cold',gistsFor(u).map(g=>({id:g.id,type:'cold'})),u);renderItem()};
+  $('#uClose').onclick=closeSheet;
+}
+function headerHTML(){
+  return `<header><div class="brand">Frase <em>a</em> Frase</div>
+  <div class="hright"><div class="seg" role="group" aria-label="Language">
+   ${Object.keys(LANGS).map(l=>`<button data-lang="${l}" aria-pressed="${st.lang===l}">${l.toUpperCase()}</button>`).join('')}</div>
+   <button class="icon-btn" id="themeBtn" aria-label="Theme: ${st.theme}" title="Theme: ${st.theme}">${ICON[st.theme==='auto'?'auto':st.theme==='light'?'sun':'moon']}</button>
+   <button class="icon-btn" id="gear" aria-label="Settings">${ICON.gear}</button></div></header>`;
+}
+function bindHeader(){
+  document.querySelectorAll('[data-lang]').forEach(b=>b.onclick=()=>{st.lang=b.dataset.lang;save();sfx('tap');renderHome()});
+  $('#gear').onclick=openSheet;
+  $('#themeBtn').onclick=()=>{st.theme=THEMES[(THEMES.indexOf(st.theme)+1)%3];applyTheme();save();sfx('tap');toast('Theme: '+({auto:'follows your phone',light:'light',dark:'dark'})[st.theme]);renderHome()};
+}
+
+/* ---------- sessions ---------- */
+let session=null;
+const LESSON_TYPES=['meaning','listen','build','translate','gap','build'];
+function typeFor(c){
+  if(!c||c.reps<=1)return shuffle(['meaning','listen','build'])[0];
+  if(c.reps===2)return shuffle(['translate','build'])[0];
+  return shuffle(['listen','translate','gap','build','build'])[0];
+}
+function newSession(mode,items,unit){session={mode,unit,items,i:0,right:0,asked:0,combo:0,best:0,xp:0}}
+function startUnit(u){
+  const inf=unitInfo(u),cs=cards();
+  const fresh=inf.ids.filter(i=>!cs[i]);
+  const cold=gistsFor(u).map(g=>({id:g.id,type:'cold'}));
+  if(fresh.length)newSession('lesson',[...fresh.map(id=>({id,type:'intro'})),...shuffle(fresh).map((id,i)=>({id,type:LESSON_TYPES[i%6]})),...cold],u);
+  else newSession('practice',[...shuffle(inf.ids).map(id=>({id,type:typeFor(cs[id])})),...cold],u);
+  renderItem();
+}
+function startReview(){
+  const items=shuffle(dueList()).slice(0,20).map(id=>({id,type:typeFor(cards()[id])}));
+  const pool=UNITS.map((_,u)=>u).filter(u=>unitInfo(u).seen).flatMap(u=>gistsFor(u));
+  if(pool.length)items.splice(Math.min(items.length,4+Math.floor(Math.random()*4)),0,{id:pick(pool).id,type:'cold'});
+  newSession('review',items);
+  renderItem();
+}
+function distractSentences(id,field){
+  const u=S[id][0],get=i=>field==='en'?S[i][1]:tgt(i);
+  const same=shuffle(unitIds(u).filter(i=>i!==id)),other=shuffle(allIds().filter(i=>S[i][0]!==u));
+  const out=[],seen=new Set([get(id)]);
+  for(const i of [...same.slice(0,2),...other,...same.slice(2)]){if(out.length>=3)break;const t=get(i);if(!seen.has(t)){seen.add(t);out.push(t)}}
+  return out;
+}
+const clean=w=>w.replace(/[¡!¿?.,]/g,'');
+function gapFor(id){
+  const toks=tgt(id).split(/\s+/);
+  let best=-1;
+  toks.forEach((t,i)=>{const c=clean(t);if(c.length<3)return;if(i>0&&/^[A-ZÁÉÍÓÚ]/.test(c))return;if(best<0||c.length>clean(toks[best]).length)best=i});
+  if(best<0)best=0;
+  const ans=clean(toks[best]);
+  const pool=[...new Set(allIds().flatMap(i=>tgt(i).split(/\s+/).map(clean)).filter(w=>w.length>=3&&w.toLowerCase()!==ans.toLowerCase()&&!/^[A-ZÁÉÍÓÚ]/.test(w)))];
+  const near=shuffle(pool.filter(w=>Math.abs(w.length-ans.length)<=3));
+  const opts=shuffle([ans,...(near.length>=3?near:shuffle(pool)).slice(0,3)]);
+  const html=toks.map((t,i)=>i===best?esc(t.replace(ans,'\u0000')).replace('\u0000','<span class="gap"></span>'):esc(t)).join(' ');
+  return {ans,opts,html};
+}
+function sessionTop(){
+  const pct=Math.round(session.i/session.items.length*100);
+  return `<div class="s-top"><button class="close" id="quit" aria-label="Quit session">✕</button>
+    <div class="pbar"><i style="width:${Math.max(pct,4)}%"></i></div>
+    <span class="combo" id="combo" ${session.combo>1?'':'style="visibility:hidden"'}>${ICON.fire}${session.combo}</span></div>${session.items[session.i]?sceneStrip(session.items[session.i]):''}`;
+}
+function qHead(kind,prompt,mood='idle'){
+  return `<div class="q-head"><div class="qt"><div class="kind">${kind}</div><p class="prompt">${prompt}</p></div></div>`;
+}
+const audioRow=()=>`<div class="audio-row"><button class="play" data-say="0">${ICON.play}Play</button><button class="play" data-say="1">${ICON.slow}Slow</button></div>`;
+function bindAudio(id){document.querySelectorAll('[data-say]').forEach(b=>b.onclick=()=>speak(id,b.dataset.say==='1'))}
+function renderItem(){
+  if(session.i>=session.items.length)return renderDone();
+  if(session.items[session.i].type==='cold')return renderCold(session.items[session.i]);
+  const it=session.items[session.i],id=it.id,T=tgt(id),EN=S[id][1];
+  const app=$('#app');let body='',opts=[],answer='',optCls='';
+  window.scrollTo(0,0);
+  if(it.type==='intro'){
+    app.innerHTML=`<div class="session">${sessionTop()}
+      ${qHead('New sentence',`${LANGS[st.lang].buddy} teaches you a phrase`,'happy')}
+      <div class="stage"><span class="intro-tag">New</span>
+        <p class="phrase">${esc(T)}</p><div class="en">${esc(EN)}</div>${audioRow()}</div>
+      <p class="note">Listen, repeat it out loud once, then continue.</p>
+      <div class="feedback"><button class="chunky full" id="next">Got it</button></div></div>`;
+    $('#quit').onclick=renderHome;bindAudio(id);speak(id);
+    $('#next').onclick=()=>{sfx('tap');cards()[id]={ef:2.5,iv:0,reps:0,lapses:0,due:Date.now()};save();session.i++;renderItem()};
+    return;
+  }
+  if(it.type==='build')return renderBuild(it);
+  if(it.type==='meaning'){
+    body=`${qHead('Read &amp; listen','What does this mean?')}<div class="stage"><p class="phrase">${esc(T)}</p>${audioRow()}</div>`;
+    answer=EN;opts=shuffle([EN,...distractSentences(id,'en')]);
+  }else if(it.type==='listen'){
+    body=`${qHead('Listening','What did you hear?')}
+      <div class="stage center"><button class="big-play" data-say="0" aria-label="Play">${ICON.play}</button>
+      <div class="audio-row" style="justify-content:center"><button class="play" data-say="1">${ICON.slow}Slow</button></div>
+      ${hasTTS?'':'<p class="note">Audio is not available here. Read instead:</p><p class="phrase">'+esc(T)+'</p>'}</div>`;
+    answer=EN;opts=shuffle([EN,...distractSentences(id,'en')]);
+  }else if(it.type==='translate'){
+    body=`${qHead('Say it in '+LANGS[st.lang].name,esc(EN))}`;
+    answer=T;opts=shuffle([T,...distractSentences(id,'tgt')]);optCls='tgt';
+  }else{
+    const g=gapFor(id);
+    body=`${qHead('Fill the gap','Pick the missing word')}<div class="stage"><p class="phrase">${g.html}</p><div class="en">${esc(EN)}</div></div>`;
+    answer=g.ans;opts=g.opts;
+  }
+  app.innerHTML=`<div class="session">${sessionTop()}${body}
+    <div class="opts ${it.type==='gap'?'words':''}">${opts.map((o,k)=>`<button class="opt ${optCls}" data-o="${esc(o)}"><span class="k">${k+1}</span><span>${esc(o)}</span></button>`).join('')}</div>
+    <div class="feedback" id="fb"></div></div>`;
+  $('#quit').onclick=renderHome;bindAudio(id);
+  if(it.type==='listen')speak(id);
+  document.querySelectorAll('.opt').forEach(b=>b.onclick=()=>answerWith(b,answer,it));
+}
+function answerWith(btn,answer,it){
+  const ok=btn.dataset.o===answer;
+  document.querySelectorAll('.opt').forEach(b=>{b.disabled=true;if(b.dataset.o===answer)b.classList.add('right')});
+  if(!ok)btn.classList.add('wrong');
+  finish(ok,it);
+}
+function renderBuild(it){
+  const id=it.id,T=tgt(id),EN=S[id][1];
+  const words=T.split(/\s+/).map(clean).filter(Boolean);
+  const pool=[...new Set(allIds().flatMap(i=>i===id?[]:tgt(i).split(/\s+/).map(clean)))].filter(w=>w.length>=2&&!words.some(x=>x.toLowerCase()===w.toLowerCase()));
+  const extra=shuffle(pool).slice(0,words.length<4?2:3);
+  const bank=shuffle([...words,...extra]).map((w,k)=>({w,k}));
+  let picked=[];
+  $('#app').innerHTML=`<div class="session">${sessionTop()}
+    ${qHead('Listen &amp; build','Tap the words in the order you hear them')}
+    <div class="stage center"><button class="big-play" data-say="0" aria-label="Play">${ICON.play}</button>
+      <div class="audio-row" style="justify-content:center"><button class="play" data-say="1">${ICON.slow}Slow</button><button class="play" id="hint">Show meaning</button></div>
+      <div class="en" id="hintTxt" hidden>${esc(EN)}</div>
+      ${hasTTS?'':'<p class="note">Audio is not available here. Build this: '+esc(EN)+'</p>'}</div>
+    <div class="answer-line" id="line" aria-live="polite"></div>
+    <div class="bank" id="bank"></div>
+    <div class="feedback" id="fb"><button class="chunky full" id="check" disabled>Check</button></div></div>`;
+  $('#quit').onclick=renderHome;bindAudio(id);speak(id);
+  $('#hint').onclick=()=>{$('#hintTxt').hidden=false;$('#hint').hidden=true};
+  const draw=()=>{
+    $('#line').innerHTML=picked.length?picked.map(p=>`<button class="tile-w" data-k="${p.k}">${esc(p.w)}</button>`).join(''):'<span class="placeholder">Your sentence appears here</span>';
+    $('#bank').innerHTML=bank.map(p=>`<button class="tile-w" data-b="${p.k}" ${picked.includes(p)?'disabled':''}>${esc(p.w)}</button>`).join('');
+    $('#line').querySelectorAll('[data-k]').forEach(b=>b.onclick=()=>{sfx('tap');picked=picked.filter(p=>p.k!==+b.dataset.k);draw()});
+    $('#bank').querySelectorAll('[data-b]:not(:disabled)').forEach(b=>b.onclick=()=>{sfx('tap');picked.push(bank.find(p=>p.k===+b.dataset.b));draw()});
+    $('#check').disabled=!picked.length;
+  };
+  draw();
+  $('#check').onclick=()=>{
+    const ok=picked.map(p=>p.w.toLowerCase()).join(' ')===words.map(w=>w.toLowerCase()).join(' ');
+    document.querySelectorAll('.tile-w').forEach(b=>b.disabled=true);
+    $('#line').classList.add(ok?'right':'wrong');
+    finish(ok,it);
+  };
+}
+function renderCold(it){
+  const g=gistById(it.id),id=it.id,opts=shuffle([g.a,...g.d]);
+  let peeked=false;
+  $('#app').innerHTML=`<div class="session">${sessionTop()}
+    ${qHead('Cold water','Listen to the whole thing. Get the gist.')}
+    <div class="stage center cold-stage"><span class="intro-tag cold-tag">Natural speed · new words</span>
+      <button class="big-play" data-say="0" aria-label="Play">${ICON.play}</button>
+      <div class="audio-row" style="justify-content:center"><button class="play" data-say="1">${ICON.slow}Slow</button><button class="play" id="peek">Show transcript</button></div>
+      <p class="transcript" id="tx" hidden>${esc(g.t)}</p>
+      <p class="note" id="peekNote" hidden>Transcript shown: half XP for this one.</p></div>
+    <p class="prompt cold-q">${esc(g.q)}</p>
+    <div class="opts">${opts.map((o,k)=>`<button class="opt" data-o="${esc(o)}"><span class="k">${k+1}</span><span>${esc(o)}</span></button>`).join('')}</div>
+    <div class="feedback" id="fb"></div></div>`;
+  $('#quit').onclick=renderHome;bindAudio(id);speak(id,false);
+  $('#peek').onclick=()=>{peeked=true;$('#tx').hidden=false;$('#peekNote').hidden=false;$('#peek').hidden=true};
+  document.querySelectorAll('.opt').forEach(b=>b.onclick=()=>{
+    const ok=b.dataset.o===g.a;
+    document.querySelectorAll('.opt').forEach(x=>{x.disabled=true;if(x.dataset.o===g.a)x.classList.add('right')});
+    if(!ok)b.classList.add('wrong');
+    session.asked++;let gain=0;
+    if(ok){session.right++;session.combo++;session.best=Math.max(session.best,session.combo);gain=peeked?12:25;session.xp+=gain;st.xp[st.lang]+=gain;save()}
+    else session.combo=0;
+    sfx(ok?'ok':'bad');
+    const cb=$('#combo');if(cb){cb.style.visibility=session.combo>1?'visible':'hidden';cb.innerHTML=ICON.fire+session.combo}
+    setSceneMood(ok?'happy':'sad');
+    $('#fb').innerHTML=`<div class="fb ${ok?'ok':'no'}">
+      <div class="fb-top">${mascot(st.lang,ok?'happy':'sad','mini')}<div><strong>${ok?'You got the gist!':'Not quite. Read along and listen again.'}</strong><small>${esc(LANGS[st.lang].buddy)}: ${esc(pick(LINES[st.lang][ok?'happy':'sad']))}</small></div>${ok?`<span class="xp-pop">+${gain} XP</span>`:''}</div>
+      <p class="transcript" style="margin:0">${esc(g.t)}</p><div class="en" style="margin:0">${esc(g.en)}</div>
+      <div class="audio-row" style="margin-top:4px"><button class="play" data-say="0">${ICON.play}Play</button><button class="play" data-say="1">${ICON.slow}Slow</button></div>
+      <button class="chunky ${ok?'ok':'bad'} full" id="next">Continue</button></div>`;
+    bindAudio(id);
+    $('#next').onclick=()=>{sfx('tap');session.i++;renderItem()};
+    $('#fb').scrollIntoView({behavior:'smooth',block:'end'});
+  });
+}
+function finish(ok,it){
+  const id=it.id,T=tgt(id);
+  session.asked++;
+  let gain=0;
+  if(ok){session.right++;session.combo++;session.best=Math.max(session.best,session.combo);gain=10+Math.min(session.combo-1,5)*2;session.xp+=gain;st.xp[st.lang]+=gain;save()}
+  else session.combo=0;
+  sfx(ok?'ok':'bad');
+  const cb=$('#combo');if(cb){cb.style.visibility=session.combo>1?'visible':'hidden';cb.innerHTML=ICON.fire+session.combo;if(ok){cb.classList.remove('pop');void cb.offsetWidth;cb.classList.add('pop')}}
+  setSceneMood(ok?'happy':'sad');
+  speak(id);
+  const graded=session.mode!=='practice',c=cards()[id];
+  let actions='';
+  if(!ok){
+    if(graded){cards()[id]=nextState(c,0);save()}
+    if(!it.retry)session.items.push({id,type:it.type==='listen'?'meaning':it.type==='build'?'translate':it.type,retry:true});
+    actions=`<button class="chunky bad full" id="next">Continue</button>`;
+  }else if(graded){
+    const pv=[1,2,3].map(g=>nextState(c,g).iv);
+    actions=`<div class="grades">
+      <button class="chunky grade" data-g="1" style="--f:var(--surface);--h:var(--surface);--d:var(--line);color:var(--ink)">Hard<small>${fmtIv(pv[0])}</small></button>
+      <button class="chunky grade ok" data-g="2">Good<small>${fmtIv(pv[1])}</small></button>
+      <button class="chunky grade" data-g="3" style="--f:var(--surface);--h:var(--surface);--d:var(--line);color:var(--ink)">Easy<small>${fmtIv(pv[2])}</small></button></div>`;
+  }else actions=`<button class="chunky ok full" id="next">Continue</button>`;
+  $('#fb').innerHTML=`<div class="fb ${ok?'ok':'no'}">
+    <div class="fb-top">${mascot(st.lang,ok?'happy':'sad','mini')}<div><strong>${ok?(session.combo>2?session.combo+' in a row!':'Correct'):'Not quite'}</strong><small>${esc(LANGS[st.lang].buddy)}: ${esc(pick(LINES[st.lang][ok?'happy':'sad']))}</small></div>${ok?`<span class="xp-pop">+${gain} XP</span>`:''}</div>
+    <p class="phrase">${esc(T)}</p><div class="en" style="margin:0">${esc(S[id][1])}</div>
+    <div class="audio-row" style="margin-top:4px">${audioRow().replace(/^<div class="audio-row">|<\/div>$/g,'')}</div>${actions}</div>`;
+  bindAudio(id);
+  const adv=()=>{sfx('tap');session.i++;renderItem()};
+  const n=$('#next');if(n)n.onclick=adv;
+  document.querySelectorAll('[data-g]').forEach(b=>b.onclick=()=>{cards()[id]=nextState(cards()[id],+b.dataset.g);save();adv()});
+  $('#fb').scrollIntoView({behavior:'smooth',block:'end'});
+}
+function renderDone(){
+  const today=new Date().toISOString().slice(0,10),yest=new Date(Date.now()-DAY).toISOString().slice(0,10);
+  if(st.streak.last!==today){st.streak={last:today,n:st.streak.last===yest?st.streak.n+1:1};save()}
+  const pct=session.asked?Math.round(session.right/session.asked*100):100;
+  const next=Object.values(cards()).map(c=>c.due).filter(d=>d>Date.now()).sort((a,b)=>a-b)[0];
+  const nextTxt=next?(next-Date.now()<DAY?'later today':new Date(next).toLocaleDateString(undefined,{weekday:'long',day:'numeric',month:'short'})):'';
+  const title=session.mode==='cold'?'Out of the cold water!':session.mode==='lesson'?`${esc(uTxt(session.unit,'t'))} cleared!`:session.mode==='review'?'Review done!':'Practice done!';
+  $('#app').innerHTML=`<div class="done-wrap">
+    ${mascot(st.lang,'cheer','big')}
+    <div class="bubble" style="margin:0">${esc(pick(LINES[st.lang].done))}</div>
+    <h2>${title}</h2>
+    <div class="done-stats">
+      <div class="dstat g"><b>+${session.xp}</b><span>XP</span></div>
+      <div class="dstat o"><b>${pct}%</b><span>Accuracy</span></div>
+      <div class="dstat"><b>${session.best}</b><span>Best combo</span></div>
+    </div>
+    ${nextTxt?`<p class="note" style="margin:0 0 14px">Next review ${nextTxt}</p>`:''}
+    <button class="chunky" id="home">Back to the path</button></div>`;
+  $('#home').onclick=()=>{sfx('tap');renderHome()};
+  sfx('done');confetti();
+}
+
+/* ---------- confetti ---------- */
+function confetti(){
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  const cv=$('#confetti'),ctx=cv.getContext('2d');cv.hidden=false;
+  const W=cv.width=innerWidth*devicePixelRatio,H=cv.height=innerHeight*devicePixelRatio;
+  const css=getComputedStyle(document.documentElement);
+  const cols=['--gold','--coral','--btn','--ok','--c-fish'].map(v=>css.getPropertyValue(v).trim());
+  const ps=Array.from({length:120},()=>({x:W/2+(Math.random()-.5)*W*.3,y:H*.35,vx:(Math.random()-.5)*16*devicePixelRatio,vy:(-Math.random()*16-6)*devicePixelRatio,r:Math.random()*6.28,vr:(Math.random()-.5)*.3,s:(6+Math.random()*6)*devicePixelRatio,c:pick(cols)}));
+  let t=0;
+  (function loop(){
+    ctx.clearRect(0,0,W,H);t++;
+    ps.forEach(p=>{p.vy+=.45*devicePixelRatio;p.vx*=.99;p.x+=p.vx;p.y+=p.vy;p.r+=p.vr;
+      ctx.save();ctx.translate(p.x,p.y);ctx.rotate(p.r);ctx.fillStyle=p.c;ctx.fillRect(-p.s/2,-p.s/4,p.s,p.s/2);ctx.restore()});
+    if(t<160)requestAnimationFrame(loop);else{ctx.clearRect(0,0,W,H);cv.hidden=true}
+  })();
+}
+
+/* ---------- keyboard ---------- */
+document.addEventListener('keydown',e=>{
+  if(!session||e.target.tagName==='SELECT')return;
+  const n=+e.key;
+  if(n>=1&&n<=4){const o=document.querySelectorAll('.opt:not(:disabled)')[n-1];if(o)o.click()}
+  if(e.key===' '){const p=document.querySelector('[data-say="0"]');if(p){e.preventDefault();p.click()}}
+  if(e.key==='Enter'){const nx=$('#next')||document.querySelector('[data-g="2"]')||$('#check');if(nx&&!nx.disabled)nx.click()}
+});
+
+/* ---------- settings ---------- */
+let sheetOpen=false,confirmReset=false;
+function openSheet(){sheetOpen=true;confirmReset=false;$('#sheet').hidden=false;$('#scrim').hidden=false;renderSheet()}
+function closeSheet(){sheetOpen=false;$('#sheet').hidden=true;$('#scrim').hidden=true;if(!session)renderHome()}
+$('#scrim').onclick=closeSheet;
+function renderSheet(){
+  const vs=langVoices(),cur=pickVoice();
+  $('#sheet').innerHTML=`<div class="sheet-in"><h3>Settings · ${LANGS[st.lang].native}</h3>
+   <div class="row"><label for="voice">Device voice (fallback)</label>
+    ${vs.length?`<select id="voice">${vs.map(v=>`<option ${cur&&v.name===cur.name?'selected':''}>${esc(v.name)}</option>`).join('')}</select>`
+      :`<p class="note" style="margin:0">${hasTTS?'No '+LANGS[st.lang].name+' voice found. Install one in your phone’s text-to-speech settings for natural audio.':'This browser has no speech output.'}</p>`}</div>
+   ${recVoices().length>1?`<div class="row"><label for="recSel">Recorded voice</label>
+    <select id="recSel"><option value="mix" ${st.recVoice[st.lang]==='mix'?'selected':''}>Mix (alternate per sentence)</option>${recVoices().map(v=>`<option value="${esc(v)}" ${st.recVoice[st.lang]===v?'selected':''}>${esc(v.charAt(0).toUpperCase()+v.slice(1))}</option>`).join('')}</select></div>`:''}
+   <div class="row"><label for="speed">Default speed</label>
+    <select id="speed"><option value="n" ${!st.slow?'selected':''}>Natural</option><option value="s" ${st.slow?'selected':''}>Slow</option></select></div>
+   <div class="row"><label for="themeSel">Theme</label>
+    <select id="themeSel">${THEMES.map(x=>`<option value="${x}" ${st.theme===x?'selected':''}>${({auto:'Follow my phone',light:'Light',dark:'Dark'})[x]}</option>`).join('')}</select></div>
+   <div class="row"><label for="sfxSel">Game sounds</label>
+    <select id="sfxSel"><option value="1" ${st.sfx?'selected':''}>On</option><option value="0" ${!st.sfx?'selected':''}>Off</option></select></div>
+   <button class="ghost" id="test">Test voice</button>
+   <p class="note" id="diag" style="margin:0">Audio check: ${recorded()?recorded()+' recorded clips':'no recorded clips yet'} · ${hasTTS?'device speech supported':'device speech not supported'} · ${voices.length} voices · ${vs.length} ${LANGS[st.lang].name} · ${esc(ttsLog)}</p>
+   <button class="ghost danger" id="reset">${confirmReset?'Tap again to erase '+LANGS[st.lang].name+' progress':'Reset '+LANGS[st.lang].name+' progress'}</button>
+   <button class="chunky" id="closeS">Done</button></div>`;
+  const vSel=$('#voice');if(vSel)vSel.onchange=()=>{st.voice[st.lang]=vSel.value;save()};
+  $('#speed').onchange=e=>{st.slow=e.target.value==='s';save()};
+  $('#sfxSel').onchange=e=>{st.sfx=e.target.value==='1';save()};
+  const rs=$('#recSel');if(rs)rs.onchange=e=>{st.recVoice[st.lang]=e.target.value;save();speak(0)};
+  $('#themeSel').onchange=e=>{st.theme=e.target.value;applyTheme();save()};
+  $('#test').onclick=()=>{loadVoices();speak(0);setTimeout(()=>{if(sheetOpen)renderSheet()},1200)};
+  $('#reset').onclick=()=>{if(confirmReset){st.cards[st.lang]={};st.xp[st.lang]=0;save();closeSheet()}else{confirmReset=true;renderSheet()}};
+  $('#closeS').onclick=closeSheet;
+}
+
+renderHome();
+</script>
+
+<script>
+if('serviceWorker' in navigator){window.addEventListener('load',()=>{navigator.serviceWorker.register('sw.js').catch(()=>{})})}
+</script>
+</body>
+</html>
