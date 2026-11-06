@@ -125,10 +125,12 @@ function speak(id,slow=st.slow){
   }
 }
 let actx=null;
-function sfx(kind){
+function sfx(kind,opt={}){
   if(!st.sfx)return;
   try{
     actx=actx||new (window.AudioContext||window.webkitAudioContext)();
+    if(actx.state==='suspended')actx.resume();
+    if(kind==='done')return fanfare(opt.perfect);
     const notes=kind==='ok'?[660,880]:kind==='bad'?[220,165]:kind==='tap'?[520]:[523,659,784,1046];
     notes.forEach((f,i)=>{
       const o=actx.createOscillator(),g=actx.createGain(),t=actx.currentTime+i*.09;
@@ -137,5 +139,30 @@ function sfx(kind){
       o.connect(g).connect(actx.destination);o.start(t);o.stop(t+.25);
     });
   }catch(e){}
+}
+function tone(f,t,dur,type,vol,dest,slideTo){
+  const o=actx.createOscillator(),g=actx.createGain();
+  o.type=type;o.frequency.setValueAtTime(f,t);if(slideTo)o.frequency.exponentialRampToValueAtTime(slideTo,t+dur*.6);
+  g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(vol,t+.012);g.gain.exponentialRampToValueAtTime(.0008,t+dur);
+  o.connect(g).connect(dest);o.start(t);o.stop(t+dur+.05);
+}
+function pop(t,dest){ // confetti burst: short filtered noise
+  const len=Math.floor(actx.sampleRate*.25),buf=actx.createBuffer(1,len,actx.sampleRate),d=buf.getChannelData(0);
+  for(let i=0;i<len;i++)d[i]=(Math.random()*2-1)*Math.pow(1-i/len,3);
+  const src=actx.createBufferSource(),bp=actx.createBiquadFilter(),g=actx.createGain();
+  src.buffer=buf;bp.type='bandpass';bp.frequency.setValueAtTime(1800,t);bp.frequency.exponentialRampToValueAtTime(5200,t+.2);bp.Q.value=.9;
+  g.gain.setValueAtTime(.32,t);g.gain.exponentialRampToValueAtTime(.001,t+.25);
+  src.connect(bp).connect(g).connect(dest);src.start(t);
+}
+function fanfare(perfect){ // rising arpeggio, confetti pop, final major chord with a light echo
+  const t0=actx.currentTime+.03,out=actx.createGain(),echo=actx.createDelay(),fb=actx.createGain(),wet=actx.createGain();
+  out.gain.value=1.35;echo.delayTime.value=.16;fb.gain.value=.28;wet.gain.value=.35;
+  out.connect(actx.destination);out.connect(echo);echo.connect(fb).connect(echo);echo.connect(wet).connect(actx.destination);
+  [[392,0],[523.25,.09],[659.25,.18],[783.99,.27]].forEach(([f,dt])=>tone(f,t0+dt,.22,'triangle',.16,out));
+  pop(t0+.36,out);
+  [523.25,659.25,783.99,1046.5].forEach((f,i)=>tone(f,t0+.38+i*.012,1.1,i===3?'triangle':'sine',i===3?.13:.08,out));
+  tone(130.81,t0+.38,.9,'sine',.12,out);                       // warm bass under the chord
+  const sparkle=perfect?[1568,1975.5,2349.3,3136]:[1568,2093];
+  sparkle.forEach((f,i)=>tone(f,t0+.62+i*.07,.3,'sine',.05,out)); // twinkle on top (longer when perfect)
 }
 

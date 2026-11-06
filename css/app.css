@@ -422,4 +422,7 @@ header{padding-block:8px 6px}
 .sheet{max-height:88vh;overflow-y:auto}
 .unit-sheet .scene{max-height:110px}
 @media (max-height:680px){.session .scene{display:none}}
+.label b,.label span{display:block;width:max-content;max-width:100%;margin-inline:auto;background:var(--bg);border-radius:6px;padding:0 4px;box-shadow:0 0 6px 3px var(--bg)}
+.label b{position:relative}
+.links path{stroke-width:3.5}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}

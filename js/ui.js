@@ -34,7 +34,7 @@ function streakNow(){
   return (st.streak.last===today||st.streak.last===yest)?st.streak.n:0;
 }
 const openUnits=()=>UNITS.map((_,u)=>u).filter(u=>unlocked(u)&&!unitInfo(u).done).sort((a,b)=>UNITS[a].row-UNITS[b].row||UNITS[a].col-UNITS[b].col);
-const ROW=122, TOP=22;
+const ROW=138, TOP=22;
 function renderHome(){
   session=null;
   const due=dueList().length,learned=Object.keys(cards()).length,total=allIds().length;
@@ -75,11 +75,11 @@ function renderHome(){
 }
 function treeHTML(kind,open){
   const ids=UNITS.map((_,i)=>i).filter(i=>(UNITS[i].tree||'main')===kind);
-  const rows=Math.max(...ids.map(i=>UNITS[i].row))+1,H=TOP+(rows-1)*ROW+104;
+  const rows=Math.max(...ids.map(i=>UNITS[i].row))+1,H=TOP+(rows-1)*ROW+112;
   const X=u=>(UNITS[u].col+.5)/4*100, Y=u=>TOP+UNITS[u].row*ROW;
   const L=LANGS[st.lang];
   const links=ids.flatMap(c=>UNITS[c].parents.filter(p=>ids.includes(p)).map(p=>{
-    const x1=X(p),y1=Y(p)+110,x2=X(c),y2=Y(c)+3,m=(y1+y2)/2;
+    const x1=X(p),y1=Y(p)+30,x2=X(c),y2=Y(c)+30,m=(y1+y2)/2;
     const cls=unitInfo(c).done?'done':unlocked(c)?'open':'';
     return `<path class="${cls}" d="M${x1} ${y1} C${x1} ${m} ${x2} ${m} ${x2} ${y2}"/>`;
   })).join('');
@@ -352,7 +352,7 @@ function renderDone(){
     ${nextTxt?`<p class="note" style="margin:0 0 14px">Next review ${nextTxt}</p>`:''}
     <button class="chunky" id="home">Back to the path</button></div>`;
   $('#home').onclick=()=>{sfx('tap');renderHome()};
-  sfx('done');confetti();
+  sfx('done',{perfect:pct===100&&session.asked>0});confetti();
 }
 
 /* ---------- confetti ---------- */
