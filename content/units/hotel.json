@@ -1,0 +1,27 @@
+{
+  "id": "hotel",
+  "title": "At the hotel",
+  "short": "Hotel",
+  "summary": "Check in, report a problem, get a taxi",
+  "level": "A2",
+  "branch": "travel",
+  "tree": "main",
+  "col": 1,
+  "row": 3,
+  "parents": ["day-trip"],
+  "scene": "hotel",
+  "scenario": false,
+  "icon": "M3 19V6M3 15h18v4M21 15v-2a3 3 0 0 0-3-3h-7v5M7 12.5a1.8 1.8 0 1 0 0-3.6 1.8 1.8 0 0 0 0 3.6z",
+  "sentences": [
+    {"id": 18, "en": "I have a reservation under the name Weber.", "es": "Tengo una reserva a nombre de Weber.", "pt": "Tenho uma reserva em nome de Weber."},
+    {"id": 19, "en": "Is breakfast included?", "es": "¿El desayuno está incluido?", "pt": "O pequeno-almoço está incluído?"},
+    {"id": 20, "en": "What time do we have to check out?", "es": "¿A qué hora tenemos que dejar la habitación?", "pt": "A que horas temos de deixar o quarto?"},
+    {"id": 21, "en": "The air conditioning doesn't work.", "es": "El aire acondicionado no funciona.", "pt": "O ar condicionado não funciona."},
+    {"id": 22, "en": "Could you call a taxi for me?", "es": "¿Me puede llamar un taxi?", "pt": "Pode chamar-me um táxi?"},
+    {"id": 23, "en": "Can I leave my luggage here?", "es": "¿Puedo dejar mi equipaje aquí?", "pt": "Posso deixar a bagagem aqui?"}
+  ],
+  "passages": [
+    {"id": "g6", "lang": "es", "text": "Su habitación todavía no está lista, porque la limpieza termina a las dos. Mientras tanto, puede dejar las maletas aquí en recepción y, por la espera, el desayuno de hoy corre de nuestra cuenta.", "en": "Your room isn't ready yet, because cleaning finishes at two. Meanwhile you can leave your bags here at reception and, for the wait, today's breakfast is on us.", "question": "What does the receptionist tell you?", "answer": "The room is ready at two. Leave your bags, and breakfast is free today.", "wrong": ["Your booking was cancelled. Try another hotel.", "The room is ready now, but breakfast costs extra.", "You must pay extra to check in before two."]},
+    {"id": "g7", "lang": "pt", "text": "O seu quarto ainda não está pronto, porque a limpeza só termina às duas. Entretanto, pode deixar as malas aqui na receção e, pela espera, o pequeno-almoço de hoje fica por nossa conta.", "en": "Your room isn't ready yet, because cleaning only finishes at two. Meanwhile you can leave your bags here at reception and, for the wait, today's breakfast is on us.", "question": "What does the receptionist tell you?", "answer": "The room is ready at two. Leave your bags, and breakfast is free today.", "wrong": ["Your booking was cancelled. Try another hotel.", "The room is ready now, but breakfast costs extra.", "You must pay extra to check in before two."]}
+  ]
+}

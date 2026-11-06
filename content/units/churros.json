@@ -1,0 +1,33 @@
+{
+  "id": "churros",
+  "title": {"es": "Churros & café con leche", "pt": "Bica & pastel de nata"},
+  "short": {"es": "Churros", "pt": "Bica & nata"},
+  "summary": {"es": "A chocolatería morning in Madrid", "pt": "A pastelaria stop in Lisboa"},
+  "level": "A2",
+  "branch": "food",
+  "tree": "main",
+  "col": 0,
+  "row": 3,
+  "parents": ["coffee-to-go"],
+  "scene": "bakery",
+  "scenario": true,
+  "icon": "M4 14h16l-1.5 5h-13zM7 14c0-3 2-5 5-5s5 2 5 5M9 6c.8-1 .8-2 0-3M13 6c.8-1 .8-2 0-3",
+  "sentences": [
+    {"id": 60, "en": "Two coffees and a portion of churros, please.", "es": "Dos cafés y una ración de churros, por favor."},
+    {"id": 61, "en": "For here or to take away?", "es": "¿Para tomar aquí o para llevar?"},
+    {"id": 62, "en": "For here, please.", "es": "Para tomar aquí, por favor."},
+    {"id": 63, "en": "Do you have hot chocolate?", "es": "¿Tiene chocolate caliente?"},
+    {"id": 64, "en": "They're still warm!", "es": "¡Todavía están calentitos!"},
+    {"id": 65, "en": "Could I have a glass of water too?", "es": "¿Me pone también un vaso de agua?"},
+    {"id": 72, "en": "Two espressos and two pastéis de nata, please.", "pt": "Duas bicas e dois pastéis de nata, por favor."},
+    {"id": 73, "en": "Is it to eat here or to take away?", "pt": "É para comer aqui ou para levar?"},
+    {"id": 74, "en": "To eat here, please.", "pt": "Para comer aqui, se faz favor."},
+    {"id": 75, "en": "Do you have cinnamon?", "pt": "Tem canela?"},
+    {"id": 76, "en": "They're still warm!", "pt": "Ainda estão quentinhos!"},
+    {"id": 77, "en": "Can I have a glass of water too?", "pt": "Pode dar-me também um copo de água?"}
+  ],
+  "passages": [
+    {"id": "g20", "lang": "es", "text": "Los churros salen ahora mismo, en cinco minutillos los tienen. El chocolate es bastante espeso, si lo prefiere más ligero le pongo un café con leche. Siéntense donde quieran, que se lo llevo a la mesa.", "en": "The churros are coming out right now, you'll have them in about five minutes. The chocolate is quite thick; if you'd prefer something lighter I'll make you a café con leche. Sit wherever you like, I'll bring it to the table.", "question": "What does the waiter tell you?", "answer": "Churros in about five minutes. Sit anywhere, they will bring it over.", "wrong": ["The churros are sold out for today.", "Pay at the bar first, then collect your order.", "The chocolate is too thin, so add milk."]},
+    {"id": "g21", "lang": "pt", "text": "Os pastéis acabaram de sair do forno, estão a escaldar, cuidado! A canela e o açúcar estão ali no balcão. Se quiserem sentar-se lá fora, há uma mesa livre, e eu levo-lhes as bicas.", "en": "The pastries have just come out of the oven, they're scalding hot, careful! The cinnamon and sugar are over there on the counter. If you'd like to sit outside, there's a free table, and I'll bring you the espressos.", "question": "What does the waiter tell you?", "answer": "The pastries are very hot. Cinnamon is on the counter, and there is a free table outside.", "wrong": ["The pastries are sold out until tomorrow.", "Cinnamon costs extra and must be ordered.", "All tables outside are taken."]}
+  ]
+}

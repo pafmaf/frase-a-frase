@@ -1,0 +1,27 @@
+{
+  "id": "getting-around",
+  "title": "Getting around",
+  "short": "Getting around",
+  "summary": "Ask the way, buy a ticket",
+  "level": "A1",
+  "branch": "travel",
+  "tree": "main",
+  "col": 1,
+  "row": 1,
+  "parents": ["first-words"],
+  "scene": "train",
+  "scenario": false,
+  "icon": "M12 21s-6.5-6-6.5-11a6.5 6.5 0 0 1 13 0c0 5-6.5 11-6.5 11zM12 12.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z",
+  "sentences": [
+    {"id": 12, "en": "Excuse me, where is the train station?", "es": "Perdone, ¿dónde está la estación de tren?", "pt": "Desculpe, onde fica a estação de comboios?"},
+    {"id": 13, "en": "Is it far from here?", "es": "¿Está lejos de aquí?", "pt": "Fica longe daqui?"},
+    {"id": 14, "en": "Turn left at the next street.", "es": "Gire a la izquierda en la próxima calle.", "pt": "Vire à esquerda na próxima rua."},
+    {"id": 15, "en": "Go straight ahead.", "es": "Siga todo recto.", "pt": "Siga em frente."},
+    {"id": 16, "en": "A ticket to the city centre, please.", "es": "Un billete al centro, por favor.", "pt": "Um bilhete para o centro, por favor."},
+    {"id": 17, "en": "What time does the bus leave?", "es": "¿A qué hora sale el autobús?", "pt": "A que horas parte o autocarro?"}
+  ],
+  "passages": [
+    {"id": "g4", "lang": "es", "text": "Atención, por favor. El tren con destino a Valencia, que tenía prevista su salida a las diez y cuarto, saldrá con veinte minutos de retraso por la vía cuatro. Disculpen las molestias.", "en": "Attention, please. The train to Valencia, scheduled to leave at quarter past ten, will depart twenty minutes late from platform four. We apologise for the inconvenience.", "question": "What is happening with the Valencia train?", "answer": "It leaves twenty minutes late, from platform four.", "wrong": ["It is cancelled. Passengers should take a bus.", "It leaves on time from platform twenty.", "It now leaves from a different station."]},
+    {"id": "g5", "lang": "pt", "text": "Atenção, por favor. O comboio com destino ao Porto, com partida prevista para as dez e um quarto, vai sair com vinte minutos de atraso da linha quatro. Pedimos desculpa pelo incómodo.", "en": "Attention, please. The train to Porto, scheduled to leave at quarter past ten, will depart twenty minutes late from platform four. We apologise for the inconvenience.", "question": "What is happening with the Porto train?", "answer": "It leaves twenty minutes late, from platform four.", "wrong": ["It is cancelled. Passengers should take a bus.", "It leaves on time from platform twenty.", "It now leaves from a different station."]}
+  ]
+}

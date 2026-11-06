@@ -1,0 +1,30 @@
+{
+  "app": {"name": "Frase a Frase", "storageKey": "frase-a-frase-v1"},
+  "languages": {
+    "es": {"name": "Spanish", "native": "Español", "code": "es-ES", "buddy": "Sol", "city": "Madrid", "lines": {"idle": ["¡Vamos!", "¿Listo?", "Poco a poco.", "¡A practicar!"], "happy": ["¡Muy bien!", "¡Genial!", "¡Eso es!", "¡Perfecto!", "¡Olé!"], "sad": ["¡Casi!", "No pasa nada.", "Otra vez."], "done": ["¡Increíble!", "¡Qué crack!"]}},
+    "pt": {"name": "Portuguese", "native": "Português (PT)", "code": "pt-PT", "buddy": "Sardi", "city": "Lisboa", "lines": {"idle": ["Vamos lá!", "Pronto?", "Devagar se vai ao longe.", "Vamos praticar!"], "happy": ["Muito bem!", "Boa!", "Isso mesmo!", "Perfeito!", "Espetacular!"], "sad": ["Quase!", "Não faz mal.", "Outra vez."], "done": ["Fantástico!", "Que maravilha!"]}}
+  },
+  "units": [
+    "first-words",
+    "cafe",
+    "getting-around",
+    "hotel",
+    "shopping",
+    "dinner-out",
+    "small-talk",
+    "health",
+    "plans",
+    "trouble",
+    "churros",
+    "day-trip",
+    "coffee-to-go",
+    "group-table",
+    "supermarket",
+    "questions",
+    "things",
+    "food-words",
+    "daily-routine",
+    "time",
+    "rental-car"
+  ]
+}

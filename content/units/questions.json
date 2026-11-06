@@ -1,0 +1,27 @@
+{
+  "id": "questions",
+  "title": "Asking questions",
+  "short": "Questions",
+  "summary": "What, how, why, who, which: asking about things",
+  "level": "A1",
+  "branch": "people",
+  "tree": "main",
+  "col": 2,
+  "row": 1,
+  "parents": ["first-words"],
+  "scene": "info",
+  "scenario": false,
+  "icon": "M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18zM9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .8-1 1.5v.7M12 17v.01",
+  "sentences": [
+    {"id": 102, "en": "What is this?", "es": "¿Qué es esto?", "pt": "O que é isto?"},
+    {"id": 103, "en": "How does it work?", "es": "¿Cómo funciona?", "pt": "Como é que funciona?"},
+    {"id": 104, "en": "Is it open on Sundays?", "es": "¿Está abierto los domingos?", "pt": "Está aberto ao domingo?"},
+    {"id": 105, "en": "Why is it closed?", "es": "¿Por qué está cerrado?", "pt": "Porque é que está fechado?"},
+    {"id": 106, "en": "Who can I ask?", "es": "¿A quién puedo preguntar?", "pt": "A quem posso perguntar?"},
+    {"id": 107, "en": "Which one do you recommend?", "es": "¿Cuál me recomienda?", "pt": "Qual me recomenda?"}
+  ],
+  "passages": [
+    {"id": "g30", "lang": "es", "text": "Esta máquina es para recargar la tarjeta de transporte. Primero eliges el idioma, luego pones la tarjeta aquí encima y pagas. Si te da error, pregunta en la ventanilla, que está abierta hasta las diez.", "en": "This machine is for topping up the transport card. First you choose the language, then you put the card on top here and pay. If you get an error, ask at the counter, which is open until ten.", "question": "What is the machine for, and what if it fails?", "answer": "Topping up a transport card. If it fails, ask at the counter (open until ten).", "wrong": ["Buying concert tickets. If it fails, call a phone number.", "Taking out cash. If it fails, come back after ten.", "Printing receipts. If it fails, ask the police."]},
+    {"id": "g31", "lang": "pt", "text": "Esta máquina é para carregar o cartão de transportes. Primeiro escolhe a língua, depois põe o cartão aqui em cima e paga. Se der erro, pergunte na bilheteira, que está aberta até às dez.", "en": "This machine is for topping up the transport card. First choose the language, then put the card on top here and pay. If you get an error, ask at the ticket office, which is open until ten.", "question": "What is the machine for, and what if it fails?", "answer": "Topping up a transport card. If it fails, ask at the ticket office (open until ten).", "wrong": ["Buying concert tickets. If it fails, call a phone number.", "Taking out cash. If it fails, come back after ten.", "Printing receipts. If it fails, ask the police."]}
+  ]
+}

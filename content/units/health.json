@@ -1,0 +1,27 @@
+{
+  "id": "health",
+  "title": "Health",
+  "short": "Health",
+  "summary": "Pharmacy, symptoms, emergencies",
+  "level": "A2",
+  "branch": "life",
+  "tree": "main",
+  "col": 3,
+  "row": 3,
+  "parents": ["supermarket"],
+  "scene": "pharmacy",
+  "scenario": false,
+  "icon": "M9.5 3.5h5v6h6v5h-6v6h-5v-6h-6v-5h6z",
+  "sentences": [
+    {"id": 42, "en": "I need a doctor.", "es": "Necesito un médico.", "pt": "Preciso de um médico."},
+    {"id": 43, "en": "I have a headache.", "es": "Me duele la cabeza.", "pt": "Dói-me a cabeça."},
+    {"id": 44, "en": "Where is the nearest pharmacy?", "es": "¿Dónde está la farmacia más cercana?", "pt": "Onde fica a farmácia mais próxima?"},
+    {"id": 45, "en": "Do you have something for a cold?", "es": "¿Tiene algo para el resfriado?", "pt": "Tem alguma coisa para a constipação?"},
+    {"id": 46, "en": "I've had a fever since yesterday.", "es": "Tengo fiebre desde ayer.", "pt": "Tenho febre desde ontem."},
+    {"id": 47, "en": "Call an ambulance!", "es": "¡Llame a una ambulancia!", "pt": "Chame uma ambulância!"}
+  ],
+  "passages": [
+    {"id": "g14", "lang": "es", "text": "Tómese una pastilla cada ocho horas, siempre después de comer, durante cinco días. Si mañana todavía tiene fiebre o le duele más la garganta, vuelva o vaya directamente al centro de salud.", "en": "Take one tablet every eight hours, always after eating, for five days. If you still have a fever tomorrow or your throat hurts more, come back or go straight to the health centre.", "question": "What are the instructions?", "answer": "One tablet every eight hours after meals for five days. Come back if it gets worse.", "wrong": ["Eight tablets a day, before meals.", "One tablet at night only, for eight days.", "Go to hospital right away."]},
+    {"id": "g15", "lang": "pt", "text": "Tome um comprimido de oito em oito horas, sempre depois das refeições, durante cinco dias. Se amanhã ainda tiver febre ou se a garganta piorar, volte cá ou vá diretamente ao centro de saúde.", "en": "Take one tablet every eight hours, always after meals, for five days. If you still have a fever tomorrow or your throat gets worse, come back or go straight to the health centre.", "question": "What are the instructions?", "answer": "One tablet every eight hours after meals for five days. Come back if it gets worse.", "wrong": ["Eight tablets a day, before meals.", "One tablet at night only, for eight days.", "Go to hospital right away."]}
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "id": "plans",
+  "title": "Making plans",
+  "short": "Plans",
+  "summary": "Times, meeting up, saying no",
+  "level": "A2",
+  "branch": "people",
+  "tree": "main",
+  "col": 2,
+  "row": 3,
+  "parents": ["small-talk"],
+  "scene": "plans",
+  "scenario": false,
+  "icon": "M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18zM12 7v5l3.5 2",
+  "sentences": [
+    {"id": 48, "en": "What time is it?", "es": "¿Qué hora es?", "pt": "Que horas são?"},
+    {"id": 49, "en": "Shall we meet tomorrow at eight?", "es": "¿Quedamos mañana a las ocho?", "pt": "Encontramo-nos amanhã às oito?"},
+    {"id": 50, "en": "I'm running ten minutes late.", "es": "Llego diez minutos tarde.", "pt": "Vou chegar dez minutos atrasado."},
+    {"id": 51, "en": "Are you free on Saturday?", "es": "¿Estás libre el sábado?", "pt": "Estás livre no sábado?"},
+    {"id": 52, "en": "Sorry, I can't today.", "es": "Lo siento, hoy no puedo.", "pt": "Desculpa, hoje não posso."},
+    {"id": 53, "en": "See you later!", "es": "¡Hasta luego!", "pt": "Até logo!"}
+  ],
+  "passages": [
+    {"id": "g16", "lang": "es", "text": "Oye, al final no puedo el sábado por la tarde, tengo que ayudar a mi hermano con la mudanza. ¿Te viene bien el domingo por la mañana? Podríamos ir al Rastro y luego tomar algo.", "en": "Hey, in the end I can't do Saturday afternoon, I have to help my brother move house. Does Sunday morning work for you? We could go to the Rastro flea market and then have a drink.", "question": "What does your friend want?", "answer": "To move your plan from Saturday afternoon to Sunday morning.", "wrong": ["Your help moving house on Sunday.", "To cancel and not meet at all.", "To meet on Saturday morning instead."]},
+    {"id": "g17", "lang": "pt", "text": "Olha, afinal não posso no sábado à tarde, tenho de ajudar o meu irmão com a mudança. Dá-te jeito domingo de manhã? Podíamos ir à Feira da Ladra e depois beber qualquer coisa.", "en": "Listen, in the end I can't do Saturday afternoon, I have to help my brother move house. Does Sunday morning suit you? We could go to the Feira da Ladra flea market and then have a drink.", "question": "What does your friend want?", "answer": "To move your plan from Saturday afternoon to Sunday morning.", "wrong": ["Your help moving house on Sunday.", "To cancel and not meet at all.", "To meet on Saturday morning instead."]}
+  ]
+}

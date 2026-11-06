@@ -1,0 +1,27 @@
+{
+  "id": "time",
+  "title": "Time & durations",
+  "short": "Time",
+  "summary": "Clock times, opening hours, how long things take",
+  "level": "A2",
+  "branch": "words",
+  "tree": "words",
+  "col": 1.5,
+  "row": 2,
+  "parents": ["food-words", "daily-routine"],
+  "scene": "clock",
+  "scenario": false,
+  "icon": "M7 3h10M7 21h10M8 3c0 5 8 5 8 9s-8 4-8 9M16 3c0 5-8 5-8 9s8 4 8 9",
+  "sentences": [
+    {"id": 126, "en": "It takes about twenty minutes.", "es": "Se tarda unos veinte minutos.", "pt": "Demora uns vinte minutos."},
+    {"id": 127, "en": "The shop opens at nine and closes at eight.", "es": "La tienda abre a las nueve y cierra a las ocho.", "pt": "A loja abre às nove e fecha às oito."},
+    {"id": 128, "en": "I'll be here for a week.", "es": "Voy a estar aquí una semana.", "pt": "Vou ficar cá uma semana."},
+    {"id": 129, "en": "It's half past three.", "es": "Son las tres y media.", "pt": "São três e meia."},
+    {"id": 130, "en": "I've been waiting for an hour.", "es": "Llevo una hora esperando.", "pt": "Estou à espera há uma hora."},
+    {"id": 131, "en": "See you in two days.", "es": "Nos vemos dentro de dos días.", "pt": "Vemo-nos daqui a dois dias."}
+  ],
+  "passages": [
+    {"id": "g38", "lang": "es", "text": "El museo abre de martes a domingo, de diez a seis, pero la última entrada es a las cinco. La visita completa dura más o menos hora y media, así que yo vendría como muy tarde a las cuatro.", "en": "The museum is open Tuesday to Sunday, ten to six, but last entry is at five. The full visit takes about an hour and a half, so I'd come at four at the latest.", "question": "What is the advice?", "answer": "Arrive by four, because the full visit takes about an hour and a half.", "wrong": ["Come on Monday, when it is quiet.", "Arrive at five for last entry, because the visit is quick.", "It opens at six, so come in the evening."]},
+    {"id": "g39", "lang": "pt", "text": "O museu abre de terça a domingo, das dez às seis, mas a última entrada é às cinco. A visita completa demora mais ou menos hora e meia, por isso eu vinha o mais tardar às quatro.", "en": "The museum is open Tuesday to Sunday, ten to six, but last entry is at five. The full visit takes about an hour and a half, so I'd come at four at the latest.", "question": "What is the advice?", "answer": "Arrive by four, because the full visit takes about an hour and a half.", "wrong": ["Come on Monday, when it is quiet.", "Arrive at five for last entry, because the visit is quick.", "It opens at six, so come in the evening."]}
+  ]
+}

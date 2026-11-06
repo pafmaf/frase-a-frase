@@ -1,8 +1,10 @@
 // Frase a Frase service worker: offline app shell + cache-as-you-go audio.
 // Bump VERSION when you replace existing audio clips with new recordings.
-const VERSION = 'v1';
+const VERSION = 'v2';
 const SHELL = `shell-${VERSION}`, AUDIO = `audio-${VERSION}`, FONTS = `fonts-${VERSION}`;
-const SHELL_FILES = ['./', 'index.html', 'manifest.webmanifest', 'icons/icon-192.png', 'icons/icon-512.png'];
+const SHELL_FILES = ['./', 'index.html', 'manifest.webmanifest', 'icons/icon-192.png', 'icons/icon-512.png',
+  'css/app.css', 'js/content.js', 'js/core.js', 'js/art.js', 'js/ui.js', 'content/config.json'];
+// content/units/*.json are cached the first time they load (the list of units lives in content/config.json).
 
 self.addEventListener('install', e => {
   e.waitUntil(caches.open(SHELL).then(c => c.addAll(SHELL_FILES)).then(() => self.skipWaiting()));
@@ -85,7 +87,7 @@ self.addEventListener('fetch', e => {
   }
 
   // App shell: network-first so new versions arrive, cache when offline.
-  if (req.mode === 'navigate' || SHELL_FILES.some(f => url.pathname.endsWith(f.replace('./', '/')))) {
+  if (req.mode === 'navigate' || /\/content\/.+\.json$/.test(url.pathname) || SHELL_FILES.some(f => url.pathname.endsWith(f.replace('./', '/')))) {
     e.respondWith(networkFirst(req, SHELL).catch(() => caches.match('index.html')));
   }
 });

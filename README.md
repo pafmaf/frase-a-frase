@@ -24,6 +24,25 @@ cold-water listening, SM-2 spaced repetition. Progress is stored in the browser.
 
 `.nojekyll` keeps GitHub from running Jekyll over the files. Pages repos are public.
 
+## Project layout
+
+```
+index.html        page shell + boot
+css/app.css       styles
+js/content.js     loads and checks content/, builds the data the app uses
+js/core.js        storage, spaced repetition (SM-2), speech and recorded audio
+js/art.js         mascots and animated scenes
+js/ui.js          home, skill tree, lessons, settings
+content/          all lessons: config.json + one file per unit (see content/README.md)
+tools/            content.py (validate, stats, export), gen-phonon.sh, make-frase-audio.sh
+audio/            recorded clips + manifest.json
+sw.js             offline support
+```
+
+Add or edit lessons in `content/` only, then `python3 tools/content.py validate`.
+The page loads `content/` with `fetch`, so open it through a web server (`python3 -m http.server`),
+not by double-clicking `index.html`.
+
 ## Audio
 
 Without recordings the app uses the phone's own speech (works in Safari and Chrome, not inside
@@ -62,14 +81,10 @@ including iPhone). See `audio/manifest.example.json`.
 
 ### What to record
 
-`tools/sentences.tsv` (and `tools/sentences.json`) list every clip:
-
-| column | meaning |
-|---|---|
-| `lang` | `es` or `pt` |
-| `id` | file name without extension. Numbers are sentences, `g…` are cold-water passages |
-| `kind` | `sentence` (calm, clear) or `passage` (natural speed, like real speech) |
-| `text` | what to say |
+`python3 tools/content.py tsv` lists every clip (`lang`, `id`, `kind`, `text`), generated from `content/`:
+`id` is the file name without extension (numbers are sentences, `g…` are cold-water passages) and
+`kind` is `sentence` (calm, clear) or `passage` (natural speed, like real speech).
+`python3 tools/content.py stats` shows how many there are.
 
 The Portuguese is European Portuguese (pt-PT), so use a Portugal voice, not a Brazilian one.
 
@@ -77,12 +92,14 @@ The Portuguese is European Portuguese (pt-PT), so use a Portugal voice, not a Br
 [Phonon](https://github.com/gradium-ai/xn-ptts) (`uvx ptts`) in several voices and writes `audio/manifest.json`.
 Defaults: Spanish `Alba Alvaro`, Portuguese `Joana Paulo`; override with
 `VOICES_ES="Alba Alvaro Lucia-Sol" VOICES_PT="Joana Paulo Sofia" bash tools/gen-phonon.sh`.
-Use Spain voices for `es` and Portugal voices for `pt`. It resumes where it stopped, so re-running only
-records missing clips. Needs `uv` and `ffmpeg`.
+Use Spain voices for `es` and Portugal voices for `pt`. Existing clips are never re-recorded, so re-running
+only records missing ones (new content, interrupted runs). To redo clips on purpose:
+`FORCE=1 bash tools/gen-phonon.sh`, optionally narrowed with `ONLY_LANG=pt ONLY_IDS="3 g4"`.
+Needs `uv` and `ffmpeg`.
 
-**macOS voices:** `tools/make-frase-audio.sh` records everything with the macOS voices (Mónica, Joana) into this layout;
-set `VOICE_DIR=male ES_VOICE="…" PT_VOICE="…"` to record a second voice. Merge the `voices` entries of
-both runs into one `manifest.json`.
+**macOS voices:** `bash tools/make-frase-audio.sh` records with the macOS voices (Mónica, Joana) into `audio/`, skipping
+clips that exist (`FORCE=1` to redo); set `VOICE_DIR=male ES_VOICE="…" PT_VOICE="…"` to record a second voice.
+`manifest.json` is rebuilt from the files on disk.
 
 ### Updating clips
 
