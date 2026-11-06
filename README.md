@@ -73,7 +73,14 @@ including iPhone). See `audio/manifest.example.json`.
 
 The Portuguese is European Portuguese (pt-PT), so use a Portugal voice, not a Brazilian one.
 
-`tools/make-frase-audio.sh` records everything with the macOS voices (Mónica, Joana) into this layout;
+**Phonon (recommended):** `bash tools/gen-phonon.sh` from the repo root records every clip with
+[Phonon](https://github.com/gradium-ai/xn-ptts) (`uvx ptts`) in several voices and writes `audio/manifest.json`.
+Defaults: Spanish `Alba Alvaro`, Portuguese `Joana Paulo`; override with
+`VOICES_ES="Alba Alvaro Lucia-Sol" VOICES_PT="Joana Paulo Sofia" bash tools/gen-phonon.sh`.
+Use Spain voices for `es` and Portugal voices for `pt`. It resumes where it stopped, so re-running only
+records missing clips. Needs `uv` and `ffmpeg`.
+
+**macOS voices:** `tools/make-frase-audio.sh` records everything with the macOS voices (Mónica, Joana) into this layout;
 set `VOICE_DIR=male ES_VOICE="…" PT_VOICE="…"` to record a second voice. Merge the `voices` entries of
 both runs into one `manifest.json`.
 
