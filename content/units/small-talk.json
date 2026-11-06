@@ -1,0 +1,27 @@
+{
+  "id": "small-talk",
+  "title": "Small talk",
+  "short": "Small talk",
+  "summary": "Where you are from, work, free time",
+  "level": "A1",
+  "branch": "people",
+  "tree": "main",
+  "col": 2,
+  "row": 2,
+  "parents": ["questions"],
+  "scene": "talk",
+  "scenario": false,
+  "icon": "M3 5h11v7H8l-5 3.5zM10 15h4.5l4.5 3.5V15h2V8.5h-4.5",
+  "sentences": [
+    {"id": 36, "en": "Where are you from?", "es": "¿De dónde eres?", "pt": "De onde és?"},
+    {"id": 37, "en": "I'm from Germany.", "es": "Soy de Alemania.", "pt": "Sou da Alemanha."},
+    {"id": 38, "en": "I work as a software engineer.", "es": "Trabajo como ingeniero de software.", "pt": "Trabalho como engenheiro de software."},
+    {"id": 39, "en": "What do you do in your free time?", "es": "¿Qué haces en tu tiempo libre?", "pt": "O que fazes nos tempos livres?"},
+    {"id": 40, "en": "I've been learning your language for two months.", "es": "Llevo dos meses aprendiendo tu idioma.", "pt": "Estou a aprender a tua língua há dois meses."},
+    {"id": 41, "en": "The weather is lovely today.", "es": "Hoy hace muy buen tiempo.", "pt": "Hoje está um tempo ótimo."}
+  ],
+  "passages": [
+    {"id": "g12", "lang": "es", "text": "Pues yo nací en Sevilla, pero llevo casi diez años viviendo en Madrid por el trabajo. Me gusta la ciudad, aunque echo de menos el sol y, sobre todo, la comida de mi madre.", "en": "Well, I was born in Seville, but I've been living in Madrid for almost ten years because of work. I like the city, although I miss the sun and, above all, my mother's cooking.", "question": "What do you learn about this person?", "answer": "Born in Seville, in Madrid for about ten years for work, misses home.", "wrong": ["Born in Madrid, moving to Seville next year.", "Has lived in Seville for ten years with their mother.", "Moved to Madrid for the weather."]},
+    {"id": "g13", "lang": "pt", "text": "Olha, eu nasci no Porto, mas já vivo em Lisboa há quase dez anos por causa do trabalho. Gosto da cidade, mas tenho saudades da família e, sobretudo, da comida da minha mãe.", "en": "Well, I was born in Porto, but I've been living in Lisbon for almost ten years because of work. I like the city, but I miss my family and, above all, my mother's cooking.", "question": "What do you learn about this person?", "answer": "Born in Porto, in Lisbon for about ten years for work, misses home.", "wrong": ["Born in Lisbon, moving to Porto next year.", "Has lived in Porto for ten years with their mother.", "Moved to Lisbon for the weather."]}
+  ]
+}

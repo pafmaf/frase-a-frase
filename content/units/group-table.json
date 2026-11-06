@@ -1,0 +1,27 @@
+{
+  "id": "group-table",
+  "title": "Table for a group",
+  "short": "Group table",
+  "summary": "Seats for six, waiting, splitting the bill",
+  "level": "A2",
+  "branch": "food",
+  "tree": "main",
+  "col": 0,
+  "row": 4,
+  "parents": ["churros"],
+  "scene": "restaurant",
+  "scenario": false,
+  "icon": "M3 10h18M6 10v9M18 10v9M8 6a1.5 1.5 0 1 0 0-.01M12 5a1.5 1.5 0 1 0 0-.01M16 6a1.5 1.5 0 1 0 0-.01",
+  "sentences": [
+    {"id": 90, "en": "Do you have a table for six?", "es": "¿Tienen mesa para seis?", "pt": "Têm mesa para seis?"},
+    {"id": 91, "en": "How long is the wait?", "es": "¿Cuánto hay que esperar?", "pt": "Quanto tempo é preciso esperar?"},
+    {"id": 92, "en": "We can wait at the bar.", "es": "Podemos esperar en la barra.", "pt": "Podemos esperar ao balcão."},
+    {"id": 93, "en": "Can we sit outside?", "es": "¿Podemos sentarnos fuera?", "pt": "Podemos sentar-nos lá fora?"},
+    {"id": 94, "en": "Two more friends are coming.", "es": "Vienen dos amigos más.", "pt": "Vêm mais dois amigos."},
+    {"id": 95, "en": "Can we pay separately?", "es": "¿Podemos pagar por separado?", "pt": "Podemos pagar em separado?"}
+  ],
+  "passages": [
+    {"id": "g26", "lang": "es", "text": "Para seis personas ahora mismo no tenemos nada dentro, pero en la terraza se queda libre una mesa en unos quince minutos. Si quieren, pueden esperar en la barra y les aviso.", "en": "For six people we have nothing inside right now, but a table on the terrace will be free in about fifteen minutes. If you like, you can wait at the bar and I'll let you know.", "question": "Where and when can your group sit?", "answer": "On the terrace, in about fifteen minutes.", "wrong": ["Inside, right away.", "Nowhere, because they are fully booked tonight.", "At the bar, in about fifty minutes."]},
+    {"id": "g27", "lang": "pt", "text": "Para seis pessoas agora não temos nada lá dentro, mas na esplanada vai ficar uma mesa livre daqui a uns quinze minutos. Se quiserem, podem esperar ao balcão e eu aviso.", "en": "For six people we have nothing inside right now, but a table on the terrace will be free in about fifteen minutes. If you like, you can wait at the counter and I'll let you know.", "question": "Where and when can your group sit?", "answer": "On the terrace, in about fifteen minutes.", "wrong": ["Inside, right away.", "Nowhere, because they are fully booked tonight.", "At the counter, in about fifty minutes."]}
+  ]
+}

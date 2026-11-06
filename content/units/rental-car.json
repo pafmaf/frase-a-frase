@@ -1,0 +1,27 @@
+{
+  "id": "rental-car",
+  "title": "Renting a car",
+  "short": "Rental car",
+  "summary": "Licence, insurance, fuel, parking",
+  "level": "A2",
+  "branch": "travel",
+  "tree": "main",
+  "col": 1.5,
+  "row": 4,
+  "parents": ["hotel"],
+  "scene": "car",
+  "scenario": false,
+  "icon": "M4 16l1.6-5.2A2 2 0 0 1 7.5 9.4h9a2 2 0 0 1 1.9 1.4L20 16v3h-2.5M4 16v3h2.5M4 16h16M8 19.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3zM16 19.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z",
+  "sentences": [
+    {"id": 132, "en": "I'd like to rent a car for three days.", "es": "Quisiera alquilar un coche para tres días.", "pt": "Queria alugar um carro por três dias."},
+    {"id": 133, "en": "Is insurance included?", "es": "¿El seguro está incluido?", "pt": "O seguro está incluído?"},
+    {"id": 134, "en": "Here is my driving licence.", "es": "Aquí tiene mi carné de conducir.", "pt": "Aqui está a minha carta de condução."},
+    {"id": 135, "en": "Do I have to return it with a full tank?", "es": "¿Tengo que devolverlo con el depósito lleno?", "pt": "Tenho de o devolver com o depósito cheio?"},
+    {"id": 136, "en": "Is it manual or automatic?", "es": "¿Es manual o automático?", "pt": "É manual ou automático?"},
+    {"id": 137, "en": "Where can I park?", "es": "¿Dónde puedo aparcar?", "pt": "Onde posso estacionar?"}
+  ],
+  "passages": [
+    {"id": "g40", "lang": "es", "text": "El coche tiene el depósito lleno y hay que devolverlo igual. El seguro básico está incluido, pero si quiere el seguro a todo riesgo son quince euros más al día. Lo puede dejar en el aeropuerto sin coste adicional.", "en": "The car has a full tank and you have to return it the same way. Basic insurance is included, but if you want fully comprehensive cover it's fifteen euros more per day. You can drop it off at the airport at no extra cost.", "question": "Which statement is true?", "answer": "Basic insurance is included. Full cover costs fifteen euros extra per day.", "wrong": ["Return it empty, because the fuel is prepaid.", "Dropping it off at the airport costs extra.", "No insurance is included at all."]},
+    {"id": "g41", "lang": "pt", "text": "O carro tem o depósito cheio e tem de o devolver da mesma forma. O seguro básico está incluído, mas se quiser o seguro contra todos os riscos são mais quinze euros por dia. Pode deixá-lo no aeroporto sem custo adicional.", "en": "The car has a full tank and you have to return it the same way. Basic insurance is included, but if you want fully comprehensive cover it's fifteen euros more per day. You can leave it at the airport at no extra cost.", "question": "Which statement is true?", "answer": "Basic insurance is included. Full cover costs fifteen euros extra per day.", "wrong": ["Return it empty, because the fuel is prepaid.", "Dropping it off at the airport costs extra.", "No insurance is included at all."]}
+  ]
+}

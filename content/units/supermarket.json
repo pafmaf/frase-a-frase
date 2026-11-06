@@ -1,0 +1,27 @@
+{
+  "id": "supermarket",
+  "title": "Supermarket checkout",
+  "short": "Supermarket",
+  "summary": "Bags, loyalty cards, paying, receipts",
+  "level": "A1",
+  "branch": "life",
+  "tree": "main",
+  "col": 3,
+  "row": 2,
+  "parents": ["shopping"],
+  "scene": "market",
+  "scenario": false,
+  "icon": "M3 4h2.5l2 11h10.5l2-8H6.5M9 20a1.2 1.2 0 1 0 0-.01M17 20a1.2 1.2 0 1 0 0-.01",
+  "sentences": [
+    {"id": 96, "en": "Do you need a bag?", "es": "¿Necesita bolsa?", "pt": "Precisa de saco?"},
+    {"id": 97, "en": "No thanks, I have my own bag.", "es": "No, gracias, tengo mi bolsa.", "pt": "Não, obrigado, tenho o meu saco."},
+    {"id": 98, "en": "Do you have a loyalty card?", "es": "¿Tiene tarjeta de cliente?", "pt": "Tem cartão de cliente?"},
+    {"id": 99, "en": "Card or cash?", "es": "¿Con tarjeta o en efectivo?", "pt": "Cartão ou dinheiro?"},
+    {"id": 100, "en": "Insert your card, please.", "es": "Introduzca la tarjeta, por favor.", "pt": "Introduza o cartão, por favor."},
+    {"id": 101, "en": "Do you want the receipt?", "es": "¿Quiere el tique?", "pt": "Quer o talão?"}
+  ],
+  "passages": [
+    {"id": "g28", "lang": "es", "text": "Son veintitrés con cuarenta. ¿Tiene tarjeta de cliente? Con ella hoy tiene un diez por ciento de descuento en la fruta. Las bolsas cuestan diez céntimos cada una.", "en": "That's twenty-three forty. Do you have a loyalty card? With it you get ten percent off fruit today. Bags cost ten cents each.", "question": "Which statement is true?", "answer": "With a loyalty card, fruit is ten percent cheaper today.", "wrong": ["Bags are free today.", "The total is thirty-two euros forty.", "Everything is ten percent off, card or not."]},
+    {"id": "g29", "lang": "pt", "text": "São vinte e três e quarenta. Tem cartão de cliente? Com o cartão hoje tem dez por cento de desconto na fruta. Os sacos custam dez cêntimos cada.", "en": "That's twenty-three forty. Do you have a loyalty card? With the card you get ten percent off fruit today. Bags cost ten cents each.", "question": "Which statement is true?", "answer": "With a loyalty card, fruit is ten percent cheaper today.", "wrong": ["Bags are free today.", "The total is thirty-two euros forty.", "Everything is ten percent off, card or not."]}
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "id": "first-words",
+  "title": "First words",
+  "short": "First words",
+  "summary": "Greet, introduce yourself, get unstuck",
+  "level": "A1",
+  "branch": "core",
+  "tree": "main",
+  "col": 1.5,
+  "row": 0,
+  "parents": [],
+  "scene": "greet",
+  "scenario": false,
+  "icon": "M4 5h16v10H10l-6 4z",
+  "sentences": [
+    {"id": 0, "en": "Hello, good morning!", "es": "¡Hola, buenos días!", "pt": "Olá, bom dia!"},
+    {"id": 1, "en": "How are you?", "es": "¿Cómo estás?", "pt": "Como estás?"},
+    {"id": 2, "en": "I'm fine, thank you. And you?", "es": "Estoy bien, gracias. ¿Y tú?", "pt": "Estou bem, obrigado. E tu?"},
+    {"id": 3, "en": "My name is Ana. What's your name?", "es": "Me llamo Ana. ¿Cómo te llamas?", "pt": "Chamo-me Ana. Como te chamas?"},
+    {"id": 4, "en": "Nice to meet you.", "es": "Mucho gusto.", "pt": "Muito prazer."},
+    {"id": 5, "en": "I don't understand. Can you speak more slowly?", "es": "No entiendo. ¿Puede hablar más despacio?", "pt": "Não percebo. Pode falar mais devagar?"}
+  ],
+  "passages": [
+    {"id": "g0", "lang": "es", "text": "¡Hola! Perdona, ¿eres el amigo de Lucía? Ella me ha dicho que llegabas hoy. Yo soy Marta, su compañera de piso. Lucía todavía está en el trabajo, pero vuelve sobre las siete.", "en": "Hi! Sorry, are you Lucía's friend? She told me you were arriving today. I'm Marta, her flatmate. Lucía is still at work, but she'll be back around seven.", "question": "Who is talking to you, and where is Lucía?", "answer": "Lucía's flatmate. Lucía is still at work until about seven.", "wrong": ["Lucía's sister. Lucía is waiting at the station.", "A neighbour. Lucía is away on holiday.", "Lucía's boss. Lucía has gone home early."]},
+    {"id": "g1", "lang": "pt", "text": "Olá! Desculpa, és o amigo da Inês? Ela disse-me que chegavas hoje. Eu sou a Rita, vivo com ela. A Inês ainda está no trabalho, mas volta por volta das sete.", "en": "Hi! Sorry, are you Inês's friend? She told me you were arriving today. I'm Rita, I live with her. Inês is still at work, but she'll be back around seven.", "question": "Who is talking to you, and where is Inês?", "answer": "Inês's flatmate. Inês is still at work until about seven.", "wrong": ["Inês's sister. Inês is waiting at the station.", "A neighbour. Inês is away on holiday.", "Inês's boss. Inês has gone home early."]}
+  ]
+}

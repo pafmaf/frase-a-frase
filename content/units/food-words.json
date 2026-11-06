@@ -1,0 +1,27 @@
+{
+  "id": "food-words",
+  "title": "Food words",
+  "short": "Food words",
+  "summary": "Bread, cheese, fish, rice, eggs, vegetables",
+  "level": "A1",
+  "branch": "words",
+  "tree": "words",
+  "col": 0.5,
+  "row": 1,
+  "parents": ["things"],
+  "scene": "stall",
+  "scenario": false,
+  "icon": "M5 13a7 7 0 0 0 14 0zM3 13h18M12 6c0-2 1.5-3 3-3M9 9c.5-1 1.5-1.5 3-1.5",
+  "sentences": [
+    {"id": 114, "en": "I'd like bread, cheese and ham.", "es": "Quiero pan, queso y jamón.", "pt": "Queria pão, queijo e fiambre."},
+    {"id": 115, "en": "Do you have fresh fish today?", "es": "¿Tiene pescado fresco hoy?", "pt": "Tem peixe fresco hoje?"},
+    {"id": 116, "en": "A kilo of tomatoes, please.", "es": "Un kilo de tomates, por favor.", "pt": "Um quilo de tomates, por favor."},
+    {"id": 117, "en": "I don't eat meat.", "es": "No como carne.", "pt": "Não como carne."},
+    {"id": 118, "en": "Rice with chicken and vegetables.", "es": "Arroz con pollo y verduras.", "pt": "Arroz com frango e legumes."},
+    {"id": 119, "en": "The eggs and the milk are over there.", "es": "Los huevos y la leche están allí.", "pt": "Os ovos e o leite estão ali."}
+  ],
+  "passages": [
+    {"id": "g34", "lang": "es", "text": "Hoy el pescado está muy bien, la merluza ha llegado esta mañana. Las fresas también están de oferta, a dos euros la caja. Lo que no me queda es pan integral, solo el blanco.", "en": "The fish is really good today, the hake came in this morning. Strawberries are on offer too, two euros a box. What I don't have left is wholemeal bread, only white.", "question": "What can you NOT buy today?", "answer": "Wholemeal bread.", "wrong": ["Fresh hake.", "Strawberries.", "White bread."]},
+    {"id": "g35", "lang": "pt", "text": "Hoje o peixe está muito bom, a pescada chegou esta manhã. Os morangos também estão em promoção, a dois euros a caixa. O que já não tenho é pão integral, só o branco.", "en": "The fish is really good today, the hake came in this morning. Strawberries are on offer too, two euros a box. What I don't have any more is wholemeal bread, only white.", "question": "What can you NOT buy today?", "answer": "Wholemeal bread.", "wrong": ["Fresh hake.", "Strawberries.", "White bread."]}
+  ]
+}

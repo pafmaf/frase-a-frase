@@ -1,0 +1,27 @@
+{
+  "id": "cafe",
+  "title": "At the café",
+  "short": "Café",
+  "summary": "Order, ask the price, pay",
+  "level": "A1",
+  "branch": "food",
+  "tree": "main",
+  "col": 0,
+  "row": 1,
+  "parents": ["first-words"],
+  "scene": "cafe",
+  "scenario": false,
+  "icon": "M5 9h11v4a5 5 0 0 1-5 5h-1a5 5 0 0 1-5-5zM16 10h1.5a2.5 2.5 0 0 1 0 5H16M8 3.5v2.5M12 3.5v2.5",
+  "sentences": [
+    {"id": 6, "en": "A coffee with milk, please.", "es": "Un café con leche, por favor.", "pt": "Um café com leite, por favor."},
+    {"id": 7, "en": "I would like a bottle of water.", "es": "Quisiera una botella de agua.", "pt": "Queria uma garrafa de água."},
+    {"id": 8, "en": "How much is it?", "es": "¿Cuánto es?", "pt": "Quanto é?"},
+    {"id": 9, "en": "Can I pay by card?", "es": "¿Puedo pagar con tarjeta?", "pt": "Posso pagar com cartão?"},
+    {"id": 10, "en": "Do you have Wi-Fi?", "es": "¿Tienen wifi?", "pt": "Têm Wi-Fi?"},
+    {"id": 11, "en": "The bill, please.", "es": "La cuenta, por favor.", "pt": "A conta, por favor."}
+  ],
+  "passages": [
+    {"id": "g2", "lang": "es", "text": "Lo siento, la máquina de tarjetas no funciona ahora mismo. Si quiere, puede pagar en efectivo, o hay un cajero justo al lado de la farmacia, a dos minutos.", "en": "Sorry, the card machine isn't working right now. If you like, you can pay cash, or there's a cash machine right next to the pharmacy, two minutes away.", "question": "What is the problem, and what does the waiter suggest?", "answer": "The card machine is broken. Pay cash, or use the cash machine nearby.", "wrong": ["The kitchen is closed. Come back in two minutes.", "They have run out of coffee. Try the pharmacy café.", "The bill is wrong. They will bring a new one."]},
+    {"id": "g3", "lang": "pt", "text": "Peço desculpa, a máquina do multibanco não está a funcionar neste momento. Se quiser, pode pagar em dinheiro, ou há uma caixa multibanco mesmo ao lado da farmácia, a dois minutos.", "en": "Sorry, the card machine isn't working at the moment. If you like, you can pay cash, or there's a cash machine right next to the pharmacy, two minutes away.", "question": "What is the problem, and what does the waiter suggest?", "answer": "The card machine is broken. Pay cash, or use the cash machine nearby.", "wrong": ["The kitchen is closed. Come back in two minutes.", "They have run out of coffee. Try the pharmacy café.", "The bill is wrong. They will bring a new one."]}
+  ]
+}

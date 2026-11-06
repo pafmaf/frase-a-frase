@@ -1,0 +1,27 @@
+{
+  "id": "dinner-out",
+  "title": "Dinner out",
+  "short": "Dinner out",
+  "summary": "Diet needs, recommendations, compliments",
+  "level": "A2",
+  "branch": "food",
+  "tree": "main",
+  "col": 0.5,
+  "row": 5,
+  "parents": ["group-table", "hotel"],
+  "scene": "restaurant",
+  "scenario": false,
+  "icon": "M7 3v18M4.5 3v5a2.5 2.5 0 0 0 5 0V3M16.5 21V3c-2.5 1.5-3 6-3 8h3",
+  "sentences": [
+    {"id": 30, "en": "A table for two, please.", "es": "Una mesa para dos, por favor.", "pt": "Uma mesa para dois, por favor."},
+    {"id": 31, "en": "What do you recommend?", "es": "¿Qué me recomienda?", "pt": "O que me recomenda?"},
+    {"id": 32, "en": "I'm vegetarian.", "es": "Soy vegetariano.", "pt": "Sou vegetariano."},
+    {"id": 33, "en": "I'm allergic to nuts.", "es": "Soy alérgico a los frutos secos.", "pt": "Sou alérgico a frutos secos."},
+    {"id": 34, "en": "It was delicious!", "es": "¡Estaba delicioso!", "pt": "Estava delicioso!"},
+    {"id": 35, "en": "Could you bring us some more bread?", "es": "¿Nos trae un poco más de pan?", "pt": "Pode trazer-nos mais pão?"}
+  ],
+  "passages": [
+    {"id": "g10", "lang": "es", "text": "Hoy el pescado del día es dorada a la plancha, viene con patatas y ensalada. El cordero se nos ha acabado, lo siento. Y de postre, la tarta de queso es casera, la recomiendo mucho.", "en": "Today's fish is grilled sea bream, served with potatoes and salad. We've run out of lamb, sorry. And for dessert, the cheesecake is homemade, I highly recommend it.", "question": "Which statement is true?", "answer": "There is no lamb left today.", "wrong": ["The lamb is the dish of the day.", "The fish comes with rice and beans.", "The cheesecake is sold out."]},
+    {"id": "g11", "lang": "pt", "text": "Hoje o peixe do dia é dourada grelhada, vem com batatas e salada. O borrego já acabou, peço desculpa. E de sobremesa, o bolo de bolacha é feito cá em casa, recomendo muito.", "en": "Today's fish is grilled sea bream, served with potatoes and salad. The lamb has run out, sorry. And for dessert, the biscuit cake is homemade, I highly recommend it.", "question": "Which statement is true?", "answer": "There is no lamb left today.", "wrong": ["The lamb is the dish of the day.", "The fish comes with rice and beans.", "The biscuit cake is sold out."]}
+  ]
+}

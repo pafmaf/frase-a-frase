@@ -1,0 +1,27 @@
+{
+  "id": "trouble",
+  "title": "When things go wrong",
+  "short": "Trouble",
+  "summary": "Lost phone, card problems, asking for help",
+  "level": "A2",
+  "branch": "life",
+  "tree": "main",
+  "col": 2.5,
+  "row": 4,
+  "parents": ["plans", "health"],
+  "scene": "trouble",
+  "scenario": false,
+  "icon": "M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18zM12 16a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM5.6 5.6l3.6 3.6M14.8 14.8l3.6 3.6M18.4 5.6l-3.6 3.6M9.2 14.8l-3.6 3.6",
+  "sentences": [
+    {"id": 54, "en": "I've lost my phone.", "es": "He perdido mi móvil.", "pt": "Perdi o meu telemóvel."},
+    {"id": 55, "en": "Can you help me, please?", "es": "¿Me puede ayudar, por favor?", "pt": "Pode ajudar-me, por favor?"},
+    {"id": 56, "en": "My card isn't working.", "es": "Mi tarjeta no funciona.", "pt": "O meu cartão não está a funcionar."},
+    {"id": 57, "en": "I missed my flight.", "es": "He perdido mi vuelo.", "pt": "Perdi o meu voo."},
+    {"id": 58, "en": "How do you say that?", "es": "¿Cómo se dice eso?", "pt": "Como se diz isso?"},
+    {"id": 59, "en": "What does this word mean?", "es": "¿Qué significa esta palabra?", "pt": "O que significa esta palavra?"}
+  ],
+  "passages": [
+    {"id": "g18", "lang": "es", "text": "Para bloquear la tarjeta tiene que llamar a su banco, el número está en la aplicación. Y para el móvil, lo mejor es poner una denuncia en la comisaría; la más cercana está en esta misma calle, al fondo.", "en": "To block the card you have to call your bank, the number is in the app. And for the phone, it's best to report it at the police station; the nearest one is at the end of this same street.", "question": "What two things should you do?", "answer": "Call your bank to block the card, and report the phone at the police station down this street.", "wrong": ["Visit a bank branch, then buy a new phone.", "Call the police about the card, and wait for the phone.", "Go back to your hotel and wait for a call."]},
+    {"id": "g19", "lang": "pt", "text": "Para cancelar o cartão tem de ligar para o seu banco, o número está na aplicação. Quanto ao telemóvel, o melhor é fazer queixa na esquadra; a mais próxima fica nesta mesma rua, lá ao fundo.", "en": "To cancel the card you have to call your bank, the number is in the app. As for the phone, it's best to report it at the police station; the nearest one is at the far end of this same street.", "question": "What two things should you do?", "answer": "Call your bank to cancel the card, and report the phone at the police station down this street.", "wrong": ["Visit a bank branch, then buy a new phone.", "Call the police about the card, and wait for the phone.", "Go back to your hotel and wait for a call."]}
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "id": "shopping",
+  "title": "Shopping",
+  "short": "Shopping",
+  "summary": "Sizes, prices, deciding",
+  "level": "A1",
+  "branch": "life",
+  "tree": "main",
+  "col": 3,
+  "row": 1,
+  "parents": ["first-words"],
+  "scene": "shop",
+  "scenario": false,
+  "icon": "M5.5 8h13l-1 12.5h-11zM9 8a3 3 0 0 1 6 0",
+  "sentences": [
+    {"id": 24, "en": "I'm just looking, thanks.", "es": "Solo estoy mirando, gracias.", "pt": "Estou só a ver, obrigado."},
+    {"id": 25, "en": "Do you have this in a bigger size?", "es": "¿Tiene esto en una talla más grande?", "pt": "Tem isto num tamanho maior?"},
+    {"id": 26, "en": "It costs twenty euros.", "es": "Cuesta veinte euros.", "pt": "Custa vinte euros."},
+    {"id": 27, "en": "That's too expensive.", "es": "Es demasiado caro.", "pt": "É demasiado caro."},
+    {"id": 28, "en": "Where can I try it on?", "es": "¿Dónde me lo puedo probar?", "pt": "Onde posso experimentar?"},
+    {"id": 29, "en": "I'll take it.", "es": "Me lo llevo.", "pt": "Vou levar."}
+  ],
+  "passages": [
+    {"id": "g8", "lang": "es", "text": "Esta talla ya no la tenemos en tienda, pero se la podemos pedir y llega en tres o cuatro días. Si no, creo que en la tienda del centro comercial todavía les quedan.", "en": "We don't have this size in the shop any more, but we can order it and it arrives in three or four days. Otherwise, I think the shop in the shopping centre still has some.", "question": "What are your options?", "answer": "Order it (three or four days) or try their shop in the shopping centre.", "wrong": ["Buy it today only, because the sale ends.", "Come back in three minutes when the stock arrives.", "Nothing. They cannot order it at all."]},
+    {"id": "g9", "lang": "pt", "text": "Este tamanho já não temos em loja, mas podemos encomendar e chega daqui a três ou quatro dias. Senão, acho que a loja do centro comercial ainda tem.", "en": "We don't have this size in the shop any more, but we can order it and it arrives in three or four days. Otherwise, I think the shop in the shopping centre still has it.", "question": "What are your options?", "answer": "Order it (three or four days) or try their shop in the shopping centre.", "wrong": ["Buy it today only, because the sale ends.", "Come back in three minutes when the stock arrives.", "Nothing. They cannot order it at all."]}
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "id": "daily-routine",
+  "title": "Daily routine",
+  "short": "Daily routine",
+  "summary": "Working, sleeping, getting up, going out",
+  "level": "A1",
+  "branch": "words",
+  "tree": "words",
+  "col": 2.5,
+  "row": 1,
+  "parents": ["things"],
+  "scene": "daynight",
+  "scenario": false,
+  "icon": "M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z",
+  "sentences": [
+    {"id": 120, "en": "I work from home on Mondays.", "es": "Los lunes trabajo desde casa.", "pt": "Às segundas trabalho a partir de casa."},
+    {"id": 121, "en": "I usually get up at seven.", "es": "Normalmente me levanto a las siete.", "pt": "Normalmente levanto-me às sete."},
+    {"id": 122, "en": "I slept really badly last night.", "es": "Anoche dormí fatal.", "pt": "Dormi muito mal esta noite."},
+    {"id": 123, "en": "I'm working right now.", "es": "Ahora mismo estoy trabajando.", "pt": "Neste momento estou a trabalhar."},
+    {"id": 124, "en": "I'm going to bed, I'm very tired.", "es": "Me voy a la cama, estoy muy cansado.", "pt": "Vou para a cama, estou muito cansado."},
+    {"id": 125, "en": "After work I go for a run.", "es": "Después del trabajo salgo a correr.", "pt": "Depois do trabalho vou correr."}
+  ],
+  "passages": [
+    {"id": "g36", "lang": "es", "text": "Esta semana estoy fatal. Trabajo de nueve a siete, luego voy al gimnasio y llego a casa tardísimo. Ayer me acosté a la una y hoy me he levantado a las seis. Necesito dormir un fin de semana entero.", "en": "This week is awful. I work from nine to seven, then I go to the gym and get home really late. Yesterday I went to bed at one and today I got up at six. I need to sleep for a whole weekend.", "question": "How is this person doing?", "answer": "Exhausted: long work days, the gym, and very little sleep.", "wrong": ["Relaxed, because they are on holiday this week.", "Out of work and sleeping a lot.", "Working only mornings, with a nap after lunch."]},
+    {"id": "g37", "lang": "pt", "text": "Esta semana está a ser terrível. Trabalho das nove às sete, depois vou ao ginásio e chego a casa tardíssimo. Ontem deitei-me à uma e hoje levantei-me às seis. Preciso de dormir um fim de semana inteiro.", "en": "This week has been terrible. I work from nine to seven, then I go to the gym and get home really late. Yesterday I went to bed at one and today I got up at six. I need to sleep for a whole weekend.", "question": "How is this person doing?", "answer": "Exhausted: long work days, the gym, and very little sleep.", "wrong": ["Relaxed, because they are on holiday this week.", "Out of work and sleeping a lot.", "Working only mornings, with a nap after lunch."]}
+  ]
+}

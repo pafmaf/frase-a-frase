@@ -2,6 +2,9 @@
 # Frase a Frase: record every clip with Phonon (ptts) in several voices.
 # Usage (from the repo root):  bash tools/gen-phonon.sh
 # Needs: uv (https://docs.astral.sh/uv/) or ptts installed, and ffmpeg (brew install ffmpeg).
+# Existing clips are never re-recorded (resume-friendly). To redo them: FORCE=1 bash tools/gen-phonon.sh
+#   (or only some: FORCE=1 ONLY_LANG=pt ONLY_IDS="g3 g4" bash tools/gen-phonon.sh).
+# The list of clips comes from content/ (python3 tools/content.py tsv).
 # Voices: one folder per voice; the folder name is shown in the app's "Recorded voice" setting.
 # Use Spain voices for es and Portugal voices for pt (not Mexican or Brazilian).
 set -euo pipefail
@@ -10,11 +13,14 @@ VOICES_ES="${VOICES_ES:-Alba Marcos}"
 VOICES_PT="${VOICES_PT:-Isadora Davi}"   # catalog has only pt-BR voices
 MODEL="${MODEL:-hf://gradium/phonon-40m-multilingual}"   # gated: request access on Hugging Face
 PTTS="${PTTS:-uvx ptts}"          # or: PTTS=ptts after `brew install gradium-ai/tap/ptts`
-TSV="tools/sentences.tsv"
 OUT="audio"
 TMP="$(mktemp -d)"
+TSV="$TMP/clips.tsv"
+FORCE="${FORCE:-0}"; ONLY_LANG="${ONLY_LANG:-}"; ONLY_IDS=" ${ONLY_IDS:-} "
 
-[ -f "$TSV" ] || { echo "Run from the repo root (tools/sentences.tsv not found)."; exit 1; }
+[ -f tools/content.py ] || { echo "Run from the repo root (tools/content.py not found)."; exit 1; }
+python3 tools/content.py validate >/dev/null || { python3 tools/content.py validate; exit 1; }
+python3 tools/content.py tsv > "$TSV"
 command -v ffmpeg >/dev/null || { echo "ffmpeg missing: brew install ffmpeg"; exit 1; }
 
 n=0; skipped=0; failed=0
@@ -22,12 +28,14 @@ slug(){ python3 -c 'import sys,unicodedata,re;s=unicodedata.normalize("NFKD",sys
 # read the list on fd 3 so ptts/ffmpeg can't swallow lines from stdin
 while IFS=$'\t' read -r -u 3 lang id kind text; do
   [ "$lang" = "lang" ] && continue          # header
+  [ -n "$ONLY_LANG" ] && [ "$lang" != "$ONLY_LANG" ] && continue
+  [ "$ONLY_IDS" != "  " ] && [[ "$ONLY_IDS" != *" $id "* ]] && continue
   if [ "$lang" = "es" ]; then voices="$VOICES_ES"; else voices="$VOICES_PT"; fi
   for voice in $voices; do
     dir="$OUT/$lang/$(slug "$voice")"
     mkdir -p "$dir"
     out="$dir/$id.m4a"
-    if [ -s "$out" ]; then skipped=$((skipped+1)); continue; fi   # resume-friendly
+    if [ "$FORCE" != 1 ] && [ -s "$out" ]; then skipped=$((skipped+1)); continue; fi   # resume-friendly: keep what exists unless FORCE=1
     if $PTTS --lang "$lang" -m "$MODEL" --voice "$voice" "$text" -o "$TMP/clip.wav" </dev/null >/dev/null 2>"$TMP/err.log" \
        && ffmpeg -nostdin -loglevel error -y -i "$TMP/clip.wav" -af "silenceremove=start_periods=1:start_threshold=-50dB,areverse,silenceremove=start_periods=1:start_threshold=-50dB,areverse" \
             -c:a aac -b:a 64k -ac 1 "$out"; then

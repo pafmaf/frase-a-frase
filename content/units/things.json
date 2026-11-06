@@ -1,0 +1,27 @@
+{
+  "id": "things",
+  "title": "Things around you",
+  "short": "Things",
+  "summary": "Table, chair, desk, bed, keys, drawer",
+  "level": "A1",
+  "branch": "words",
+  "tree": "words",
+  "col": 1.5,
+  "row": 0,
+  "parents": ["first-words"],
+  "scene": "room",
+  "scenario": false,
+  "icon": "M4 11h16M6 11v8M18 11v8M8 11V6h8v5",
+  "sentences": [
+    {"id": 108, "en": "The table is next to the window.", "es": "La mesa está al lado de la ventana.", "pt": "A mesa está ao lado da janela."},
+    {"id": 109, "en": "Is this chair free?", "es": "¿Está libre esta silla?", "pt": "Esta cadeira está livre?"},
+    {"id": 110, "en": "My laptop is on the desk.", "es": "Mi portátil está en el escritorio.", "pt": "O meu portátil está na secretária."},
+    {"id": 111, "en": "The keys are in the drawer.", "es": "Las llaves están en el cajón.", "pt": "As chaves estão na gaveta."},
+    {"id": 112, "en": "Where is the light switch?", "es": "¿Dónde está el interruptor de la luz?", "pt": "Onde está o interruptor da luz?"},
+    {"id": 113, "en": "The bed is very comfortable.", "es": "La cama es muy cómoda.", "pt": "A cama é muito confortável."}
+  ],
+  "passages": [
+    {"id": "g32", "lang": "es", "text": "El piso es pequeño pero muy práctico. En el salón tienes un sofá cama y un escritorio junto a la ventana para trabajar. Las toallas están en el armario del pasillo y la llave del buzón, en el cajón de la cocina.", "en": "The flat is small but very practical. In the living room you have a sofa bed and a desk by the window for working. The towels are in the hallway cupboard and the mailbox key is in the kitchen drawer.", "question": "Where is the mailbox key?", "answer": "In the kitchen drawer.", "wrong": ["In the hallway cupboard.", "On the desk by the window.", "Under the sofa bed."]},
+    {"id": "g33", "lang": "pt", "text": "O apartamento é pequeno mas muito prático. Na sala tem um sofá-cama e uma secretária ao pé da janela para trabalhar. As toalhas estão no armário do corredor e a chave da caixa do correio está na gaveta da cozinha.", "en": "The flat is small but very practical. In the living room there's a sofa bed and a desk by the window for working. The towels are in the hallway cupboard and the mailbox key is in the kitchen drawer.", "question": "Where is the mailbox key?", "answer": "In the kitchen drawer.", "wrong": ["In the hallway cupboard.", "On the desk by the window.", "Under the sofa bed."]}
+  ]
+}
