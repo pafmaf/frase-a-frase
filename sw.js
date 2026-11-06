@@ -1,6 +1,6 @@
 // Frase a Frase service worker: offline app shell + cache-as-you-go audio.
 // Bump VERSION when you replace existing audio clips with new recordings.
-const VERSION = 'v1';
+const VERSION = 'v2';
 const SHELL = `shell-${VERSION}`, AUDIO = `audio-${VERSION}`, FONTS = `fonts-${VERSION}`;
 const SHELL_FILES = ['./', 'index.html', 'manifest.webmanifest', 'icons/icon-192.png', 'icons/icon-512.png'];
 

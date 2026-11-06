@@ -6,8 +6,9 @@
 # Use Spain voices for es and Portugal voices for pt (not Mexican or Brazilian).
 set -euo pipefail
 
-VOICES_ES="${VOICES_ES:-Alba Alvaro}"
-VOICES_PT="${VOICES_PT:-Joana Paulo}"
+VOICES_ES="${VOICES_ES:-Alba Marcos}"
+VOICES_PT="${VOICES_PT:-Isadora Davi}"   # catalog has only pt-BR voices
+MODEL="${MODEL:-hf://gradium/phonon-40m-multilingual}"   # gated: request access on Hugging Face
 PTTS="${PTTS:-uvx ptts}"          # or: PTTS=ptts after `brew install gradium-ai/tap/ptts`
 TSV="tools/sentences.tsv"
 OUT="audio"
@@ -27,7 +28,7 @@ while IFS=$'\t' read -r -u 3 lang id kind text; do
     mkdir -p "$dir"
     out="$dir/$id.m4a"
     if [ -s "$out" ]; then skipped=$((skipped+1)); continue; fi   # resume-friendly
-    if $PTTS --lang "$lang" --voice "$voice" "$text" -o "$TMP/clip.wav" </dev/null >/dev/null 2>"$TMP/err.log" \
+    if $PTTS --lang "$lang" -m "$MODEL" --voice "$voice" "$text" -o "$TMP/clip.wav" </dev/null >/dev/null 2>"$TMP/err.log" \
        && ffmpeg -nostdin -loglevel error -y -i "$TMP/clip.wav" -af "silenceremove=start_periods=1:start_threshold=-50dB,areverse,silenceremove=start_periods=1:start_threshold=-50dB,areverse" \
             -c:a aac -b:a 64k -ac 1 "$out"; then
       n=$((n+1)); printf '\r%d recorded, %d skipped, %d failed  (%s %s %s)   ' "$n" "$skipped" "$failed" "$lang" "$voice" "$id"
