@@ -13,7 +13,7 @@
   --sc-glass:#E6F3FF; --sc-frame:#FFFFFF; --sc-win:#FFFFFF; --sc-build:#A9BCE6; --sc-sun:#FFC23F; --sc-moon:#DDE3F5; --sc-hill:#9DD8A8; --sc-hill2:#7CC48C;
   --sc-road:#5D6380; --sc-rail:#8A93AE; --sc-bubble:#FFFFFF; --sc-line:#C9D2EA; --sc-tag:#18213D; --sc-tagtext:#FFFFFF; --sc-steam:#FFFFFF; --sc-cup:#FFFFFF;
   --sc-board:#2E3A5E; --sc-boardtext:#FFFFFF; --sc-shirt:#5A6588; --sc-cloth:#FF9E86; --sc-plate:#FFFFFF; --sc-palace1:#F4C542; --sc-palace2:#E05A4A; --sc-star-o:0;
-  --sc-crust:#E9A23B; --sc-custard:#FFE08A; --sc-crust-d:#A8611A; --c-skin:#F1C29B; --c-hair:#3B2A20;
+  --sc-crust:#E9A23B; --sc-custard:#FFE08A; --sc-crust-d:#A8611A; --c-skin:#F1C29B; --c-hair:#3B2A20; --c-skin2:#C98B5E; --c-skin3:#8B5A3C; --c-hair2:#A0522D; --c-hair3:#241E1E; --c-hair4:#D9A441; --c-shade:rgba(20,20,60,.13); --c-shade-d:rgba(70,35,20,.38); --c-collar:rgba(255,255,255,.45);
   --br-food:#FF7A59; --br-travel:#3A9BE0; --br-people:#22A060; --br-life:#9B5DE5; --br-words:#E0548E;
   --shadow:0 1px 0 rgba(255,255,255,.7) inset, 0 10px 30px -12px rgba(34,56,168,.35);
   /* character colors (same in both themes) */
@@ -243,7 +243,17 @@ header{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;display:flex;a
 .sc-q{font-family:var(--f-display);font-weight:800;font-size:18px;fill:var(--accent)}
 .sc-star{opacity:var(--sc-star-o);animation:twinkle 2.4s ease-in-out infinite}
 .sc-bob{animation:bob 2.6s ease-in-out infinite}
-.sc-wave{animation:wavearm .5s ease-in-out infinite alternate}
+.sc-person{animation:breathe 3.8s ease-in-out infinite}
+.sc-headtilt{animation:headtilt 7s ease-in-out infinite}
+.sc-eyes{transform-box:fill-box;transform-origin:center;animation:blink 5s infinite}
+.sc-upper{animation:upper 3.6s ease-in-out infinite}
+.sc-forearm{animation:forearm 3.6s ease-in-out infinite}
+.sc-tail{animation:tail 2.8s ease-in-out infinite}
+@keyframes breathe{0%,100%{transform:translateY(0)}50%{transform:translateY(-1.2px)}}
+@keyframes headtilt{0%,100%{transform:rotate(0)}20%,35%{transform:rotate(4deg)}55%,70%{transform:rotate(-3deg)}85%{transform:rotate(0)}}
+@keyframes upper{0%,62%,100%{transform:rotate(0)}8%,52%{transform:rotate(-8deg)}}
+@keyframes forearm{0%,60%,100%{transform:rotate(0)}10%,30%{transform:rotate(18deg)}20%,40%{transform:rotate(-14deg)}50%{transform:rotate(10deg)}}
+@keyframes tail{0%,100%{transform:rotate(-5deg)}50%{transform:rotate(7deg)}}
 .sc-bubble{transform-box:fill-box;transform-origin:center bottom;animation:bubin 4.4s ease-in-out infinite both}
 .sc-steam{animation:steam 2.1s ease-out infinite}
 .sc-slide{animation:slide 5s ease-in-out infinite}
@@ -272,7 +282,6 @@ header{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;display:flex;a
 .sc-sun{transform-box:fill-box;transform-origin:center;animation:ripple 3s ease-in-out infinite}
 .scene .mascot{overflow:visible}
 @keyframes twinkle{0%,100%{opacity:calc(var(--sc-star-o) * .3)}50%{opacity:var(--sc-star-o)}}
-@keyframes wavearm{from{transform:rotate(-25deg)}to{transform:rotate(20deg)}}
 @keyframes bubin{0%{opacity:0;transform:scale(.6)}8%,44%{opacity:1;transform:scale(1)}52%,100%{opacity:0;transform:scale(.9)}}
 @keyframes steam{0%{opacity:0;transform:translateY(4px)}30%{opacity:.9}100%{opacity:0;transform:translateY(-12px)}}
 @keyframes slide{0%,20%{transform:translateX(0)}50%,70%{transform:translateX(-60px)}100%{transform:translateX(0)}}

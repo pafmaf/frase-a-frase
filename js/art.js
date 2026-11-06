@@ -48,16 +48,60 @@ function tag(x,y,text){
   const w=tw(text)-4;
   return `<g class="sc-tag"><rect x="${x-w/2}" y="${y}" width="${w}" height="18" rx="6" fill="var(--sc-tag)"/><text x="${x}" y="${y+13}" text-anchor="middle" class="sc-tagtext">${esc(text)}</text></g>`;
 }
+/* people: soft shapes, hairstyles, skin tones, idle breathing + head tilt, natural wave */
+let npcN=0;
 function npc(x,y,shirt,o={}){
-  const skin=o.skin||'var(--c-skin)',hair=o.hair||'var(--c-hair)';
-  const arm=o.wave?`<g class="sc-wave" style="transform-origin:${x+14}px ${y+2}px"><rect x="${x+12}" y="${y-14}" width="7" height="20" rx="3.5" fill="${shirt}"/><circle cx="${x+15.5}" cy="${y-16}" r="4.5" fill="${skin}"/></g>`:'';
-  return `<g class="${o.cls||'sc-bob'}">${arm}
-    <rect x="${x-16}" y="${y-6}" width="32" height="36" rx="14" fill="${shirt}"/>
-    ${o.apron?`<rect x="${x-10}" y="${y+2}" width="20" height="26" rx="5" fill="${o.apron}"/>`:''}
-    <circle cx="${x}" cy="${y-19}" r="14" fill="${skin}"/>
-    <path d="M${x-14} ${y-21} Q${x} ${y-42} ${x+14} ${y-21} Q${x+7} ${y-30} ${x} ${y-30} Q${x-7} ${y-30} ${x-14} ${y-21}z" fill="${hair}"/>
-    <g class="eyes" style="transform-origin:${x}px ${y-18}px"><circle cx="${x-5}" cy="${y-18}" r="1.9" fill="var(--c-ink)"/><circle cx="${x+5}" cy="${y-18}" r="1.9" fill="var(--c-ink)"/></g>
-    <path d="M${x-5} ${y-11} Q${x} ${y-7} ${x+5} ${y-11}" stroke="var(--c-ink)" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+  const by=o.bottom||96, id=npcN++, skin=o.skin||'var(--c-skin)', hair=o.hair||'var(--c-hair)', style=o.style||'short', hy=y-21;
+  const d=(o.delay!=null?o.delay:(id*1.37)%4).toFixed(2);
+  // hair behind the head
+  const back={
+    bun:`<circle cx="${x}" cy="${hy-15}" r="6.5" fill="${hair}"/>`,
+    bob:`<path d="M${x-15} ${hy-1} C${x-16} ${hy-19} ${x+16} ${hy-19} ${x+15} ${hy-1} L${x+15} ${hy+9} Q${x+15} ${hy+12} ${x+11} ${hy+11} L${x-11} ${hy+11} Q${x-15} ${hy+12} ${x-15} ${hy+9} Z" fill="${hair}"/>`,
+    ponytail:`<g class="sc-tail" style="transform-origin:${x+10}px ${hy-8}px;animation-delay:${d}s"><path d="M${x+9} ${hy-9} C${x+22} ${hy-10} ${x+22} ${hy+6} ${x+17} ${hy+14} C${x+19} ${hy+4} ${x+15} ${hy-2} ${x+8} ${hy-3} Z" fill="${hair}"/></g>`,
+    curly:[[-11,-6],[-8,-13],[0,-16],[8,-13],[11,-6],[-13,1],[13,1]].map(([dx,dy])=>`<circle cx="${x+dx}" cy="${hy+dy}" r="6" fill="${hair}"/>`).join(''),
+    short:'',spiky:''
+  }[style]||'';
+  // hair in front of the head
+  const front={
+    short:`<path d="M${x-12.5} ${hy-1} C${x-14} ${hy-14} ${x-5} ${hy-19} ${x+3} ${hy-17} C${x+10} ${hy-16} ${x+14} ${hy-10} ${x+12.5} ${hy-1} C${x+11} ${hy-7} ${x+6} ${hy-10} ${x+1} ${hy-9} C${x-3} ${hy-11} ${x-9} ${hy-8} ${x-12.5} ${hy-1} Z" fill="${hair}"/>`,
+    spiky:`<path d="M${x-12.5} ${hy-1} L${x-12} ${hy-11} L${x-8} ${hy-15} L${x-5} ${hy-19} L${x-1} ${hy-15} L${x+3} ${hy-19} L${x+6} ${hy-14} L${x+11} ${hy-15} L${x+12.5} ${hy-1} C${x+9} ${hy-8} ${x-9} ${hy-8} ${x-12.5} ${hy-1} Z" fill="${hair}"/>`,
+    bun:`<path d="M${x-12.8} ${hy} C${x-14.5} ${hy-19} ${x+14.5} ${hy-19} ${x+12.8} ${hy} C${x+9} ${hy-8} ${x-9} ${hy-8} ${x-12.8} ${hy} Z" fill="${hair}"/>`,
+    ponytail:`<path d="M${x-12.8} ${hy} C${x-14.5} ${hy-19} ${x+14.5} ${hy-19} ${x+12.8} ${hy} C${x+7} ${hy-9} ${x-4} ${hy-10} ${x-12.8} ${hy} Z" fill="${hair}"/>`,
+    bob:`<path d="M${x-13} ${hy} C${x-14} ${hy-19} ${x+14} ${hy-19} ${x+13} ${hy} C${x+6} ${hy-5} ${x-3} ${hy-8} ${x-13} ${hy} Z" fill="${hair}"/>`,
+    curly:[[-9,-8],[-3,-12],[4,-12],[10,-8]].map(([dx,dy])=>`<circle cx="${x+dx}" cy="${hy+dy}" r="5" fill="${hair}"/>`).join('')
+  }[style]||'';
+  const hat=o.cap==='chef'?`<path d="M${x-11} ${hy-8} h22 v-6 c4 -1 5 -8 0 -9 c-1 -5 -8 -6 -11 -2 c-3 -4 -10 -3 -11 2 c-5 1 -4 8 0 9 z" fill="var(--sc-bubble)" stroke="var(--sc-line)" stroke-width="1"/>`:'';
+  const glasses=o.glasses?`<g fill="none" stroke="var(--c-ink)" stroke-width="1.2"><circle cx="${x-4.8}" cy="${hy+1}" r="3.6"/><circle cx="${x+4.8}" cy="${hy+1}" r="3.6"/><path d="M${x-1.2} ${hy+.6} q1.2 -1 2.4 0"/></g>`:'';
+  const mouth=o.mouth==='open'
+    ?`<path d="M${x-3.6} ${hy+6.4} q3.6 4.6 7.2 0 z" fill="var(--c-ink)"/><path d="M${x-2} ${hy+8.4} q2 1.4 4 0" fill="var(--c-cheek)"/>`
+    :`<path d="M${x-3.4} ${hy+6.8} q3.4 3.2 6.8 0" stroke="var(--c-ink)" stroke-width="1.6" fill="none" stroke-linecap="round"/>`;
+  const apron=o.apron?`<path d="M${x-8} ${y+1} h16 v3 q0 4 3 6 V${by} h-22 V${y+10} q3 -2 3 -6 z" fill="${o.apron}"/><path d="M${x-8} ${y+1} L${x-12} ${y-3} M${x+8} ${y+1} L${x+12} ${y-3}" stroke="${o.apron}" stroke-width="1.6"/>`:'';
+  const wave=o.wave?`<g class="sc-upper" style="transform-origin:${x+15}px ${y+3}px;animation-delay:${d}s">
+      <path d="M${x+14} ${y+4} L${x+24} ${y-7}" stroke="${shirt}" stroke-width="7.5" stroke-linecap="round"/>
+      <g class="sc-forearm" style="transform-origin:${x+24}px ${y-7}px;animation-delay:${d}s">
+        <path d="M${x+24} ${y-7} L${x+26} ${y-21}" stroke="${skin}" stroke-width="5.5" stroke-linecap="round"/>
+        <ellipse cx="${x+26.4}" cy="${y-25}" rx="4.2" ry="4.8" fill="${skin}"/><ellipse cx="${x+22.6}" cy="${y-22.6}" rx="1.6" ry="2.6" transform="rotate(-35 ${x+22.6} ${y-22.6})" fill="${skin}"/>
+      </g></g>`:'';
+  return `<g class="${o.cls||'sc-person'}" style="animation-delay:${d}s">
+    ${wave}
+    <path d="M${x-18} ${by} L${x-18} ${y+10} C${x-18} ${y+1} ${x-11} ${y-3} ${x-5} ${y-4} L${x+5} ${y-4} C${x+11} ${y-3} ${x+18} ${y+1} ${x+18} ${y+10} L${x+18} ${by} Z" fill="${shirt}"/>
+    <path d="M${x-18} ${y+12} C${x-17} ${y+4} ${x-13} ${y} ${x-9} ${y-1} C${x-12} ${y+3} ${x-14} ${y+8} ${x-14} ${by} L${x-18} ${by} Z" fill="var(--c-shade)"/>
+    ${apron}
+    <path d="M${x-4.5} ${y-10} h9 v6 q-4.5 4.5 -9 0 z" fill="${skin}"/><path d="M${x-4.5} ${y-6} q4.5 3 9 0 v2 q-4.5 4.5 -9 0 z" fill="var(--c-shade)"/>
+    <path d="M${x-6} ${y-4} L${x} ${y+2.5} L${x+6} ${y-4}" fill="none" stroke="var(--c-collar)" stroke-width="2" stroke-linejoin="round"/>
+    <g class="sc-headtilt" style="transform-origin:${x}px ${y-6}px;animation-delay:${d}s">
+      ${back}
+      <circle cx="${x-12.4}" cy="${hy+1.5}" r="3" fill="${skin}"/><circle cx="${x+12.4}" cy="${hy+1.5}" r="3" fill="${skin}"/>
+      <ellipse cx="${x}" cy="${hy}" rx="12.6" ry="13.6" fill="${skin}"/>
+      ${front}${hat}
+      <path d="M${x-7.2} ${hy-4.2} q2.4 -1.8 4.8 -.2 M${x+2.4} ${hy-4.4} q2.4 -1.6 4.8 .2" stroke="${hair}" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+      <g class="sc-eyes" style="animation-delay:${d}s"><ellipse cx="${x-4.8}" cy="${hy+1}" rx="1.75" ry="2.3" fill="var(--c-ink)"/><ellipse cx="${x+4.8}" cy="${hy+1}" rx="1.75" ry="2.3" fill="var(--c-ink)"/>
+        <circle cx="${x-4.2}" cy="${hy+.2}" r=".6" fill="var(--c-white)"/><circle cx="${x+5.4}" cy="${hy+.2}" r=".6" fill="var(--c-white)"/></g>
+      ${glasses}
+      <circle cx="${x-7.6}" cy="${hy+5.2}" r="2.5" fill="var(--c-cheek)" opacity=".38"/><circle cx="${x+7.6}" cy="${hy+5.2}" r="2.5" fill="var(--c-cheek)" opacity=".38"/>
+      <path d="M${x+.4} ${hy+2.2} q-1.3 1.9 .4 2.5" stroke="var(--c-shade-d)" stroke-width="1.1" fill="none" stroke-linecap="round"/>
+      ${mouth}
+    </g>
     ${o.hat||''}</g>`;
 }
 const hero=(x,y,size,mood)=>`<g class="sc-hero">${mascot(st.lang,mood).replace('<svg class="mascot',`<svg x="${x}" y="${y}" width="${size}" height="${size}" class="mascot`)}</g>`;
@@ -72,18 +116,18 @@ const SCENES={
    <g fill="var(--sc-build)"><rect x="150" y="34" width="50" height="62"/><rect x="205" y="18" width="60" height="78"/><rect x="270" y="44" width="46" height="52"/><rect x="320" y="28" width="40" height="68"/></g>
    ${[[160,44],[180,44],[160,64],[215,30],[240,30],[215,52],[240,52],[280,56],[298,56],[330,40],[330,62]].map(([x,y],i)=>`<rect class="sc-winb" style="animation-delay:${i*.3}s" x="${x}" y="${y}" width="10" height="12" rx="2" fill="var(--sc-win)"/>`).join('')}
    <circle class="sc-sun" cx="60" cy="26" r="13" fill="var(--sc-sun)"/>
-   ${npc(250,70,'var(--br-people)',{wave:true})}${bubble(262,10,B('¡Hola! ¿Qué tal?','Olá! Tudo bem?'),0,'l')}
+   ${npc(250,70,'var(--br-people)',{wave:true,style:'curly',skin:'var(--c-skin2)',hair:'var(--c-hair3)',mouth:'open'})}${bubble(262,10,B('¡Hola! ¿Qué tal?','Olá! Tudo bem?'),0,'l')}
    ${hero(70,44,58,m)}`,
  cafe:m=>`${base('var(--sc-wall)')}${windowR(18,14,70,52)}
    <rect x="300" y="20" width="44" height="30" rx="4" fill="var(--sc-board)"/><text x="322" y="39" text-anchor="middle" class="sc-board">${B('CAFÉ','CAFÉ')}</text>
-   ${npc(255,66,'var(--sc-shirt)',{apron:'var(--br-food)'})}${counter()}
+   ${npc(255,66,'var(--sc-shirt)',{apron:'var(--br-food)',style:'bun'})}${counter()}
    <rect x="168" y="46" width="44" height="30" rx="5" fill="var(--sc-metal)"/><rect x="176" y="40" width="28" height="8" rx="3" fill="var(--sc-metal-d)"/>
    <rect x="183" y="58" width="14" height="12" rx="3" fill="var(--sc-cup)"/>${steam(190,56)}
    <g class="sc-slide"><rect x="300" y="60" width="16" height="15" rx="3" fill="var(--sc-cup)"/><rect x="298" y="57" width="20" height="4" rx="2" fill="var(--br-food)"/></g>
    ${bubble(230,8,B('¿Para llevar?','É para levar?'),0,'l')}${hero(60,46,56,m)}`,
  bakery:m=>`${base('var(--sc-wall)')}
    <g class="sc-awning">${[0,1,2,3,4,5,6,7,8].map(i=>`<path d="M${i*40} 0 h40 v16 q-10 8 -20 0 q-10 8 -20 0z" fill="${i%2?'var(--br-food)':'var(--sc-bubble)'}"/>`).join('')}</g>
-   ${npc(270,66,'var(--sc-shirt)',{apron:'var(--sc-bubble)',hat:`<rect x="257" y="35" width="26" height="9" rx="4" fill="var(--sc-bubble)"/>`})}
+   ${npc(270,66,'var(--sc-shirt)',{apron:'var(--sc-bubble)',cap:'chef',style:'short',skin:'var(--c-skin3)',hair:'var(--c-hair3)'})}
    <rect x="150" y="62" width="210" height="34" rx="4" fill="var(--sc-glass)" stroke="var(--sc-frame)" stroke-width="3"/>
    ${[170,198,226,254,282,310,338].map((x,i)=>`<g class="sc-pop" style="animation-delay:${i*.15}s"><ellipse cx="${x}" cy="84" rx="11" ry="6" fill="var(--sc-crust)"/><ellipse cx="${x}" cy="82" rx="7" ry="3.5" fill="var(--sc-custard)"/><circle cx="${x-2}" cy="81" r="1.4" fill="var(--sc-crust-d)"/></g>`).join('')}
    ${steam(198,74)}${bubble(225,22,B('¡Recién hechos!','Acabados de sair!'),0,'l')}${hero(55,46,56,m)}`,
@@ -92,7 +136,7 @@ const SCENES={
    <rect x="120" y="74" width="140" height="8" rx="3" fill="var(--sc-cloth)"/><path d="M128 82 v14 M252 82 v14" stroke="var(--sc-wood-d)" stroke-width="5"/>
    <ellipse cx="160" cy="73" rx="16" ry="4" fill="var(--sc-plate)"/><ellipse cx="220" cy="73" rx="16" ry="4" fill="var(--sc-plate)"/>
    <rect x="187" y="58" width="6" height="14" rx="2" fill="var(--sc-bubble)"/><path class="sc-flame" d="M190 50 q4 5 0 9 q-4 -4 0 -9z" fill="var(--sc-sun)"/>
-   <g class="sc-walk">${npc(310,66,'var(--sc-shirt)',{apron:'var(--c-ink)',cls:'sc-none'})}<rect x="318" y="44" width="30" height="4" rx="2" fill="var(--sc-metal-d)"/><ellipse cx="333" cy="42" rx="10" ry="4" fill="var(--sc-plate)"/></g>
+   <g class="sc-walk">${npc(310,66,'var(--sc-shirt)',{apron:'var(--c-ink)',cls:'sc-none',style:'short',skin:'var(--c-skin2)',hair:'var(--c-hair2)'})}<rect x="318" y="44" width="30" height="4" rx="2" fill="var(--sc-metal-d)"/><ellipse cx="333" cy="42" rx="10" ry="4" fill="var(--sc-plate)"/></g>
    ${bubble(240,6,B('¿Mesa para seis?','Mesa para seis?'),0,'l')}${hero(40,46,56,m)}`,
  train:m=>`${base()}<circle class="sc-sun" cx="320" cy="22" r="11" fill="var(--sc-sun)"/>
    <g class="sc-scroll slow"><path d="M0 80 q45 -34 90 0 t90 0 t90 0 t90 0 t90 0 t90 0 t90 0 t90 0 v20 h-720z" fill="var(--sc-hill2)"/></g>
@@ -123,13 +167,13 @@ const SCENES={
  hotel:m=>`${base('var(--sc-wall)')}
    <rect x="196" y="14" width="80" height="40" rx="4" fill="var(--sc-wood-d)"/>
    ${[0,1,2,3].map(i=>`<g class="sc-swing" style="transform-origin:${210+i*18}px 22px;animation-delay:${i*.3}s"><path d="M${210+i*18} 22 v10" stroke="var(--sc-metal)" stroke-width="2"/><circle cx="${210+i*18}" cy="36" r="4" fill="var(--sc-sun)"/></g>`).join('')}
-   ${npc(300,66,'var(--br-travel)')}${counter(76)}
+   ${npc(300,66,'var(--br-travel)',{style:'bob',hair:'var(--c-hair2)'})}${counter(76)}
    <g class="sc-ding"><path d="M178 72 q8 -14 16 0z" fill="var(--sc-sun)"/><rect x="174" y="71" width="24" height="3" rx="1.5" fill="var(--sc-metal-d)"/></g>
    ${bubble(150,2,B('¿A nombre de quién?','Em nome de quem?'),0,'l')}${hero(50,46,56,m)}`,
  shop:m=>`${base('var(--sc-wall)')}
    <rect x="160" y="22" width="150" height="5" rx="2" fill="var(--sc-metal-d)"/><path d="M170 27 v70 M300 27 v70" stroke="var(--sc-metal-d)" stroke-width="4"/>
    ${['var(--br-food)','var(--br-travel)','var(--br-people)','var(--br-life)','var(--sc-sun)'].map((c,i)=>`<g class="sc-swing" style="transform-origin:${185+i*26}px 25px;animation-delay:${i*.25}s"><path d="M${185+i*26} 25 v6" stroke="var(--sc-metal-d)" stroke-width="2"/><path d="M${173+i*26} 34 l12 -4 l12 4 l4 10 h-6 v20 h-20 v-20 h-6z" fill="${c}"/></g>`).join('')}
-   ${npc(330,66,'var(--sc-shirt)')}
+   ${npc(330,66,'var(--sc-shirt)',{style:'ponytail',hair:'var(--c-hair4)'})}
    <rect x="20" y="20" width="34" height="70" rx="17" fill="var(--sc-glass)" stroke="var(--sc-frame)" stroke-width="3"/>
    ${bubble(230,72,B('¿Qué talla?','Que tamanho?'),0,'l')}${hero(76,46,56,m)}`,
  market:m=>`${base('var(--sc-wall)')}
@@ -138,27 +182,27 @@ const SCENES={
    <g class="sc-belt">${Array.from({length:14},(_,i)=>`<rect x="${100+i*16}" y="66" width="10" height="5" fill="var(--sc-metal-d)"/>`).join('')}</g>
    <g class="sc-items"><circle cx="130" cy="60" r="7" fill="var(--br-food)"/><rect x="150" y="46" width="10" height="21" rx="3" fill="var(--br-travel)"/><rect x="172" y="52" width="20" height="15" rx="2" fill="var(--sc-sun)"/></g>
    <rect x="250" y="56" width="20" height="12" rx="2" fill="var(--c-ink)"/><rect class="sc-blink" x="252" y="66" width="16" height="3" fill="var(--br-food)"/>
-   ${npc(320,64,'var(--br-life)')}${bubble(240,8,B('¿Necesita bolsa?','Precisa de saco?'),0,'l')}${hero(36,46,56,m)}`,
+   ${npc(320,64,'var(--br-life)',{style:'curly',skin:'var(--c-skin3)',hair:'var(--c-hair3)'})}${bubble(240,8,B('¿Necesita bolsa?','Precisa de saco?'),0,'l')}${hero(36,46,56,m)}`,
  pharmacy:m=>`${base('var(--sc-wall)')}
    <g class="sc-blink"><path d="M58 10 h14 v14 h14 v14 h-14 v14 h-14 v-14 h-14 v-14 h14z" fill="var(--br-people)"/></g>
    ${[0,1].map(r=>`<rect x="160" y="${22+r*24}" width="190" height="4" fill="var(--sc-wood-d)"/>${[0,1,2,3,4,5,6].map(i=>`<rect x="${166+i*26}" y="${8+r*24}" width="18" height="14" rx="2" fill="${['var(--br-travel)','var(--sc-bubble)','var(--br-food)','var(--br-life)'][(i+r)%4]}"/>`).join('')}`).join('')}
-   ${npc(270,70,'var(--sc-bubble)')}${counter(80)}
+   ${npc(270,70,'var(--sc-bubble)',{style:'bun',glasses:true,hair:'var(--c-hair4)'})}${counter(80)}
    ${bubble(140,56,B('¿Qué le pasa?','O que se passa?'),0,'l')}${hero(40,46,56,m)}`,
  talk:m=>`${base()}<circle class="sc-sun" cx="40" cy="22" r="11" fill="var(--sc-sun)"/>
    <circle cx="320" cy="50" r="26" fill="var(--sc-hill2)"/><rect x="317" y="70" width="6" height="26" fill="var(--sc-wood-d)"/>
    <rect x="110" y="80" width="150" height="6" rx="3" fill="var(--sc-wood)"/><path d="M118 86 v10 M252 86 v10" stroke="var(--sc-wood-d)" stroke-width="4"/>
-   ${npc(215,62,'var(--br-people)')}
+   ${npc(215,62,'var(--br-people)',{style:'bob',skin:'var(--c-skin2)',hair:'var(--c-hair3)',mouth:'open'})}
    ${bubble(180,4,B('¿De dónde eres?','De onde és?'),0,'l')}${bubble(170,28,B('¡De Alemania!','Da Alemanha!'),2.2,'r')}
    ${hero(118,36,54,m)}`,
  plans:m=>`${base('var(--sc-wall)')}
    <rect x="230" y="14" width="80" height="64" rx="6" fill="var(--sc-bubble)" stroke="var(--sc-frame)" stroke-width="3"/><rect x="230" y="14" width="80" height="16" rx="6" fill="var(--br-people)"/>
    ${Array.from({length:12},(_,i)=>`<rect x="${238+(i%4)*17}" y="${36+Math.floor(i/4)*13}" width="12" height="9" rx="2" fill="${i===9?'var(--br-food)':'var(--sc-line)'}" ${i===9?'class="sc-blink"':''}/>`).join('')}
    <text x="270" y="27" text-anchor="middle" class="sc-tagtext" fill="var(--sc-bubble)">${B('SÁBADO','SÁBADO')}</text>
-   ${npc(170,66,'var(--br-travel)')}<g class="sc-buzz"><rect x="186" y="56" width="10" height="17" rx="2" fill="var(--c-ink)"/></g>
+   ${npc(170,66,'var(--br-travel)',{style:'spiky'})}<g class="sc-buzz"><rect x="186" y="56" width="10" height="17" rx="2" fill="var(--c-ink)"/></g>
    ${bubble(110,6,B('¿Quedamos el domingo?','Combinamos domingo?'),0,'l')}${hero(40,46,56,m)}`,
  trouble:m=>`${base()}
    <g fill="var(--sc-build)"><rect x="200" y="30" width="60" height="66"/><rect x="266" y="16" width="44" height="80"/><rect x="314" y="40" width="46" height="56"/></g>
-   ${npc(160,66,'var(--br-life)')}
+   ${npc(160,66,'var(--br-life)',{style:'ponytail',hair:'var(--c-hair2)'})}
    ${['?','?','!'].map((q,i)=>`<text class="sc-float sc-q" style="animation-delay:${i*.6}s" x="${150+i*14}" y="36">${q}</text>`).join('')}
    <g class="sc-buzz"><rect x="232" y="72" width="16" height="24" rx="3" fill="var(--c-ink)"/><rect x="235" y="75" width="10" height="15" fill="var(--br-food)"/></g>
    ${bubble(200,8,B('¿Me puede ayudar?','Pode ajudar-me?'),0,'l')}${hero(50,46,56,m)}`,
@@ -166,7 +210,7 @@ const SCENES={
    <circle cx="300" cy="28" r="16" fill="var(--br-people)"/><text x="300" y="35" text-anchor="middle" class="sc-board" fill="var(--sc-bubble)">i</text>
    <rect x="180" y="30" width="56" height="66" rx="6" fill="var(--sc-metal)"/><rect class="sc-screen" x="188" y="38" width="40" height="26" rx="3" fill="var(--br-travel)"/>
    <rect x="196" y="70" width="24" height="6" rx="2" fill="var(--c-ink)"/>
-   ${npc(300,70,'var(--br-people)')}
+   ${npc(300,70,'var(--br-people)',{style:'short',glasses:true,skin:'var(--c-skin3)',hair:'var(--c-hair3)'})}
    ${bubble(110,6,B('¿Cómo funciona?','Como é que funciona?'),0,'l')}${hero(70,46,56,m)}`,
  room:m=>`${base('var(--sc-wall)')}${windowR(150,12,60,46)}
    <rect x="40" y="62" width="100" height="6" rx="2" fill="var(--sc-wood)"/><path d="M48 68 v28 M132 68 v28" stroke="var(--sc-wood-d)" stroke-width="5"/>
