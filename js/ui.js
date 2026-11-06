@@ -34,7 +34,7 @@ function streakNow(){
   return (st.streak.last===today||st.streak.last===yest)?st.streak.n:0;
 }
 const openUnits=()=>UNITS.map((_,u)=>u).filter(u=>unlocked(u)&&!unitInfo(u).done).sort((a,b)=>UNITS[a].row-UNITS[b].row||UNITS[a].col-UNITS[b].col);
-const ROW=178, TOP=30;
+const ROW=122, TOP=22;
 function renderHome(){
   session=null;
   const due=dueList().length,learned=Object.keys(cards()).length,total=allIds().length;
@@ -75,11 +75,11 @@ function renderHome(){
 }
 function treeHTML(kind,open){
   const ids=UNITS.map((_,i)=>i).filter(i=>(UNITS[i].tree||'main')===kind);
-  const rows=Math.max(...ids.map(i=>UNITS[i].row))+1,H=TOP+(rows-1)*ROW+128;
+  const rows=Math.max(...ids.map(i=>UNITS[i].row))+1,H=TOP+(rows-1)*ROW+104;
   const X=u=>(UNITS[u].col+.5)/4*100, Y=u=>TOP+UNITS[u].row*ROW;
   const L=LANGS[st.lang];
   const links=ids.flatMap(c=>UNITS[c].parents.filter(p=>ids.includes(p)).map(p=>{
-    const x1=X(p),y1=Y(p)+138,x2=X(c),y2=Y(c)+2,m=(y1+y2)/2;
+    const x1=X(p),y1=Y(p)+110,x2=X(c),y2=Y(c)+3,m=(y1+y2)/2;
     const cls=unitInfo(c).done?'done':unlocked(c)?'open':'';
     return `<path class="${cls}" d="M${x1} ${y1} C${x1} ${m} ${x2} ${m} ${x2} ${y2}"/>`;
   })).join('');
@@ -299,7 +299,6 @@ function renderCold(it){
       <button class="chunky ${ok?'ok':'bad'} full" id="next">Continue</button></div>`;
     bindAudio(id);
     $('#next').onclick=()=>{sfx('tap');session.i++;renderItem()};
-    $('#fb').scrollIntoView({behavior:'smooth',block:'end'});
   });
 }
 function finish(ok,it){
@@ -333,7 +332,6 @@ function finish(ok,it){
   const adv=()=>{sfx('tap');session.i++;renderItem()};
   const n=$('#next');if(n)n.onclick=adv;
   document.querySelectorAll('[data-g]').forEach(b=>b.onclick=()=>{cards()[id]=nextState(cards()[id],+b.dataset.g);save();adv()});
-  $('#fb').scrollIntoView({behavior:'smooth',block:'end'});
 }
 function renderDone(){
   const today=new Date().toISOString().slice(0,10),yest=new Date(Date.now()-DAY).toISOString().slice(0,10);

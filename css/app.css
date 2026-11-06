@@ -292,7 +292,7 @@ header{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;display:flex;a
 @keyframes floatq{0%{opacity:0;transform:translateY(6px)}30%{opacity:1}100%{opacity:0;transform:translateY(-14px)}}
 @keyframes glow{from{opacity:.65}to{opacity:1}}
 @keyframes flipg{0%,40%{transform:rotate(0)}60%,100%{transform:rotate(180deg)}}
-#toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(20px + env(safe-area-inset-bottom,0px));z-index:40;max-width:min(92vw,440px);
+#toast{position:fixed;left:50%;transform:translateX(-50%);top:calc(10px + env(safe-area-inset-top,0px));z-index:40;max-width:min(92vw,440px);
   background:var(--ink);color:var(--bg);border-radius:14px;padding:10px 14px;font-size:14px;box-shadow:0 10px 30px rgba(0,0,0,.3)}
 #confetti{position:fixed;inset:0;pointer-events:none;z-index:30;width:100%;height:100%}
 
@@ -339,4 +339,78 @@ select{font:inherit;padding:11px;border-radius:12px;border:2px solid var(--line)
 @keyframes pulse{0%,100%{box-shadow:0 7px 0 var(--btn-deep),0 0 0 0 var(--soft)}50%{box-shadow:0 7px 0 var(--btn-deep),0 0 0 14px var(--soft)}}
 @keyframes ripple{0%,100%{transform:scale(1)}50%{transform:scale(1.06)}}
 .node.open .coin{animation:ripple 1.6s ease-in-out infinite}
+/* compact vertical layout: fewer scrolls on a phone */
+header{padding-block:8px 6px}
+.hero{grid-template-columns:72px 1fr;gap:10px;padding:14px;border-radius:22px}
+.hero .mascot{width:72px;height:72px}
+.hero h2{font-size:18px}
+.bubble{font-size:13px;padding:2px 9px;margin-bottom:4px;border-radius:12px}
+.chips{gap:5px;margin:7px 0 9px}
+.chip{font-size:12px;padding:2px 8px 2px 5px}
+.hero .chunky{padding:10px 16px;font-size:15px;border-radius:14px}
+.lvl{font-size:11px}
+.map-head{margin:16px 4px 2px}
+.legend{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;font-size:11px;gap:10px;margin-bottom:0;white-space:nowrap}
+.legend::-webkit-scrollbar{display:none}
+.node{width:84px;margin-left:-42px}
+.ring{width:60px;height:60px;padding:4px}
+.coin{width:52px;height:52px;box-shadow:0 4px 0 var(--btn-deep),0 8px 14px -8px var(--btn-deep)}
+.node.done .coin{box-shadow:0 4px 0 var(--gold-deep),0 8px 14px -8px var(--gold-deep)}
+.node.locked .coin{box-shadow:0 4px 0 var(--lock-deep)}
+.coin svg{width:24px;height:24px}
+.label{margin-top:5px}
+.label b{font-size:12px}
+.label span{font-size:10.5px}
+.node .scen{font-size:9px;padding:0 4px;top:-5px;right:-8px}
+.side-mascot{width:34px;height:34px;top:-14px}
+.side-mascot.r{right:-14px} .side-mascot.l{left:-14px}
+
+.session{min-height:0;padding-bottom:110px}
+.s-top{padding-block:8px 10px}
+.pbar{height:13px}
+.scene{max-height:100px;border-radius:18px;margin-bottom:10px}
+.scene-svg{height:100%}
+.q-head{margin-bottom:8px}
+.prompt{font-size:19px}
+.stage{padding:14px;border-radius:18px}
+.phrase{font-size:22px}
+.en{font-size:15px;margin-top:4px}
+.audio-row{margin-top:10px;gap:8px}
+.play{padding:7px 13px;font-size:14px}
+.big-play{width:78px;height:78px;margin:0 auto 4px}
+.big-play svg{width:34px;height:34px}
+.opts{gap:8px;margin-top:12px}
+.opt{padding:10px 13px;font-size:15px;border-bottom-width:4px;border-radius:14px}
+.opt .k{width:22px;height:22px}
+.opt.tgt{font-size:16px}
+.answer-line{min-height:58px;margin-top:10px}
+.bank{margin-top:10px;gap:7px}
+.tile-w{font-size:17px;padding:5px 11px;min-height:42px}
+.transcript{font-size:16px;margin-top:10px}
+.cold-q{margin-top:12px}
+.intro-tag{margin-bottom:6px}
+.note{margin-top:8px}
+/* answer panel docked to the bottom of the screen */
+.feedback{position:fixed;left:0;right:0;bottom:0;z-index:8;margin:0;pointer-events:none;
+  padding:0 max(12px,env(safe-area-inset-right,0px)) calc(10px + env(safe-area-inset-bottom,0px)) max(12px,env(safe-area-inset-left,0px))}
+.feedback:not(:empty){padding-top:22px;background:linear-gradient(transparent,var(--bg) 22px)}
+.feedback > *{pointer-events:auto;max-width:560px;margin-inline:auto;display:block}
+.feedback > .chunky{width:100%}
+.fb{gap:4px;padding:10px 14px 12px;max-height:62vh;overflow-y:auto;box-shadow:0 -8px 30px -6px rgba(10,14,40,.28)}
+.fb-top .mini{width:46px;height:46px}
+.fb-top strong{font-size:17px}
+.fb-top small{font-size:14px}
+.fb .phrase{font-size:18px}
+.fb .en{font-size:14px}
+.fb .transcript{font-size:15px;margin:0}
+.fb .audio-row{margin-top:2px}
+.grades{margin-top:6px;gap:8px}
+.grade{padding:8px 4px}
+.fb .chunky.full{margin-top:6px;padding:12px 18px}
+.done-wrap{padding-top:12px;gap:4px}
+.done-wrap .big{width:130px;height:130px}
+.done-stats{margin:8px 0 12px}
+.sheet{max-height:88vh;overflow-y:auto}
+.unit-sheet .scene{max-height:110px}
+@media (max-height:680px){.session .scene{display:none}}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
