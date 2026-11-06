@@ -397,6 +397,8 @@ function renderSheet(){
     <select id="speed"><option value="n" ${!st.slow?'selected':''}>Natural</option><option value="s" ${st.slow?'selected':''}>Slow</option></select></div>
    <div class="row"><label for="themeSel">Theme</label>
     <select id="themeSel">${THEMES.map(x=>`<option value="${x}" ${st.theme===x?'selected':''}>${({auto:'Follow my phone',light:'Light',dark:'Dark'})[x]}</option>`).join('')}</select></div>
+   <div class="row"><label for="splashSel">Start-up animation</label>
+    <select id="splashSel"><option value="1" ${st.splash!==false?'selected':''}>On</option><option value="0" ${st.splash===false?'selected':''}>Off</option></select></div>
    <div class="row"><label for="sfxSel">Game sounds</label>
     <select id="sfxSel"><option value="1" ${st.sfx?'selected':''}>On</option><option value="0" ${!st.sfx?'selected':''}>Off</option></select></div>
    <button class="ghost" id="test">Test voice</button>
@@ -406,6 +408,7 @@ function renderSheet(){
   const vSel=$('#voice');if(vSel)vSel.onchange=()=>{st.voice[st.lang]=vSel.value;save()};
   $('#speed').onchange=e=>{st.slow=e.target.value==='s';save()};
   $('#sfxSel').onchange=e=>{st.sfx=e.target.value==='1';save()};
+  $('#splashSel').onchange=e=>{st.splash=e.target.value==='1';save()};
   const rs=$('#recSel');if(rs)rs.onchange=e=>{st.recVoice[st.lang]=e.target.value;save();speak(0)};
   $('#themeSel').onchange=e=>{st.theme=e.target.value;applyTheme();save()};
   $('#test').onclick=()=>{loadVoices();speak(0);setTimeout(()=>{if(sheetOpen)renderSheet()},1200)};

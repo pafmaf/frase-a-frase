@@ -425,4 +425,52 @@ header{padding-block:8px 6px}
 .label b,.label span{display:block;width:max-content;max-width:100%;margin-inline:auto;background:var(--bg);border-radius:6px;padding:0 4px;box-shadow:0 0 6px 3px var(--bg)}
 .label b{position:relative}
 .links path{stroke-width:3.5}
+/* splash: dusk scene on open */
+html.splashing,html.splashing body{overflow:hidden}
+.splash{position:fixed;inset:0;z-index:100;background:#1B2470;overflow:hidden;cursor:pointer;-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none}
+.sp-art{position:absolute;inset:0;width:100%;height:100%;display:block}
+@media (min-aspect-ratio:1/1){.sp-art{top:auto;bottom:0;height:80%}}
+.sp-star{animation:spTwinkle 2.6s ease-in-out infinite both}
+.sp-sun{animation:spRise 1.4s cubic-bezier(.2,.8,.2,1) both}
+.sp-glow{transform-box:fill-box;transform-origin:center;animation:spGlow 3s ease-in-out 1.2s infinite alternate}
+.sp-swell{animation:spDrift512 9s linear infinite}
+.sp-wave1{animation:spDrift384 6s linear infinite}
+.sp-wave1.slow{animation:spDrift512 15s linear infinite}
+.sp-wave2{animation:spDrift448 8s linear infinite reverse}
+.sp-fish{transform-box:fill-box;transform-origin:center;animation:spLeap 1.1s cubic-bezier(.3,.75,.4,1) .45s both}
+.sp-fish-tap{transform-box:fill-box;transform-origin:center}
+.sp-trail{opacity:.75;animation:spTrail .6s ease-out 1.35s both}
+.sp-drops circle{transform-box:fill-box;transform-origin:center bottom;animation:spPop .5s ease-out 1.3s both}
+.sp-drops circle:nth-child(2){animation-delay:1.4s} .sp-drops circle:nth-child(3){animation-delay:1.5s}
+.sp-person{animation:spUp 1s cubic-bezier(.2,.9,.3,1.12) .25s both}
+.sp-title{position:absolute;left:0;right:0;top:calc(env(safe-area-inset-top,0px) + 6vh);text-align:center;color:#fff;pointer-events:none;padding-inline:16px}
+.sp-title h1{margin:0;font-family:var(--f-display);font-weight:800;font-size:clamp(40px,11.5vw,66px);letter-spacing:-.02em;line-height:1;text-shadow:0 4px 0 rgba(10,12,50,.35)}
+.sp-title h1 span,.sp-title h1 em{display:inline-block;animation:spDrop .7s cubic-bezier(.3,1.6,.5,1) .9s both}
+.sp-title h1 em{font-style:normal;color:#FFB627;animation-delay:1.05s}
+.sp-title h1 span:last-child{animation-delay:1.2s}
+.sp-title p{margin:10px 0 0;font-weight:700;letter-spacing:.14em;text-transform:uppercase;font-size:13px;opacity:.88;animation:spFadeIn .6s ease-out 1.45s both}
+.sp-cta{position:absolute;left:0;right:0;bottom:calc(env(safe-area-inset-bottom,0px) + 8vh);text-align:center;padding-inline:16px}
+.sp-go{min-width:230px;font-size:19px;padding:16px 28px;animation:spBtn .5s ease-out 1.7s both,spPulse 1.8s ease-in-out 2.3s infinite}
+.splash.tapped .sp-fish-tap{animation:spFlip .95s cubic-bezier(.3,.7,.4,1) both}
+.splash.tapped .sp-person-tap{animation:spHop .45s cubic-bezier(.3,1.6,.5,1) 2}
+.splash.tapped .sp-go{animation:spPress .25s ease-out both}
+.splash.leaving{animation:spOut .6s ease-in forwards;pointer-events:none}
+@keyframes spTwinkle{0%,100%{opacity:.25}50%{opacity:.95}}
+@keyframes spRise{from{transform:translateY(520px)}to{transform:none}}
+@keyframes spGlow{from{transform:scale(.92);opacity:.8}to{transform:scale(1.06);opacity:1}}
+@keyframes spDrift512{to{transform:translateX(-512px)}}
+@keyframes spDrift448{to{transform:translateX(-448px)}}
+@keyframes spDrift384{to{transform:translateX(-384px)}}
+@keyframes spLeap{0%{transform:translate(220px,640px) rotate(50deg);opacity:0}12%{opacity:1}100%{transform:none;opacity:1}}
+@keyframes spTrail{from{opacity:0}to{opacity:.75}}
+@keyframes spPop{0%{transform:scale(0)}60%{transform:scale(1.35)}100%{transform:scale(1)}}
+@keyframes spUp{from{transform:translateY(460px)}to{transform:none}}
+@keyframes spDrop{from{transform:translateY(-70px) scale(.8);opacity:0}to{transform:none;opacity:1}}
+@keyframes spFadeIn{from{opacity:0}to{opacity:.88}}
+@keyframes spBtn{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+@keyframes spPulse{0%,100%{box-shadow:0 5px 0 var(--gold-deep),0 0 0 0 rgba(255,182,39,.55)}50%{box-shadow:0 5px 0 var(--gold-deep),0 0 0 18px rgba(255,182,39,0)}}
+@keyframes spFlip{0%{transform:none}45%{transform:translateY(-150px) rotate(-200deg)}100%{transform:rotate(-360deg)}}
+@keyframes spHop{0%,100%{transform:none}50%{transform:translateY(-36px)}}
+@keyframes spPress{to{transform:translateY(4px) scale(.97)}}
+@keyframes spOut{to{opacity:0;transform:scale(1.08)}}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}

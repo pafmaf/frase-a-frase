@@ -13,7 +13,7 @@ let session=null,sheetOpen=false,confirmReset=false; // UI state shared by core.
 const KEY=APP.storageKey;
 const LANG_IDS=Object.keys(LANGS);
 const perLang=mk=>Object.fromEntries(LANG_IDS.map(l=>[l,mk()]));
-let st={lang:LANG_IDS[0],theme:'auto',recVoice:perLang(()=>'mix'),cards:perLang(()=>({})),slow:false,sfx:true,xp:perLang(()=>0),voice:perLang(()=>''),streak:{last:'',n:0}};
+let st={lang:LANG_IDS[0],theme:'auto',recVoice:perLang(()=>'mix'),cards:perLang(()=>({})),slow:false,sfx:true,splash:true,xp:perLang(()=>0),voice:perLang(()=>''),streak:{last:'',n:0}};
 try{const raw=localStorage.getItem(KEY);if(raw){const p=JSON.parse(raw);st={...st,...p,cards:{...st.cards,...(p.cards||{})},voice:{...st.voice,...(p.voice||{})},recVoice:{...st.recVoice,...(p.recVoice||{})},xp:{...st.xp,...(p.xp||{})}};if(!LANGS[st.lang])st.lang=LANG_IDS[0]}}catch(e){}
 function save(){try{localStorage.setItem(KEY,JSON.stringify(st))}catch(e){}}
 function applyTheme(){const r=document.documentElement;if(st.theme==='light'||st.theme==='dark')r.dataset.theme=st.theme;else delete r.dataset.theme}
