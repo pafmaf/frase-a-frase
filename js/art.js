@@ -112,6 +112,20 @@ const steam=(x,y)=>[0,.7,1.4].map((d,i)=>`<path class="sc-steam" style="animatio
 const windowR=(x,y,w,h)=>`<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="4" fill="var(--sc-glass)" stroke="var(--sc-frame)" stroke-width="3"/><path d="M${x+w/2} ${y} v${h} M${x} ${y+h/2} h${w}" stroke="var(--sc-frame)" stroke-width="2"/>`;
 
 const SCENES={
+ beach:m=>{
+   const wave=(y,a,w)=>`M-360 ${y} `+Array.from({length:Math.ceil(1080/w)},()=>`q${w/4} ${-a} ${w/2} 0 t${w/2} 0`).join(' ')+` V120 H-360Z`;
+   return `${base()}<circle class="sc-sun" cx="300" cy="26" r="12" fill="var(--sc-sun)"/>
+   <rect y="62" width="360" height="40" fill="var(--sc-sea)"/>
+   <g class="sc-scroll slow"><path d="${wave(64,3,60)}" fill="var(--sc-sea)"/><path d="${wave(70,2,48).replace(/ V120 H-360Z/,'')}" stroke="var(--sc-foam)" stroke-width="2" fill="none" opacity=".7"/></g>
+   <g class="sc-scroll"><path d="${wave(84,3,72).replace(/ V120 H-360Z/,'')}" stroke="var(--sc-foam)" stroke-width="2.5" fill="none" opacity=".55"/></g>
+   <path d="M0 90 Q90 84 180 90 T360 88 V120 H0Z" fill="var(--sc-sand)"/>
+   <g class="sc-swing" style="transform-origin:236px 98px"><path d="M236 98 V44" stroke="var(--sc-wood-d)" stroke-width="3"/>
+     <path d="M204 50 Q236 26 268 50Z" fill="var(--br-food)"/><path d="M220 50 Q236 26 236 50Z M236 50 Q236 26 252 50Z" fill="var(--sc-bubble)" opacity=".9"/></g>
+   <rect x="196" y="96" width="62" height="10" rx="3" fill="var(--br-travel)"/><rect x="196" y="99" width="62" height="3" fill="var(--sc-bubble)" opacity=".6"/>
+   <g class="sc-bob"><rect x="292" y="58" width="5" height="40" fill="var(--sc-wood-d)"/><rect x="318" y="58" width="5" height="40" fill="var(--sc-wood-d)"/><rect x="286" y="52" width="44" height="8" rx="2" fill="var(--sc-palace2)"/>
+     <path class="sc-flag" d="M330 52 v-22 l12 4 l-12 4" fill="var(--br-food)"/></g>
+   ${npc(308,46,'var(--sc-palace2)',{style:'short',skin:'var(--c-skin2)',hair:'var(--c-hair3)',bottom:52})}
+   ${bubble(110,8,B('¡Cuidado con las olas!','Cuidado com as ondas!'),0,'l')}${hero(36,48,52,m)}`},
  greet:m=>`${base()}
    <g fill="var(--sc-build)"><rect x="150" y="34" width="50" height="62"/><rect x="205" y="18" width="60" height="78"/><rect x="270" y="44" width="46" height="52"/><rect x="320" y="28" width="40" height="68"/></g>
    ${[[160,44],[180,44],[160,64],[215,30],[240,30],[215,52],[240,52],[280,56],[298,56],[330,40],[330,62]].map(([x,y],i)=>`<rect class="sc-winb" style="animation-delay:${i*.3}s" x="${x}" y="${y}" width="10" height="12" rx="2" fill="var(--sc-win)"/>`).join('')}
@@ -247,14 +261,15 @@ const SCENES={
    ${tag(240,98,B('las tres y media','três e meia'))}${bubble(110,8,B('¿Cuánto se tarda?','Quanto tempo demora?'),0,'l')}${hero(60,46,56,m)}`
 };
 const UNIT_SCENE=['greet','cafe','train','hotel','shop','restaurant','talk','pharmacy','plans','trouble','bakery','palace','cafe','restaurant','market','info','room','stall','daynight','clock','car'];
-function sceneSVG(u,mood='idle'){
-  const sk=SCENES[UNITS[u].scene]||SCENES.greet;
+const stageScene=(u,k)=>((UNITS[u].stages[(k||1)-1]||{}).scene)||UNITS[u].scene;
+function sceneSVG(u,mood='idle',key){
+  const sk=SCENES[key||UNITS[u].scene]||SCENES.greet;
   return `<svg class="scene-svg" viewBox="0 0 360 120" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Scene: ${esc(uTxt(u,'t'))}">${sk(mood)}</svg>`;
 }
 function itemUnit(it){return it.type==='cold'?gistById(it.id).u:S[it.id].u}
 function sceneStrip(it){
-  const u=itemUnit(it);
-  return `<div class="scene ${it.type==='intro'?'':'quiet'}" id="scene" data-u="${u}">${sceneSVG(u)}</div>`;
+  const u=itemUnit(it),k=it.type==='cold'?gistById(it.id).st:S[it.id].st,key=stageScene(u,k);
+  return `<div class="scene ${it.type==='intro'?'':'quiet'}" id="scene" data-u="${u}" data-key="${key}">${sceneSVG(u,'idle',key)}</div>`;
 }
-function setSceneMood(mood){const s=$('#scene');if(s){s.classList.remove('quiet');s.innerHTML=sceneSVG(+s.dataset.u,mood)}}
+function setSceneMood(mood){const s=$('#scene');if(s){s.classList.remove('quiet');s.innerHTML=sceneSVG(+s.dataset.u,mood,s.dataset.key)}}
 

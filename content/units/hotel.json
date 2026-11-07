@@ -7,21 +7,51 @@
   "branch": "travel",
   "tree": "main",
   "col": 1,
-  "row": 3,
-  "parents": ["day-trip"],
+  "row": 4,
+  "parents": ["museum"],
   "scene": "hotel",
   "scenario": false,
   "icon": "M3 19V6M3 15h18v4M21 15v-2a3 3 0 0 0-3-3h-7v5M7 12.5a1.8 1.8 0 1 0 0-3.6 1.8 1.8 0 0 0 0 3.6z",
+  "stages": [
+    {"title": "Arriving", "summary": "Check in, report a problem, get a taxi"},
+    {"title": "Problems in the room", "summary": "Hot water, noise, towels", "scene": "room"},
+    {"title": "Hotel services", "summary": "Breakfast, laundry, late check-out"},
+    {"title": "Checking out", "summary": "The bill, the minibar, leaving well"}
+  ],
   "sentences": [
     {"id": 18, "en": "I have a reservation under the name Weber.", "es": "Tengo una reserva a nombre de Weber.", "pt": "Tenho uma reserva em nome de Weber."},
     {"id": 19, "en": "Is breakfast included?", "es": "¿El desayuno está incluido?", "pt": "O pequeno-almoço está incluído?"},
     {"id": 20, "en": "What time do we have to check out?", "es": "¿A qué hora tenemos que dejar la habitación?", "pt": "A que horas temos de deixar o quarto?"},
     {"id": 21, "en": "The air conditioning doesn't work.", "es": "El aire acondicionado no funciona.", "pt": "O ar condicionado não funciona."},
     {"id": 22, "en": "Could you call a taxi for me?", "es": "¿Me puede llamar un taxi?", "pt": "Pode chamar-me um táxi?"},
-    {"id": 23, "en": "Can I leave my luggage here?", "es": "¿Puedo dejar mi equipaje aquí?", "pt": "Posso deixar a bagagem aqui?"}
+    {"id": 23, "en": "Can I leave my luggage here?", "es": "¿Puedo dejar mi equipaje aquí?", "pt": "Posso deixar a bagagem aqui?"},
+    {"id": 340, "en": "The shower has no hot water.", "es": "La ducha no tiene agua caliente.", "pt": "O duche não tem água quente.", "stage": 2},
+    {"id": 341, "en": "The room is very noisy.", "es": "La habitación es muy ruidosa.", "pt": "O quarto é muito barulhento.", "stage": 2},
+    {"id": 342, "en": "Could we change rooms?", "es": "¿Podríamos cambiar de habitación?", "pt": "Podíamos mudar de quarto?", "stage": 2},
+    {"id": 343, "en": "Could we have more towels?", "es": "¿Nos pueden dar más toallas?", "pt": "Podem dar-nos mais toalhas?", "stage": 2},
+    {"id": 344, "en": "The key card doesn't work.", "es": "La tarjeta de la habitación no funciona.", "pt": "O cartão do quarto não funciona.", "stage": 2},
+    {"id": 345, "en": "The safe is locked.", "es": "La caja fuerte está bloqueada.", "pt": "O cofre está bloqueado.", "stage": 2},
+    {"id": 346, "en": "What time is breakfast?", "es": "¿A qué hora es el desayuno?", "pt": "A que horas é o pequeno-almoço?", "stage": 3},
+    {"id": 347, "en": "Is there a laundry service?", "es": "¿Hay servicio de lavandería?", "pt": "Há serviço de lavandaria?", "stage": 3},
+    {"id": 348, "en": "Could we check out a bit later?", "es": "¿Podríamos dejar la habitación un poco más tarde?", "pt": "Podíamos sair do quarto um pouco mais tarde?", "stage": 3},
+    {"id": 349, "en": "Can you recommend a restaurant nearby?", "es": "¿Nos recomienda un restaurante cerca?", "pt": "Pode recomendar-nos um restaurante aqui perto?", "stage": 3},
+    {"id": 350, "en": "Is there parking?", "es": "¿Tienen aparcamiento?", "pt": "Têm estacionamento?", "stage": 3},
+    {"id": 351, "en": "Please don't clean the room today.", "es": "Por favor, no limpien la habitación hoy.", "pt": "Por favor, não limpem o quarto hoje.", "stage": 3},
+    {"id": 352, "en": "We'd like to check out.", "es": "Queremos dejar la habitación.", "pt": "Queríamos fazer o check-out.", "stage": 4},
+    {"id": 353, "en": "What's this charge?", "es": "¿Qué es este cargo?", "pt": "O que é esta cobrança?", "stage": 4},
+    {"id": 354, "en": "We didn't use the minibar.", "es": "No hemos usado el minibar.", "pt": "Não usámos o minibar.", "stage": 4},
+    {"id": 355, "en": "Is the city tax included?", "es": "¿La tasa turística está incluida?", "pt": "A taxa turística está incluída?", "stage": 4},
+    {"id": 356, "en": "Could you send the invoice by email?", "es": "¿Me puede mandar la factura por correo?", "pt": "Pode enviar-me a fatura por email?", "stage": 4},
+    {"id": 357, "en": "We had a great stay.", "es": "Hemos estado muy a gusto.", "pt": "Gostámos muito da estadia.", "stage": 4}
   ],
   "passages": [
     {"id": "g6", "lang": "es", "text": "Su habitación todavía no está lista, porque la limpieza termina a las dos. Mientras tanto, puede dejar las maletas aquí en recepción y, por la espera, el desayuno de hoy corre de nuestra cuenta.", "en": "Your room isn't ready yet, because cleaning finishes at two. Meanwhile you can leave your bags here at reception and, for the wait, today's breakfast is on us.", "question": "What does the receptionist tell you?", "answer": "The room is ready at two. Leave your bags, and breakfast is free today.", "wrong": ["Your booking was cancelled. Try another hotel.", "The room is ready now, but breakfast costs extra.", "You must pay extra to check in before two."]},
-    {"id": "g7", "lang": "pt", "text": "O seu quarto ainda não está pronto, porque a limpeza só termina às duas. Entretanto, pode deixar as malas aqui na receção e, pela espera, o pequeno-almoço de hoje fica por nossa conta.", "en": "Your room isn't ready yet, because cleaning only finishes at two. Meanwhile you can leave your bags here at reception and, for the wait, today's breakfast is on us.", "question": "What does the receptionist tell you?", "answer": "The room is ready at two. Leave your bags, and breakfast is free today.", "wrong": ["Your booking was cancelled. Try another hotel.", "The room is ready now, but breakfast costs extra.", "You must pay extra to check in before two."]}
+    {"id": "g7", "lang": "pt", "text": "O seu quarto ainda não está pronto, porque a limpeza só termina às duas. Entretanto, pode deixar as malas aqui na receção e, pela espera, o pequeno-almoço de hoje fica por nossa conta.", "en": "Your room isn't ready yet, because cleaning only finishes at two. Meanwhile you can leave your bags here at reception and, for the wait, today's breakfast is on us.", "question": "What does the receptionist tell you?", "answer": "The room is ready at two. Leave your bags, and breakfast is free today.", "wrong": ["Your booking was cancelled. Try another hotel.", "The room is ready now, but breakfast costs extra.", "You must pay extra to check in before two."]},
+    {"id": "g100", "lang": "es", "stage": 2, "text": "Siento lo del agua caliente; el técnico viene esta tarde. Si no quiere esperar, tenemos una habitación libre en el cuarto piso, más tranquila, porque da al patio. Le subo las maletas.", "en": "Sorry about the hot water; the technician is coming this afternoon. If you don't want to wait, we have a free room on the fourth floor, quieter because it faces the courtyard. I'll bring your bags up.", "question": "Why is the other room better?", "answer": "It's quieter; it faces the courtyard.", "wrong": ["It's bigger and has a sea view.", "It's on the ground floor.", "It has a new shower."]},
+    {"id": "g101", "lang": "pt", "stage": 2, "text": "Peço desculpa pela água quente; o técnico vem esta tarde. Se não quiser esperar, temos um quarto livre no quarto andar, mais sossegado, porque dá para o pátio. Eu levo-lhe as malas.", "en": "Sorry about the hot water; the technician is coming this afternoon. If you don't want to wait, we have a free room on the fourth floor, quieter because it faces the courtyard. I'll bring your bags up.", "question": "Why is the other room better?", "answer": "It's quieter; it faces the courtyard.", "wrong": ["It's bigger and has a sea view.", "It's on the ground floor.", "It has a new shower."]},
+    {"id": "g102", "lang": "es", "stage": 3, "text": "El desayuno es de siete a diez y media en la primera planta. La ropa que deje en la bolsa antes de las nueve la tiene lista por la tarde. Salir más tarde es posible hasta la una, sin coste.", "en": "Breakfast is from seven to ten thirty on the first floor. Laundry left in the bag before nine is ready in the afternoon. Late check-out is possible until one, at no charge.", "question": "What do you learn about late check-out?", "answer": "It's free until one.", "wrong": ["It costs extra after ten thirty.", "It isn't possible.", "It's free until nine."]},
+    {"id": "g103", "lang": "pt", "stage": 3, "text": "O pequeno-almoço é das sete às dez e meia no primeiro andar. A roupa que deixar no saco antes das nove fica pronta à tarde. Sair mais tarde é possível até à uma, sem custo.", "en": "Breakfast is from seven to ten thirty on the first floor. Laundry left in the bag before nine is ready in the afternoon. Late check-out is possible until one, at no charge.", "question": "What do you learn about late check-out?", "answer": "It's free until one.", "wrong": ["It costs extra after ten thirty.", "It isn't possible.", "It's free until nine."]},
+    {"id": "g104", "lang": "es", "stage": 4, "text": "Tiene un cargo de dieciocho euros del minibar, pero si dice que no lo ha usado, lo quito ahora mismo. La tasa turística no está incluida: son dos euros por noche y persona.", "en": "There's an eighteen-euro minibar charge, but if you say you didn't use it, I'll remove it right away. The city tax isn't included: it's two euros per night per person.", "question": "What still has to be paid?", "answer": "The city tax: two euros per night per person.", "wrong": ["The minibar charge.", "Eighteen euros per night.", "Nothing more."]},
+    {"id": "g105", "lang": "pt", "stage": 4, "text": "Tem uma cobrança de dezoito euros do minibar, mas se diz que não o usou, tiro já. A taxa turística não está incluída: são dois euros por noite e por pessoa.", "en": "There's an eighteen-euro minibar charge, but if you say you didn't use it, I'll remove it right away. The city tax isn't included: it's two euros per night per person.", "question": "What still has to be paid?", "answer": "The city tax: two euros per night per person.", "wrong": ["The minibar charge.", "Eighteen euros per night.", "Nothing more."]}
   ]
 }

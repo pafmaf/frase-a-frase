@@ -6,22 +6,52 @@
   "level": "A2",
   "branch": "travel",
   "tree": "main",
-  "col": 1.5,
-  "row": 4,
-  "parents": ["hotel"],
+  "col": 1,
+  "row": 6,
+  "parents": ["airport"],
   "scene": "car",
   "scenario": false,
   "icon": "M4 16l1.6-5.2A2 2 0 0 1 7.5 9.4h9a2 2 0 0 1 1.9 1.4L20 16v3h-2.5M4 16v3h2.5M4 16h16M8 19.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3zM16 19.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z",
+  "stages": [
+    {"title": "At the rental desk", "summary": "Licence, insurance, fuel, parking"},
+    {"title": "On the road", "summary": "Petrol stations and tolls"},
+    {"title": "Parking & rules", "summary": "Where can I leave the car?"},
+    {"title": "Car trouble", "summary": "Breakdowns and returning the car", "scene": "trouble"}
+  ],
   "sentences": [
     {"id": 132, "en": "I'd like to rent a car for three days.", "es": "Quisiera alquilar un coche para tres días.", "pt": "Queria alugar um carro por três dias."},
     {"id": 133, "en": "Is insurance included?", "es": "¿El seguro está incluido?", "pt": "O seguro está incluído?"},
     {"id": 134, "en": "Here is my driving licence.", "es": "Aquí tiene mi carné de conducir.", "pt": "Aqui está a minha carta de condução."},
     {"id": 135, "en": "Do I have to return it with a full tank?", "es": "¿Tengo que devolverlo con el depósito lleno?", "pt": "Tenho de o devolver com o depósito cheio?"},
     {"id": 136, "en": "Is it manual or automatic?", "es": "¿Es manual o automático?", "pt": "É manual ou automático?"},
-    {"id": 137, "en": "Where can I park?", "es": "¿Dónde puedo aparcar?", "pt": "Onde posso estacionar?"}
+    {"id": 137, "en": "Where can I park?", "es": "¿Dónde puedo aparcar?", "pt": "Onde posso estacionar?"},
+    {"id": 382, "en": "Fill it up, please.", "es": "Lleno, por favor.", "pt": "Encha o depósito, por favor.", "stage": 2},
+    {"id": 383, "en": "Is this petrol or diesel?", "es": "¿Esto es gasolina o diésel?", "pt": "Isto é gasolina ou gasóleo?", "stage": 2},
+    {"id": 384, "en": "I'm at pump three.", "es": "Estoy en el surtidor tres.", "pt": "Estou na bomba três.", "stage": 2},
+    {"id": 385, "en": "Is there a toll on this road?", "es": "¿Esta carretera tiene peaje?", "pt": "Esta estrada tem portagem?", "stage": 2},
+    {"id": 386, "en": "Can I pay the toll by card?", "es": "¿Puedo pagar el peaje con tarjeta?", "pt": "Posso pagar a portagem com cartão?", "stage": 2},
+    {"id": 387, "en": "How far is the next service area?", "es": "¿A qué distancia está la próxima área de servicio?", "pt": "A que distância fica a próxima área de serviço?", "stage": 2},
+    {"id": 388, "en": "Can I park here?", "es": "¿Puedo aparcar aquí?", "pt": "Posso estacionar aqui?", "stage": 3},
+    {"id": 389, "en": "Where do I pay for parking?", "es": "¿Dónde se paga el aparcamiento?", "pt": "Onde se paga o estacionamento?", "stage": 3},
+    {"id": 390, "en": "How much is it per hour?", "es": "¿Cuánto es por hora?", "pt": "Quanto é por hora?", "stage": 3},
+    {"id": 391, "en": "Is there a car park near the centre?", "es": "¿Hay un parking cerca del centro?", "pt": "Há um parque de estacionamento perto do centro?", "stage": 3},
+    {"id": 392, "en": "What's the speed limit here?", "es": "¿Cuál es el límite de velocidad aquí?", "pt": "Qual é o limite de velocidade aqui?", "stage": 3},
+    {"id": 393, "en": "I got a parking ticket.", "es": "Me han puesto una multa de aparcamiento.", "pt": "Levei uma multa de estacionamento.", "stage": 3},
+    {"id": 394, "en": "The car won't start.", "es": "El coche no arranca.", "pt": "O carro não pega.", "stage": 4},
+    {"id": 395, "en": "We have a flat tyre.", "es": "Tenemos una rueda pinchada.", "pt": "Temos um pneu furado.", "stage": 4},
+    {"id": 396, "en": "A warning light has come on.", "es": "Se ha encendido una luz en el salpicadero.", "pt": "Acendeu-se uma luz no painel.", "stage": 4},
+    {"id": 397, "en": "We're on the motorway, near exit twelve.", "es": "Estamos en la autopista, cerca de la salida doce.", "pt": "Estamos na autoestrada, perto da saída doze.", "stage": 4},
+    {"id": 398, "en": "Here are the keys.", "es": "Aquí tiene las llaves.", "pt": "Aqui estão as chaves.", "stage": 4},
+    {"id": 399, "en": "This scratch was already here.", "es": "Este arañazo ya estaba.", "pt": "Este risco já cá estava.", "stage": 4}
   ],
   "passages": [
     {"id": "g40", "lang": "es", "text": "El coche tiene el depósito lleno y hay que devolverlo igual. El seguro básico está incluido, pero si quiere el seguro a todo riesgo son quince euros más al día. Lo puede dejar en el aeropuerto sin coste adicional.", "en": "The car has a full tank and you have to return it the same way. Basic insurance is included, but if you want fully comprehensive cover it's fifteen euros more per day. You can drop it off at the airport at no extra cost.", "question": "Which statement is true?", "answer": "Basic insurance is included. Full cover costs fifteen euros extra per day.", "wrong": ["Return it empty, because the fuel is prepaid.", "Dropping it off at the airport costs extra.", "No insurance is included at all."]},
-    {"id": "g41", "lang": "pt", "text": "O carro tem o depósito cheio e tem de o devolver da mesma forma. O seguro básico está incluído, mas se quiser o seguro contra todos os riscos são mais quinze euros por dia. Pode deixá-lo no aeroporto sem custo adicional.", "en": "The car has a full tank and you have to return it the same way. Basic insurance is included, but if you want fully comprehensive cover it's fifteen euros more per day. You can leave it at the airport at no extra cost.", "question": "Which statement is true?", "answer": "Basic insurance is included. Full cover costs fifteen euros extra per day.", "wrong": ["Return it empty, because the fuel is prepaid.", "Dropping it off at the airport costs extra.", "No insurance is included at all."]}
+    {"id": "g41", "lang": "pt", "text": "O carro tem o depósito cheio e tem de o devolver da mesma forma. O seguro básico está incluído, mas se quiser o seguro contra todos os riscos são mais quinze euros por dia. Pode deixá-lo no aeroporto sem custo adicional.", "en": "The car has a full tank and you have to return it the same way. Basic insurance is included, but if you want fully comprehensive cover it's fifteen euros more per day. You can leave it at the airport at no extra cost.", "question": "Which statement is true?", "answer": "Basic insurance is included. Full cover costs fifteen euros extra per day.", "wrong": ["Return it empty, because the fuel is prepaid.", "Dropping it off at the airport costs extra.", "No insurance is included at all."]},
+    {"id": "g114", "lang": "es", "stage": 2, "text": "En esta autopista el peaje es electrónico, no hay cabinas. Su coche de alquiler lleva un aparato, y el importe se lo cobramos después en la tarjeta. En las carreteras nacionales no se paga.", "en": "On this motorway the toll is electronic; there are no booths. Your rental car has a device, and the amount is charged to your card later. On national roads you don't pay.", "question": "How do you pay the toll?", "answer": "Automatically: a device in the car, charged to your card later.", "wrong": ["Cash at the booth.", "At the next petrol station.", "You don't pay on motorways."]},
+    {"id": "g115", "lang": "pt", "stage": 2, "text": "Nesta autoestrada a portagem é eletrónica, não há cabines. O seu carro de aluguer tem um aparelho e o valor é cobrado depois no cartão. Nas estradas nacionais não se paga.", "en": "On this motorway the toll is electronic; there are no booths. Your rental car has a device, and the amount is charged to your card later. On national roads you don't pay.", "question": "How do you pay the toll?", "answer": "Automatically: a device in the car, charged to your card later.", "wrong": ["Cash at the booth.", "At the next petrol station.", "You don't pay on motorways."]},
+    {"id": "g116", "lang": "es", "stage": 3, "text": "En la zona azul se paga de nueve a ocho, máximo dos horas, en la máquina o con la aplicación. Los domingos es gratis. Si se pasa del tiempo, la multa es de noventa euros.", "en": "In the blue zone you pay from nine to eight, two hours maximum, at the machine or with the app. On Sundays it's free. If you overstay, the fine is ninety euros.", "question": "When is parking free?", "answer": "On Sundays.", "wrong": ["After two hours.", "From nine to eight.", "With the app."]},
+    {"id": "g117", "lang": "pt", "stage": 3, "text": "Na zona azul paga-se das nove às oito, no máximo duas horas, na máquina ou com a aplicação. Ao domingo é grátis. Se passar do tempo, a multa é de noventa euros.", "en": "In the blue zone you pay from nine to eight, two hours maximum, at the machine or with the app. On Sundays it's free. If you overstay, the fine is ninety euros.", "question": "When is parking free?", "answer": "On Sundays.", "wrong": ["After two hours.", "From nine to eight.", "With the app."]},
+    {"id": "g118", "lang": "es", "stage": 4, "text": "No se preocupe, la asistencia en carretera está incluida. Póngase el chaleco, coloque el triángulo y espere detrás de la valla. La grúa tarda unos cuarenta minutos y le llevamos otro coche.", "en": "Don't worry, roadside assistance is included. Put on the vest, set up the triangle and wait behind the barrier. The tow truck takes about forty minutes, and we'll bring you another car.", "question": "What should you do while waiting?", "answer": "Wear the vest, set up the triangle and wait behind the barrier.", "wrong": ["Drive slowly to the next exit.", "Wait inside the car.", "Call the police first."]},
+    {"id": "g119", "lang": "pt", "stage": 4, "text": "Não se preocupe, a assistência em viagem está incluída. Vista o colete, coloque o triângulo e espere atrás dos rails. O reboque demora uns quarenta minutos e levamos-lhe outro carro.", "en": "Don't worry, roadside assistance is included. Put on the vest, set up the triangle and wait behind the barrier. The tow truck takes about forty minutes, and we'll bring you another car.", "question": "What should you do while waiting?", "answer": "Wear the vest, set up the triangle and wait behind the barrier.", "wrong": ["Drive slowly to the next exit.", "Wait inside the car.", "Call the police first."]}
   ]
 }

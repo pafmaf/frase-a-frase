@@ -12,6 +12,12 @@
   "scene": "bakery",
   "scenario": true,
   "icon": "M4 14h16l-1.5 5h-13zM7 14c0-3 2-5 5-5s5 2 5 5M9 6c.8-1 .8-2 0-3M13 6c.8-1 .8-2 0-3",
+  "stages": [
+    {"title": {"es": "Churros & café con leche", "pt": "Bica & pastel de nata"}, "summary": {"es": "A chocolatería morning", "pt": "A pastelaria stop"}},
+    {"title": {"es": "Afternoon chocolate", "pt": "The neighbourhood pastelaria"}, "summary": {"es": "Porras, thick chocolate, sharing", "pt": "Savoury snacks and a box to take away"}},
+    {"title": {"es": "Churros after midnight", "pt": "The famous queue in Belém"}, "summary": {"es": "The late-night chocolatería", "pt": "Takeaway or a table inside"}},
+    {"title": {"es": "Ordering a cake", "pt": "Ordering a cake"}, "summary": {"es": "A birthday cake for Saturday", "pt": "A birthday cake for Saturday"}}
+  ],
   "sentences": [
     {"id": 60, "en": "Two coffees and a portion of churros, please.", "es": "Dos cafés y una ración de churros, por favor."},
     {"id": 61, "en": "For here or to take away?", "es": "¿Para tomar aquí o para llevar?"},
@@ -24,10 +30,47 @@
     {"id": 74, "en": "To eat here, please.", "pt": "Para comer aqui, se faz favor."},
     {"id": 75, "en": "Do you have cinnamon?", "pt": "Tem canela?"},
     {"id": 76, "en": "They're still warm!", "pt": "Ainda estão quentinhos!"},
-    {"id": 77, "en": "Can I have a glass of water too?", "pt": "Pode dar-me também um copo de água?"}
+    {"id": 77, "en": "Can I have a glass of water too?", "pt": "Pode dar-me também um copo de água?"},
+    {"id": 174, "en": "What's the difference between churros and porras?", "es": "¿Qué diferencia hay entre churros y porras?", "stage": 2},
+    {"id": 175, "en": "A thick hot chocolate to share.", "es": "Un chocolate espeso para compartir.", "stage": 2},
+    {"id": 176, "en": "Can you bring two cups?", "es": "¿Nos trae dos tazas?", "stage": 2},
+    {"id": 177, "en": "Half a dozen churros, please.", "es": "Media docena de churros, por favor.", "stage": 2},
+    {"id": 178, "en": "Do you have sugar for the churros?", "es": "¿Tienen azúcar para los churros?", "stage": 2},
+    {"id": 179, "en": "This is the best chocolate in Madrid!", "es": "¡Este es el mejor chocolate de Madrid!", "stage": 2},
+    {"id": 180, "en": "What are these pastries called?", "pt": "Como se chamam estes bolos?", "stage": 2},
+    {"id": 181, "en": "Two pastéis de nata and a croquette.", "pt": "Dois pastéis de nata e um croquete.", "stage": 2},
+    {"id": 182, "en": "Can you put six in a box?", "pt": "Pode pôr seis numa caixa?", "stage": 2},
+    {"id": 183, "en": "Are these savoury or sweet?", "pt": "Estes são salgados ou doces?", "stage": 2},
+    {"id": 184, "en": "A toasted ham and cheese sandwich, please.", "pt": "Uma tosta mista, por favor.", "stage": 2},
+    {"id": 185, "en": "What do you recommend with coffee?", "pt": "O que recomenda para acompanhar o café?", "stage": 2},
+    {"id": 186, "en": "Is it open all night?", "es": "¿Está abierto toda la noche?", "stage": 3},
+    {"id": 187, "en": "Is there a queue to sit down?", "es": "¿Hay cola para sentarse?", "stage": 3},
+    {"id": 188, "en": "Do we order at the bar or at the table?", "es": "¿Pedimos en la barra o en la mesa?", "stage": 3},
+    {"id": 189, "en": "Two hot chocolates and a portion of churros.", "es": "Dos chocolates y una ración de churros.", "stage": 3},
+    {"id": 190, "en": "We'll eat them standing up.", "es": "Nos los comemos de pie.", "stage": 3},
+    {"id": 191, "en": "Is it always this busy?", "es": "¿Siempre hay tanta gente?", "stage": 3},
+    {"id": 192, "en": "Is this the queue for takeaway?", "pt": "Esta é a fila para levar?", "stage": 3},
+    {"id": 193, "en": "Is the queue faster inside?", "pt": "A fila lá dentro é mais rápida?", "stage": 3},
+    {"id": 194, "en": "A box of six, please.", "pt": "Uma caixa de seis, por favor.", "stage": 3},
+    {"id": 195, "en": "Are they still warm?", "pt": "Ainda estão quentes?", "stage": 3},
+    {"id": 196, "en": "Is there a free table inside?", "pt": "Há alguma mesa livre lá dentro?", "stage": 3},
+    {"id": 197, "en": "They're the best in Lisbon!", "pt": "São os melhores de Lisboa!", "stage": 3},
+    {"id": 198, "en": "A well-baked baguette, please.", "es": "Una barra de pan bien hecha, por favor.", "stage": 4},
+    {"id": 199, "en": "Six bread rolls, please.", "pt": "Seis pães, por favor.", "stage": 4},
+    {"id": 200, "en": "I'd like to order a cake for Saturday.", "es": "Quería encargar una tarta para el sábado.", "pt": "Queria encomendar um bolo para sábado.", "stage": 4},
+    {"id": 201, "en": "For about ten people.", "es": "Para unas diez personas.", "pt": "Para umas dez pessoas.", "stage": 4},
+    {"id": 202, "en": "Can you write a name on it?", "es": "¿Le pueden poner un nombre?", "pt": "Pode escrever um nome?", "stage": 4},
+    {"id": 203, "en": "What time can I pick it up?", "es": "¿A qué hora la puedo recoger?", "pt": "A que horas posso vir buscar?", "stage": 4},
+    {"id": 204, "en": "Do I have to pay now?", "es": "¿Tengo que pagar ahora?", "pt": "Tenho de pagar já?", "stage": 4}
   ],
   "passages": [
     {"id": "g20", "lang": "es", "text": "Los churros salen ahora mismo, en cinco minutillos los tienen. El chocolate es bastante espeso, si lo prefiere más ligero le pongo un café con leche. Siéntense donde quieran, que se lo llevo a la mesa.", "en": "The churros are coming out right now, you'll have them in about five minutes. The chocolate is quite thick; if you'd prefer something lighter I'll make you a café con leche. Sit wherever you like, I'll bring it to the table.", "question": "What does the waiter tell you?", "answer": "Churros in about five minutes. Sit anywhere, they will bring it over.", "wrong": ["The churros are sold out for today.", "Pay at the bar first, then collect your order.", "The chocolate is too thin, so add milk."]},
-    {"id": "g21", "lang": "pt", "text": "Os pastéis acabaram de sair do forno, estão a escaldar, cuidado! A canela e o açúcar estão ali no balcão. Se quiserem sentar-se lá fora, há uma mesa livre, e eu levo-lhes as bicas.", "en": "The pastries have just come out of the oven, they're scalding hot, careful! The cinnamon and sugar are over there on the counter. If you'd like to sit outside, there's a free table, and I'll bring you the espressos.", "question": "What does the waiter tell you?", "answer": "The pastries are very hot. Cinnamon is on the counter, and there is a free table outside.", "wrong": ["The pastries are sold out until tomorrow.", "Cinnamon costs extra and must be ordered.", "All tables outside are taken."]}
+    {"id": "g21", "lang": "pt", "text": "Os pastéis acabaram de sair do forno, estão a escaldar, cuidado! A canela e o açúcar estão ali no balcão. Se quiserem sentar-se lá fora, há uma mesa livre, e eu levo-lhes as bicas.", "en": "The pastries have just come out of the oven, they're scalding hot, careful! The cinnamon and sugar are over there on the counter. If you'd like to sit outside, there's a free table, and I'll bring you the espressos.", "question": "What does the waiter tell you?", "answer": "The pastries are very hot. Cinnamon is on the counter, and there is a free table outside.", "wrong": ["The pastries are sold out until tomorrow.", "Cinnamon costs extra and must be ordered.", "All tables outside are taken."]},
+    {"id": "g54", "lang": "es", "stage": 2, "text": "Las porras son más gordas que los churros y se hacen con la misma masa. Para dos personas, con una ración y un chocolate grande tienen de sobra. Ojo, que el chocolate quema.", "en": "Porras are thicker than churros and made from the same dough. For two people, one portion and one large chocolate is more than enough. Careful, the chocolate is very hot.", "question": "What does the waiter suggest for two people?", "answer": "One portion and one large chocolate to share.", "wrong": ["Two portions each.", "Only porras, no chocolate.", "Coming back when it is less hot."]},
+    {"id": "g55", "lang": "pt", "stage": 2, "text": "A caixa de seis pastéis de nata sai mais barata do que comprar à unidade. A canela e o açúcar em pó vão num saquinho à parte. Se for para comer hoje, não ponha no frigorífico.", "en": "A box of six pastéis de nata is cheaper than buying them one by one. The cinnamon and icing sugar come in a separate little bag. If you're eating them today, don't put them in the fridge.", "question": "What's the tip about storing them?", "answer": "Don't refrigerate them if you eat them today.", "wrong": ["Keep them in the fridge overnight.", "Eat them within an hour.", "Store them with the cinnamon on top."]},
+    {"id": "g56", "lang": "es", "stage": 3, "text": "A estas horas siempre hay cola, pero va rápido. Primero se paga en caja, le dan un tique y luego se sienta donde encuentre sitio. El camarero le trae todo a la mesa.", "en": "At this time there's always a queue, but it moves fast. First you pay at the till, they give you a ticket and then you sit wherever you find a spot. The waiter brings everything to your table.", "question": "What's the order of things?", "answer": "Pay at the till first, then find a seat and wait to be served.", "wrong": ["Sit down first and pay at the end.", "Order at the bar and carry it yourself.", "Book a table online."]},
+    {"id": "g57", "lang": "pt", "stage": 3, "text": "Para levar, a fila é esta da rua e anda depressa. Se quiser comer cá dentro, entre pela outra porta: há muitas salas e normalmente há lugar. Os pastéis saem do forno de dez em dez minutos.", "en": "For takeaway, it's this queue on the street and it moves fast. If you want to eat inside, go in through the other door: there are lots of rooms and there's usually space. The pastries come out of the oven every ten minutes.", "question": "What should you do to eat inside?", "answer": "Use the other door; there's usually room inside.", "wrong": ["Join the street queue.", "Book in advance.", "Wait ten minutes outside."]},
+    {"id": "g58", "lang": "es", "stage": 4, "text": "Las tartas por encargo hay que pedirlas con dos días de antelación. Se paga la mitad ahora y el resto al recogerla. El sábado abrimos de ocho a dos.", "en": "Custom cakes must be ordered two days in advance. You pay half now and the rest when you pick it up. On Saturdays we're open from eight to two.", "question": "How does payment work?", "answer": "Half now, the rest at pick-up.", "wrong": ["Everything now.", "Everything at pick-up.", "Only by bank transfer."]},
+    {"id": "g59", "lang": "pt", "stage": 4, "text": "Os bolos por encomenda têm de ser pedidos com dois dias de antecedência. Paga metade agora e o resto quando vier buscar. Ao sábado abrimos das oito às duas.", "en": "Custom cakes must be ordered two days in advance. You pay half now and the rest when you pick it up. On Saturdays we're open from eight to two.", "question": "How does payment work?", "answer": "Half now, the rest at pick-up.", "wrong": ["Everything now.", "Everything at pick-up.", "Only by bank transfer."]}
   ]
 }

@@ -3,7 +3,8 @@
 const $=s=>document.querySelector(s);
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const shuffle=a=>{a=[...a];for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]]}return a};
-const unitIds=u=>allIds().filter(i=>S[i].u===u);
+const unitIds=(u,k)=>allIds().filter(i=>S[i].u===u&&(k==null||S[i].st===k));
+const stageTxt=(u,k,key)=>{const v=UNITS[u].stages[k-1][key];return v&&typeof v==='object'?v[st.lang]:v||''};
 const ICON={
  play:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3A4.5 4.5 0 0 0 14 7.97v8.05A4.5 4.5 0 0 0 16.5 12zM14 3.23v2.06a7 7 0 0 1 0 13.42v2.06a9 9 0 0 0 0-17.54z"/></svg>',
  slow:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>',
@@ -20,20 +21,31 @@ const ICON={
 const unitIcon=u=>`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="${UNITS[u].ic}"/></svg>`;
 
 /* ---------- unit progress ---------- */
+/* A unit has stages (usually 4 x 6 sentences). Stage 1 done = "passed": unlocks the children in the tree.
+   Stage k opens when stage k-1 is done (or once you've started it). All stages done = "done". */
 function unitInfo(u){
   const ids=unitIds(u),cs=cards();
   const seen=ids.filter(i=>cs[i]).length;
-  const strength=ids.reduce((a,i)=>a+(cs[i]?Math.min((cs[i].iv||0)/21,1):0),0)/ids.length;
-  return {ids,seen,total:ids.length,strength,done:seen===ids.length};
+  const strength=ids.length?ids.reduce((a,i)=>a+(cs[i]?Math.min((cs[i].iv||0)/21,1):0),0)/ids.length:0;
+  const stages=[];
+  UNITS[u].stages.forEach((_,j)=>{
+    const k=j+1,sid=ids.filter(i=>S[i].st===k),sseen=sid.filter(i=>cs[i]).length;
+    const done=sid.length>0&&sseen===sid.length,open=k===1||stages[j-1].done||sseen>0;
+    stages.push({k,ids:sid,seen:sseen,total:sid.length,done,open});
+  });
+  const real=stages.filter(s=>s.total);
+  const cur=real.find(s=>!s.done&&s.open)||null;
+  return {ids,seen,total:ids.length,strength,stages:real,cur,nDone:real.filter(s=>s.done).length,
+    passed:!!(real[0]&&real[0].done),done:real.length>0&&real.every(s=>s.done)};
 }
-const unlocked=u=>UNITS[u].parents.every(p=>unitInfo(p).done)||unitInfo(u).seen>0;
+const unlocked=u=>UNITS[u].parents.every(p=>unitInfo(p).passed)||unitInfo(u).seen>0;
 
 /* ---------- home ---------- */
 function streakNow(){
   const today=new Date().toISOString().slice(0,10),yest=new Date(Date.now()-DAY).toISOString().slice(0,10);
   return (st.streak.last===today||st.streak.last===yest)?st.streak.n:0;
 }
-const openUnits=()=>UNITS.map((_,u)=>u).filter(u=>unlocked(u)&&!unitInfo(u).done).sort((a,b)=>UNITS[a].row-UNITS[b].row||UNITS[a].col-UNITS[b].col);
+const openUnits=()=>UNITS.map((_,u)=>u).filter(u=>unlocked(u)&&!unitInfo(u).done).sort((a,b)=>(unitInfo(a).passed-unitInfo(b).passed)||UNITS[a].row-UNITS[b].row||UNITS[a].col-UNITS[b].col);
 const ROW=138, TOP=22;
 function renderHome(){
   session=null;
@@ -42,7 +54,7 @@ function renderHome(){
   const L=LANGS[st.lang],xp=st.xp[st.lang],lv=lvlOf(xp),lo=xpFor(lv),hi=xpFor(lv+1);
   const headline=due?`${due} sentence${due>1?'s':''} ready to review`
     :open.length>1?`${open.length} paths open. Where to next?`
-    :open.length?`Next: ${esc(uTxt(open[0],'t'))}`:'Tree complete. Keep your streak alive.';
+    :open.length?`Next: ${esc(uTxt(open[0],'sh'))}, stage ${unitInfo(open[0]).cur?unitInfo(open[0]).cur.k:1}`:'Tree complete. Keep your streak alive.';
   $('#app').innerHTML=`
   ${headerHTML()}
   <section class="hero">
@@ -80,42 +92,53 @@ function treeHTML(kind,open){
   const L=LANGS[st.lang];
   const links=ids.flatMap(c=>UNITS[c].parents.filter(p=>ids.includes(p)).map(p=>{
     const x1=X(p),y1=Y(p)+30,x2=X(c),y2=Y(c)+30,m=(y1+y2)/2;
-    const cls=unitInfo(c).done?'done':unlocked(c)?'open':'';
+    const cls=unitInfo(c).passed?'done':unlocked(c)?'open':'';
     return `<path class="${cls}" d="M${x1} ${y1} C${x1} ${m} ${x2} ${m} ${x2} ${y2}"/>`;
   })).join('');
   const firstOpen=open.find(u=>ids.includes(u));
   return `<div class="tree" style="height:${H}px">
     <svg class="links" viewBox="0 0 100 ${H}" preserveAspectRatio="none" aria-hidden="true">${links}</svg>
     ${ids.map(i=>{
-      const u=UNITS[i],inf=unitInfo(i),lock=!unlocked(i),isOpen=!lock&&!inf.done;
-      const cls=lock?'locked':inf.done?'done':'open';
-      const p=lock?0:Math.round(inf.done?Math.max(inf.strength*100,8):inf.seen/inf.total*100);
+      const u=UNITS[i],inf=unitInfo(i),lock=!unlocked(i),isOpen=!lock&&!inf.passed;
+      const cls=lock?'locked':inf.done?'done':inf.passed?'passed':'open';
+      const n=inf.stages.length||1,p=lock?0:Math.round(inf.done?100:(inf.nDone+(inf.cur?inf.cur.seen/inf.cur.total:0))/n*100);
       const icon=lock?ICON.lock:inf.done?ICON.check:unitIcon(i);
+      const pips=lock?'':`<span class="pips" aria-label="${inf.nDone} of ${n} stages done">${inf.stages.map(s=>`<i class="${s.done?'on':s.seen?'half':''}"></i>`).join('')}</span>`;
       return `<div class="node ${cls}" style="left:${X(i)}%;top:${Y(i)}px;--br:var(${BR[u.br]})">
         <div class="coin-wrap">
           ${u.scen?`<span class="scen">${esc(L.city.toUpperCase())}</span>`:''}
           ${isOpen&&i===firstOpen&&kind==='main'?mascot(st.lang,'idle','side-mascot '+(u.col<2?'r':'l')):''}
           <div class="ring" style="--p:${p}"><button class="coin" data-unit="${i}" aria-label="${esc(uTxt(i,'t'))}${lock?' (locked)':''}">${icon}</button></div>
         </div>
-        <div class="label"><b>${esc(uTxt(i,'sh'))}</b><span>${lock?u.lv+' · locked':inf.done?Math.round(inf.strength*100)+'% strong':inf.seen+'/'+inf.total}</span></div>
+        <div class="label"><b>${esc(uTxt(i,'sh'))}</b><span>${lock?u.lv+' · locked':inf.done?'All '+n+' stages · '+Math.round(inf.strength*100)+'% strong':pips+(inf.cur?' '+inf.cur.seen+'/'+inf.cur.total:'')}</span></div>
       </div>`}).join('')}
   </div>`;
 }
 function openUnitSheet(u){
   sheetOpen=true;$('#sheet').hidden=false;$('#scrim').hidden=false;
   const inf=unitInfo(u),lock=!unlocked(u),U=UNITS[u];
-  const sample=inf.ids.slice(0,3);
-  const needs=U.parents.filter(p=>!unitInfo(p).done).map(p=>uTxt(p,'t'));
+  const focus=inf.cur?inf.cur.k:1;
+  const needs=U.parents.filter(p=>!unitInfo(p).passed).map(p=>uTxt(p,'sh'));
+  const coldPool=gistsFor(u).filter(g=>(inf.stages[g.st-1]||{}).open);
+  const go=()=>{sfx('tap');sheetOpen=false;$('#sheet').hidden=true;$('#scrim').hidden=true};
   $('#sheet').innerHTML=`<div class="sheet-in unit-sheet">
-    <div class="scene sheet-scene" style="--br:var(${BR[U.br]})">${sceneSVG(u)}</div>
+    <div class="scene sheet-scene">${sceneSVG(u,'idle',stageScene(u,focus))}</div>
     <div><span class="lv">${U.lv}${U.scen?' · '+esc(LANGS[st.lang].city)+' scenario':''}</span><h3>${esc(uTxt(u,'t'))}</h3></div>
-    <p class="desc">${esc(uTxt(u,'s'))} · ${inf.total} sentences${inf.seen?` · ${inf.seen} learned`:''}</p>
-    <ul class="preview">${sample.map(i=>`<li>${esc(tgt(i))}<span>${esc(S[i].en)}</span></li>`).join('')}</ul>
-    ${lock?`<p class="needs">Finish ${needs.map(esc).join(' and ')} to unlock this.</p><button class="chunky" id="uClose">OK</button>`
-      :`<button class="chunky ${inf.done?'':'gold'}" id="uStart">${inf.done?'Practise':inf.seen?'Continue':'Start'}</button>${gistsFor(u).length?`<button class="chunky cold-btn" id="uCold">Jump in: cold water</button><p class="needs" style="margin-top:-6px">A real-life passage at natural speed. Get the gist, not every word.</p>`:''}<button class="ghost" id="uClose">Not now</button>`}
+    <ol class="stages">${inf.stages.map(s=>{
+      const state=lock||!s.open?'locked':s.done?'done':'open';
+      const right=state==='locked'?ICON.lock:s.done?ICON.check:s.seen+'/'+s.total;
+      return `<li><button class="stg ${state}${inf.cur&&inf.cur.k===s.k&&!lock?' cur':''}" data-stage="${s.k}" ${state==='locked'?'aria-disabled="true"':''}>
+        <span class="no">${s.k}</span><span class="tx"><b>${esc(stageTxt(u,s.k,'title'))}</b><small>${esc(stageTxt(u,s.k,'summary'))}</small></span><span class="st">${right}</span></button></li>`}).join('')}</ol>
+    ${lock?`<p class="needs">Finish stage 1 of ${needs.map(esc).join(' and ')} to unlock this.</p><button class="chunky" id="uClose">OK</button>`
+      :`<button class="chunky ${inf.done?'':'gold'}" id="uStart">${inf.done?'Practise all stages':(inf.cur.seen?'Continue':'Start')+' stage '+inf.cur.k}</button>${coldPool.length?`<button class="chunky cold-btn" id="uCold">Jump in: cold water</button><p class="needs" style="margin-top:-6px">Real-life passages at natural speed, one per open stage. Get the gist, not every word.</p>`:''}<button class="ghost" id="uClose">Not now</button>`}
   </div>`;
-  const s=$('#uStart');if(s)s.onclick=()=>{sfx('tap');sheetOpen=false;$('#sheet').hidden=true;$('#scrim').hidden=true;startUnit(u)};
-  const c=$('#uCold');if(c)c.onclick=()=>{sfx('tap');sheetOpen=false;$('#sheet').hidden=true;$('#scrim').hidden=true;newSession('cold',gistsFor(u).map(g=>({id:g.id,type:'cold'})),u);renderItem()};
+  document.querySelectorAll('.stg').forEach(b=>b.onclick=()=>{
+    const k=+b.dataset.stage;
+    if(b.classList.contains('locked')){sfx('bad');toast(lock?'Unlock this unit first.':'Finish stage '+(k-1)+' first.');return}
+    go();startUnit(u,k);
+  });
+  const s=$('#uStart');if(s)s.onclick=()=>{go();startUnit(u,inf.done?'all':inf.cur.k)};
+  const c=$('#uCold');if(c)c.onclick=()=>{go();newSession('cold',shuffle(coldPool).slice(0,4).map(g=>({id:g.id,type:'cold'})),u);renderItem()};
   $('#uClose').onclick=closeSheet;
 }
 function headerHTML(){
@@ -139,18 +162,24 @@ function typeFor(c){
   if(c.reps===2)return shuffle(['translate','build'])[0];
   return shuffle(['listen','translate','gap','build','build'])[0];
 }
-function newSession(mode,items,unit){session={mode,unit,items,i:0,right:0,asked:0,combo:0,best:0,xp:0}}
-function startUnit(u){
+function newSession(mode,items,unit,stage){session={mode,unit,stage,items,i:0,right:0,asked:0,combo:0,best:0,xp:0,before:unit!=null?unitInfo(unit):null}}
+function startUnit(u,k){
   const inf=unitInfo(u),cs=cards();
-  const fresh=inf.ids.filter(i=>!cs[i]);
-  const cold=gistsFor(u).map(g=>({id:g.id,type:'cold'}));
-  if(fresh.length)newSession('lesson',[...fresh.map(id=>({id,type:'intro'})),...shuffle(fresh).map((id,i)=>({id,type:LESSON_TYPES[i%6]})),...cold],u);
-  else newSession('practice',[...shuffle(inf.ids).map(id=>({id,type:typeFor(cs[id])})),...cold],u);
+  if(k==null)k=inf.cur?inf.cur.k:'all';
+  if(k==='all'){ // everything done: a mixed workout across all stages
+    const pick12=shuffle(inf.ids).slice(0,12),cold=shuffle(gistsFor(u)).slice(0,1).map(g=>({id:g.id,type:'cold'}));
+    newSession('practice',[...pick12.map(id=>({id,type:typeFor(cs[id])})),...cold],u);
+    return renderItem();
+  }
+  const ids=unitIds(u,k),fresh=ids.filter(i=>!cs[i]);
+  const cold=gistsFor(u).filter(g=>g.st===k).map(g=>({id:g.id,type:'cold'}));
+  if(fresh.length)newSession('lesson',[...fresh.map(id=>({id,type:'intro'})),...shuffle(fresh).map((id,i)=>({id,type:LESSON_TYPES[i%6]})),...cold],u,k);
+  else newSession('practice',[...shuffle(ids).map(id=>({id,type:typeFor(cs[id])})),...cold],u,k);
   renderItem();
 }
 function startReview(){
   const items=shuffle(dueList()).slice(0,20).map(id=>({id,type:typeFor(cards()[id])}));
-  const pool=UNITS.map((_,u)=>u).filter(u=>unitInfo(u).seen).flatMap(u=>gistsFor(u));
+  const pool=UNITS.map((_,u)=>u).filter(u=>unitInfo(u).seen).flatMap(u=>gistsFor(u).filter(g=>unitIds(u,g.st).some(i=>cards()[i])));
   if(pool.length)items.splice(Math.min(items.length,4+Math.floor(Math.random()*4)),0,{id:pick(pool).id,type:'cold'});
   newSession('review',items);
   renderItem();
@@ -339,7 +368,15 @@ function renderDone(){
   const pct=session.asked?Math.round(session.right/session.asked*100):100;
   const next=Object.values(cards()).map(c=>c.due).filter(d=>d>Date.now()).sort((a,b)=>a-b)[0];
   const nextTxt=next?(next-Date.now()<DAY?'later today':new Date(next).toLocaleDateString(undefined,{weekday:'long',day:'numeric',month:'short'})):'';
-  const title=session.mode==='cold'?'Out of the cold water!':session.mode==='lesson'?`${esc(uTxt(session.unit,'t'))} cleared!`:session.mode==='review'?'Review done!':'Practice done!';
+  const title=session.mode==='cold'?'Out of the cold water!':session.mode==='lesson'?`${esc(uTxt(session.unit,'sh'))} · stage ${session.stage} cleared!`:session.mode==='review'?'Review done!':'Practice done!';
+  let unlockNote='';
+  if(session.mode==='lesson'&&session.before){
+    const now=unitInfo(session.unit),u=session.unit;
+    const kids=UNITS.map((_,c)=>c).filter(c=>UNITS[c].parents.includes(u));
+    if(!session.before.passed&&now.passed&&kids.length)unlockNote=`New ${kids.length>1?'paths':'path'} open: ${kids.map(c=>esc(uTxt(c,'sh'))).join(', ')}`;
+    if(now.cur&&now.cur.k!==session.stage)unlockNote+=(unlockNote?' · ':'')+`Next here: stage ${now.cur.k}, ${esc(stageTxt(u,now.cur.k,'title'))}`;
+    else if(now.done&&!session.before.done)unlockNote+=(unlockNote?' · ':'')+'All stages of this unit done!';
+  }
   $('#app').innerHTML=`<div class="done-wrap">
     ${mascot(st.lang,'cheer','big')}
     <div class="bubble" style="margin:0">${esc(pick(LINES[st.lang].done))}</div>
@@ -349,6 +386,7 @@ function renderDone(){
       <div class="dstat o"><b>${pct}%</b><span>Accuracy</span></div>
       <div class="dstat"><b>${session.best}</b><span>Best combo</span></div>
     </div>
+    ${unlockNote?`<p class="unlock-note">${unlockNote}</p>`:''}
     ${nextTxt?`<p class="note" style="margin:0 0 14px">Next review ${nextTxt}</p>`:''}
     <button class="chunky" id="home">Back to the path</button></div>`;
   $('#home').onclick=()=>{sfx('tap');renderHome()};

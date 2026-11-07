@@ -2,9 +2,9 @@
    and builds the structures the app uses:
      APP    {name, storageKey}
      LANGS  {es:{name,native,code,buddy,city}, ...}      LINES {es:{idle,happy,sad,done}, ...}
-     UNITS  [{slug,t,sh,s,lv,br,tree,col,row,parents:[unit index],ic,scen,scene}]
-     S      [ {u:unit index, en, es, pt, ...} ] indexed by sentence id (ids may have gaps)
-     GIST   [ {u,l,t,en,q,a,d} ]               indexed by passage number (id "g<n>")
+     UNITS  [{slug,t,sh,s,lv,br,tree,col,row,parents:[unit index],ic,scen,scene,stages:[{title,summary,scene}]}]
+     S      [ {u:unit index, st:stage, en, es, pt, ...} ] indexed by sentence id (ids may have gaps)
+     GIST   [ {u,st,l,t,en,q,a,d} ]               indexed by passage number (id "g<n>")
    Format: see content/README.md. tools/content.py validate checks the same rules offline. */
 let APP, LANGS, LINES, UNITS, S, GIST;
 
@@ -41,7 +41,8 @@ function buildContent(cfg, files) {
     slug: f.id, t: f.title, sh: f.short || f.title, s: f.summary || '', lv: f.level || '',
     br: f.branch || 'core', tree: f.tree || 'main', col: f.col ?? 0, row: f.row ?? 0,
     parents: (f.parents || []).map(p => p in index ? index[p] : bad(f.id, `unknown parent "${p}"`)),
-    ic: f.icon || '', scen: !!f.scenario, scene: f.scene || 'greet'
+    ic: f.icon || '', scen: !!f.scenario, scene: f.scene || 'greet',
+    stages: (f.stages && f.stages.length) ? f.stages : [{ title: f.title, summary: f.summary || '' }]
   }));
 
   S = []; GIST = [];
@@ -50,7 +51,9 @@ function buildContent(cfg, files) {
       if (!Number.isInteger(s.id) || s.id < 0) bad(f.id, `sentence id must be a whole number, got ${JSON.stringify(s.id)}`);
       if (S[s.id]) bad(f.id, `sentence id ${s.id} is already used`);
       if (!s.en) bad(f.id, `sentence ${s.id} has no English`);
-      S[s.id] = { u, en: s.en };
+      const st = s.stage || 1;
+      if (!Number.isInteger(st) || st < 1 || st > UNITS[u].stages.length) bad(f.id, `sentence ${s.id}: stage ${s.stage} is not listed in "stages"`);
+      S[s.id] = { u, st, en: s.en };
       for (const l of Object.keys(LANGS)) if (s[l]) S[s.id][l] = s[l];
     }
     for (const p of f.passages || []) {
@@ -58,7 +61,7 @@ function buildContent(cfg, files) {
       if (GIST[n]) bad(f.id, `passage id ${p.id} is already used`);
       if (!LANGS[p.lang]) bad(f.id, `passage ${p.id}: unknown language "${p.lang}"`);
       if (!(p.text && p.en && p.question && p.answer && (p.wrong || []).length >= 2)) bad(f.id, `passage ${p.id}: needs text, en, question, answer and at least 2 wrong answers`);
-      GIST[n] = { u, l: p.lang, t: p.text, en: p.en, q: p.question, a: p.answer, d: p.wrong };
+      GIST[n] = { u, st: p.stage || 1, l: p.lang, t: p.text, en: p.en, q: p.question, a: p.answer, d: p.wrong };
     }
   });
 }

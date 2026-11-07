@@ -12,16 +12,46 @@
   "scene": "cafe",
   "scenario": false,
   "icon": "M5 9h11v4a5 5 0 0 1-5 5h-1a5 5 0 0 1-5-5zM16 10h1.5a2.5 2.5 0 0 1 0 5H16M8 3.5v2.5M12 3.5v2.5",
+  "stages": [
+    {"title": "First order", "summary": "Order, ask the price, pay"},
+    {"title": "Breakfast at the counter", "summary": "Toast, juice and the breakfast deal", "scene": "bakery"},
+    {"title": "Sitting down", "summary": "Terrace, Wi-Fi password, the toilet"},
+    {"title": "A regular", "summary": "Chatting with the barista"}
+  ],
   "sentences": [
     {"id": 6, "en": "A coffee with milk, please.", "es": "Un café con leche, por favor.", "pt": "Um café com leite, por favor."},
     {"id": 7, "en": "I would like a bottle of water.", "es": "Quisiera una botella de agua.", "pt": "Queria uma garrafa de água."},
     {"id": 8, "en": "How much is it?", "es": "¿Cuánto es?", "pt": "Quanto é?"},
     {"id": 9, "en": "Can I pay by card?", "es": "¿Puedo pagar con tarjeta?", "pt": "Posso pagar com cartão?"},
     {"id": 10, "en": "Do you have Wi-Fi?", "es": "¿Tienen wifi?", "pt": "Têm Wi-Fi?"},
-    {"id": 11, "en": "The bill, please.", "es": "La cuenta, por favor.", "pt": "A conta, por favor."}
+    {"id": 11, "en": "The bill, please.", "es": "La cuenta, por favor.", "pt": "A conta, por favor."},
+    {"id": 138, "en": "I'd like a slice of toast, please.", "es": "Quería una tostada, por favor.", "pt": "Queria uma torrada, por favor.", "stage": 2},
+    {"id": 139, "en": "A freshly squeezed orange juice, please.", "es": "Un zumo de naranja natural, por favor.", "pt": "Um sumo de laranja natural, por favor.", "stage": 2},
+    {"id": 140, "en": "Is there anything gluten-free?", "es": "¿Hay algo sin gluten?", "pt": "Há alguma coisa sem glúten?", "stage": 2},
+    {"id": 141, "en": "What do you have for breakfast?", "es": "¿Qué tienen para desayunar?", "pt": "O que têm para o pequeno-almoço?", "stage": 2},
+    {"id": 142, "en": "Another coffee, please.", "es": "Otro café, por favor.", "pt": "Mais um café, por favor.", "stage": 2},
+    {"id": 143, "en": "Can you warm it up, please?", "es": "¿Me lo puede calentar, por favor?", "pt": "Pode aquecer, por favor?", "stage": 2},
+    {"id": 144, "en": "Can we sit on the terrace?", "es": "¿Podemos sentarnos en la terraza?", "pt": "Podemos sentar-nos na esplanada?", "stage": 3},
+    {"id": 145, "en": "What's the Wi-Fi password?", "es": "¿Cuál es la contraseña del wifi?", "pt": "Qual é a password do Wi-Fi?", "stage": 3},
+    {"id": 146, "en": "Where is the toilet?", "es": "¿Dónde está el baño?", "pt": "Onde fica a casa de banho?", "stage": 3},
+    {"id": 147, "en": "Excuse me, we've been waiting a while.", "es": "Perdone, llevamos un rato esperando.", "pt": "Desculpe, estamos à espera há algum tempo.", "stage": 3},
+    {"id": 148, "en": "Can I charge my phone here?", "es": "¿Puedo cargar el móvil aquí?", "pt": "Posso carregar o telemóvel aqui?", "stage": 3},
+    {"id": 149, "en": "Is this table free?", "es": "¿Está libre esta mesa?", "pt": "Esta mesa está livre?", "stage": 3},
+    {"id": 150, "en": "The usual, please.", "es": "Lo de siempre, por favor.", "pt": "O costume, por favor.", "stage": 4},
+    {"id": 151, "en": "This coffee is excellent.", "es": "Este café está buenísimo.", "pt": "Este café está ótimo.", "stage": 4},
+    {"id": 152, "en": "Where do you buy your coffee beans?", "es": "¿Dónde compran el café en grano?", "pt": "Onde compram o café em grão?", "stage": 4},
+    {"id": 153, "en": "What time do you close today?", "es": "¿A qué hora cierran hoy?", "pt": "A que horas fecham hoje?", "stage": 4},
+    {"id": 154, "en": "See you tomorrow!", "es": "¡Hasta mañana!", "pt": "Até amanhã!", "stage": 4},
+    {"id": 155, "en": "Keep the change.", "es": "Quédese con el cambio.", "pt": "Pode ficar com o troco.", "stage": 4}
   ],
   "passages": [
     {"id": "g2", "lang": "es", "text": "Lo siento, la máquina de tarjetas no funciona ahora mismo. Si quiere, puede pagar en efectivo, o hay un cajero justo al lado de la farmacia, a dos minutos.", "en": "Sorry, the card machine isn't working right now. If you like, you can pay cash, or there's a cash machine right next to the pharmacy, two minutes away.", "question": "What is the problem, and what does the waiter suggest?", "answer": "The card machine is broken. Pay cash, or use the cash machine nearby.", "wrong": ["The kitchen is closed. Come back in two minutes.", "They have run out of coffee. Try the pharmacy café.", "The bill is wrong. They will bring a new one."]},
-    {"id": "g3", "lang": "pt", "text": "Peço desculpa, a máquina do multibanco não está a funcionar neste momento. Se quiser, pode pagar em dinheiro, ou há uma caixa multibanco mesmo ao lado da farmácia, a dois minutos.", "en": "Sorry, the card machine isn't working at the moment. If you like, you can pay cash, or there's a cash machine right next to the pharmacy, two minutes away.", "question": "What is the problem, and what does the waiter suggest?", "answer": "The card machine is broken. Pay cash, or use the cash machine nearby.", "wrong": ["The kitchen is closed. Come back in two minutes.", "They have run out of coffee. Try the pharmacy café.", "The bill is wrong. They will bring a new one."]}
+    {"id": "g3", "lang": "pt", "text": "Peço desculpa, a máquina do multibanco não está a funcionar neste momento. Se quiser, pode pagar em dinheiro, ou há uma caixa multibanco mesmo ao lado da farmácia, a dois minutos.", "en": "Sorry, the card machine isn't working at the moment. If you like, you can pay cash, or there's a cash machine right next to the pharmacy, two minutes away.", "question": "What is the problem, and what does the waiter suggest?", "answer": "The card machine is broken. Pay cash, or use the cash machine nearby.", "wrong": ["The kitchen is closed. Come back in two minutes.", "They have run out of coffee. Try the pharmacy café.", "The bill is wrong. They will bring a new one."]},
+    {"id": "g42", "lang": "es", "stage": 2, "text": "Buenos días. Las tostadas vienen con mantequilla y mermelada, o con queso y jamón. El zumo es natural, lo exprimimos en el momento. El menú de desayuno, con café incluido, sale a tres euros con cincuenta.", "en": "Good morning. Toast comes with butter and jam, or with cheese and ham. The juice is fresh, squeezed on the spot. The breakfast deal, coffee included, comes to three euros fifty.", "question": "How much is the breakfast deal, and what does it include?", "answer": "Three fifty, coffee included.", "wrong": ["Three fifty, but coffee is extra.", "Five euros, with juice and toast.", "It is free with any coffee."]},
+    {"id": "g43", "lang": "pt", "stage": 2, "text": "Bom dia. As torradas vêm com manteiga e compota, ou com queijo e fiambre. O sumo é natural, espremido na hora. O menu de pequeno-almoço, com café incluído, fica a três euros e cinquenta.", "en": "Good morning. Toast comes with butter and jam, or with cheese and ham. The juice is fresh, squeezed on the spot. The breakfast deal, coffee included, comes to three euros fifty.", "question": "How much is the breakfast deal, and what does it include?", "answer": "Three fifty, coffee included.", "wrong": ["Three fifty, but coffee is extra.", "Five euros, with juice and toast.", "It is free with any coffee."]},
+    {"id": "g44", "lang": "es", "stage": 3, "text": "En la terraza solo servimos en mesa, así que siéntese y enseguida le atiendo. La contraseña del wifi está en el tique. El baño está al fondo, a la derecha, pero hay que pedir la llave en la barra.", "en": "On the terrace we only do table service, so sit down and I'll be right with you. The Wi-Fi password is on the receipt. The toilet is at the back on the right, but you have to ask for the key at the counter.", "question": "What do you need to use the toilet?", "answer": "The key, which you ask for at the counter.", "wrong": ["The Wi-Fi password.", "A receipt from the terrace.", "Nothing, it is open."]},
+    {"id": "g45", "lang": "pt", "stage": 3, "text": "Na esplanada só servimos à mesa, por isso sente-se e eu já lá vou. A password do Wi-Fi está no talão. A casa de banho fica ao fundo, à direita, mas tem de pedir a chave ao balcão.", "en": "On the terrace we only do table service, so sit down and I'll be right with you. The Wi-Fi password is on the receipt. The toilet is at the back on the right, but you have to ask for the key at the counter.", "question": "What do you need to use the toilet?", "answer": "The key, which you ask for at the counter.", "wrong": ["The Wi-Fi password.", "A receipt from the terrace.", "Nothing, it is open."]},
+    {"id": "g46", "lang": "es", "stage": 4, "text": "¡Hombre, otra vez por aquí! ¿Lo de siempre, un cortado? Hoy tenemos un café nuevo de Colombia; si quiere probarlo, se lo pongo sin cobrarle la diferencia.", "en": "Look who's back! The usual, a coffee with a dash of milk? Today we have a new coffee from Colombia; if you want to try it, I won't charge you the difference.", "question": "What does the barista offer?", "answer": "To try a new Colombian coffee at no extra cost.", "wrong": ["A free pastry with your usual.", "A discount card for regulars.", "To pay tomorrow instead."]},
+    {"id": "g47", "lang": "pt", "stage": 4, "text": "Olha quem é! O costume, um pingo? Hoje temos um café novo da Colômbia; se quiser provar, sirvo-lho sem cobrar a diferença.", "en": "Look who's back! The usual, a coffee with a dash of milk? Today we have a new coffee from Colombia; if you want to try it, I won't charge you the difference.", "question": "What does the barista offer?", "answer": "To try a new Colombian coffee at no extra cost.", "wrong": ["A free pastry with your usual.", "A discount card for regulars.", "To pay tomorrow instead."]}
   ]
 }

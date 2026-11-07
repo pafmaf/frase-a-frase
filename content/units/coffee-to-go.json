@@ -12,16 +12,46 @@
   "scene": "cafe",
   "scenario": false,
   "icon": "M7 7h10l-1.2 13.5h-7.6zM6 7h12M8.5 4h7l1 3h-9z",
+  "stages": [
+    {"title": "Takeaway order", "summary": "Milk, size, your name on the cup"},
+    {"title": "In a hurry", "summary": "A quick order at the station kiosk", "scene": "train"},
+    {"title": "Something cold", "summary": "Iced drinks on a hot day"},
+    {"title": "Ordering for the office", "summary": "Several drinks at once"}
+  ],
   "sentences": [
     {"id": 84, "en": "A large milky coffee to go, please.", "es": "Un café con leche grande para llevar, por favor.", "pt": "Um galão grande para levar, por favor."},
     {"id": 85, "en": "With oat milk, please.", "es": "Con leche de avena, por favor.", "pt": "Com leite de aveia, por favor."},
     {"id": 86, "en": "Without sugar.", "es": "Sin azúcar.", "pt": "Sem açúcar."},
     {"id": 87, "en": "Can I have a lid, please?", "es": "¿Me da una tapa, por favor?", "pt": "Pode dar-me uma tampa, por favor?"},
     {"id": 88, "en": "What name is it for?", "es": "¿A nombre de quién?", "pt": "Em nome de quem?"},
-    {"id": 89, "en": "I'm in a bit of a hurry.", "es": "Tengo un poco de prisa.", "pt": "Estou com um bocado de pressa."}
+    {"id": 89, "en": "I'm in a bit of a hurry.", "es": "Tengo un poco de prisa.", "pt": "Estou com um bocado de pressa."},
+    {"id": 156, "en": "A small americano to take away.", "es": "Un americano pequeño para llevar.", "pt": "Um abatanado pequeno para levar.", "stage": 2},
+    {"id": 157, "en": "Will it take long?", "es": "¿Tardará mucho?", "pt": "Vai demorar muito?", "stage": 2},
+    {"id": 158, "en": "My train leaves in five minutes.", "es": "Mi tren sale en cinco minutos.", "pt": "O meu comboio parte daqui a cinco minutos.", "stage": 2},
+    {"id": 159, "en": "Can I pay with my phone?", "es": "¿Puedo pagar con el móvil?", "pt": "Posso pagar com o telemóvel?", "stage": 2},
+    {"id": 160, "en": "And a croissant to go as well.", "es": "Y un cruasán para llevar también.", "pt": "E também um croissant para levar.", "stage": 2},
+    {"id": 161, "en": "Can you put it in a bag?", "es": "¿Me lo pone en una bolsa?", "pt": "Pode pôr num saco?", "stage": 2},
+    {"id": 162, "en": "An iced coffee, please.", "es": "Un café con hielo, por favor.", "pt": "Um café com gelo, por favor.", "stage": 3},
+    {"id": 163, "en": "With less ice, please.", "es": "Con menos hielo, por favor.", "pt": "Com menos gelo, por favor.", "stage": 3},
+    {"id": 164, "en": "Do you have lemonade?", "es": "¿Tienen limonada?", "pt": "Têm limonada?", "stage": 3},
+    {"id": 165, "en": "A large one, please.", "es": "Uno grande, por favor.", "pt": "Um grande, por favor.", "stage": 3},
+    {"id": 166, "en": "Can I have a straw?", "es": "¿Me da una pajita?", "pt": "Pode dar-me uma palhinha?", "stage": 3},
+    {"id": 167, "en": "It's boiling outside!", "es": "¡Fuera hace un calor horrible!", "pt": "Lá fora está um calor terrível!", "stage": 3},
+    {"id": 168, "en": "I'm ordering for four people.", "es": "Pido para cuatro personas.", "pt": "Vou pedir para quatro pessoas.", "stage": 4},
+    {"id": 169, "en": "Two lattes and two espressos.", "es": "Dos cafés con leche y dos solos.", "pt": "Dois galões e dois cafés.", "stage": 4},
+    {"id": 170, "en": "Do you have a cardboard tray?", "es": "¿Tiene una bandeja de cartón?", "pt": "Tem um tabuleiro de cartão?", "stage": 4},
+    {"id": 171, "en": "Can you write the names on the cups?", "es": "¿Puede escribir los nombres en los vasos?", "pt": "Pode escrever os nomes nos copos?", "stage": 4},
+    {"id": 172, "en": "Can I get an invoice with my tax number?", "es": "¿Me hace una factura con mi NIF?", "pt": "Pode passar fatura com contribuinte?", "stage": 4},
+    {"id": 173, "en": "One of them is decaf.", "es": "Uno de ellos es descafeinado.", "pt": "Um deles é descafeinado.", "stage": 4}
   ],
   "passages": [
     {"id": "g24", "lang": "es", "text": "¿El café con leche lo quiere grande o normal? La leche de avena cuesta cincuenta céntimos más. Ahora mismo hay un poco de cola, así que serán unos cinco minutos. ¿A nombre de quién lo pongo?", "en": "Do you want the latte large or regular? Oat milk costs fifty cents more. There's a bit of a queue right now, so it'll be about five minutes. What name shall I put?", "question": "What does the barista tell you?", "answer": "Oat milk costs fifty cents extra, and it will take about five minutes.", "wrong": ["Oat milk is free, and your coffee is ready now.", "They only have the regular size today.", "You can only pay in cash."]},
-    {"id": "g25", "lang": "pt", "text": "Quer o galão grande ou normal? O leite de aveia custa mais cinquenta cêntimos. Agora há um bocadinho de fila, por isso são uns cinco minutos. Em nome de quem é?", "en": "Do you want the latte large or regular? Oat milk is fifty cents more. There's a bit of a queue now, so it's about five minutes. What name is it for?", "question": "What does the barista tell you?", "answer": "Oat milk costs fifty cents extra, and it will take about five minutes.", "wrong": ["Oat milk is free, and your coffee is ready now.", "They only have the regular size today.", "You can only pay in cash."]}
+    {"id": "g25", "lang": "pt", "text": "Quer o galão grande ou normal? O leite de aveia custa mais cinquenta cêntimos. Agora há um bocadinho de fila, por isso são uns cinco minutos. Em nome de quem é?", "en": "Do you want the latte large or regular? Oat milk is fifty cents more. There's a bit of a queue now, so it's about five minutes. What name is it for?", "question": "What does the barista tell you?", "answer": "Oat milk costs fifty cents extra, and it will take about five minutes.", "wrong": ["Oat milk is free, and your coffee is ready now.", "They only have the regular size today.", "You can only pay in cash."]},
+    {"id": "g48", "lang": "es", "stage": 2, "text": "Para llevar, ¿verdad? Ahora mismo la máquina tarda un poquito, unos tres minutos. Si tiene prisa, el café de filtro ya está hecho y se lo sirvo al momento.", "en": "To go, right? Right now the machine is taking a little while, about three minutes. If you're in a hurry, the filter coffee is already made and I can serve it right away.", "question": "What's the fast option?", "answer": "Filter coffee, which is ready now.", "wrong": ["An espresso from the machine.", "Ordering on the app.", "Coming back in three hours."]},
+    {"id": "g49", "lang": "pt", "stage": 2, "text": "É para levar, não é? Neste momento a máquina está a demorar um bocadinho, uns três minutos. Se estiver com pressa, o café de filtro já está feito e sirvo-lho já.", "en": "To go, right? Right now the machine is taking a little while, about three minutes. If you're in a hurry, the filter coffee is already made and I can serve it right away.", "question": "What's the fast option?", "answer": "Filter coffee, which is ready now.", "wrong": ["An espresso from the machine.", "Ordering on the app.", "Coming back in three hours."]},
+    {"id": "g50", "lang": "es", "stage": 3, "text": "Las limonadas están hechas esta mañana. El café con hielo lo hacemos con espresso, así que es bastante fuerte. Si lo quiere más suave, le añado leche fría.", "en": "The lemonades were made this morning. The iced coffee is made with espresso, so it's quite strong. If you want it milder, I'll add cold milk.", "question": "How can you make the iced coffee milder?", "answer": "Ask for cold milk to be added.", "wrong": ["Order it without espresso.", "Wait until the afternoon.", "Order the lemonade instead."]},
+    {"id": "g51", "lang": "pt", "stage": 3, "text": "As limonadas foram feitas esta manhã. O café com gelo é feito com expresso, por isso é bastante forte. Se o quiser mais suave, junto-lhe leite frio.", "en": "The lemonades were made this morning. The iced coffee is made with espresso, so it's quite strong. If you want it milder, I'll add cold milk.", "question": "How can you make the iced coffee milder?", "answer": "Ask for cold milk to be added.", "wrong": ["Order it without espresso.", "Wait until the afternoon.", "Order the lemonade instead."]},
+    {"id": "g52", "lang": "es", "stage": 4, "text": "Cuatro cafés y dos zumos, perfecto. Para pedidos grandes le doy una bandeja. ¿Quiere factura? Entonces necesito el nombre de la empresa y el NIF.", "en": "Four coffees and two juices, perfect. For big orders I'll give you a tray. Do you want an invoice? Then I need the company name and the tax number.", "question": "What does the barista need for the invoice?", "answer": "The company name and the tax number.", "wrong": ["Your passport.", "The names on the cups.", "A loyalty card."]},
+    {"id": "g53", "lang": "pt", "stage": 4, "text": "Quatro cafés e dois sumos, perfeito. Para pedidos grandes dou-lhe um tabuleiro. Quer fatura? Então preciso do nome da empresa e do número de contribuinte.", "en": "Four coffees and two juices, perfect. For big orders I'll give you a tray. Do you want an invoice? Then I need the company name and the tax number.", "question": "What does the barista need for the invoice?", "answer": "The company name and the tax number.", "wrong": ["Your passport.", "The names on the cups.", "A loyalty card."]}
   ]
 }

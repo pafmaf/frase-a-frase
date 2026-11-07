@@ -12,16 +12,46 @@
   "scene": "shop",
   "scenario": false,
   "icon": "M5.5 8h13l-1 12.5h-11zM9 8a3 3 0 0 1 6 0",
+  "stages": [
+    {"title": "In a clothes shop", "summary": "Sizes, prices, deciding"},
+    {"title": "Returns & exchanges", "summary": "Receipts, other sizes, refunds"},
+    {"title": "Souvenirs & gifts", "summary": "Something to take home"},
+    {"title": "At the market", "summary": "Tasting, deals, paying", "scene": "stall"}
+  ],
   "sentences": [
     {"id": 24, "en": "I'm just looking, thanks.", "es": "Solo estoy mirando, gracias.", "pt": "Estou só a ver, obrigado."},
     {"id": 25, "en": "Do you have this in a bigger size?", "es": "¿Tiene esto en una talla más grande?", "pt": "Tem isto num tamanho maior?"},
     {"id": 26, "en": "It costs twenty euros.", "es": "Cuesta veinte euros.", "pt": "Custa vinte euros."},
     {"id": 27, "en": "That's too expensive.", "es": "Es demasiado caro.", "pt": "É demasiado caro."},
     {"id": 28, "en": "Where can I try it on?", "es": "¿Dónde me lo puedo probar?", "pt": "Onde posso experimentar?"},
-    {"id": 29, "en": "I'll take it.", "es": "Me lo llevo.", "pt": "Vou levar."}
+    {"id": 29, "en": "I'll take it.", "es": "Me lo llevo.", "pt": "Vou levar."},
+    {"id": 544, "en": "I'd like to return this.", "es": "Quería devolver esto.", "pt": "Queria devolver isto.", "stage": 2},
+    {"id": 545, "en": "Here is the receipt.", "es": "Aquí tiene el tique.", "pt": "Aqui está o talão.", "stage": 2},
+    {"id": 546, "en": "Can I exchange it for another size?", "es": "¿Lo puedo cambiar por otra talla?", "pt": "Posso trocar por outro tamanho?", "stage": 2},
+    {"id": 547, "en": "It doesn't fit me.", "es": "No me queda bien.", "pt": "Não me serve.", "stage": 2},
+    {"id": 548, "en": "Can I get my money back?", "es": "¿Me devuelven el dinero?", "pt": "Devolvem-me o dinheiro?", "stage": 2},
+    {"id": 549, "en": "Is there a sale on?", "es": "¿Hay rebajas?", "pt": "Há saldos?", "stage": 2},
+    {"id": 550, "en": "I'm looking for a present for my mother.", "es": "Busco un regalo para mi madre.", "pt": "Procuro uma prenda para a minha mãe.", "stage": 3},
+    {"id": 551, "en": "Is this made here?", "es": "¿Esto está hecho aquí?", "pt": "Isto é feito cá?", "stage": 3},
+    {"id": 552, "en": "Is it handmade?", "es": "¿Está hecho a mano?", "pt": "É feito à mão?", "stage": 3},
+    {"id": 553, "en": "Do you have anything cheaper?", "es": "¿Tiene algo más barato?", "pt": "Tem alguma coisa mais barata?", "stage": 3},
+    {"id": 554, "en": "Will it break in my suitcase?", "es": "¿Se romperá en la maleta?", "pt": "Vai partir-se na mala?", "stage": 3},
+    {"id": 555, "en": "I'll take two of these.", "es": "Me llevo dos de estos.", "pt": "Levo dois destes.", "stage": 3},
+    {"id": 556, "en": "How much is this one?", "es": "¿Cuánto vale este?", "pt": "Quanto custa este?", "stage": 4},
+    {"id": 557, "en": "Can I try it?", "es": "¿Puedo probarlo?", "pt": "Posso provar?", "stage": 4},
+    {"id": 558, "en": "Two for ten euros?", "es": "¿Dos por diez euros?", "pt": "Dois por dez euros?", "stage": 4},
+    {"id": 559, "en": "Do you take cards?", "es": "¿Aceptan tarjeta?", "pt": "Aceitam cartão?", "stage": 4},
+    {"id": 560, "en": "I'll come back later.", "es": "Vuelvo luego.", "pt": "Volto mais tarde.", "stage": 4},
+    {"id": 561, "en": "Do you have a smaller bag?", "es": "¿Tiene una bolsa más pequeña?", "pt": "Tem um saco mais pequeno?", "stage": 4}
   ],
   "passages": [
     {"id": "g8", "lang": "es", "text": "Esta talla ya no la tenemos en tienda, pero se la podemos pedir y llega en tres o cuatro días. Si no, creo que en la tienda del centro comercial todavía les quedan.", "en": "We don't have this size in the shop any more, but we can order it and it arrives in three or four days. Otherwise, I think the shop in the shopping centre still has some.", "question": "What are your options?", "answer": "Order it (three or four days) or try their shop in the shopping centre.", "wrong": ["Buy it today only, because the sale ends.", "Come back in three minutes when the stock arrives.", "Nothing. They cannot order it at all."]},
-    {"id": "g9", "lang": "pt", "text": "Este tamanho já não temos em loja, mas podemos encomendar e chega daqui a três ou quatro dias. Senão, acho que a loja do centro comercial ainda tem.", "en": "We don't have this size in the shop any more, but we can order it and it arrives in three or four days. Otherwise, I think the shop in the shopping centre still has it.", "question": "What are your options?", "answer": "Order it (three or four days) or try their shop in the shopping centre.", "wrong": ["Buy it today only, because the sale ends.", "Come back in three minutes when the stock arrives.", "Nothing. They cannot order it at all."]}
+    {"id": "g9", "lang": "pt", "text": "Este tamanho já não temos em loja, mas podemos encomendar e chega daqui a três ou quatro dias. Senão, acho que a loja do centro comercial ainda tem.", "en": "We don't have this size in the shop any more, but we can order it and it arrives in three or four days. Otherwise, I think the shop in the shopping centre still has it.", "question": "What are your options?", "answer": "Order it (three or four days) or try their shop in the shopping centre.", "wrong": ["Buy it today only, because the sale ends.", "Come back in three minutes when the stock arrives.", "Nothing. They cannot order it at all."]},
+    {"id": "g168", "lang": "es", "stage": 2, "text": "Sin tique no puedo devolverle el dinero, pero sí le puedo dar un vale para gastar en la tienda. Tiene treinta días desde la compra. Las prendas rebajadas no se cambian.", "en": "Without a receipt I can't refund you, but I can give you a voucher to spend in the shop. You have thirty days from purchase. Sale items can't be exchanged.", "question": "What can you get without a receipt?", "answer": "A store voucher.", "wrong": ["A full refund.", "An exchange for a sale item.", "Nothing at all."]},
+    {"id": "g169", "lang": "pt", "stage": 2, "text": "Sem talão não lhe posso devolver o dinheiro, mas posso dar-lhe um vale para gastar na loja. Tem trinta dias desde a compra. As peças em saldo não se trocam.", "en": "Without a receipt I can't refund you, but I can give you a voucher to spend in the shop. You have thirty days from purchase. Sale items can't be exchanged.", "question": "What can you get without a receipt?", "answer": "A store voucher.", "wrong": ["A full refund.", "An exchange for a sale item.", "Nothing at all."]},
+    {"id": "g170", "lang": "es", "stage": 3, "text": "Estos platos están pintados a mano por una familia del pueblo de al lado. Se los envuelvo bien en papel y cartón, así que no se le van a romper en la maleta.", "en": "These plates are hand-painted by a family from the next village. I'll wrap them well in paper and cardboard, so they won't break in your suitcase.", "question": "Who makes the plates?", "answer": "A family from the next village, by hand.", "wrong": ["A factory abroad.", "The shop owner.", "A local school."]},
+    {"id": "g171", "lang": "pt", "stage": 3, "text": "Estes pratos são pintados à mão por uma família da aldeia ao lado. Embrulho-os bem em papel e cartão, por isso não se vão partir na mala.", "en": "These plates are hand-painted by a family from the next village. I'll wrap them well in paper and cardboard, so they won't break in your suitcase.", "question": "Who makes the plates?", "answer": "A family from the next village, by hand.", "wrong": ["A factory abroad.", "The shop owner.", "A local school."]},
+    {"id": "g172", "lang": "es", "stage": 4, "text": "Hoy las naranjas a un euro el kilo, y si se lleva tres kilos, se los dejo en dos cincuenta. Pruebe, pruebe, que son dulcísimas. Tarjeta no, solo efectivo.", "en": "Today oranges are one euro a kilo, and if you take three kilos, I'll let you have them for two fifty. Try one, they're really sweet. No cards, cash only.", "question": "What's the deal?", "answer": "Three kilos for two fifty, cash only.", "wrong": ["Three kilos for three euros, cards accepted.", "One kilo free with three.", "Two fifty a kilo."]},
+    {"id": "g173", "lang": "pt", "stage": 4, "text": "Hoje as laranjas estão a um euro o quilo e, se levar três quilos, faço-lhe dois e cinquenta. Prove, prove, que são docinhas. Cartão não, só dinheiro.", "en": "Today oranges are one euro a kilo, and if you take three kilos, I'll let you have them for two fifty. Try one, they're really sweet. No cards, cash only.", "question": "What's the deal?", "answer": "Three kilos for two fifty, cash only.", "wrong": ["Three kilos for three euros, cards accepted.", "One kilo free with three.", "Two fifty a kilo."]}
   ]
 }

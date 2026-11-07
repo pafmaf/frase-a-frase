@@ -30,15 +30,21 @@ content/
 | `scene` | animated scene: `greet cafe train hotel shop restaurant talk pharmacy plans trouble bakery palace market info room stall daynight clock car` (drawn in `js/art.js`) |
 | `scenario` | `true` shows the city badge and allows language-specific sentences |
 | `icon` | SVG path (24x24, stroke) |
-| `sentences` | list of `{ "id": 6, "en": "…", "es": "…", "pt": "…" }` |
+| `stages` | the unit's situations, in order: `[{ "title": "…", "summary": "…", "scene": "bakery" }]` (`scene` optional, defaults to the unit's) |
+| `sentences` | list of `{ "id": 6, "stage": 2, "en": "…", "es": "…", "pt": "…" }` (`stage` defaults to 1) |
 | `passages` | list of cold-water listening passages (below) |
+
+**Stages.** Every unit has up to 4 stages, each a different situation (Café: first order, breakfast at the counter,
+sitting down, a regular). Aim for 6 sentences and 1 passage per stage and language. Finishing **stage 1** unlocks the
+unit's children in the tree; stage 2 opens after stage 1, and so on. Sentences and passages say which stage they belong
+to with `"stage": n`; leaving it out means stage 1.
 
 **Sentences.** `id` is a whole number and must be unique across all units. Leave a language out
 to make the sentence exist only in the other one (used by the Madrid and Lisboa scenarios).
-Aim for 6 sentences per unit: they are taught, then drilled in five exercise types.
+Each stage's 6 sentences are taught, then drilled in five exercise types.
 Use Spain Spanish and European Portuguese (`tu`/`você` forms, `comboio`, `pequeno-almoço`, …).
 
-**Passages.** `{ "id": "g12", "lang": "es", "text": "…", "en": "…", "question": "…", "answer": "…", "wrong": ["…", "…", "…"] }`.
+**Passages.** `{ "id": "g12", "lang": "es", "stage": 2, "text": "…", "en": "…", "question": "…", "answer": "…", "wrong": ["…", "…", "…"] }`.
 Natural speed, a few words beyond the unit's vocabulary, plus an English gist question with three
 wrong answers. `id` is `g` plus a number, unique across all units.
 

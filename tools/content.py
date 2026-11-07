@@ -24,9 +24,9 @@ def clips(cfg, units):
     for u in units:
         for s in u.get('sentences', []):
             for l in langs:
-                if s.get(l): out.append(dict(lang=l, id=str(s['id']), kind='sentence', unit=u['id'], text=s[l], en=s['en']))
+                if s.get(l): out.append(dict(lang=l, id=str(s['id']), kind='sentence', unit=u['id'], stage=s.get('stage', 1), text=s[l], en=s['en']))
         for p in u.get('passages', []):
-            out.append(dict(lang=p['lang'], id=p['id'], kind='passage', unit=u['id'], text=p['text'], en=p['en']))
+            out.append(dict(lang=p['lang'], id=p['id'], kind='passage', unit=u['id'], stage=p.get('stage', 1), text=p['text'], en=p['en']))
     key = lambda c: (langs.index(c['lang']), c['kind'] == 'passage', int(c['id'].lstrip('g')))
     return sorted(out, key=key)
 
@@ -54,7 +54,9 @@ def validate(cfg, units):
             if not s.get('en'): E(f'{uid}: sentence {i} has no English')
             if not any(s.get(l) for l in langs): E(f'{uid}: sentence {i} has no target-language text')
             for l in s:
-                if l not in ('id', 'en') and l not in langs: E(f'{uid}: sentence {i} has unknown field "{l}"')
+                if l not in ('id', 'en', 'stage') and l not in langs: E(f'{uid}: sentence {i} has unknown field "{l}"')
+            if not isinstance(s.get('stage', 1), int) or not 1 <= s.get('stage', 1) <= max(1, len(u.get('stages', []))):
+                E(f'{uid}: sentence {i} has stage {s.get("stage")!r} but the unit lists {len(u.get("stages", []))} stages')
         for p in u.get('passages', []):
             m = re.fullmatch(r'g(\d+)', str(p.get('id')))
             if not m: E(f'{uid}: bad passage id {p.get("id")!r}'); continue
@@ -67,6 +69,9 @@ def validate(cfg, units):
             if len(w) < 2: E(f'{uid}: passage {p["id"]} needs at least 2 wrong answers')
             if len(w) != 3: W(f'{uid}: passage {p["id"]} has {len(w)} wrong answers (3 is the norm)')
             if p.get('answer') in w: E(f'{uid}: passage {p["id"]} lists the right answer as wrong')
+            if not 1 <= p.get('stage', 1) <= max(1, len(u.get('stages', []))): E(f'{uid}: passage {p["id"]} has a bad stage {p.get("stage")!r}')
+        for k, stg in enumerate(u.get('stages', []), 1):
+            if not stg.get('title') or not stg.get('summary'): E(f'{uid}: stage {k} needs a title and a summary')
     # skill tree must be acyclic
     par = {u['id']: u.get('parents', []) for u in units}
     state = {}
@@ -77,13 +82,16 @@ def validate(cfg, units):
         for p in par[n]: visit(p, path + [n])
         state[n] = 2
     for n in par: visit(n, [])
-    # quality: a unit should have sentences and a passage in each language it teaches
+    # quality: every stage should have 6 sentences and a cold-water passage in each language the unit teaches
     for u in units:
-        for l in langs:
-            n = sum(1 for s in u.get('sentences', []) if s.get(l))
-            g = sum(1 for p in u.get('passages', []) if p.get('lang') == l)
-            if n and not g: W(f'{u["id"]}: {l} has {n} sentences but no cold-water passage')
-            if g and not n: W(f'{u["id"]}: {l} has a passage but no sentences')
+        for k in range(1, max(1, len(u.get('stages', []))) + 1):
+            for l in langs:
+                n = sum(1 for s in u.get('sentences', []) if s.get(l) and s.get('stage', 1) == k)
+                g = sum(1 for p in u.get('passages', []) if p.get('lang') == l and p.get('stage', 1) == k)
+                if not any(s.get(l) for s in u.get('sentences', [])): continue
+                if n != 6: W(f'{u["id"]} stage {k}: {l} has {n} sentences (6 is the norm)')
+                if n and not g: W(f'{u["id"]} stage {k}: {l} has sentences but no cold-water passage')
+                if g and not n: W(f'{u["id"]} stage {k}: {l} has a passage but no sentences')
     texts = {}
     for c in clips(cfg, units):
         k = (c['lang'], c['text'].strip().lower())
@@ -94,15 +102,15 @@ def validate(cfg, units):
 
 def stats(cfg, units):
     langs = list(cfg['languages'])
-    print(f'{"unit":<18}' + ''.join(f'{l+" sent":>9}{l+" pass":>9}' for l in langs))
+    print(f'{"unit":<18}{"stages":>7}' + ''.join(f'{l+" sent":>9}{l+" pass":>9}' for l in langs))
     tot = {l: [0, 0] for l in langs}
     for u in units:
-        row = f'{u["id"]:<18}'
+        row = f'{u["id"]:<18}{len(u.get("stages", [])) or 1:>7}'
         for l in langs:
             n = sum(1 for s in u.get('sentences', []) if s.get(l)); g = sum(1 for p in u.get('passages', []) if p.get('lang') == l)
             tot[l][0] += n; tot[l][1] += g; row += f'{n:>9}{g:>9}'
         print(row)
-    print(f'{"TOTAL":<18}' + ''.join(f'{tot[l][0]:>9}{tot[l][1]:>9}' for l in langs))
+    print(f'{"TOTAL":<18}{"":>7}' + ''.join(f'{tot[l][0]:>9}{tot[l][1]:>9}' for l in langs))
 
 if __name__ == '__main__':
     cmd = sys.argv[1] if len(sys.argv) > 1 else 'validate'

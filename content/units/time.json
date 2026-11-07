@@ -8,20 +8,50 @@
   "tree": "words",
   "col": 1.5,
   "row": 2,
-  "parents": ["food-words", "daily-routine"],
+  "parents": ["numbers", "daily-routine"],
   "scene": "clock",
   "scenario": false,
   "icon": "M7 3h10M7 21h10M8 3c0 5 8 5 8 9s-8 4-8 9M16 3c0 5-8 5-8 9s8 4 8 9",
+  "stages": [
+    {"title": "Clock & durations", "summary": "Clock times, opening hours, how long things take"},
+    {"title": "Days & dates", "summary": "Weekdays, months, appointments", "scene": "plans"},
+    {"title": "How often?", "summary": "Always, sometimes, never"},
+    {"title": "Past & future", "summary": "Yesterday, tomorrow, next week"}
+  ],
   "sentences": [
     {"id": 126, "en": "It takes about twenty minutes.", "es": "Se tarda unos veinte minutos.", "pt": "Demora uns vinte minutos."},
     {"id": 127, "en": "The shop opens at nine and closes at eight.", "es": "La tienda abre a las nueve y cierra a las ocho.", "pt": "A loja abre às nove e fecha às oito."},
     {"id": 128, "en": "I'll be here for a week.", "es": "Voy a estar aquí una semana.", "pt": "Vou ficar cá uma semana."},
     {"id": 129, "en": "It's half past three.", "es": "Son las tres y media.", "pt": "São três e meia."},
     {"id": 130, "en": "I've been waiting for an hour.", "es": "Llevo una hora esperando.", "pt": "Estou à espera há uma hora."},
-    {"id": 131, "en": "See you in two days.", "es": "Nos vemos dentro de dos días.", "pt": "Vemo-nos daqui a dois dias."}
+    {"id": 131, "en": "See you in two days.", "es": "Nos vemos dentro de dos días.", "pt": "Vemo-nos daqui a dois dias."},
+    {"id": 766, "en": "What's the date today?", "es": "¿A qué fecha estamos?", "pt": "Que dia é hoje?", "stage": 2},
+    {"id": 767, "en": "Today is the fifth of May.", "es": "Hoy es cinco de mayo.", "pt": "Hoje é cinco de maio.", "stage": 2},
+    {"id": 768, "en": "My birthday is in July.", "es": "Mi cumpleaños es en julio.", "pt": "O meu aniversário é em julho.", "stage": 2},
+    {"id": 769, "en": "Are you open on Mondays?", "es": "¿Abren los lunes?", "pt": "Abrem à segunda?", "stage": 2},
+    {"id": 770, "en": "The appointment is on Thursday.", "es": "La cita es el jueves.", "pt": "A marcação é na quinta-feira.", "stage": 2},
+    {"id": 771, "en": "We're leaving at the end of the month.", "es": "Nos vamos a finales de mes.", "pt": "Vamos embora no fim do mês.", "stage": 2},
+    {"id": 772, "en": "The bus comes every fifteen minutes.", "es": "El autobús pasa cada quince minutos.", "pt": "O autocarro passa de quinze em quinze minutos.", "stage": 3},
+    {"id": 773, "en": "I sometimes work on Saturdays.", "es": "A veces trabajo los sábados.", "pt": "Às vezes trabalho ao sábado.", "stage": 3},
+    {"id": 774, "en": "I've never been to the south.", "es": "Nunca he estado en el sur.", "pt": "Nunca estive no sul.", "stage": 3},
+    {"id": 775, "en": "How often do you come here?", "es": "¿Cada cuánto vienes aquí?", "pt": "Com que frequência vens cá?", "stage": 3},
+    {"id": 776, "en": "Once a year.", "es": "Una vez al año.", "pt": "Uma vez por ano.", "stage": 3},
+    {"id": 777, "en": "It always rains in November.", "es": "Siempre llueve en noviembre.", "pt": "Chove sempre em novembro.", "stage": 3},
+    {"id": 778, "en": "I arrived the day before yesterday.", "es": "Llegué anteayer.", "pt": "Cheguei anteontem.", "stage": 4},
+    {"id": 779, "en": "We'll see each other next week.", "es": "Nos vemos la semana que viene.", "pt": "Vemo-nos na próxima semana.", "stage": 4},
+    {"id": 780, "en": "Last year I travelled a lot.", "es": "El año pasado viajé mucho.", "pt": "No ano passado viajei muito.", "stage": 4},
+    {"id": 781, "en": "In two weeks I'm going home.", "es": "Dentro de dos semanas vuelvo a casa.", "pt": "Daqui a duas semanas volto para casa.", "stage": 4},
+    {"id": 782, "en": "This morning I was very busy.", "es": "Esta mañana he estado muy ocupado.", "pt": "Esta manhã estive muito ocupado.", "stage": 4},
+    {"id": 783, "en": "Tomorrow afternoon I'm free.", "es": "Mañana por la tarde estoy libre.", "pt": "Amanhã à tarde estou livre.", "stage": 4}
   ],
   "passages": [
     {"id": "g38", "lang": "es", "text": "El museo abre de martes a domingo, de diez a seis, pero la última entrada es a las cinco. La visita completa dura más o menos hora y media, así que yo vendría como muy tarde a las cuatro.", "en": "The museum is open Tuesday to Sunday, ten to six, but last entry is at five. The full visit takes about an hour and a half, so I'd come at four at the latest.", "question": "What is the advice?", "answer": "Arrive by four, because the full visit takes about an hour and a half.", "wrong": ["Come on Monday, when it is quiet.", "Arrive at five for last entry, because the visit is quick.", "It opens at six, so come in the evening."]},
-    {"id": "g39", "lang": "pt", "text": "O museu abre de terça a domingo, das dez às seis, mas a última entrada é às cinco. A visita completa demora mais ou menos hora e meia, por isso eu vinha o mais tardar às quatro.", "en": "The museum is open Tuesday to Sunday, ten to six, but last entry is at five. The full visit takes about an hour and a half, so I'd come at four at the latest.", "question": "What is the advice?", "answer": "Arrive by four, because the full visit takes about an hour and a half.", "wrong": ["Come on Monday, when it is quiet.", "Arrive at five for last entry, because the visit is quick.", "It opens at six, so come in the evening."]}
+    {"id": "g39", "lang": "pt", "text": "O museu abre de terça a domingo, das dez às seis, mas a última entrada é às cinco. A visita completa demora mais ou menos hora e meia, por isso eu vinha o mais tardar às quatro.", "en": "The museum is open Tuesday to Sunday, ten to six, but last entry is at five. The full visit takes about an hour and a half, so I'd come at four at the latest.", "question": "What is the advice?", "answer": "Arrive by four, because the full visit takes about an hour and a half.", "wrong": ["Come on Monday, when it is quiet.", "Arrive at five for last entry, because the visit is quick.", "It opens at six, so come in the evening."]},
+    {"id": "g242", "lang": "es", "stage": 2, "text": "Las citas se pueden pedir de lunes a viernes. Para este mes ya no queda nada; la primera fecha libre es el martes tres de junio a las diez. ¿Se la apunto?", "en": "Appointments can be booked Monday to Friday. There's nothing left this month; the first free date is Tuesday the third of June at ten. Shall I book it?", "question": "When is the first free appointment?", "answer": "Tuesday, 3 June, at ten.", "wrong": ["Monday this week at ten.", "Friday, 10 June.", "Tuesday at three."]},
+    {"id": "g243", "lang": "pt", "stage": 2, "text": "As consultas podem ser marcadas de segunda a sexta. Para este mês já não há nada; a primeira data livre é terça-feira, três de junho, às dez. Quer que marque?", "en": "Appointments can be booked Monday to Friday. There's nothing left this month; the first free date is Tuesday the third of June at ten. Shall I book it?", "question": "When is the first free appointment?", "answer": "Tuesday, 3 June, at ten.", "wrong": ["Monday this week at ten.", "Friday, 10 June.", "Tuesday at three."]},
+    {"id": "g244", "lang": "es", "stage": 3, "text": "El autobús de la playa pasa cada veinte minutos en verano, pero en invierno solo cada hora. Los domingos no hay servicio por la mañana.", "en": "The beach bus runs every twenty minutes in summer, but in winter only once an hour. On Sundays there's no morning service.", "question": "How often does it run in winter?", "answer": "Once an hour.", "wrong": ["Every twenty minutes.", "Not at all.", "Only on Sunday mornings."]},
+    {"id": "g245", "lang": "pt", "stage": 3, "text": "O autocarro da praia passa de vinte em vinte minutos no verão, mas no inverno só de hora a hora. Ao domingo não há serviço de manhã.", "en": "The beach bus runs every twenty minutes in summer, but in winter only once an hour. On Sundays there's no morning service.", "question": "How often does it run in winter?", "answer": "Once an hour.", "wrong": ["Every twenty minutes.", "Not at all.", "Only on Sunday mornings."]},
+    {"id": "g246", "lang": "es", "stage": 4, "text": "Llegué anteayer y me voy el domingo, así que solo me quedan tres días. Ayer estuve en el museo y mañana quiero ir a la costa. El sábado, ya veremos.", "en": "I arrived the day before yesterday and I'm leaving on Sunday, so I only have three more days. Yesterday I was at the museum, and tomorrow I want to go to the coast. Saturday, we'll see.", "question": "What's the plan for tomorrow?", "answer": "A trip to the coast.", "wrong": ["The museum.", "Going home.", "Nothing yet."]},
+    {"id": "g247", "lang": "pt", "stage": 4, "text": "Cheguei anteontem e vou-me embora no domingo, por isso só tenho mais três dias. Ontem estive no museu e amanhã quero ir à costa. No sábado, logo se vê.", "en": "I arrived the day before yesterday and I'm leaving on Sunday, so I only have three more days. Yesterday I was at the museum, and tomorrow I want to go to the coast. Saturday, we'll see.", "question": "What's the plan for tomorrow?", "answer": "A trip to the coast.", "wrong": ["The museum.", "Going home.", "Nothing yet."]}
   ]
 }

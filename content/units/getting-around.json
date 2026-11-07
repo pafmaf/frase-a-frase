@@ -12,16 +12,46 @@
   "scene": "train",
   "scenario": false,
   "icon": "M12 21s-6.5-6-6.5-11a6.5 6.5 0 0 1 13 0c0 5-6.5 11-6.5 11zM12 12.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z",
+  "stages": [
+    {"title": "Directions & tickets", "summary": "Ask the way, buy a ticket"},
+    {"title": "Metro & bus", "summary": "Lines, changes and stops"},
+    {"title": "Taking a taxi", "summary": "Addresses, prices, stopping", "scene": "car"},
+    {"title": "Lost on foot", "summary": "Asking strangers for help", "scene": "trouble"}
+  ],
   "sentences": [
     {"id": 12, "en": "Excuse me, where is the train station?", "es": "Perdone, ¿dónde está la estación de tren?", "pt": "Desculpe, onde fica a estação de comboios?"},
     {"id": 13, "en": "Is it far from here?", "es": "¿Está lejos de aquí?", "pt": "Fica longe daqui?"},
     {"id": 14, "en": "Turn left at the next street.", "es": "Gire a la izquierda en la próxima calle.", "pt": "Vire à esquerda na próxima rua."},
     {"id": 15, "en": "Go straight ahead.", "es": "Siga todo recto.", "pt": "Siga em frente."},
     {"id": 16, "en": "A ticket to the city centre, please.", "es": "Un billete al centro, por favor.", "pt": "Um bilhete para o centro, por favor."},
-    {"id": 17, "en": "What time does the bus leave?", "es": "¿A qué hora sale el autobús?", "pt": "A que horas parte o autocarro?"}
+    {"id": 17, "en": "What time does the bus leave?", "es": "¿A qué hora sale el autobús?", "pt": "A que horas parte o autocarro?"},
+    {"id": 265, "en": "Which metro line do I take?", "es": "¿Qué línea de metro tengo que coger?", "pt": "Que linha de metro tenho de apanhar?", "stage": 2},
+    {"id": 266, "en": "Where do I change lines?", "es": "¿Dónde cambio de línea?", "pt": "Onde tenho de mudar de linha?", "stage": 2},
+    {"id": 267, "en": "How do I top up this card?", "es": "¿Cómo recargo esta tarjeta?", "pt": "Como carrego este cartão?", "stage": 2},
+    {"id": 268, "en": "Does this bus stop at the museum?", "es": "¿Este autobús para en el museo?", "pt": "Este autocarro para no museu?", "stage": 2},
+    {"id": 269, "en": "Is the next stop the market?", "es": "¿La próxima parada es el mercado?", "pt": "A próxima paragem é o mercado?", "stage": 2},
+    {"id": 270, "en": "I want to get off here.", "es": "Quiero bajarme aquí.", "pt": "Quero sair aqui.", "stage": 2},
+    {"id": 271, "en": "To this address, please.", "es": "A esta dirección, por favor.", "pt": "Para esta morada, por favor.", "stage": 3},
+    {"id": 272, "en": "Roughly how much will it cost?", "es": "¿Cuánto costará, más o menos?", "pt": "Quanto vai custar, mais ou menos?", "stage": 3},
+    {"id": 273, "en": "Can you stop here, please?", "es": "¿Puede parar aquí, por favor?", "pt": "Pode parar aqui, por favor?", "stage": 3},
+    {"id": 274, "en": "Please take the fastest route.", "es": "Vaya por el camino más rápido, por favor.", "pt": "Vá pelo caminho mais rápido, por favor.", "stage": 3},
+    {"id": 275, "en": "Can you open the boot?", "es": "¿Me abre el maletero?", "pt": "Pode abrir a bagageira?", "stage": 3},
+    {"id": 276, "en": "Can I have a receipt?", "es": "¿Me da un recibo?", "pt": "Pode dar-me um recibo?", "stage": 3},
+    {"id": 277, "en": "Excuse me, I'm lost.", "es": "Perdone, me he perdido.", "pt": "Desculpe, estou perdido.", "stage": 4},
+    {"id": 278, "en": "Can you show me on the map?", "es": "¿Me lo puede enseñar en el mapa?", "pt": "Pode mostrar-me no mapa?", "stage": 4},
+    {"id": 279, "en": "Is it on this side of the river?", "es": "¿Está en este lado del río?", "pt": "Fica deste lado do rio?", "stage": 4},
+    {"id": 280, "en": "Is it uphill?", "es": "¿Es cuesta arriba?", "pt": "É a subir?", "stage": 4},
+    {"id": 281, "en": "How many minutes on foot?", "es": "¿Cuántos minutos andando?", "pt": "Quantos minutos a pé?", "stage": 4},
+    {"id": 282, "en": "Thank you very much, that's very kind of you.", "es": "Muchas gracias, es usted muy amable.", "pt": "Muito obrigado, é muito simpático.", "stage": 4}
   ],
   "passages": [
     {"id": "g4", "lang": "es", "text": "Atención, por favor. El tren con destino a Valencia, que tenía prevista su salida a las diez y cuarto, saldrá con veinte minutos de retraso por la vía cuatro. Disculpen las molestias.", "en": "Attention, please. The train to Valencia, scheduled to leave at quarter past ten, will depart twenty minutes late from platform four. We apologise for the inconvenience.", "question": "What is happening with the Valencia train?", "answer": "It leaves twenty minutes late, from platform four.", "wrong": ["It is cancelled. Passengers should take a bus.", "It leaves on time from platform twenty.", "It now leaves from a different station."]},
-    {"id": "g5", "lang": "pt", "text": "Atenção, por favor. O comboio com destino ao Porto, com partida prevista para as dez e um quarto, vai sair com vinte minutos de atraso da linha quatro. Pedimos desculpa pelo incómodo.", "en": "Attention, please. The train to Porto, scheduled to leave at quarter past ten, will depart twenty minutes late from platform four. We apologise for the inconvenience.", "question": "What is happening with the Porto train?", "answer": "It leaves twenty minutes late, from platform four.", "wrong": ["It is cancelled. Passengers should take a bus.", "It leaves on time from platform twenty.", "It now leaves from a different station."]}
+    {"id": "g5", "lang": "pt", "text": "Atenção, por favor. O comboio com destino ao Porto, com partida prevista para as dez e um quarto, vai sair com vinte minutos de atraso da linha quatro. Pedimos desculpa pelo incómodo.", "en": "Attention, please. The train to Porto, scheduled to leave at quarter past ten, will depart twenty minutes late from platform four. We apologise for the inconvenience.", "question": "What is happening with the Porto train?", "answer": "It leaves twenty minutes late, from platform four.", "wrong": ["It is cancelled. Passengers should take a bus.", "It leaves on time from platform twenty.", "It now leaves from a different station."]},
+    {"id": "g80", "lang": "es", "stage": 2, "text": "Para ir al centro, coja la línea azul hasta el final y allí cambie a la verde. Son cuatro paradas. La tarjeta se recarga en las máquinas de la estación, con efectivo o con tarjeta.", "en": "To get to the centre, take the blue line to the end and change to the green one there. It's four stops. You top up the card at the station machines, with cash or card.", "question": "How do you get to the centre?", "answer": "Blue line to the end, then change to the green line.", "wrong": ["Green line all the way.", "A bus from the station.", "Blue line, four stops, no change."]},
+    {"id": "g81", "lang": "pt", "stage": 2, "text": "Para ir ao centro, apanhe a linha azul até ao fim e aí mude para a verde. São quatro paragens. O cartão carrega-se nas máquinas da estação, com dinheiro ou com cartão.", "en": "To get to the centre, take the blue line to the end and change to the green one there. It's four stops. You top up the card at the station machines, with cash or card.", "question": "How do you get to the centre?", "answer": "Blue line to the end, then change to the green line.", "wrong": ["Green line all the way.", "A bus from the station.", "Blue line, four stops, no change."]},
+    {"id": "g82", "lang": "es", "stage": 3, "text": "Hasta el centro son unos veinte minutos si no hay tráfico, unos quince euros. Las maletas grandes llevan un pequeño suplemento. Si quiere recibo, se lo imprimo al final.", "en": "To the centre it's about twenty minutes without traffic, roughly fifteen euros. Big suitcases have a small extra charge. If you want a receipt, I'll print it at the end.", "question": "What costs extra?", "answer": "Big suitcases.", "wrong": ["Traffic.", "The receipt.", "Paying by card."]},
+    {"id": "g83", "lang": "pt", "stage": 3, "text": "Até ao centro são uns vinte minutos se não houver trânsito, uns quinze euros. As malas grandes têm um pequeno suplemento. Se quiser recibo, imprimo-lho no fim.", "en": "To the centre it's about twenty minutes without traffic, roughly fifteen euros. Big suitcases have a small extra charge. If you want a receipt, I'll print it at the end.", "question": "What costs extra?", "answer": "Big suitcases.", "wrong": ["Traffic.", "The receipt.", "Paying by card."]},
+    {"id": "g84", "lang": "es", "stage": 4, "text": "Está cerca, pero todo es cuesta arriba. Suba por esta calle hasta la iglesia, gire a la derecha y verá un mirador. El museo está justo detrás, a unos diez minutos.", "en": "It's close, but it's all uphill. Go up this street to the church, turn right and you'll see a viewpoint. The museum is right behind it, about ten minutes away.", "question": "Where exactly is the museum?", "answer": "Right behind the viewpoint, past the church.", "wrong": ["Next to the church, downhill.", "By the river, twenty minutes away.", "Opposite the station."]},
+    {"id": "g85", "lang": "pt", "stage": 4, "text": "Fica perto, mas é sempre a subir. Suba esta rua até à igreja, vire à direita e vê um miradouro. O museu fica mesmo atrás, a uns dez minutos.", "en": "It's close, but it's all uphill. Go up this street to the church, turn right and you'll see a viewpoint. The museum is right behind it, about ten minutes away.", "question": "Where exactly is the museum?", "answer": "Right behind the viewpoint, past the church.", "wrong": ["Next to the church, downhill.", "By the river, twenty minutes away.", "Opposite the station."]}
   ]
 }
