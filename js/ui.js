@@ -53,7 +53,7 @@ function renderHome(){
   const open=openUnits();
   const L=LANGS[st.lang],xp=st.xp[st.lang],lv=lvlOf(xp),lo=xpFor(lv),hi=xpFor(lv+1);
   const headline=due?`${due} sentence${due>1?'s':''} ready to review`
-    :open.length>1?`${open.length} paths open. Where to next?`
+    :open.length>1?`${open.length} paths open. Pick one below.`
     :open.length?`Next: ${esc(uTxt(open[0],'sh'))}, stage ${unitInfo(open[0]).cur?unitInfo(open[0]).cur.k:1}`:'Tree complete. Keep your streak alive.';
   $('#app').innerHTML=`
   ${headerHTML()}
@@ -67,23 +67,57 @@ function renderHome(){
         <span class="chip star">${ICON.star}${learned}/${total}</span>
         <span class="chip due">${ICON.clock}${due} due</span>
       </div>
-      <button class="chunky ${due?'gold':''}" id="go" ${!due&&!open.length?'disabled':''}>${due?'Review':open.length>1?'Pick a branch':'Start lesson'}</button>
+      ${due?'<button class="chunky gold" id="go">Review</button>':''}
     </div>
     <div class="lvl"><span class="badge">Lv ${lv}</span><div class="xpbar"><i style="width:${Math.round((xp-lo)/(hi-lo)*100)}%"></i></div><span>${xp} XP</span></div>
   </section>
+  ${pickHTML(open)}
   <div class="map-head" id="treeHead"><h3>${L.native} skill tree</h3><small>${audioLabel()}</small></div>
   <div class="legend"><span><i style="background:var(--br-food)"></i>Food</span><span><i style="background:var(--br-travel)"></i>Travel</span><span><i style="background:var(--br-people)"></i>People</span><span><i style="background:var(--br-life)"></i>Everyday</span><span><i style="background:var(--br-words)"></i>Words</span><span><i style="background:var(--gold)"></i>${L.city} scenario</span></div>
   ${treeHTML('main',open)}
   <div class="map-head"><h3>Word packs</h3><small>Everyday nouns, verbs and times</small></div>
   ${treeHTML('words',open)}`;
   bindHeader();
-  $('#go').onclick=()=>{sfx('tap');if(due)return startReview();if(open.length===1)return startUnit(open[0]);$('#treeHead').scrollIntoView({behavior:'smooth',block:'start'})};
+  if($('#go'))$('#go').onclick=()=>{sfx('tap');startReview()};
+  bindPick();
   document.querySelectorAll('.coin').forEach(b=>b.onclick=()=>{
     const u=+b.dataset.unit;
     if(!unlocked(u)){const s=b.closest('.node');s.classList.remove('shake');void s.offsetWidth;s.classList.add('shake');sfx('bad')}
     else sfx('tap');
     openUnitSheet(u);
   });
+}
+// "Where to next?" carousel: one swipeable card per open branch
+const BR_NAME={core:'Basics',food:'Food',travel:'Travel',people:'People',life:'Everyday',words:'Words'};
+let pickIdx=0;
+function pickHTML(open){
+  if(!open.length)return'';
+  const cardsH=open.map(u=>{
+    const U=UNITS[u],inf=unitInfo(u),k=inf.cur?inf.cur.k:1,n=inf.stages.length||U.stages.length;
+    const tag=U.scen?LANGS[st.lang].city:(BR_NAME[U.br]||U.br);
+    return `<article class="pcard" data-unit="${u}" style="--c:var(${U.scen?'--gold':BR_NAME[U.br]&&U.br!=='core'?'--br-'+U.br:'--btn'})">
+      <div class="pc-art">${sceneSVG(u,'idle',stageScene(u,k))}</div>
+      <div class="pc-body"><span class="pc-tag">${esc(tag)} · Stage ${k}/${n}</span>
+        <h4>${esc(stageTxt(u,k,'title')||uTxt(u,'t'))}</h4>
+        <p>${esc(stageTxt(u,k,'summary')||uTxt(u,'s'))}</p>
+        <div class="pc-row"><span class="pc-pips" aria-label="${inf.nDone} of ${n} stages done">${inf.stages.map(x=>`<i class="${x.done?'on':''}"></i>`).join('')}</span>
+        <button class="chunky gold pc-go" data-unit="${u}" data-k="${k}">Let's go!</button></div></div>
+    </article>`}).join('');
+  return `<section class="pick"><div class="pick-head"><h3>Where to next?</h3>${open.length>1?'<small>swipe ‹ ›</small>':''}</div>
+    <div class="pick-rail${open.length===1?' solo':''}">${cardsH}</div>
+    ${open.length>1&&open.length<=9?`<div class="pick-dots">${open.map((_,i)=>`<i data-i="${i}"></i>`).join('')}</div>`
+      :open.length>9?`<div class="pick-dots count"><b id="pickN">1</b>&nbsp;/ ${open.length}</div>`:''}</section>`;
+}
+function bindPick(){
+  const rail=$('.pick-rail');if(!rail)return;
+  const cs=[...rail.children],dots=[...document.querySelectorAll('.pick-dots i')];
+  const step=()=>cs.length>1?cs[1].offsetLeft-cs[0].offsetLeft:1;
+  const mark=()=>{const i=Math.max(0,Math.min(cs.length-1,Math.round(rail.scrollLeft/step())));pickIdx=i;dots.forEach((d,j)=>d.classList.toggle('on',j===i));if($('#pickN'))$('#pickN').textContent=i+1};
+  pickIdx=Math.min(pickIdx,cs.length-1);rail.scrollLeft=pickIdx*step();mark();
+  rail.addEventListener('scroll',mark,{passive:true});
+  dots.forEach(d=>d.onclick=()=>rail.scrollTo({left:+d.dataset.i*step(),behavior:'smooth'}));
+  rail.querySelectorAll('.pc-go').forEach(b=>b.onclick=e=>{e.stopPropagation();sfx('tap');startUnit(+b.dataset.unit,+b.dataset.k)});
+  cs.forEach(c=>c.onclick=()=>{sfx('tap');openUnitSheet(+c.dataset.unit)});
 }
 function treeHTML(kind,open){
   const ids=UNITS.map((_,i)=>i).filter(i=>(UNITS[i].tree||'main')===kind);

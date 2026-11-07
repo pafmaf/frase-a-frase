@@ -494,6 +494,32 @@ html.splashing,html.splashing body{overflow:hidden}
 .stg.locked{opacity:.55}
 .stg:active:not(.locked){transform:translateY(2px);border-bottom-width:2px}
 .unlock-note{margin:0 0 12px;max-width:340px;font-weight:700;color:var(--accent);text-wrap:balance}
+
+/* "Where to next?" carousel */
+.pick{margin:14px -16px 2px}
+.pick-head{display:flex;align-items:baseline;justify-content:space-between;padding:0 18px 8px}
+.pick-head h3{margin:0;font-family:var(--f-display);font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.pick-head small{color:var(--muted);font-weight:700}
+.pick-rail{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;padding:4px 16px 12px;scrollbar-width:none;overscroll-behavior-x:contain}
+.pick-rail::-webkit-scrollbar{display:none}
+.pick-rail.solo .pcard{flex-basis:100%}
+.pcard{--c:var(--br-food);display:flex;flex-direction:column;flex:0 0 84%;max-width:420px;scroll-snap-align:center;position:relative;border-radius:26px;overflow:hidden;box-shadow:var(--shadow);background:#141A44;border:3px solid color-mix(in srgb,var(--c) 75%,transparent);cursor:pointer}
+.pc-art{position:relative;aspect-ratio:2.25/1;background:var(--sc-sky)}
+.pc-art .scene-svg{position:absolute;inset:0;width:100%;height:100%}
+.pc-art::after{content:"";position:absolute;inset:auto 0 0 0;height:45%;background:linear-gradient(transparent,#141A44)}
+.pc-body{position:relative;flex:1;display:flex;flex-direction:column;margin-top:-26px;padding:0 16px 16px;color:#fff}
+.pc-tag{align-self:flex-start;font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;background:var(--c);color:#fff;padding:4px 10px;border-radius:99px;box-shadow:0 2px 0 rgba(0,0,0,.25)}
+.pc-body h4{margin:8px 0 2px;font-family:var(--f-display);font-weight:800;font-size:22px;line-height:1.1}
+.pc-body p{margin:0 0 12px;font-size:14px;opacity:.85;line-height:1.3;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-height:2.6em}
+.pc-row{margin-top:auto;display:flex;align-items:center;justify-content:space-between;gap:10px}
+.pc-pips{display:flex;gap:5px}
+.pc-pips i{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.25)}
+.pc-pips i.on{background:var(--gold)}
+.pcard .chunky{padding:10px 20px;font-size:16px;border-radius:15px}
+.pick-dots{display:flex;justify-content:center;gap:6px}
+.pick-dots i{width:7px;height:7px;border-radius:99px;background:var(--line);transition:width .2s;cursor:pointer}
+.pick-dots i.on{width:22px;background:var(--btn)}
+.pick-dots.count{font-weight:800;font-size:13px;color:var(--muted)}
 @media (prefers-reduced-motion:reduce){
   :not(.splash,.splash *),:not(.splash,.splash *)::before,:not(.splash,.splash *)::after{animation:none!important;transition:none!important}
   /* splash stays alive but calm: fades and slow drift instead of leaps, flips and hops */
