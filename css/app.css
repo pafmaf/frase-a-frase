@@ -577,6 +577,14 @@ button.lvl{border:0;background:none;font-family:inherit;color:var(--muted);width
 .tl-ev small{display:block;color:var(--muted);font-size:13px}
 .rem{display:flex;gap:8px;align-items:center}.rem input{font:inherit;padding:8px;border-radius:12px;border:2px solid var(--line);background:var(--surface);color:var(--ink)}
 .rem .ghost{white-space:nowrap}
+
+/* Literally & why */
+.expl{margin:6px 0 4px}
+.expl-btn{display:inline-flex;align-items:center;gap:6px;border:0;background:none;color:var(--accent);font:inherit;font-size:14px;font-weight:800;padding:4px 0;cursor:pointer}
+.expl-body{display:none;margin-top:4px;padding:10px 12px;border-radius:14px;background:color-mix(in srgb,var(--gold) 14%,transparent);border-left:4px solid var(--gold);font-size:14px;line-height:1.4;color:var(--ink);text-align:left}
+.expl-body p{margin:0}.expl-body p+p{margin-top:6px}
+.expl.open .expl-body{display:block}
+.feedback .expl-body{color:inherit}
 @media (prefers-reduced-motion:reduce){
   :not(.splash,.splash *),:not(.splash,.splash *)::before,:not(.splash,.splash *)::after{animation:none!important;transition:none!important}
   /* splash stays alive but calm: fades and slow drift instead of leaps, flips and hops */

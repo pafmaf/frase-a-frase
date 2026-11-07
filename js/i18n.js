@@ -55,6 +55,8 @@ const DE={
  'Language':'Sprache',
  "Let's go!":'Los geht’s!',
  'Light':'Hell',
+ 'Literally & why':'Wörtlich & warum',
+ 'Literally':'Wörtlich',
  'Listen &amp; build':'Hören &amp; bauen',
  'Listen to the whole thing. Get the gist.':'Hör dir alles an. Erfass den Kern.',
  'Listen, repeat it out loud once, then continue.':'Hör zu, sprich es einmal laut nach, dann weiter.',

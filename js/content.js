@@ -56,7 +56,8 @@ function buildContent(cfg, files) {
       if (!Number.isInteger(st) || st < 1 || st > UNITS[u].stages.length) bad(f.id, `sentence ${s.id}: stage ${s.stage} is not listed in "stages"`);
       S[s.id] = { u, st, en: s.en };
       if (s.de) S[s.id].de = s.de;                       // German meaning
-      if (s.f) S[s.id].f = s.f;                          // {es,pt}: feminine form when the speaker is a woman
+      if (s.f) S[s.id].f = s.f;
+      if (s.x) S[s.id].x = s.x;                          // {es,pt}: {lit:{en,de}, note?:{en,de}} explanations                          // {es,pt}: feminine form when the speaker is a woman
       for (const l of Object.keys(LANGS)) if (s[l]) S[s.id][l] = s[l];
     }
     for (const p of f.passages || []) {

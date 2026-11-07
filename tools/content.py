@@ -56,7 +56,7 @@ def validate(cfg, units):
             if not s.get('en'): E(f'{uid}: sentence {i} has no English')
             if not any(s.get(l) for l in langs): E(f'{uid}: sentence {i} has no target-language text')
             for l in s:
-                if l not in ('id', 'en', 'de', 'f', 'stage') and l not in langs: E(f'{uid}: sentence {i} has unknown field "{l}"')
+                if l not in ('id', 'en', 'de', 'f', 'x', 'stage') and l not in langs: E(f'{uid}: sentence {i} has unknown field "{l}"')
             for l, t in (s.get('f') or {}).items():
                 if l not in langs or not s.get(l): E(f'{uid}: sentence {i}: feminine form for "{l}" without a main text')
                 elif t == s[l]: E(f'{uid}: sentence {i}: feminine {l} form equals the main text')

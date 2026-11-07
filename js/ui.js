@@ -274,7 +274,7 @@ function renderItem(){
     app.innerHTML=`<div class="session">${sessionTop()}
       ${qHead(T('New sentence'),T('{b} teaches you a phrase',{b:LANGS[st.lang].buddy}),'happy')}
       <div class="stage"><span class="intro-tag">${T('New')}</span>
-        <p class="phrase">${esc(TX)}</p><div class="en">${esc(EN)}</div>${audioRow()}</div>
+        <p class="phrase">${esc(TX)}</p><div class="en">${esc(EN)}</div>${explHTML(id)}${audioRow()}</div>
       <p class="note">${T('Listen, repeat it out loud once, then continue.')}</p>
       <div class="feedback"><button class="chunky full" id="next">${T('Got it')}</button></div></div>`;
     $('#quit').onclick=renderHome;bindAudio(id);speak(id);
@@ -406,7 +406,7 @@ function finish(ok,it){
   }else actions=`<button class="chunky ok full" id="next">${T('Continue')}</button>`;
   $('#fb').innerHTML=`<div class="fb ${ok?'ok':'no'}">
     <div class="fb-top">${mascot(st.lang,ok?'happy':'sad','mini')}<div><strong>${ok?(session.combo>2?T('{n} in a row!',{n:session.combo}):T('Correct')):T('Not quite')}</strong><small>${esc(LANGS[st.lang].buddy)}: ${esc(pick(LINES[st.lang][ok?'happy':'sad']))}</small></div>${ok?`<span class="xp-pop">+${gain} XP</span>`:''}</div>
-    <p class="phrase">${esc(TX)}</p><div class="en" style="margin:0">${esc(mean(id))}</div>
+    <p class="phrase">${esc(TX)}</p><div class="en" style="margin:0">${esc(mean(id))}</div>${explHTML(id)}
     <div class="audio-row" style="margin-top:4px">${audioRow().replace(/^<div class="audio-row">|<\/div>$/g,'')}</div>${actions}</div>`;
   bindAudio(id);
   const adv=()=>{sfx('tap');session.i++;renderItem()};
@@ -610,3 +610,23 @@ function downloadReminder(time){
   const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([ics],{type:'text/calendar'}));a.download='frase-a-frase-reminder.ics';
   document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},1000);
 }
+
+/* ---------- "Literally & why": word-for-word reading plus a short explanation ---------- */
+function explOf(id){
+  const x=S[id]&&S[id].x&&S[id].x[st.lang];if(!x)return null;
+  const pick=v=>v?(v[st.ui]||v.en):'';
+  return {lit:pick(x.lit),note:pick(x.note)};
+}
+function explHTML(id){
+  const e=explOf(id);if(!e||!(e.lit||e.note))return'';
+  const open=!!st.explOpen;
+  return `<div class="expl${open?' open':''}"><button class="expl-btn" aria-expanded="${open}">${ICON_BULB}${T('Literally & why')}</button>
+    <div class="expl-body">${e.lit?`<p><b>${T('Literally')}:</b> ${esc(e.lit)}</p>`:''}${e.note?`<p>${esc(e.note)}</p>`:''}</div></div>`;
+}
+const ICON_BULB='<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.6 10.8c.6.5 1 1.2 1.1 2l.1.7h4.8l.1-.7c.1-.8.5-1.5 1.1-2A6 6 0 0 0 12 3z"/></svg>';
+document.addEventListener('click',e=>{
+  const b=e.target.closest('.expl-btn');if(!b)return;
+  const box=b.parentElement,open=!box.classList.contains('open');
+  box.classList.toggle('open',open);b.setAttribute('aria-expanded',open);
+  st.explOpen=open;save();sfx('tap');
+});
