@@ -69,7 +69,7 @@ function renderHome(){
       </div>
       ${due?'<button class="chunky gold" id="go">Review</button>':''}
     </div>
-    <div class="lvl"><span class="badge">Lv ${lv}</span><div class="xpbar"><i style="width:${Math.round((xp-lo)/(hi-lo)*100)}%"></i></div><span>${xp} XP</span></div>
+    <button class="lvl" id="progBtn" aria-label="Open your progress"><span class="badge">Lv ${lv}</span><div class="xpbar"><i style="width:${Math.round((xp-lo)/(hi-lo)*100)}%"></i></div><span>${xp} XP</span><span class="lvl-more">Progress ›</span></button>
   </section>
   ${pickHTML(open)}
   <div class="map-head" id="treeHead"><h3>${L.native} skill tree</h3><small>${audioLabel()}</small></div>
@@ -78,6 +78,7 @@ function renderHome(){
   <div class="map-head"><h3>Word packs</h3><small>Everyday nouns, verbs and times</small></div>
   ${treeHTML('words',open)}`;
   bindHeader();
+  $('#progBtn').onclick=()=>{sfx('tap');renderProgress()};
   if($('#go'))$('#go').onclick=()=>{sfx('tap');startReview()};
   bindPick();
   document.querySelectorAll('.coin').forEach(b=>b.onclick=()=>{
@@ -210,7 +211,7 @@ function typeFor(c){
   if(c.reps===2)return shuffle(['translate','build'])[0];
   return shuffle(['listen','translate','gap','build','build'])[0];
 }
-function newSession(mode,items,unit,stage){session={mode,unit,stage,items,i:0,right:0,asked:0,combo:0,best:0,xp:0,before:unit!=null?unitInfo(unit):null}}
+function newSession(mode,items,unit,stage){session={mode,unit,stage,items,i:0,right:0,asked:0,combo:0,best:0,xp:0,t0:Date.now(),nb:Object.keys(cards()).length,before:unit!=null?unitInfo(unit):null}}
 function startUnit(u,k){
   const inf=unitInfo(u),cs=cards();
   if(k==null)k=inf.cur?inf.cur.k:'all';
@@ -366,6 +367,7 @@ function renderCold(it){
     session.asked++;let gain=0;
     if(ok){session.right++;session.combo++;session.best=Math.max(session.best,session.combo);gain=peeked?12:25;session.xp+=gain;st.xp[st.lang]+=gain;save()}
     else session.combo=0;
+    logAnswer(ok,gain);save();
     sfx(ok?'ok':'bad');
     const cb=$('#combo');if(cb){cb.style.visibility=session.combo>1?'visible':'hidden';cb.innerHTML=ICON.fire+session.combo}
     setSceneMood(ok?'happy':'sad');
@@ -384,6 +386,7 @@ function finish(ok,it){
   let gain=0;
   if(ok){session.right++;session.combo++;session.best=Math.max(session.best,session.combo);gain=10+Math.min(session.combo-1,5)*2;session.xp+=gain;st.xp[st.lang]+=gain;save()}
   else session.combo=0;
+  logAnswer(ok,gain);save();
   sfx(ok?'ok':'bad');
   const cb=$('#combo');if(cb){cb.style.visibility=session.combo>1?'visible':'hidden';cb.innerHTML=ICON.fire+session.combo;if(ok){cb.classList.remove('pop');void cb.offsetWidth;cb.classList.add('pop')}}
   setSceneMood(ok?'happy':'sad');
@@ -412,7 +415,16 @@ function finish(ok,it){
 }
 function renderDone(){
   const today=new Date().toISOString().slice(0,10),yest=new Date(Date.now()-DAY).toISOString().slice(0,10);
-  if(st.streak.last!==today){st.streak={last:today,n:st.streak.last===yest?st.streak.n+1:1};save()}
+  if(st.streak.last!==today){st.streak={last:today,n:st.streak.last===yest?st.streak.n+1:1};st.streak.best=Math.max(st.streak.best||0,st.streak.n);if([3,7,14,30,50,100,200,365].includes(st.streak.n))logEvent('streak',{n:st.streak.n});save()}
+  { // activity log + milestones
+    const L=logs(),k=dkey(),day=L[k]=L[k]||{a:0,ok:0,xp:0,n:0,s:0};
+    day.n+=Math.max(0,Object.keys(cards()).length-session.nb);day.s+=Math.min(60,Math.round((Date.now()-session.t0)/60000));
+    const lvA=lvlOf(st.xp[st.lang]-session.xp),lvB=lvlOf(st.xp[st.lang]);if(lvB>lvA)logEvent('level',{n:lvB});
+    if(session.mode==='lesson'&&session.before){const nowI=unitInfo(session.unit),b4=session.before;
+      nowI.stages.forEach((x,j)=>{if(x.done&&!(b4.stages[j]&&b4.stages[j].done))logEvent('stage',{u:UNITS[session.unit].slug,k:x.k})});
+      if(nowI.done&&!b4.done)logEvent('unit',{u:UNITS[session.unit].slug});}
+    save();
+  }
   const pct=session.asked?Math.round(session.right/session.asked*100):100;
   const next=Object.values(cards()).map(c=>c.due).filter(d=>d>Date.now()).sort((a,b)=>a-b)[0];
   const nextTxt=next?(next-Date.now()<DAY?'later today':new Date(next).toLocaleDateString(undefined,{weekday:'long',day:'numeric',month:'short'})):'';
@@ -490,6 +502,9 @@ function renderSheet(){
     <select id="sfxSel"><option value="1" ${st.sfx?'selected':''}>On</option><option value="0" ${!st.sfx?'selected':''}>Off</option></select></div>
    <div class="row"><label for="dlSel">Download next stages for offline</label>
     <select id="dlSel"><option value="1" ${st.autoDl!==false?'selected':''}>On (after each stage)</option><option value="0" ${st.autoDl===false?'selected':''}>Off</option></select></div>
+   <div class="row"><label for="remT">Daily reminder</label>
+    <div class="rem"><input type="time" id="remT" value="${esc(st.remind||'19:00')}"><button class="ghost" id="remBtn">Add to calendar</button></div></div>
+   <p class="note" style="margin:-6px 0 0">Adds a repeating daily event with an alert to your phone’s calendar. The app has no server, so it can’t send push notifications itself.</p>
    <button class="ghost" id="test">Test voice</button>
    <p class="note" id="diag" style="margin:0">Audio check: ${recorded()?recorded()+' recorded clips':'no recorded clips yet'} · ${hasTTS?'device speech supported':'device speech not supported'} · ${voices.length} voices · ${vs.length} ${LANGS[st.lang].name} · ${esc(ttsLog)}</p>
    <button class="ghost danger" id="reset">${confirmReset?'Tap again to erase '+LANGS[st.lang].name+' progress':'Reset '+LANGS[st.lang].name+' progress'}</button>
@@ -503,6 +518,89 @@ function renderSheet(){
   $('#themeSel').onchange=e=>{st.theme=e.target.value;applyTheme();save()};
   $('#test').onclick=()=>{loadVoices();speak(0);setTimeout(()=>{if(sheetOpen)renderSheet()},1200)};
   $('#reset').onclick=()=>{if(confirmReset){st.cards[st.lang]={};st.xp[st.lang]=0;save();closeSheet()}else{confirmReset=true;renderSheet()}};
+  $('#remT').onchange=e=>{st.remind=e.target.value;save()};
+  $('#remBtn').onclick=()=>{sfx('tap');st.remind=$('#remT').value||'19:00';save();downloadReminder(st.remind)};
   $('#closeS').onclick=closeSheet;
 }
 
+
+/* ---------- progress overview ---------- */
+function renderProgress(){
+  session=null;
+  const L=LANGS[st.lang],cs=cards(),ids=allIds(),log=logs(),now=Date.now();
+  const xp=st.xp[st.lang],lv=lvlOf(xp);
+  const vals=ids.map(i=>cs[i]).filter(Boolean);
+  const mature=vals.filter(c=>c.iv>=21).length,young=vals.filter(c=>c.iv>=3&&c.iv<21).length,learning=vals.length-mature-young,fresh=ids.length-vals.length;
+  const sum=(a,f)=>a.reduce((x,y)=>x+f(y),0);
+  // heatmap: 12 weeks, Monday-first columns
+  const today=new Date();today.setHours(12,0,0,0);
+  const start=new Date(today);start.setDate(start.getDate()-((today.getDay()+6)%7)-7*11);
+  const lvl=a=>!a?0:a<10?1:a<25?2:a<50?3:4;
+  let cells='';
+  for(let w=0;w<12;w++)for(let d=0;d<7;d++){
+    const t=new Date(start);t.setDate(start.getDate()+w*7+d);if(t>today)continue;
+    const k=dkey(t),e=log[k],a=e?e.a:0;
+    cells+=`<i class="hm l${lvl(a)}${k===dkey()?' today':''}" style="grid-column:${w+1};grid-row:${d+1}" title="${t.toLocaleDateString(undefined,{weekday:'short',day:'numeric',month:'short'})}: ${a} answers"></i>`;
+  }
+  const days=Object.keys(log).sort(),active=days.filter(k=>log[k].a>0).length;
+  const tot={a:sum(days,k=>log[k].a),ok:sum(days,k=>log[k].ok),m:sum(days,k=>log[k].s||0)};
+  // last 14 days XP
+  const last=[...Array(14)].map((_,i)=>{const t=new Date(today);t.setDate(t.getDate()-13+i);const e=log[dkey(t)];return {t,xp:e?e.xp:0}});
+  const mx=Math.max(50,...last.map(x=>x.xp));
+  const bars=last.map(x=>`<div class="bar${dkey(x.t)===dkey()?' today':''}"><i style="height:${Math.round(x.xp/mx*100)}%" title="${x.xp} XP"></i><span>${x.t.toLocaleDateString(undefined,{weekday:'narrow'})}</span></div>`).join('');
+  // coming up: reviews per day for the next 7 days (today includes overdue)
+  const up=[...Array(7)].map((_,i)=>{const end=new Date(today);end.setHours(23,59,59,999);end.setDate(end.getDate()+i);const s0=i?new Date(end.getTime()-DAY+1):null;
+    return {i,n:vals.filter(c=>c.due<=end.getTime()&&(!s0||c.due>=s0.getTime())).length,t:end}});
+  const umx=Math.max(5,...up.map(x=>x.n));
+  // branches
+  const groups={};UNITS.forEach((U,u)=>{const key=U.scen?'scen':U.br;const g=groups[key]=groups[key]||{done:0,total:0};const inf=unitInfo(u);g.done+=inf.nDone;g.total+=inf.stages.length});
+  const BNAME={...BR_NAME,scen:L.city},BCOL=k=>k==='scen'?'--gold':k==='core'?'--btn':'--br-'+k;
+  const branches=Object.entries(groups).map(([k,g])=>`<div class="br-row"><span>${esc(BNAME[k]||k)}</span><div class="br-bar"><i style="width:${g.total?Math.round(g.done/g.total*100):0}%;background:var(${BCOL(k)})"></i></div><b>${g.done}/${g.total}</b></div>`).join('');
+  // timeline
+  const unitBySlug=s=>UNITS.findIndex(x=>x.slug===s);
+  const evs=[...events()].reverse();
+  const evTxt=e=>{const u=e.u!=null?unitBySlug(e.u):-1,nm=u>=0?esc(uTxt(u,'sh')):'';
+    return e.type==='stage'?[`Cleared <b>${nm}</b> · stage ${e.k}`,u>=0?esc(stageTxt(u,e.k,'title')):'' ,'stage']
+      :e.type==='unit'?[`Finished every stage of <b>${nm}</b>`,'','unit']
+      :e.type==='level'?[`Reached <b>level ${e.n}</b>`,'','level']
+      :e.type==='streak'?[`<b>${e.n}-day</b> streak`,'','streak']:[e.type,'',''];};
+  let tl='',lastDay='';
+  evs.forEach(e=>{const d=new Date(e.t).toLocaleDateString(undefined,{weekday:'short',day:'numeric',month:'short'});
+    if(d!==lastDay){tl+=`<li class="tl-day">${d}</li>`;lastDay=d}
+    const [a,b,c]=evTxt(e);tl+=`<li class="tl-ev ev-${c}"><i></i><div>${a}${b?`<small>${b}</small>`:''}</div></li>`});
+  if(days.length)tl+=`<li class="tl-day">${new Date(days[0]+'T12:00').toLocaleDateString(undefined,{day:'numeric',month:'short',year:'numeric'})}</li><li class="tl-ev ev-start"><i></i><div>Progress tracking started</div></li>`;
+  $('#app').innerHTML=`
+  <div class="pg-top"><button class="ghost" id="back">‹ Back</button><h2>Your ${esc(L.name)}</h2></div>
+  <div class="pg-tiles">
+    <div class="tile"><b>${streakNow()}</b><span>day streak${st.streak.best?` · best ${st.streak.best}`:''}</span></div>
+    <div class="tile"><b>${vals.length}<small>/${ids.length}</small></b><span>sentences met</span></div>
+    <div class="tile"><b>${mature}</b><span>known well (3+ weeks)</span></div>
+    <div class="tile"><b>Lv ${lv}</b><span>${xp} XP</span></div>
+  </div>
+  <section class="pg-card"><h3>Activity · last 12 weeks</h3>
+    <div class="hm-grid">${cells}</div>
+    <div class="hm-foot"><span>${active} active day${active===1?'':'s'} · ${tot.a} answers${tot.a?` · ${Math.round(tot.ok/tot.a*100)}% right`:''}${tot.m?` · ~${tot.m} min`:''}</span>
+    <span class="hm-legend">less<i class="hm l0"></i><i class="hm l1"></i><i class="hm l2"></i><i class="hm l3"></i><i class="hm l4"></i>more</span></div></section>
+  <section class="pg-card"><h3>XP · last 14 days</h3><div class="bars">${bars}</div></section>
+  <section class="pg-card"><h3>Your memory</h3>
+    <div class="mem">${[['mature',mature],['young',young],['learning',learning],['fresh',fresh]].map(([c,n])=>`<i class="${c}" style="flex-grow:${n}"></i>`).join('')}</div>
+    <div class="mem-key"><span><i class="mature"></i>Known well ${mature}</span><span><i class="young"></i>Getting there ${young}</span><span><i class="learning"></i>Just learned ${learning}</span><span><i class="fresh"></i>Not met yet ${fresh}</span></div></section>
+  <section class="pg-card"><h3>Reviews coming up</h3><div class="bars up">${up.map(x=>`<div class="bar"><b>${x.n||''}</b><i style="height:${Math.round(x.n/umx*100)}%"></i><span>${x.i?x.t.toLocaleDateString(undefined,{weekday:'short'}):'Today'}</span></div>`).join('')}</div></section>
+  <section class="pg-card"><h3>Stages cleared by branch</h3>${branches}</section>
+  <section class="pg-card"><h3>Timeline</h3>${tl?`<ol class="tl">${tl}</ol>`:'<p class="note">Milestones show up here as you clear stages, level up and keep streaks.</p>'}</section>
+  <button class="chunky full" id="back2">Back to the path</button>`;
+  $('#back').onclick=$('#back2').onclick=()=>{sfx('tap');renderHome();scrollTo(0,0)};
+  scrollTo(0,0);
+}
+
+/* ---------- calendar reminder (no server needed) ---------- */
+function downloadReminder(time){
+  const [h,m]=(time||'19:00').split(':'),d=new Date();d.setDate(d.getDate()+1);
+  const p=n=>String(n).padStart(2,'0'),day=`${d.getFullYear()}${p(d.getMonth()+1)}${p(d.getDate())}`;
+  const stamp=new Date().toISOString().replace(/[-:]/g,'').slice(0,15)+'Z',url=location.href.split('#')[0];
+  const ics=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Frase a Frase//EN','BEGIN:VEVENT',`UID:frase-a-frase-daily-${stamp}`,`DTSTAMP:${stamp}`,
+    `DTSTART:${day}T${p(h)}${p(m)}00`,'DURATION:PT10M','RRULE:FREQ=DAILY','SUMMARY:Frase a Frase · 10 minutes',
+    `DESCRIPTION:Keep your streak alive: ${url}`,`URL:${url}`,'BEGIN:VALARM','ACTION:DISPLAY','DESCRIPTION:Frase a Frase','TRIGGER:PT0M','END:VALARM','END:VEVENT','END:VCALENDAR'].join('\r\n');
+  const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([ics],{type:'text/calendar'}));a.download='frase-a-frase-reminder.ics';
+  document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},1000);
+}

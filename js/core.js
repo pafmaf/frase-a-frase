@@ -13,7 +13,7 @@ let session=null,sheetOpen=false,confirmReset=false; // UI state shared by core.
 const KEY=APP.storageKey;
 const LANG_IDS=Object.keys(LANGS);
 const perLang=mk=>Object.fromEntries(LANG_IDS.map(l=>[l,mk()]));
-let st={lang:LANG_IDS[0],theme:'auto',recVoice:perLang(()=>'mix'),cards:perLang(()=>({})),slow:false,sfx:true,splash:true,pick:'all',autoDl:true,xp:perLang(()=>0),voice:perLang(()=>''),streak:{last:'',n:0}};
+let st={lang:LANG_IDS[0],theme:'auto',recVoice:perLang(()=>'mix'),cards:perLang(()=>({})),slow:false,sfx:true,splash:true,pick:'all',autoDl:true,log:perLang(()=>({})),events:perLang(()=>[]),remind:'19:00',xp:perLang(()=>0),voice:perLang(()=>''),streak:{last:'',n:0}};
 try{const raw=localStorage.getItem(KEY);if(raw){const p=JSON.parse(raw);st={...st,...p,cards:{...st.cards,...(p.cards||{})},voice:{...st.voice,...(p.voice||{})},recVoice:{...st.recVoice,...(p.recVoice||{})},xp:{...st.xp,...(p.xp||{})}};if(!LANGS[st.lang])st.lang=LANG_IDS[0]}}catch(e){}
 function save(){try{localStorage.setItem(KEY,JSON.stringify(st))}catch(e){}}
 function applyTheme(){const r=document.documentElement;if(st.theme==='light'||st.theme==='dark')r.dataset.theme=st.theme;else delete r.dataset.theme}
@@ -191,3 +191,10 @@ function fanfare(perfect){ // rising arpeggio, confetti pop, final major chord w
   sparkle.forEach((f,i)=>tone(f,t0+.62+i*.07,.3,'sine',.05,out)); // twinkle on top (longer when perfect)
 }
 
+
+/* ---------- activity log (local dates) ---------- */
+const dkey=(t=Date.now())=>{const d=new Date(t);return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')};
+function logs(){st.log=st.log||{};return st.log[st.lang]=st.log[st.lang]||{}}
+function events(){st.events=st.events||{};return st.events[st.lang]=st.events[st.lang]||[]}
+function logAnswer(ok,xp){const L=logs(),k=dkey(),d=L[k]=L[k]||{a:0,ok:0,xp:0,n:0,s:0};d.a++;if(ok)d.ok++;d.xp+=xp||0}
+function logEvent(type,data){events().push({t:Date.now(),type,...data});if(events().length>300)events().splice(0,events().length-300)}
