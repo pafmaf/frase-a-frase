@@ -90,8 +90,18 @@ function renderHome(){
 // "Where to next?" carousel: one swipeable card per open branch
 const BR_NAME={core:'Basics',food:'Food',travel:'Travel',people:'People',life:'Everyday',words:'Words'};
 let pickIdx=0;
-function pickHTML(open){
-  if(!open.length)return'';
+const PICKS=[['all','Mix'],['main','Situations'],['words','Word packs']];
+// Mix: two situations, then a word pack, so vocabulary comes up regularly
+function pickList(open){
+  const isW=u=>(UNITS[u].tree||'main')==='words',m=open.filter(u=>!isW(u)),w=open.filter(isW);
+  if(st.pick==='main')return m;if(st.pick==='words')return w;
+  const out=[];while(m.length||w.length){out.push(...m.splice(0,2));if(w.length)out.push(w.shift())}return out;
+}
+function pickHTML(all){
+  if(!all.length)return'';
+  const open=pickList(all);
+  const tabs=`<div class="pick-tabs" role="tablist">${PICKS.map(([k,l])=>`<button role="tab" data-pick="${k}" aria-selected="${(st.pick||'all')===k}">${l}</button>`).join('')}</div>`;
+  if(!open.length)return`<section class="pick"><div class="pick-head"><h3>Where to next?</h3>${tabs}</div><p class="pick-empty">Nothing open here right now. Try another filter.</p></section>`;
   const cardsH=open.map(u=>{
     const U=UNITS[u],inf=unitInfo(u),k=inf.cur?inf.cur.k:1,n=inf.stages.length||U.stages.length;
     const tag=U.scen?LANGS[st.lang].city:(BR_NAME[U.br]||U.br);
@@ -103,16 +113,20 @@ function pickHTML(open){
         <div class="pc-row"><span class="pc-pips" aria-label="${inf.nDone} of ${n} stages done">${inf.stages.map(x=>`<i class="${x.done?'on':''}"></i>`).join('')}</span>
         <button class="chunky gold pc-go" data-unit="${u}" data-k="${k}">Let's go!</button></div></div>
     </article>`}).join('');
-  return `<section class="pick"><div class="pick-head"><h3>Where to next?</h3>${open.length>1?'<small>swipe ‹ ›</small>':''}</div>
-    <div class="pick-rail${open.length===1?' solo':''}">${cardsH}</div>
+  return `<section class="pick"><div class="pick-head"><h3>Where to next?</h3>${tabs}</div>
+    <div class="pick-wrap"><div class="pick-rail${open.length===1?' solo':''}">${cardsH}</div>
+    ${open.length>1?`<button class="pick-arrow prev" aria-label="Previous">‹</button><button class="pick-arrow next" aria-label="Next">›</button>`:''}</div>
     ${open.length>1&&open.length<=9?`<div class="pick-dots">${open.map((_,i)=>`<i data-i="${i}"></i>`).join('')}</div>`
       :open.length>9?`<div class="pick-dots count"><b id="pickN">1</b>&nbsp;/ ${open.length}</div>`:''}</section>`;
 }
 function bindPick(){
+  document.querySelectorAll('.pick-tabs button').forEach(b=>b.onclick=()=>{sfx('tap');st.pick=b.dataset.pick;pickIdx=0;save();renderHome()});
   const rail=$('.pick-rail');if(!rail)return;
   const cs=[...rail.children],dots=[...document.querySelectorAll('.pick-dots i')];
   const step=()=>cs.length>1?cs[1].offsetLeft-cs[0].offsetLeft:1;
-  const mark=()=>{const i=Math.max(0,Math.min(cs.length-1,Math.round(rail.scrollLeft/step())));pickIdx=i;dots.forEach((d,j)=>d.classList.toggle('on',j===i));if($('#pickN'))$('#pickN').textContent=i+1};
+  const mark=()=>{const i=Math.max(0,Math.min(cs.length-1,Math.round(rail.scrollLeft/step())));pickIdx=i;dots.forEach((d,j)=>d.classList.toggle('on',j===i));if($('#pickN'))$('#pickN').textContent=i+1;
+    const pv=$('.pick-arrow.prev'),nx=$('.pick-arrow.next');if(pv){pv.disabled=rail.scrollLeft<4;nx.disabled=rail.scrollLeft>rail.scrollWidth-rail.clientWidth-4}};
+  document.querySelectorAll('.pick-arrow').forEach(b=>b.onclick=()=>{sfx('tap');rail.scrollBy({left:(b.classList.contains('next')?1:-1)*step(),behavior:'smooth'})});
   pickIdx=Math.min(pickIdx,cs.length-1);rail.scrollLeft=pickIdx*step();mark();
   rail.addEventListener('scroll',mark,{passive:true});
   dots.forEach(d=>d.onclick=()=>rail.scrollTo({left:+d.dataset.i*step(),behavior:'smooth'}));

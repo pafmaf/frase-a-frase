@@ -516,6 +516,16 @@ html.splashing,html.splashing body{overflow:hidden}
 .pc-pips i{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.25)}
 .pc-pips i.on{background:var(--gold)}
 .pcard .chunky{padding:10px 20px;font-size:16px;border-radius:15px}
+.pick-head{flex-wrap:wrap;gap:8px;align-items:center}
+.pick-tabs{display:flex;gap:4px;background:var(--surface);border-radius:99px;padding:3px;box-shadow:var(--shadow)}
+.pick-tabs button{border:0;background:none;color:var(--muted);font:inherit;font-size:12px;font-weight:800;padding:6px 11px;border-radius:99px;cursor:pointer}
+.pick-tabs button[aria-selected="true"]{background:var(--btn);color:var(--on-btn,#fff)}
+.pick-empty{margin:0 18px;color:var(--muted)}
+.pick-wrap{position:relative}
+.pick-arrow{position:absolute;top:calc(50% - 30px);width:44px;height:44px;border-radius:50%;border:0;background:var(--surface);color:var(--ink);font-size:28px;line-height:1;font-weight:800;box-shadow:var(--shadow);cursor:pointer;display:none;z-index:2;padding:0 0 4px}
+.pick-arrow.prev{left:8px}.pick-arrow.next{right:8px}
+.pick-arrow:disabled{opacity:0;pointer-events:none}
+@media (hover:hover) and (pointer:fine){.pick-arrow{display:block}}
 .pick-dots{display:flex;justify-content:center;gap:6px}
 .pick-dots i{width:7px;height:7px;border-radius:99px;background:var(--line);transition:width .2s;cursor:pointer}
 .pick-dots i.on{width:22px;background:var(--btn)}
