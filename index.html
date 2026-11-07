@@ -111,7 +111,7 @@
 /* Boot: load the content first, then the app scripts in order. */
 const loadScript=src=>new Promise((ok,fail)=>{const s=document.createElement("script");s.src=src;s.async=false;s.onload=ok;s.onerror=()=>fail(new Error("Could not load "+src));document.head.appendChild(s)});
 loadContent()
-  .then(()=>["js/core.js","js/art.js","js/ui.js"].reduce((p,f)=>p.then(()=>loadScript(f)),Promise.resolve()))
+  .then(()=>["js/core.js","js/i18n.js","js/art.js","js/ui.js"].reduce((p,f)=>p.then(()=>loadScript(f)),Promise.resolve()))
   .then(()=>renderHome())
   .then(()=>window.dispatchEvent(new Event('app-ready')))
   .catch(e=>{console.error(e);window.dispatchEvent(new Event('app-ready'));const a=document.getElementById("app");a.textContent="Could not load the lessons ("+e.message+"). Check your connection and reload.";a.style.cssText="padding:24px;font:16px/1.5 system-ui"});

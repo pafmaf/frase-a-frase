@@ -4,6 +4,7 @@
   python3 tools/content.py validate   check every rule the app enforces, plus extra quality checks
   python3 tools/content.py stats      counts per unit and language
   python3 tools/content.py tsv        list every clip to record (lang, id, kind, text) on stdout
+                                      (feminine forms are extra clips with id "<id>f")
   python3 tools/content.py json       same list as JSON, with English and unit
 """
 import json, os, re, sys
@@ -25,9 +26,10 @@ def clips(cfg, units):
         for s in u.get('sentences', []):
             for l in langs:
                 if s.get(l): out.append(dict(lang=l, id=str(s['id']), kind='sentence', unit=u['id'], stage=s.get('stage', 1), text=s[l], en=s['en']))
+                if (s.get('f') or {}).get(l): out.append(dict(lang=l, id=f"{s['id']}f", kind='sentence-f', unit=u['id'], stage=s.get('stage', 1), text=s['f'][l], en=s['en']))
         for p in u.get('passages', []):
             out.append(dict(lang=p['lang'], id=p['id'], kind='passage', unit=u['id'], stage=p.get('stage', 1), text=p['text'], en=p['en']))
-    key = lambda c: (langs.index(c['lang']), c['kind'] == 'passage', int(c['id'].lstrip('g')))
+    key = lambda c: (langs.index(c['lang']), c['kind'] == 'passage', int(c['id'].strip('gf')), c['id'])
     return sorted(out, key=key)
 
 def validate(cfg, units):
@@ -54,7 +56,10 @@ def validate(cfg, units):
             if not s.get('en'): E(f'{uid}: sentence {i} has no English')
             if not any(s.get(l) for l in langs): E(f'{uid}: sentence {i} has no target-language text')
             for l in s:
-                if l not in ('id', 'en', 'stage') and l not in langs: E(f'{uid}: sentence {i} has unknown field "{l}"')
+                if l not in ('id', 'en', 'de', 'f', 'stage') and l not in langs: E(f'{uid}: sentence {i} has unknown field "{l}"')
+            for l, t in (s.get('f') or {}).items():
+                if l not in langs or not s.get(l): E(f'{uid}: sentence {i}: feminine form for "{l}" without a main text')
+                elif t == s[l]: E(f'{uid}: sentence {i}: feminine {l} form equals the main text')
             if not isinstance(s.get('stage', 1), int) or not 1 <= s.get('stage', 1) <= max(1, len(u.get('stages', []))):
                 E(f'{uid}: sentence {i} has stage {s.get("stage")!r} but the unit lists {len(u.get("stages", []))} stages')
         for p in u.get('passages', []):
@@ -69,6 +74,9 @@ def validate(cfg, units):
             if len(w) < 2: E(f'{uid}: passage {p["id"]} needs at least 2 wrong answers')
             if len(w) != 3: W(f'{uid}: passage {p["id"]} has {len(w)} wrong answers (3 is the norm)')
             if p.get('answer') in w: E(f'{uid}: passage {p["id"]} lists the right answer as wrong')
+            if p.get('de'):
+                d = p['de']
+                if not all(d.get(k) for k in ('meaning', 'question', 'answer')) or len(d.get('wrong', [])) != len(w): E(f'{uid}: passage {p["id"]}: "de" needs meaning, question, answer and {len(w)} wrong answers')
             if not 1 <= p.get('stage', 1) <= max(1, len(u.get('stages', []))): E(f'{uid}: passage {p["id"]} has a bad stage {p.get("stage")!r}')
         for k, stg in enumerate(u.get('stages', []), 1):
             if not stg.get('title') or not stg.get('summary'): E(f'{uid}: stage {k} needs a title and a summary')

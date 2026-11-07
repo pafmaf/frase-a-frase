@@ -4,7 +4,7 @@ const $=s=>document.querySelector(s);
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const shuffle=a=>{a=[...a];for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]]}return a};
 const unitIds=(u,k)=>allIds().filter(i=>S[i].u===u&&(k==null||S[i].st===k));
-const stageTxt=(u,k,key)=>{const v=UNITS[u].stages[k-1][key];return v&&typeof v==='object'?v[st.lang]:v||''};
+const stageTxt=(u,k,key)=>{const sg=UNITS[u].stages[k-1],v=(st.ui==='de'&&sg.de&&sg.de[key])||sg[key];return v&&typeof v==='object'?v[st.lang]:v||''};
 const ICON={
  play:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3A4.5 4.5 0 0 0 14 7.97v8.05A4.5 4.5 0 0 0 16.5 12zM14 3.23v2.06a7 7 0 0 1 0 13.42v2.06a9 9 0 0 0 0-17.54z"/></svg>',
  slow:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>',
@@ -52,9 +52,9 @@ function renderHome(){
   const due=dueList().length,learned=Object.keys(cards()).length,total=allIds().length;
   const open=openUnits();
   const L=LANGS[st.lang],xp=st.xp[st.lang],lv=lvlOf(xp),lo=xpFor(lv),hi=xpFor(lv+1);
-  const headline=due?`${due} sentence${due>1?'s':''} ready to review`
-    :open.length>1?`${open.length} paths open. Pick one below.`
-    :open.length?`Next: ${esc(uTxt(open[0],'sh'))}, stage ${unitInfo(open[0]).cur?unitInfo(open[0]).cur.k:1}`:'Tree complete. Keep your streak alive.';
+  const headline=due?T(due>1?'{n} sentences ready to review':'{n} sentence ready to review',{n:due})
+    :open.length>1?T('{n} paths open. Pick one below.',{n:open.length})
+    :open.length?T('Next: {u}, stage {k}',{u:esc(uTxt(open[0],'sh')),k:unitInfo(open[0]).cur?unitInfo(open[0]).cur.k:1}):T('Tree complete. Keep your streak alive.');
   $('#app').innerHTML=`
   ${headerHTML()}
   <section class="hero">
@@ -63,19 +63,19 @@ function renderHome(){
       <div class="bubble">${esc(pick(LINES[st.lang].idle))}</div>
       <h2>${headline}</h2>
       <div class="chips">
-        <span class="chip fire">${ICON.fire}${streakNow()} day${streakNow()===1?'':'s'}</span>
+        <span class="chip fire">${ICON.fire}${T(streakNow()===1?'{n} day':'{n} days',{n:streakNow()})}</span>
         <span class="chip star">${ICON.star}${learned}/${total}</span>
-        <span class="chip due">${ICON.clock}${due} due</span>
+        <span class="chip due">${ICON.clock}${T('{n} due',{n:due})}</span>
       </div>
-      ${due?'<button class="chunky gold" id="go">Review</button>':''}
+      ${due?`<button class="chunky gold" id="go">${T('Review')}</button>`:''}
     </div>
-    <button class="lvl" id="progBtn" aria-label="Open your progress"><span class="badge">Lv ${lv}</span><div class="xpbar"><i style="width:${Math.round((xp-lo)/(hi-lo)*100)}%"></i></div><span>${xp} XP</span><span class="lvl-more">Progress ›</span></button>
+    <button class="lvl" id="progBtn" aria-label="${T('Open your progress')}"><span class="badge">Lv ${lv}</span><div class="xpbar"><i style="width:${Math.round((xp-lo)/(hi-lo)*100)}%"></i></div><span>${xp} XP</span><span class="lvl-more">${T('Progress')} ›</span></button>
   </section>
   ${pickHTML(open)}
-  <div class="map-head" id="treeHead"><h3>${L.native} skill tree</h3><small>${audioLabel()}</small></div>
-  <div class="legend"><span><i style="background:var(--br-food)"></i>Food</span><span><i style="background:var(--br-travel)"></i>Travel</span><span><i style="background:var(--br-people)"></i>People</span><span><i style="background:var(--br-life)"></i>Everyday</span><span><i style="background:var(--br-words)"></i>Words</span><span><i style="background:var(--gold)"></i>${L.city} scenario</span></div>
+  <div class="map-head" id="treeHead"><h3>${T('{l} skill tree',{l:L.native})}</h3><small>${audioLabel()}</small></div>
+  <div class="legend"><span><i style="background:var(--br-food)"></i>${T('Food')}</span><span><i style="background:var(--br-travel)"></i>${T('Travel')}</span><span><i style="background:var(--br-people)"></i>${T('People')}</span><span><i style="background:var(--br-life)"></i>${T('Everyday')}</span><span><i style="background:var(--br-words)"></i>${T('Words')}</span><span><i style="background:var(--gold)"></i>${T('{c} scenario',{c:L.city})}</span></div>
   ${treeHTML('main',open)}
-  <div class="map-head"><h3>Word packs</h3><small>Everyday nouns, verbs and times</small></div>
+  <div class="map-head"><h3>${T('Word packs')}</h3><small>${T('Everyday nouns, verbs and times')}</small></div>
   ${treeHTML('words',open)}`;
   bindHeader();
   $('#progBtn').onclick=()=>{sfx('tap');renderProgress()};
@@ -101,22 +101,22 @@ function pickList(open){
 function pickHTML(all){
   if(!all.length)return'';
   const open=pickList(all);
-  const tabs=`<div class="pick-tabs" role="tablist">${PICKS.map(([k,l])=>`<button role="tab" data-pick="${k}" aria-selected="${(st.pick||'all')===k}">${l}</button>`).join('')}</div>`;
-  if(!open.length)return`<section class="pick"><div class="pick-head"><h3>Where to next?</h3>${tabs}</div><p class="pick-empty">Nothing open here right now. Try another filter.</p></section>`;
+  const tabs=`<div class="pick-tabs" role="tablist">${PICKS.map(([k,l])=>`<button role="tab" data-pick="${k}" aria-selected="${(st.pick||'all')===k}">${T(l)}</button>`).join('')}</div>`;
+  if(!open.length)return`<section class="pick"><div class="pick-head"><h3>${T('Where to next?')}</h3>${tabs}</div><p class="pick-empty">${T('Nothing open here right now. Try another filter.')}</p></section>`;
   const cardsH=open.map(u=>{
     const U=UNITS[u],inf=unitInfo(u),k=inf.cur?inf.cur.k:1,n=inf.stages.length||U.stages.length;
-    const tag=U.scen?LANGS[st.lang].city:(BR_NAME[U.br]||U.br);
+    const tag=U.scen?LANGS[st.lang].city:T(BR_NAME[U.br]||U.br);
     return `<article class="pcard" data-unit="${u}" style="--c:var(${U.scen?'--gold':BR_NAME[U.br]&&U.br!=='core'?'--br-'+U.br:'--btn'})">
       <div class="pc-art">${sceneSVG(u,'idle',stageScene(u,k))}</div>
-      <div class="pc-body"><span class="pc-tag">${esc(tag)} · Stage ${k}/${n}</span>
+      <div class="pc-body"><span class="pc-tag">${esc(tag)} · ${T('Stage')} ${k}/${n}</span>
         <h4>${esc(stageTxt(u,k,'title')||uTxt(u,'t'))}</h4>
         <p>${esc(stageTxt(u,k,'summary')||uTxt(u,'s'))}</p>
-        <div class="pc-row"><span class="pc-pips" aria-label="${inf.nDone} of ${n} stages done">${inf.stages.map(x=>`<i class="${x.done?'on':''}"></i>`).join('')}</span>
-        <button class="chunky gold pc-go" data-unit="${u}" data-k="${k}">Let's go!</button></div></div>
+        <div class="pc-row"><span class="pc-pips" aria-label="${T('{a} of {n} stages done',{a:inf.nDone,n})}">${inf.stages.map(x=>`<i class="${x.done?'on':''}"></i>`).join('')}</span>
+        <button class="chunky gold pc-go" data-unit="${u}" data-k="${k}">${T("Let's go!")}</button></div></div>
     </article>`}).join('');
-  return `<section class="pick"><div class="pick-head"><h3>Where to next?</h3>${tabs}</div>
+  return `<section class="pick"><div class="pick-head"><h3>${T('Where to next?')}</h3>${tabs}</div>
     <div class="pick-wrap"><div class="pick-rail${open.length===1?' solo':''}">${cardsH}</div>
-    ${open.length>1?`<button class="pick-arrow prev" aria-label="Previous">‹</button><button class="pick-arrow next" aria-label="Next">›</button>`:''}</div>
+    ${open.length>1?`<button class="pick-arrow prev" aria-label="${T('Previous')}">‹</button><button class="pick-arrow next" aria-label="${T('Next')}">›</button>`:''}</div>
     ${open.length>1&&open.length<=9?`<div class="pick-dots">${open.map((_,i)=>`<i data-i="${i}"></i>`).join('')}</div>`
       :open.length>9?`<div class="pick-dots count"><b id="pickN">1</b>&nbsp;/ ${open.length}</div>`:''}</section>`;
 }
@@ -152,14 +152,14 @@ function treeHTML(kind,open){
       const cls=lock?'locked':inf.done?'done':inf.passed?'passed':'open';
       const n=inf.stages.length||1,p=lock?0:Math.round(inf.done?100:(inf.nDone+(inf.cur?inf.cur.seen/inf.cur.total:0))/n*100);
       const icon=lock?ICON.lock:inf.done?ICON.check:unitIcon(i);
-      const pips=lock?'':`<span class="pips" aria-label="${inf.nDone} of ${n} stages done">${inf.stages.map(s=>`<i class="${s.done?'on':s.seen?'half':''}"></i>`).join('')}</span>`;
+      const pips=lock?'':`<span class="pips" aria-label="${T('{a} of {n} stages done',{a:inf.nDone,n})}">${inf.stages.map(s=>`<i class="${s.done?'on':s.seen?'half':''}"></i>`).join('')}</span>`;
       return `<div class="node ${cls}" style="left:${X(i)}%;top:${Y(i)}px;--br:var(${BR[u.br]})">
         <div class="coin-wrap">
           ${u.scen?`<span class="scen">${esc(L.city.toUpperCase())}</span>`:''}
           ${isOpen&&i===firstOpen&&kind==='main'?mascot(st.lang,'idle','side-mascot '+(u.col<2?'r':'l')):''}
-          <div class="ring" style="--p:${p}"><button class="coin" data-unit="${i}" aria-label="${esc(uTxt(i,'t'))}${lock?' (locked)':''}">${icon}</button></div>
+          <div class="ring" style="--p:${p}"><button class="coin" data-unit="${i}" aria-label="${esc(uTxt(i,'t'))}${lock?' ('+T('locked')+')':''}">${icon}</button></div>
         </div>
-        <div class="label"><b>${esc(uTxt(i,'sh'))}</b><span>${lock?u.lv+' · locked':inf.done?'All '+n+' stages · '+Math.round(inf.strength*100)+'% strong':pips+(inf.cur?' '+inf.cur.seen+'/'+inf.cur.total:'')}</span></div>
+        <div class="label"><b>${esc(uTxt(i,'sh'))}</b><span>${lock?u.lv+' · '+T('locked'):inf.done?T('All {n} stages · {p}% strong',{n,p:Math.round(inf.strength*100)}):pips+(inf.cur?' '+inf.cur.seen+'/'+inf.cur.total:'')}</span></div>
       </div>`}).join('')}
   </div>`;
 }
@@ -172,18 +172,18 @@ function openUnitSheet(u){
   const go=()=>{sfx('tap');sheetOpen=false;$('#sheet').hidden=true;$('#scrim').hidden=true};
   $('#sheet').innerHTML=`<div class="sheet-in unit-sheet">
     <div class="scene sheet-scene">${sceneSVG(u,'idle',stageScene(u,focus))}</div>
-    <div><span class="lv">${U.lv}${U.scen?' · '+esc(LANGS[st.lang].city)+' scenario':''}</span><h3>${esc(uTxt(u,'t'))}</h3></div>
+    <div><span class="lv">${U.lv}${U.scen?' · '+T('{c} scenario',{c:esc(LANGS[st.lang].city)}):''}</span><h3>${esc(uTxt(u,'t'))}</h3></div>
     <ol class="stages">${inf.stages.map(s=>{
       const state=lock||!s.open?'locked':s.done?'done':'open';
       const right=state==='locked'?ICON.lock:s.done?ICON.check:s.seen+'/'+s.total;
       return `<li><button class="stg ${state}${inf.cur&&inf.cur.k===s.k&&!lock?' cur':''}" data-stage="${s.k}" ${state==='locked'?'aria-disabled="true"':''}>
         <span class="no">${s.k}</span><span class="tx"><b>${esc(stageTxt(u,s.k,'title'))}</b><small>${esc(stageTxt(u,s.k,'summary'))}</small></span><span class="st">${right}</span></button></li>`}).join('')}</ol>
-    ${lock?`<p class="needs">Finish stage 1 of ${needs.map(esc).join(' and ')} to unlock this.</p><button class="chunky" id="uClose">OK</button>`
-      :`<button class="chunky ${inf.done?'':'gold'}" id="uStart">${inf.done?'Practise all stages':(inf.cur.seen?'Continue':'Start')+' stage '+inf.cur.k}</button>${coldPool.length?`<button class="chunky cold-btn" id="uCold">Jump in: cold water</button><p class="needs" style="margin-top:-6px">Real-life passages at natural speed, one per open stage. Get the gist, not every word.</p>`:''}<button class="ghost" id="uClose">Not now</button>`}
+    ${lock?`<p class="needs">${T('Finish stage 1 of {u} to unlock this.',{u:needs.map(esc).join(T(' and '))})}</p><button class="chunky" id="uClose">OK</button>`
+      :`<button class="chunky ${inf.done?'':'gold'}" id="uStart">${inf.done?T('Practise all stages'):T(inf.cur.seen?'Continue stage {k}':'Start stage {k}',{k:inf.cur.k})}</button>${coldPool.length?`<button class="chunky cold-btn" id="uCold">${T('Jump in: cold water')}</button><p class="needs" style="margin-top:-6px">${T('Real-life passages at natural speed, one per open stage. Get the gist, not every word.')}</p>`:''}<button class="ghost" id="uClose">${T('Not now')}</button>`}
   </div>`;
   document.querySelectorAll('.stg').forEach(b=>b.onclick=()=>{
     const k=+b.dataset.stage;
-    if(b.classList.contains('locked')){sfx('bad');toast(lock?'Unlock this unit first.':'Finish stage '+(k-1)+' first.');return}
+    if(b.classList.contains('locked')){sfx('bad');toast(lock?T('Unlock this unit first.'):T('Finish stage {k} first.',{k:k-1}));return}
     go();startUnit(u,k);
   });
   const s=$('#uStart');if(s)s.onclick=()=>{go();startUnit(u,inf.done?'all':inf.cur.k)};
@@ -192,15 +192,15 @@ function openUnitSheet(u){
 }
 function headerHTML(){
   return `<header><div class="brand">Frase <em>a</em> Frase</div>
-  <div class="hright"><div class="seg" role="group" aria-label="Language">
+  <div class="hright"><div class="seg" role="group" aria-label="${T('Language')}">
    ${Object.keys(LANGS).map(l=>`<button data-lang="${l}" aria-pressed="${st.lang===l}">${l.toUpperCase()}</button>`).join('')}</div>
-   <button class="icon-btn" id="themeBtn" aria-label="Theme: ${st.theme}" title="Theme: ${st.theme}">${ICON[st.theme==='auto'?'auto':st.theme==='light'?'sun':'moon']}</button>
-   <button class="icon-btn" id="gear" aria-label="Settings">${ICON.gear}</button></div></header>`;
+   <button class="icon-btn" id="themeBtn" aria-label="${T('Theme')}" title="${T('Theme')}">${ICON[st.theme==='auto'?'auto':st.theme==='light'?'sun':'moon']}</button>
+   <button class="icon-btn" id="gear" aria-label="${T('Settings')}">${ICON.gear}</button></div></header>`;
 }
 function bindHeader(){
   document.querySelectorAll('[data-lang]').forEach(b=>b.onclick=()=>{st.lang=b.dataset.lang;save();sfx('tap');renderHome()});
   $('#gear').onclick=openSheet;
-  $('#themeBtn').onclick=()=>{st.theme=THEMES[(THEMES.indexOf(st.theme)+1)%3];applyTheme();save();sfx('tap');toast('Theme: '+({auto:'follows your phone',light:'light',dark:'dark'})[st.theme]);renderHome()};
+  $('#themeBtn').onclick=()=>{st.theme=THEMES[(THEMES.indexOf(st.theme)+1)%3];applyTheme();save();sfx('tap');toast(T(({auto:'Theme: follows your phone',light:'Theme: light',dark:'Theme: dark'})[st.theme]));renderHome()};
 }
 
 /* ---------- sessions ---------- */
@@ -234,7 +234,7 @@ function startReview(){
   renderItem();
 }
 function distractSentences(id,field){
-  const u=S[id].u,get=i=>field==='en'?S[i].en:tgt(i);
+  const u=S[id].u,get=i=>field==='en'?mean(i):tgt(i);
   const same=shuffle(unitIds(u).filter(i=>i!==id)),other=shuffle(allIds().filter(i=>S[i].u!==u));
   const out=[],seen=new Set([get(id)]);
   for(const i of [...same.slice(0,2),...other,...same.slice(2)]){if(out.length>=3)break;const t=get(i);if(!seen.has(t)){seen.add(t);out.push(t)}}
@@ -262,41 +262,41 @@ function sessionTop(){
 function qHead(kind,prompt,mood='idle'){
   return `<div class="q-head"><div class="qt"><div class="kind">${kind}</div><p class="prompt">${prompt}</p></div></div>`;
 }
-const audioRow=()=>`<div class="audio-row"><button class="play" data-say="0">${ICON.play}Play</button><button class="play" data-say="1">${ICON.slow}Slow</button></div>`;
+const audioRow=()=>`<div class="audio-row"><button class="play" data-say="0">${ICON.play}${T('Play')}</button><button class="play" data-say="1">${ICON.slow}${T('Slow')}</button></div>`;
 function bindAudio(id){document.querySelectorAll('[data-say]').forEach(b=>b.onclick=()=>speak(id,b.dataset.say==='1'))}
 function renderItem(){
   if(session.i>=session.items.length)return renderDone();
   if(session.items[session.i].type==='cold')return renderCold(session.items[session.i]);
-  const it=session.items[session.i],id=it.id,T=tgt(id),EN=S[id].en;
+  const it=session.items[session.i],id=it.id,TX=tgt(id),EN=mean(id);
   const app=$('#app');let body='',opts=[],answer='',optCls='';
   window.scrollTo(0,0);
   if(it.type==='intro'){
     app.innerHTML=`<div class="session">${sessionTop()}
-      ${qHead('New sentence',`${LANGS[st.lang].buddy} teaches you a phrase`,'happy')}
-      <div class="stage"><span class="intro-tag">New</span>
-        <p class="phrase">${esc(T)}</p><div class="en">${esc(EN)}</div>${audioRow()}</div>
-      <p class="note">Listen, repeat it out loud once, then continue.</p>
-      <div class="feedback"><button class="chunky full" id="next">Got it</button></div></div>`;
+      ${qHead(T('New sentence'),T('{b} teaches you a phrase',{b:LANGS[st.lang].buddy}),'happy')}
+      <div class="stage"><span class="intro-tag">${T('New')}</span>
+        <p class="phrase">${esc(TX)}</p><div class="en">${esc(EN)}</div>${audioRow()}</div>
+      <p class="note">${T('Listen, repeat it out loud once, then continue.')}</p>
+      <div class="feedback"><button class="chunky full" id="next">${T('Got it')}</button></div></div>`;
     $('#quit').onclick=renderHome;bindAudio(id);speak(id);
     $('#next').onclick=()=>{sfx('tap');cards()[id]={ef:2.5,iv:0,reps:0,lapses:0,due:Date.now()};save();session.i++;renderItem()};
     return;
   }
   if(it.type==='build')return renderBuild(it);
   if(it.type==='meaning'){
-    body=`${qHead('Read &amp; listen','What does this mean?')}<div class="stage"><p class="phrase">${esc(T)}</p>${audioRow()}</div>`;
+    body=`${qHead(T('Read &amp; listen'),T('What does this mean?'))}<div class="stage"><p class="phrase">${esc(TX)}</p>${audioRow()}</div>`;
     answer=EN;opts=shuffle([EN,...distractSentences(id,'en')]);
   }else if(it.type==='listen'){
-    body=`${qHead('Listening','What did you hear?')}
-      <div class="stage center"><button class="big-play" data-say="0" aria-label="Play">${ICON.play}</button>
-      <div class="audio-row" style="justify-content:center"><button class="play" data-say="1">${ICON.slow}Slow</button></div>
-      ${hasTTS?'':'<p class="note">Audio is not available here. Read instead:</p><p class="phrase">'+esc(T)+'</p>'}</div>`;
+    body=`${qHead(T('Listening'),T('What did you hear?'))}
+      <div class="stage center"><button class="big-play" data-say="0" aria-label="${T('Play')}">${ICON.play}</button>
+      <div class="audio-row" style="justify-content:center"><button class="play" data-say="1">${ICON.slow}${T('Slow')}</button></div>
+      ${hasTTS?'':'<p class="note">'+T('Audio is not available here. Read instead:')+'</p><p class="phrase">'+esc(TX)+'</p>'}</div>`;
     answer=EN;opts=shuffle([EN,...distractSentences(id,'en')]);
   }else if(it.type==='translate'){
-    body=`${qHead('Say it in '+LANGS[st.lang].name,esc(EN))}`;
-    answer=T;opts=shuffle([T,...distractSentences(id,'tgt')]);optCls='tgt';
+    body=`${qHead(T('Say it in {l}',{l:T(LANGS[st.lang].name)}),esc(EN))}`;
+    answer=TX;opts=shuffle([TX,...distractSentences(id,'tgt')]);optCls='tgt';
   }else{
     const g=gapFor(id);
-    body=`${qHead('Fill the gap','Pick the missing word')}<div class="stage"><p class="phrase">${g.html}</p><div class="en">${esc(EN)}</div></div>`;
+    body=`${qHead(T('Fill the gap'),T('Pick the missing word'))}<div class="stage"><p class="phrase">${g.html}</p><div class="en">${esc(EN)}</div></div>`;
     answer=g.ans;opts=g.opts;
   }
   app.innerHTML=`<div class="session">${sessionTop()}${body}
@@ -313,25 +313,25 @@ function answerWith(btn,answer,it){
   finish(ok,it);
 }
 function renderBuild(it){
-  const id=it.id,T=tgt(id),EN=S[id].en;
-  const words=T.split(/\s+/).map(clean).filter(Boolean);
+  const id=it.id,TX=tgt(id),EN=mean(id);
+  const words=TX.split(/\s+/).map(clean).filter(Boolean);
   const pool=[...new Set(allIds().flatMap(i=>i===id?[]:tgt(i).split(/\s+/).map(clean)))].filter(w=>w.length>=2&&!words.some(x=>x.toLowerCase()===w.toLowerCase()));
   const extra=shuffle(pool).slice(0,words.length<4?2:3);
   const bank=shuffle([...words,...extra]).map((w,k)=>({w,k}));
   let picked=[];
   $('#app').innerHTML=`<div class="session">${sessionTop()}
-    ${qHead('Listen &amp; build','Tap the words in the order you hear them')}
-    <div class="stage center"><button class="big-play" data-say="0" aria-label="Play">${ICON.play}</button>
-      <div class="audio-row" style="justify-content:center"><button class="play" data-say="1">${ICON.slow}Slow</button><button class="play" id="hint">Show meaning</button></div>
+    ${qHead(T('Listen &amp; build'),T('Tap the words in the order you hear them'))}
+    <div class="stage center"><button class="big-play" data-say="0" aria-label="${T('Play')}">${ICON.play}</button>
+      <div class="audio-row" style="justify-content:center"><button class="play" data-say="1">${ICON.slow}${T('Slow')}</button><button class="play" id="hint">${T('Show meaning')}</button></div>
       <div class="en" id="hintTxt" hidden>${esc(EN)}</div>
-      ${hasTTS?'':'<p class="note">Audio is not available here. Build this: '+esc(EN)+'</p>'}</div>
+      ${hasTTS?'':'<p class="note">'+T('Audio is not available here. Build this:')+' '+esc(EN)+'</p>'}</div>
     <div class="answer-line" id="line" aria-live="polite"></div>
     <div class="bank" id="bank"></div>
-    <div class="feedback" id="fb"><button class="chunky full" id="check" disabled>Check</button></div></div>`;
+    <div class="feedback" id="fb"><button class="chunky full" id="check" disabled>${T('Check')}</button></div></div>`;
   $('#quit').onclick=renderHome;bindAudio(id);speak(id);
   $('#hint').onclick=()=>{$('#hintTxt').hidden=false;$('#hint').hidden=true};
   const draw=()=>{
-    $('#line').innerHTML=picked.length?picked.map(p=>`<button class="tile-w" data-k="${p.k}">${esc(p.w)}</button>`).join(''):'<span class="placeholder">Your sentence appears here</span>';
+    $('#line').innerHTML=picked.length?picked.map(p=>`<button class="tile-w" data-k="${p.k}">${esc(p.w)}</button>`).join(''):`<span class="placeholder">${T('Your sentence appears here')}</span>`;
     $('#bank').innerHTML=bank.map(p=>`<button class="tile-w" data-b="${p.k}" ${picked.includes(p)?'disabled':''}>${esc(p.w)}</button>`).join('');
     $('#line').querySelectorAll('[data-k]').forEach(b=>b.onclick=()=>{sfx('tap');picked=picked.filter(p=>p.k!==+b.dataset.k);draw()});
     $('#bank').querySelectorAll('[data-b]:not(:disabled)').forEach(b=>b.onclick=()=>{sfx('tap');picked.push(bank.find(p=>p.k===+b.dataset.b));draw()});
@@ -349,12 +349,12 @@ function renderCold(it){
   const g=gistById(it.id),id=it.id,opts=shuffle([g.a,...g.d]);
   let peeked=false;
   $('#app').innerHTML=`<div class="session">${sessionTop()}
-    ${qHead('Cold water','Listen to the whole thing. Get the gist.')}
-    <div class="stage center cold-stage"><span class="intro-tag cold-tag">Natural speed · new words</span>
-      <button class="big-play" data-say="0" aria-label="Play">${ICON.play}</button>
-      <div class="audio-row" style="justify-content:center"><button class="play" data-say="1">${ICON.slow}Slow</button><button class="play" id="peek">Show transcript</button></div>
+    ${qHead(T('Cold water'),T('Listen to the whole thing. Get the gist.'))}
+    <div class="stage center cold-stage"><span class="intro-tag cold-tag">${T('Natural speed · new words')}</span>
+      <button class="big-play" data-say="0" aria-label="${T('Play')}">${ICON.play}</button>
+      <div class="audio-row" style="justify-content:center"><button class="play" data-say="1">${ICON.slow}${T('Slow')}</button><button class="play" id="peek">${T('Show transcript')}</button></div>
       <p class="transcript" id="tx" hidden>${esc(g.t)}</p>
-      <p class="note" id="peekNote" hidden>Transcript shown: half XP for this one.</p></div>
+      <p class="note" id="peekNote" hidden>${T('Transcript shown: half XP for this one.')}</p></div>
     <p class="prompt cold-q">${esc(g.q)}</p>
     <div class="opts">${opts.map((o,k)=>`<button class="opt" data-o="${esc(o)}"><span class="k">${k+1}</span><span>${esc(o)}</span></button>`).join('')}</div>
     <div class="feedback" id="fb"></div></div>`;
@@ -372,16 +372,16 @@ function renderCold(it){
     const cb=$('#combo');if(cb){cb.style.visibility=session.combo>1?'visible':'hidden';cb.innerHTML=ICON.fire+session.combo}
     setSceneMood(ok?'happy':'sad');
     $('#fb').innerHTML=`<div class="fb ${ok?'ok':'no'}">
-      <div class="fb-top">${mascot(st.lang,ok?'happy':'sad','mini')}<div><strong>${ok?'You got the gist!':'Not quite. Read along and listen again.'}</strong><small>${esc(LANGS[st.lang].buddy)}: ${esc(pick(LINES[st.lang][ok?'happy':'sad']))}</small></div>${ok?`<span class="xp-pop">+${gain} XP</span>`:''}</div>
+      <div class="fb-top">${mascot(st.lang,ok?'happy':'sad','mini')}<div><strong>${ok?T('You got the gist!'):T('Not quite. Read along and listen again.')}</strong><small>${esc(LANGS[st.lang].buddy)}: ${esc(pick(LINES[st.lang][ok?'happy':'sad']))}</small></div>${ok?`<span class="xp-pop">+${gain} XP</span>`:''}</div>
       <p class="transcript" style="margin:0">${esc(g.t)}</p><div class="en" style="margin:0">${esc(g.en)}</div>
-      <div class="audio-row" style="margin-top:4px"><button class="play" data-say="0">${ICON.play}Play</button><button class="play" data-say="1">${ICON.slow}Slow</button></div>
-      <button class="chunky ${ok?'ok':'bad'} full" id="next">Continue</button></div>`;
+      <div class="audio-row" style="margin-top:4px"><button class="play" data-say="0">${ICON.play}${T('Play')}</button><button class="play" data-say="1">${ICON.slow}${T('Slow')}</button></div>
+      <button class="chunky ${ok?'ok':'bad'} full" id="next">${T('Continue')}</button></div>`;
     bindAudio(id);
     $('#next').onclick=()=>{sfx('tap');session.i++;renderItem()};
   });
 }
 function finish(ok,it){
-  const id=it.id,T=tgt(id);
+  const id=it.id,TX=tgt(id);
   session.asked++;
   let gain=0;
   if(ok){session.right++;session.combo++;session.best=Math.max(session.best,session.combo);gain=10+Math.min(session.combo-1,5)*2;session.xp+=gain;st.xp[st.lang]+=gain;save()}
@@ -396,17 +396,17 @@ function finish(ok,it){
   if(!ok){
     if(graded){cards()[id]=nextState(c,0);save()}
     if(!it.retry)session.items.push({id,type:it.type==='listen'?'meaning':it.type==='build'?'translate':it.type,retry:true});
-    actions=`<button class="chunky bad full" id="next">Continue</button>`;
+    actions=`<button class="chunky bad full" id="next">${T('Continue')}</button>`;
   }else if(graded){
     const pv=[1,2,3].map(g=>nextState(c,g).iv);
     actions=`<div class="grades">
-      <button class="chunky grade" data-g="1" style="--f:var(--surface);--h:var(--surface);--d:var(--line);color:var(--ink)">Hard<small>${fmtIv(pv[0])}</small></button>
-      <button class="chunky grade ok" data-g="2">Good<small>${fmtIv(pv[1])}</small></button>
-      <button class="chunky grade" data-g="3" style="--f:var(--surface);--h:var(--surface);--d:var(--line);color:var(--ink)">Easy<small>${fmtIv(pv[2])}</small></button></div>`;
-  }else actions=`<button class="chunky ok full" id="next">Continue</button>`;
+      <button class="chunky grade" data-g="1" style="--f:var(--surface);--h:var(--surface);--d:var(--line);color:var(--ink)">${T('Hard')}<small>${fmtIv(pv[0])}</small></button>
+      <button class="chunky grade ok" data-g="2">${T('Good')}<small>${fmtIv(pv[1])}</small></button>
+      <button class="chunky grade" data-g="3" style="--f:var(--surface);--h:var(--surface);--d:var(--line);color:var(--ink)">${T('Easy')}<small>${fmtIv(pv[2])}</small></button></div>`;
+  }else actions=`<button class="chunky ok full" id="next">${T('Continue')}</button>`;
   $('#fb').innerHTML=`<div class="fb ${ok?'ok':'no'}">
-    <div class="fb-top">${mascot(st.lang,ok?'happy':'sad','mini')}<div><strong>${ok?(session.combo>2?session.combo+' in a row!':'Correct'):'Not quite'}</strong><small>${esc(LANGS[st.lang].buddy)}: ${esc(pick(LINES[st.lang][ok?'happy':'sad']))}</small></div>${ok?`<span class="xp-pop">+${gain} XP</span>`:''}</div>
-    <p class="phrase">${esc(T)}</p><div class="en" style="margin:0">${esc(S[id].en)}</div>
+    <div class="fb-top">${mascot(st.lang,ok?'happy':'sad','mini')}<div><strong>${ok?(session.combo>2?T('{n} in a row!',{n:session.combo}):T('Correct')):T('Not quite')}</strong><small>${esc(LANGS[st.lang].buddy)}: ${esc(pick(LINES[st.lang][ok?'happy':'sad']))}</small></div>${ok?`<span class="xp-pop">+${gain} XP</span>`:''}</div>
+    <p class="phrase">${esc(TX)}</p><div class="en" style="margin:0">${esc(mean(id))}</div>
     <div class="audio-row" style="margin-top:4px">${audioRow().replace(/^<div class="audio-row">|<\/div>$/g,'')}</div>${actions}</div>`;
   bindAudio(id);
   const adv=()=>{sfx('tap');session.i++;renderItem()};
@@ -427,15 +427,15 @@ function renderDone(){
   }
   const pct=session.asked?Math.round(session.right/session.asked*100):100;
   const next=Object.values(cards()).map(c=>c.due).filter(d=>d>Date.now()).sort((a,b)=>a-b)[0];
-  const nextTxt=next?(next-Date.now()<DAY?'later today':new Date(next).toLocaleDateString(undefined,{weekday:'long',day:'numeric',month:'short'})):'';
-  const title=session.mode==='cold'?'Out of the cold water!':session.mode==='lesson'?`${esc(uTxt(session.unit,'sh'))} · stage ${session.stage} cleared!`:session.mode==='review'?'Review done!':'Practice done!';
+  const nextTxt=next?(next-Date.now()<DAY?T('later today'):new Date(next).toLocaleDateString(LOC(),{weekday:'long',day:'numeric',month:'short'})):'';
+  const title=session.mode==='cold'?T('Out of the cold water!'):session.mode==='lesson'?T('{u} · stage {k} cleared!',{u:esc(uTxt(session.unit,'sh')),k:session.stage}):session.mode==='review'?T('Review done!'):T('Practice done!');
   let unlockNote='';
   if(session.mode==='lesson'&&session.before){
     const now=unitInfo(session.unit),u=session.unit;
     const kids=UNITS.map((_,c)=>c).filter(c=>UNITS[c].parents.includes(u));
-    if(!session.before.passed&&now.passed&&kids.length)unlockNote=`New ${kids.length>1?'paths':'path'} open: ${kids.map(c=>esc(uTxt(c,'sh'))).join(', ')}`;
-    if(now.cur&&now.cur.k!==session.stage)unlockNote+=(unlockNote?' · ':'')+`Next here: stage ${now.cur.k}, ${esc(stageTxt(u,now.cur.k,'title'))}`;
-    else if(now.done&&!session.before.done)unlockNote+=(unlockNote?' · ':'')+'All stages of this unit done!';
+    if(!session.before.passed&&now.passed&&kids.length)unlockNote=T(kids.length>1?'New paths open: {u}':'New path open: {u}',{u:kids.map(c=>esc(uTxt(c,'sh'))).join(', ')});
+    if(now.cur&&now.cur.k!==session.stage)unlockNote+=(unlockNote?' · ':'')+T('Next here: stage {k}, {t}',{k:now.cur.k,t:esc(stageTxt(u,now.cur.k,'title'))});
+    else if(now.done&&!session.before.done)unlockNote+=(unlockNote?' · ':'')+T('All stages of this unit done!');
   }
   $('#app').innerHTML=`<div class="done-wrap">
     ${mascot(st.lang,'cheer','big')}
@@ -443,12 +443,12 @@ function renderDone(){
     <h2>${title}</h2>
     <div class="done-stats">
       <div class="dstat g"><b>+${session.xp}</b><span>XP</span></div>
-      <div class="dstat o"><b>${pct}%</b><span>Accuracy</span></div>
-      <div class="dstat"><b>${session.best}</b><span>Best combo</span></div>
+      <div class="dstat o"><b>${pct}%</b><span>${T('Accuracy')}</span></div>
+      <div class="dstat"><b>${session.best}</b><span>${T('Best combo')}</span></div>
     </div>
     ${unlockNote?`<p class="unlock-note">${unlockNote}</p>`:''}
-    ${nextTxt?`<p class="note" style="margin:0 0 14px">Next review ${nextTxt}</p>`:''}
-    <button class="chunky" id="home">Back to the path</button></div>`;
+    ${nextTxt?`<p class="note" style="margin:0 0 14px">${T('Next review {d}',{d:nextTxt})}</p>`:''}
+    <button class="chunky" id="home">${T('Back to the path')}</button></div>`;
   $('#home').onclick=()=>{sfx('tap');renderHome()};
   sfx('done',{perfect:pct===100&&session.asked>0});confetti();
   setTimeout(prefetchAhead,1500);
@@ -486,31 +486,37 @@ function closeSheet(){sheetOpen=false;$('#sheet').hidden=true;$('#scrim').hidden
 $('#scrim').onclick=closeSheet;
 function renderSheet(){
   const vs=langVoices(),cur=pickVoice();
-  $('#sheet').innerHTML=`<div class="sheet-in"><h3>Settings · ${LANGS[st.lang].native}</h3>
-   <div class="row"><label for="voice">Device voice (fallback)</label>
+  $('#sheet').innerHTML=`<div class="sheet-in"><h3>${T('Settings')} · ${LANGS[st.lang].native}</h3>
+   <div class="row"><label for="uiSel">${T('App language')}</label>
+    <select id="uiSel"><option value="en" ${st.ui!=='de'?'selected':''}>English</option><option value="de" ${st.ui==='de'?'selected':''}>Deutsch</option></select></div>
+   <div class="row"><label for="genSel">${T('I speak as')}</label>
+    <select id="genSel"><option value="m" ${st.gender!=='f'?'selected':''}>${T('a man (obrigado, cansado)')}</option><option value="f" ${st.gender==='f'?'selected':''}>${T('a woman (obrigada, cansada)')}</option></select></div>
+   <div class="row"><label for="voice">${T('Device voice (fallback)')}</label>
     ${vs.length?`<select id="voice">${vs.map(v=>`<option ${cur&&v.name===cur.name?'selected':''}>${esc(v.name)}</option>`).join('')}</select>`
-      :`<p class="note" style="margin:0">${hasTTS?'No '+LANGS[st.lang].name+' voice found. Install one in your phone’s text-to-speech settings for natural audio.':'This browser has no speech output.'}</p>`}</div>
-   ${recVoices().length>1?`<div class="row"><label for="recSel">Recorded voice</label>
-    <select id="recSel"><option value="mix" ${st.recVoice[st.lang]==='mix'?'selected':''}>Mix (alternate per sentence)</option>${recVoices().map(v=>`<option value="${esc(v)}" ${st.recVoice[st.lang]===v?'selected':''}>${esc(v.charAt(0).toUpperCase()+v.slice(1))}</option>`).join('')}</select></div>`:''}
-   <div class="row"><label for="speed">Default speed</label>
-    <select id="speed"><option value="n" ${!st.slow?'selected':''}>Natural</option><option value="s" ${st.slow?'selected':''}>Slow</option></select></div>
-   <div class="row"><label for="themeSel">Theme</label>
-    <select id="themeSel">${THEMES.map(x=>`<option value="${x}" ${st.theme===x?'selected':''}>${({auto:'Follow my phone',light:'Light',dark:'Dark'})[x]}</option>`).join('')}</select></div>
-   <div class="row"><label for="splashSel">Start-up animation</label>
-    <select id="splashSel"><option value="1" ${st.splash!==false?'selected':''}>On</option><option value="0" ${st.splash===false?'selected':''}>Off</option></select></div>
-   <div class="row"><label for="sfxSel">Game sounds</label>
-    <select id="sfxSel"><option value="1" ${st.sfx?'selected':''}>On</option><option value="0" ${!st.sfx?'selected':''}>Off</option></select></div>
-   <div class="row"><label for="dlSel">Download next stages for offline</label>
-    <select id="dlSel"><option value="1" ${st.autoDl!==false?'selected':''}>On (after each stage)</option><option value="0" ${st.autoDl===false?'selected':''}>Off</option></select></div>
-   <div class="row"><label for="remT">Daily reminder</label>
-    <div class="rem"><input type="time" id="remT" value="${esc(st.remind||'19:00')}"><button class="ghost" id="remBtn">Add to calendar</button></div></div>
-   <p class="note" style="margin:-6px 0 0">Adds a repeating daily event with an alert to your phone’s calendar. The app has no server, so it can’t send push notifications itself.</p>
-   <button class="ghost" id="test">Test voice</button>
+      :`<p class="note" style="margin:0">${hasTTS?T('No {l} voice found. Install one in your phone’s text-to-speech settings for natural audio.',{l:T(LANGS[st.lang].name)}):T('This browser has no speech output.')}</p>`}</div>
+   ${recVoices().length>1?`<div class="row"><label for="recSel">${T('Recorded voice')}</label>
+    <select id="recSel"><option value="mix" ${st.recVoice[st.lang]==='mix'?'selected':''}>${T('Mix (alternate per sentence)')}</option>${recVoices().map(v=>`<option value="${esc(v)}" ${st.recVoice[st.lang]===v?'selected':''}>${esc(v.charAt(0).toUpperCase()+v.slice(1))}</option>`).join('')}</select></div>`:''}
+   <div class="row"><label for="speed">${T('Default speed')}</label>
+    <select id="speed"><option value="n" ${!st.slow?'selected':''}>${T('Natural')}</option><option value="s" ${st.slow?'selected':''}>${T('Slow')}</option></select></div>
+   <div class="row"><label for="themeSel">${T('Theme')}</label>
+    <select id="themeSel">${THEMES.map(x=>`<option value="${x}" ${st.theme===x?'selected':''}>${T(({auto:'Follow my phone',light:'Light',dark:'Dark'})[x])}</option>`).join('')}</select></div>
+   <div class="row"><label for="splashSel">${T('Start-up animation')}</label>
+    <select id="splashSel"><option value="1" ${st.splash!==false?'selected':''}>${T('On')}</option><option value="0" ${st.splash===false?'selected':''}>${T('Off')}</option></select></div>
+   <div class="row"><label for="sfxSel">${T('Game sounds')}</label>
+    <select id="sfxSel"><option value="1" ${st.sfx?'selected':''}>${T('On')}</option><option value="0" ${!st.sfx?'selected':''}>${T('Off')}</option></select></div>
+   <div class="row"><label for="dlSel">${T('Download next stages for offline')}</label>
+    <select id="dlSel"><option value="1" ${st.autoDl!==false?'selected':''}>${T('On (after each stage)')}</option><option value="0" ${st.autoDl===false?'selected':''}>${T('Off')}</option></select></div>
+   <div class="row"><label for="remT">${T('Daily reminder')}</label>
+    <div class="rem"><input type="time" id="remT" value="${esc(st.remind||'19:00')}"><button class="ghost" id="remBtn">${T('Add to calendar')}</button></div></div>
+   <p class="note" style="margin:-6px 0 0">${T('Adds a repeating daily event with an alert to your phone’s calendar. The app has no server, so it can’t send push notifications itself.')}</p>
+   <button class="ghost" id="test">${T('Test voice')}</button>
    <p class="note" id="diag" style="margin:0">Audio check: ${recorded()?recorded()+' recorded clips':'no recorded clips yet'} · ${hasTTS?'device speech supported':'device speech not supported'} · ${voices.length} voices · ${vs.length} ${LANGS[st.lang].name} · ${esc(ttsLog)}</p>
-   <button class="ghost danger" id="reset">${confirmReset?'Tap again to erase '+LANGS[st.lang].name+' progress':'Reset '+LANGS[st.lang].name+' progress'}</button>
-   <button class="chunky" id="closeS">Done</button></div>`;
+   <button class="ghost danger" id="reset">${T(confirmReset?'Tap again to erase {l} progress':'Reset {l} progress',{l:T(LANGS[st.lang].name)})}</button>
+   <button class="chunky" id="closeS">${T('Done')}</button></div>`;
   const vSel=$('#voice');if(vSel)vSel.onchange=()=>{st.voice[st.lang]=vSel.value;save()};
   $('#speed').onchange=e=>{st.slow=e.target.value==='s';save()};
+  $('#uiSel').onchange=e=>{st.ui=e.target.value;applyUiLang();save();renderSheet()};
+  $('#genSel').onchange=e=>{st.gender=e.target.value;save()};
   $('#sfxSel').onchange=e=>{st.sfx=e.target.value==='1';save()};
   $('#dlSel').onchange=e=>{st.autoDl=e.target.value==='1';save();if(st.autoDl)prefetchAhead()};
   $('#splashSel').onchange=e=>{st.splash=e.target.value==='1';save()};
@@ -540,55 +546,55 @@ function renderProgress(){
   for(let w=0;w<12;w++)for(let d=0;d<7;d++){
     const t=new Date(start);t.setDate(start.getDate()+w*7+d);if(t>today)continue;
     const k=dkey(t),e=log[k],a=e?e.a:0;
-    cells+=`<i class="hm l${lvl(a)}${k===dkey()?' today':''}" style="grid-column:${w+1};grid-row:${d+1}" title="${t.toLocaleDateString(undefined,{weekday:'short',day:'numeric',month:'short'})}: ${a} answers"></i>`;
+    cells+=`<i class="hm l${lvl(a)}${k===dkey()?' today':''}" style="grid-column:${w+1};grid-row:${d+1}" title="${t.toLocaleDateString(LOC(),{weekday:'short',day:'numeric',month:'short'})}: ${T('{n} answers',{n:a})}"></i>`;
   }
   const days=Object.keys(log).sort(),active=days.filter(k=>log[k].a>0).length;
   const tot={a:sum(days,k=>log[k].a),ok:sum(days,k=>log[k].ok),m:sum(days,k=>log[k].s||0)};
   // last 14 days XP
   const last=[...Array(14)].map((_,i)=>{const t=new Date(today);t.setDate(t.getDate()-13+i);const e=log[dkey(t)];return {t,xp:e?e.xp:0}});
   const mx=Math.max(50,...last.map(x=>x.xp));
-  const bars=last.map(x=>`<div class="bar${dkey(x.t)===dkey()?' today':''}"><i style="height:${Math.round(x.xp/mx*100)}%" title="${x.xp} XP"></i><span>${x.t.toLocaleDateString(undefined,{weekday:'narrow'})}</span></div>`).join('');
+  const bars=last.map(x=>`<div class="bar${dkey(x.t)===dkey()?' today':''}"><i style="height:${Math.round(x.xp/mx*100)}%" title="${x.xp} XP"></i><span>${x.t.toLocaleDateString(LOC(),{weekday:'narrow'})}</span></div>`).join('');
   // coming up: reviews per day for the next 7 days (today includes overdue)
   const up=[...Array(7)].map((_,i)=>{const end=new Date(today);end.setHours(23,59,59,999);end.setDate(end.getDate()+i);const s0=i?new Date(end.getTime()-DAY+1):null;
     return {i,n:vals.filter(c=>c.due<=end.getTime()&&(!s0||c.due>=s0.getTime())).length,t:end}});
   const umx=Math.max(5,...up.map(x=>x.n));
   // branches
   const groups={};UNITS.forEach((U,u)=>{const key=U.scen?'scen':U.br;const g=groups[key]=groups[key]||{done:0,total:0};const inf=unitInfo(u);g.done+=inf.nDone;g.total+=inf.stages.length});
-  const BNAME={...BR_NAME,scen:L.city},BCOL=k=>k==='scen'?'--gold':k==='core'?'--btn':'--br-'+k;
+  const BNAME={...Object.fromEntries(Object.entries(BR_NAME).map(([k,v])=>[k,T(v)])),scen:L.city},BCOL=k=>k==='scen'?'--gold':k==='core'?'--btn':'--br-'+k;
   const branches=Object.entries(groups).map(([k,g])=>`<div class="br-row"><span>${esc(BNAME[k]||k)}</span><div class="br-bar"><i style="width:${g.total?Math.round(g.done/g.total*100):0}%;background:var(${BCOL(k)})"></i></div><b>${g.done}/${g.total}</b></div>`).join('');
   // timeline
   const unitBySlug=s=>UNITS.findIndex(x=>x.slug===s);
   const evs=[...events()].reverse();
   const evTxt=e=>{const u=e.u!=null?unitBySlug(e.u):-1,nm=u>=0?esc(uTxt(u,'sh')):'';
-    return e.type==='stage'?[`Cleared <b>${nm}</b> · stage ${e.k}`,u>=0?esc(stageTxt(u,e.k,'title')):'' ,'stage']
-      :e.type==='unit'?[`Finished every stage of <b>${nm}</b>`,'','unit']
-      :e.type==='level'?[`Reached <b>level ${e.n}</b>`,'','level']
-      :e.type==='streak'?[`<b>${e.n}-day</b> streak`,'','streak']:[e.type,'',''];};
+    return e.type==='stage'?[T('Cleared <b>{u}</b> · stage {k}',{u:nm,k:e.k}),u>=0?esc(stageTxt(u,e.k,'title')):'' ,'stage']
+      :e.type==='unit'?[T('Finished every stage of <b>{u}</b>',{u:nm}),'','unit']
+      :e.type==='level'?[T('Reached <b>level {n}</b>',{n:e.n}),'','level']
+      :e.type==='streak'?[T('<b>{n}-day</b> streak',{n:e.n}),'','streak']:[e.type,'',''];};
   let tl='',lastDay='';
-  evs.forEach(e=>{const d=new Date(e.t).toLocaleDateString(undefined,{weekday:'short',day:'numeric',month:'short'});
+  evs.forEach(e=>{const d=new Date(e.t).toLocaleDateString(LOC(),{weekday:'short',day:'numeric',month:'short'});
     if(d!==lastDay){tl+=`<li class="tl-day">${d}</li>`;lastDay=d}
     const [a,b,c]=evTxt(e);tl+=`<li class="tl-ev ev-${c}"><i></i><div>${a}${b?`<small>${b}</small>`:''}</div></li>`});
-  if(days.length)tl+=`<li class="tl-day">${new Date(days[0]+'T12:00').toLocaleDateString(undefined,{day:'numeric',month:'short',year:'numeric'})}</li><li class="tl-ev ev-start"><i></i><div>Progress tracking started</div></li>`;
+  if(days.length)tl+=`<li class="tl-day">${new Date(days[0]+'T12:00').toLocaleDateString(LOC(),{day:'numeric',month:'short',year:'numeric'})}</li><li class="tl-ev ev-start"><i></i><div>${T('Progress tracking started')}</div></li>`;
   $('#app').innerHTML=`
-  <div class="pg-top"><button class="ghost" id="back">‹ Back</button><h2>Your ${esc(L.name)}</h2></div>
+  <div class="pg-top"><button class="ghost" id="back">‹ ${T('Back')}</button><h2>${T('Your {l}',{l:esc(T(L.name))})}</h2></div>
   <div class="pg-tiles">
-    <div class="tile"><b>${streakNow()}</b><span>day streak${st.streak.best?` · best ${st.streak.best}`:''}</span></div>
-    <div class="tile"><b>${vals.length}<small>/${ids.length}</small></b><span>sentences met</span></div>
-    <div class="tile"><b>${mature}</b><span>known well (3+ weeks)</span></div>
+    <div class="tile"><b>${streakNow()}</b><span>${T('day streak')}${st.streak.best?` · ${T('best {n}',{n:st.streak.best})}`:''}</span></div>
+    <div class="tile"><b>${vals.length}<small>/${ids.length}</small></b><span>${T('sentences met')}</span></div>
+    <div class="tile"><b>${mature}</b><span>${T('known well (3+ weeks)')}</span></div>
     <div class="tile"><b>Lv ${lv}</b><span>${xp} XP</span></div>
   </div>
-  <section class="pg-card"><h3>Activity · last 12 weeks</h3>
+  <section class="pg-card"><h3>${T('Activity · last 12 weeks')}</h3>
     <div class="hm-grid">${cells}</div>
-    <div class="hm-foot"><span>${active} active day${active===1?'':'s'} · ${tot.a} answers${tot.a?` · ${Math.round(tot.ok/tot.a*100)}% right`:''}${tot.m?` · ~${tot.m} min`:''}</span>
-    <span class="hm-legend">less<i class="hm l0"></i><i class="hm l1"></i><i class="hm l2"></i><i class="hm l3"></i><i class="hm l4"></i>more</span></div></section>
-  <section class="pg-card"><h3>XP · last 14 days</h3><div class="bars">${bars}</div></section>
-  <section class="pg-card"><h3>Your memory</h3>
+    <div class="hm-foot"><span>${T(active===1?'{n} active day':'{n} active days',{n:active})} · ${T('{n} answers',{n:tot.a})}${tot.a?` · ${T('{p}% right',{p:Math.round(tot.ok/tot.a*100)})}`:''}${tot.m?` · ~${tot.m} min`:''}</span>
+    <span class="hm-legend">${T('less')}<i class="hm l0"></i><i class="hm l1"></i><i class="hm l2"></i><i class="hm l3"></i><i class="hm l4"></i>${T('more')}</span></div></section>
+  <section class="pg-card"><h3>${T('XP · last 14 days')}</h3><div class="bars">${bars}</div></section>
+  <section class="pg-card"><h3>${T('Your memory')}</h3>
     <div class="mem">${[['mature',mature],['young',young],['learning',learning],['fresh',fresh]].map(([c,n])=>`<i class="${c}" style="flex-grow:${n}"></i>`).join('')}</div>
-    <div class="mem-key"><span><i class="mature"></i>Known well ${mature}</span><span><i class="young"></i>Getting there ${young}</span><span><i class="learning"></i>Just learned ${learning}</span><span><i class="fresh"></i>Not met yet ${fresh}</span></div></section>
-  <section class="pg-card"><h3>Reviews coming up</h3><div class="bars up">${up.map(x=>`<div class="bar"><b>${x.n||''}</b><i style="height:${Math.round(x.n/umx*100)}%"></i><span>${x.i?x.t.toLocaleDateString(undefined,{weekday:'short'}):'Today'}</span></div>`).join('')}</div></section>
-  <section class="pg-card"><h3>Stages cleared by branch</h3>${branches}</section>
-  <section class="pg-card"><h3>Timeline</h3>${tl?`<ol class="tl">${tl}</ol>`:'<p class="note">Milestones show up here as you clear stages, level up and keep streaks.</p>'}</section>
-  <button class="chunky full" id="back2">Back to the path</button>`;
+    <div class="mem-key"><span><i class="mature"></i>${T('Known well')} ${mature}</span><span><i class="young"></i>${T('Getting there')} ${young}</span><span><i class="learning"></i>${T('Just learned')} ${learning}</span><span><i class="fresh"></i>${T('Not met yet')} ${fresh}</span></div></section>
+  <section class="pg-card"><h3>${T('Reviews coming up')}</h3><div class="bars up">${up.map(x=>`<div class="bar"><b>${x.n||''}</b><i style="height:${Math.round(x.n/umx*100)}%"></i><span>${x.i?x.t.toLocaleDateString(LOC(),{weekday:'short'}):T('Today')}</span></div>`).join('')}</div></section>
+  <section class="pg-card"><h3>${T('Stages cleared by branch')}</h3>${branches}</section>
+  <section class="pg-card"><h3>${T('Timeline')}</h3>${tl?`<ol class="tl">${tl}</ol>`:`<p class="note">${T('Milestones show up here as you clear stages, level up and keep streaks.')}</p>`}</section>
+  <button class="chunky full" id="back2">${T('Back to the path')}</button>`;
   $('#back').onclick=$('#back2').onclick=()=>{sfx('tap');renderHome();scrollTo(0,0)};
   scrollTo(0,0);
 }
@@ -599,8 +605,8 @@ function downloadReminder(time){
   const p=n=>String(n).padStart(2,'0'),day=`${d.getFullYear()}${p(d.getMonth()+1)}${p(d.getDate())}`;
   const stamp=new Date().toISOString().replace(/[-:]/g,'').slice(0,15)+'Z',url=location.href.split('#')[0];
   const ics=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Frase a Frase//EN','BEGIN:VEVENT',`UID:frase-a-frase-daily-${stamp}`,`DTSTAMP:${stamp}`,
-    `DTSTART:${day}T${p(h)}${p(m)}00`,'DURATION:PT10M','RRULE:FREQ=DAILY','SUMMARY:Frase a Frase · 10 minutes',
-    `DESCRIPTION:Keep your streak alive: ${url}`,`URL:${url}`,'BEGIN:VALARM','ACTION:DISPLAY','DESCRIPTION:Frase a Frase','TRIGGER:PT0M','END:VALARM','END:VEVENT','END:VCALENDAR'].join('\r\n');
+    `DTSTART:${day}T${p(h)}${p(m)}00`,'DURATION:PT10M','RRULE:FREQ=DAILY',`SUMMARY:Frase a Frase · ${T('10 minutes')}`,
+    `DESCRIPTION:${T('Keep your streak alive:')} ${url}`,`URL:${url}`,'BEGIN:VALARM','ACTION:DISPLAY','DESCRIPTION:Frase a Frase','TRIGGER:PT0M','END:VALARM','END:VEVENT','END:VCALENDAR'].join('\r\n');
   const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([ics],{type:'text/calendar'}));a.download='frase-a-frase-reminder.ics';
   document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},1000);
 }

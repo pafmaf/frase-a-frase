@@ -3,7 +3,7 @@
      APP    {name, storageKey}
      LANGS  {es:{name,native,code,buddy,city}, ...}      LINES {es:{idle,happy,sad,done}, ...}
      UNITS  [{slug,t,sh,s,lv,br,tree,col,row,parents:[unit index],ic,scen,scene,stages:[{title,summary,scene}]}]
-     S      [ {u:unit index, st:stage, en, es, pt, ...} ] indexed by sentence id (ids may have gaps)
+     S      [ {u:unit index, st:stage, en, de?, es, pt, f?:{es,pt}} ] indexed by sentence id (ids may have gaps)
      GIST   [ {u,st,l,t,en,q,a,d} ]               indexed by passage number (id "g<n>")
    Format: see content/README.md. tools/content.py validate checks the same rules offline. */
 let APP, LANGS, LINES, UNITS, S, GIST;
@@ -42,7 +42,8 @@ function buildContent(cfg, files) {
     br: f.branch || 'core', tree: f.tree || 'main', col: f.col ?? 0, row: f.row ?? 0,
     parents: (f.parents || []).map(p => p in index ? index[p] : bad(f.id, `unknown parent "${p}"`)),
     ic: f.icon || '', scen: !!f.scenario, scene: f.scene || 'greet',
-    stages: (f.stages && f.stages.length) ? f.stages : [{ title: f.title, summary: f.summary || '' }]
+    stages: (f.stages && f.stages.length) ? f.stages : [{ title: f.title, summary: f.summary || '' }],
+    de: f.de ? { t: f.de.title, sh: f.de.short || f.de.title, s: f.de.summary || '' } : null
   }));
 
   S = []; GIST = [];
@@ -54,6 +55,8 @@ function buildContent(cfg, files) {
       const st = s.stage || 1;
       if (!Number.isInteger(st) || st < 1 || st > UNITS[u].stages.length) bad(f.id, `sentence ${s.id}: stage ${s.stage} is not listed in "stages"`);
       S[s.id] = { u, st, en: s.en };
+      if (s.de) S[s.id].de = s.de;                       // German meaning
+      if (s.f) S[s.id].f = s.f;                          // {es,pt}: feminine form when the speaker is a woman
       for (const l of Object.keys(LANGS)) if (s[l]) S[s.id][l] = s[l];
     }
     for (const p of f.passages || []) {
@@ -62,6 +65,7 @@ function buildContent(cfg, files) {
       if (!LANGS[p.lang]) bad(f.id, `passage ${p.id}: unknown language "${p.lang}"`);
       if (!(p.text && p.en && p.question && p.answer && (p.wrong || []).length >= 2)) bad(f.id, `passage ${p.id}: needs text, en, question, answer and at least 2 wrong answers`);
       GIST[n] = { u, st: p.stage || 1, l: p.lang, t: p.text, en: p.en, q: p.question, a: p.answer, d: p.wrong };
+      if (p.de) GIST[n].de = { en: p.de.meaning, q: p.de.question, a: p.de.answer, d: p.de.wrong };
     }
   });
 }

@@ -8,6 +8,7 @@
   if (saved.splash === false) { el.remove(); return; }
 
   const root = document.documentElement, btn = document.getElementById('spGo');
+  if ((saved.ui || (/^de\b/i.test(navigator.language || '') ? 'de' : 'en')) === 'de') btn.textContent = 'Tippen zum Starten';
   root.classList.add('splashing');
   let ready = false, tapped = false, gone = false;
 

@@ -11,6 +11,9 @@ set -euo pipefail
 
 VOICES_ES="${VOICES_ES:-Alba Marcos}"
 VOICES_PT="${VOICES_PT:-Isadora Davi}"   # catalog has only pt-BR voices
+# Sentences with a feminine form ("Obrigada") get an extra clip <id>f, recorded only with the female voices,
+# and the app plays the masculine form with the male voices. List them here (and in content/config.json "voiceGender").
+VOICES_FEMALE=" ${VOICES_FEMALE:-Alba Isadora} "
 MODEL="${MODEL:-hf://gradium/phonon-40m-multilingual}"   # gated: request access on Hugging Face
 PTTS="${PTTS:-uvx ptts}"          # or: PTTS=ptts after `brew install gradium-ai/tap/ptts`
 OUT="audio"
@@ -31,6 +34,7 @@ while IFS=$'\t' read -r -u 3 lang id kind text; do
   [ -n "$ONLY_LANG" ] && [ "$lang" != "$ONLY_LANG" ] && continue
   [ "$ONLY_IDS" != "  " ] && [[ "$ONLY_IDS" != *" $id "* ]] && continue
   if [ "$lang" = "es" ]; then voices="$VOICES_ES"; else voices="$VOICES_PT"; fi
+  if [ "$kind" = "sentence-f" ]; then fv=""; for v in $voices; do [[ "$VOICES_FEMALE" == *" $v "* ]] && fv="$fv $v"; done; voices="${fv:-$voices}"; fi
   for voice in $voices; do
     dir="$OUT/$lang/$(slug "$voice")"
     mkdir -p "$dir"
@@ -57,7 +61,7 @@ for lang in ("es", "pt"):
     for v in sorted(os.listdir(d)):
         vd = os.path.join(d, v)
         if os.path.isdir(vd):
-            ids = sorted((f[:-4] for f in os.listdir(vd) if f.endswith(".m4a")), key=lambda s: (s[0] == "g", int(s.lstrip("g"))))
+            ids = sorted((f[:-4] for f in os.listdir(vd) if f.endswith(".m4a")), key=lambda s: (s[0] == "g", int(s.strip("gf")), s))
             if ids: voices[lang][v] = ids
 json.dump({"ext": "m4a", "voices": voices}, open(os.path.join(root, "manifest.json"), "w"))
 print("manifest.json:", {l: {v: len(i) for v, i in vs.items()} for l, vs in voices.items()})

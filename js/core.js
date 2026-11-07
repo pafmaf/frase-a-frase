@@ -1,10 +1,13 @@
 /* Core: storage, spaced repetition, speech + recorded audio. Needs content (js/content.js) loaded first. */
 const BR={core:'--btn',food:'--br-food',travel:'--br-travel',people:'--br-people',life:'--br-life',words:'--br-words'};
-const uTxt=(u,k)=>{const v=UNITS[u][k];return typeof v==='object'?v[st.lang]:v};
-const tgt=(id,l=st.lang)=>S[id][l];
+const uTxt=(u,k)=>{const v=(st.ui==='de'&&UNITS[u].de&&UNITS[u].de[k])||UNITS[u][k];return typeof v==='object'?v[st.lang]:v};
+const tgt=(id,l=st.lang)=>femOf(id,l)||S[id][l];
 const allIds=(l=st.lang)=>S.map((_,i)=>i).filter(i=>S[i][l]);
-const gistsFor=(u,l=st.lang)=>GIST.map((g,i)=>({...g,id:'g'+i})).filter(g=>g.u===u&&g.l===l);
-const gistById=id=>GIST[+String(id).slice(1)];
+const gLoc=g=>g&&st.ui==='de'&&g.de?{...g,...g.de}:g;   // passage with question/answers in the learner's language
+const gistsFor=(u,l=st.lang)=>GIST.map((g,i)=>({...gLoc(g),id:'g'+i})).filter(g=>g.u===u&&g.l===l);
+const gistById=id=>gLoc(GIST[+String(id).slice(1)]);
+const mean=id=>st.ui==='de'&&S[id].de?S[id].de:S[id].en;  // meaning in the learner's language
+const femOf=(id,l=st.lang)=>st.gender==='f'&&S[id]&&S[id].f&&S[id].f[l]?S[id].f[l]:null;
 const textOf=id=>typeof id==='string'&&id[0]==='g'?gistById(id).t:tgt(id);
 const DAY=864e5, MIN=6e4;
 let session=null,sheetOpen=false,confirmReset=false; // UI state shared by core.js and ui.js
@@ -13,7 +16,7 @@ let session=null,sheetOpen=false,confirmReset=false; // UI state shared by core.
 const KEY=APP.storageKey;
 const LANG_IDS=Object.keys(LANGS);
 const perLang=mk=>Object.fromEntries(LANG_IDS.map(l=>[l,mk()]));
-let st={lang:LANG_IDS[0],theme:'auto',recVoice:perLang(()=>'mix'),cards:perLang(()=>({})),slow:false,sfx:true,splash:true,pick:'all',autoDl:true,log:perLang(()=>({})),events:perLang(()=>[]),remind:'19:00',xp:perLang(()=>0),voice:perLang(()=>''),streak:{last:'',n:0}};
+let st={lang:LANG_IDS[0],theme:'auto',recVoice:perLang(()=>'mix'),cards:perLang(()=>({})),slow:false,sfx:true,splash:true,pick:'all',autoDl:true,ui:/^de\b/i.test(navigator.language||'')?'de':'en',gender:'m',log:perLang(()=>({})),events:perLang(()=>[]),remind:'19:00',xp:perLang(()=>0),voice:perLang(()=>''),streak:{last:'',n:0}};
 try{const raw=localStorage.getItem(KEY);if(raw){const p=JSON.parse(raw);st={...st,...p,cards:{...st.cards,...(p.cards||{})},voice:{...st.voice,...(p.voice||{})},recVoice:{...st.recVoice,...(p.recVoice||{})},xp:{...st.xp,...(p.xp||{})}};if(!LANGS[st.lang])st.lang=LANG_IDS[0]}}catch(e){}
 function save(){try{localStorage.setItem(KEY,JSON.stringify(st))}catch(e){}}
 function applyTheme(){const r=document.documentElement;if(st.theme==='light'||st.theme==='dark')r.dataset.theme=st.theme;else delete r.dataset.theme}
@@ -33,7 +36,7 @@ function nextState(c,g){ // g: 0 again,1 hard,2 good,3 easy
   else{iv=c.reps===0?4:Math.round(Math.max(c.iv,1)*ef*1.3);ef+=.15}
   return {...c,ef,reps:c.reps+1,iv,due:now+iv*DAY};
 }
-const fmtIv=d=>d<30?d+'d':d<365?Math.round(d/30)+'mo':(d/365).toFixed(1)+'y';
+const fmtIv=d=>st.ui==='de'?(d<30?d+' T':d<365?Math.round(d/30)+' Mon':(d/365).toFixed(1).replace('.',',')+' J'):d<30?d+'d':d<365?Math.round(d/30)+'mo':(d/365).toFixed(1)+'y';
 const dueList=()=>Object.entries(cards()).filter(([,c])=>c.due<=Date.now()).map(([id])=>+id);
 
 /* ---------- XP / level ---------- */
@@ -75,10 +78,10 @@ function ttsSpeak(text,slow=st.slow){
     u.onend=()=>{bp&&bp.classList.remove('talking')};
     u.onerror=e=>{bp&&bp.classList.remove('talking');
       if(e.error==='interrupted'||e.error==='canceled')return;
-      ttsLog='error: '+e.error;toast('Device speech unavailable here ('+e.error+'). Recorded voices fix this: see Settings.')};
+      ttsLog='error: '+e.error;toast(T('Device speech unavailable here ({e}). Recorded voices fix this: see Settings.',{e:e.error}))};
     speechSynthesis.speak(u);
     ttsLog='queued, '+voices.length+' voices on device';
-  }catch(e){ttsLog='exception: '+e.message;toast('Audio failed: '+e.message)}
+  }catch(e){ttsLog='exception: '+e.message;toast(T('Audio failed: {e}',{e:e.message}))}
 }
 /* recorded audio, described by audio/manifest.json
    v2 (several voices): {"ext":"m4a","voices":{"es":{"female":["0","1","g0"],"male":[...]},"pt":{...}}}
@@ -97,8 +100,11 @@ fetch('audio/manifest.json',{cache:'no-store'}).then(r=>r.ok?r.json():null).then
 const recVoices=(l=st.lang)=>manifest?Object.keys(manifest.voices[l]).filter(v=>manifest.voices[l][v].size):[];
 const recorded=(l=st.lang)=>Math.max(0,...recVoices(l).map(v=>manifest.voices[l][v].size));
 function clipFor(id){
-  const l=st.lang,key=String(id),has=recVoices(l).filter(v=>manifest.voices[l][v].has(key));
+  const l=st.lang,fem=typeof id==='number'&&femOf(id),key=String(id)+(fem?'f':'');
+  let has=recVoices(l).filter(v=>manifest.voices[l][v].has(key));
   if(!has.length)return null;
+  // gendered sentence: a woman's "Obrigada" in a female voice, a man's "Obrigado" in a male one
+  if(typeof id==='number'&&S[id]&&S[id].f&&S[id].f[l]){const vg=APP.voiceGender||{},want=fem?'f':'m',m=has.filter(v=>vg[v]===want);if(m.length)has=m}
   const pref=st.recVoice[l]||'mix';
   const v=pref==='mix'?has[[...key].reduce((a,c)=>a+c.charCodeAt(0),0)%has.length]:has.includes(pref)?pref:has[0];
   return `audio/${l}/${v?v+'/':''}${encodeURIComponent(key)}.${manifest.ext}`;
@@ -128,7 +134,7 @@ async function prefetchAhead(){
   }catch(e){}
   prefetching=false;
 }
-const audioLabel=()=>{const v=recVoices();return v.length?`recorded ${v.filter(Boolean).length>1?v.length+' voices':'voice'} · ${recorded()} clips`:'device speech'};
+const audioLabel=()=>{const v=recVoices();return v.length?T(v.filter(Boolean).length>1?'recorded {v} voices · {n} clips':'recorded voice · {n} clips',{v:v.length,n:recorded()}):T('device speech')};
 function speak(id,slow=st.slow){
   const bp=document.querySelector('.big-play');
   if(curAudio){try{curAudio.pause()}catch(e){}curAudio=null}
@@ -146,7 +152,7 @@ function speak(id,slow=st.slow){
   }
   ttsSpeak(textOf(id),slow);
   if(hasTTS&&!warnedTTS){
-    setTimeout(()=>{if(!/^playing/.test(ttsLog)&&!warnedTTS){warnedTTS=true;toast('Device speech is silent here. Recorded voices fix this: see Settings.')}},2500);
+    setTimeout(()=>{if(!/^playing/.test(ttsLog)&&!warnedTTS){warnedTTS=true;toast(T('Device speech is silent here. Recorded voices fix this: see Settings.'))}},2500);
   }
 }
 let actx=null;

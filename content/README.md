@@ -48,6 +48,22 @@ Use Spain Spanish and European Portuguese (`tu`/`você` forms, `comboio`, `peque
 Natural speed, a few words beyond the unit's vocabulary, plus an English gist question with three
 wrong answers. `id` is `g` plus a number, unique across all units.
 
+## German and feminine forms
+
+The app explains everything in English or German (Settings → App language). German lives next to the English:
+
+- unit: `"de": {"title": "…", "short": "…", "summary": "…"}`; each stage: `"de": {"title": "…", "summary": "…"}`
+- sentence: `"de": "Einen Milchkaffee, bitte."`
+- passage: `"de": {"meaning": "…", "question": "…", "answer": "…", "wrong": ["…", "…", "…"]}`
+
+Missing German falls back to English.
+
+**Speaker gender.** When a sentence changes with the speaker's gender ("Obrigado" / "Obrigada"), the main text is
+the man's form and `"f": {"pt": "Obrigada."}` holds the woman's (only for the languages that change). Users pick
+"I speak as a man / a woman" in Settings. Feminine forms are recorded as extra clips `<id>f` (female voices only;
+see `VOICES_FEMALE` in tools/gen-phonon.sh and `app.voiceGender` in config.json). Until they are recorded the app
+reads the feminine form with the device voice.
+
 ## Ids are forever
 
 Learner progress (spaced-repetition cards) and recorded audio are keyed by `id`.
