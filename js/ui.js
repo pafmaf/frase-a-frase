@@ -439,6 +439,7 @@ function renderDone(){
     <button class="chunky" id="home">Back to the path</button></div>`;
   $('#home').onclick=()=>{sfx('tap');renderHome()};
   sfx('done',{perfect:pct===100&&session.asked>0});confetti();
+  setTimeout(prefetchAhead,1500);
 }
 
 /* ---------- confetti ---------- */
@@ -487,6 +488,8 @@ function renderSheet(){
     <select id="splashSel"><option value="1" ${st.splash!==false?'selected':''}>On</option><option value="0" ${st.splash===false?'selected':''}>Off</option></select></div>
    <div class="row"><label for="sfxSel">Game sounds</label>
     <select id="sfxSel"><option value="1" ${st.sfx?'selected':''}>On</option><option value="0" ${!st.sfx?'selected':''}>Off</option></select></div>
+   <div class="row"><label for="dlSel">Download next stages for offline</label>
+    <select id="dlSel"><option value="1" ${st.autoDl!==false?'selected':''}>On (after each stage)</option><option value="0" ${st.autoDl===false?'selected':''}>Off</option></select></div>
    <button class="ghost" id="test">Test voice</button>
    <p class="note" id="diag" style="margin:0">Audio check: ${recorded()?recorded()+' recorded clips':'no recorded clips yet'} · ${hasTTS?'device speech supported':'device speech not supported'} · ${voices.length} voices · ${vs.length} ${LANGS[st.lang].name} · ${esc(ttsLog)}</p>
    <button class="ghost danger" id="reset">${confirmReset?'Tap again to erase '+LANGS[st.lang].name+' progress':'Reset '+LANGS[st.lang].name+' progress'}</button>
@@ -494,6 +497,7 @@ function renderSheet(){
   const vSel=$('#voice');if(vSel)vSel.onchange=()=>{st.voice[st.lang]=vSel.value;save()};
   $('#speed').onchange=e=>{st.slow=e.target.value==='s';save()};
   $('#sfxSel').onchange=e=>{st.sfx=e.target.value==='1';save()};
+  $('#dlSel').onchange=e=>{st.autoDl=e.target.value==='1';save();if(st.autoDl)prefetchAhead()};
   $('#splashSel').onchange=e=>{st.splash=e.target.value==='1';save()};
   const rs=$('#recSel');if(rs)rs.onchange=e=>{st.recVoice[st.lang]=e.target.value;save();speak(0)};
   $('#themeSel').onchange=e=>{st.theme=e.target.value;applyTheme();save()};

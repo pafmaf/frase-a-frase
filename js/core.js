@@ -13,7 +13,7 @@ let session=null,sheetOpen=false,confirmReset=false; // UI state shared by core.
 const KEY=APP.storageKey;
 const LANG_IDS=Object.keys(LANGS);
 const perLang=mk=>Object.fromEntries(LANG_IDS.map(l=>[l,mk()]));
-let st={lang:LANG_IDS[0],theme:'auto',recVoice:perLang(()=>'mix'),cards:perLang(()=>({})),slow:false,sfx:true,splash:true,pick:'all',xp:perLang(()=>0),voice:perLang(()=>''),streak:{last:'',n:0}};
+let st={lang:LANG_IDS[0],theme:'auto',recVoice:perLang(()=>'mix'),cards:perLang(()=>({})),slow:false,sfx:true,splash:true,pick:'all',autoDl:true,xp:perLang(()=>0),voice:perLang(()=>''),streak:{last:'',n:0}};
 try{const raw=localStorage.getItem(KEY);if(raw){const p=JSON.parse(raw);st={...st,...p,cards:{...st.cards,...(p.cards||{})},voice:{...st.voice,...(p.voice||{})},recVoice:{...st.recVoice,...(p.recVoice||{})},xp:{...st.xp,...(p.xp||{})}};if(!LANGS[st.lang])st.lang=LANG_IDS[0]}}catch(e){}
 function save(){try{localStorage.setItem(KEY,JSON.stringify(st))}catch(e){}}
 function applyTheme(){const r=document.documentElement;if(st.theme==='light'||st.theme==='dark')r.dataset.theme=st.theme;else delete r.dataset.theme}
@@ -93,7 +93,7 @@ function parseManifest(m){
   }
   return out;
 }
-fetch('audio/manifest.json',{cache:'no-store'}).then(r=>r.ok?r.json():null).then(m=>{if(m){manifest=parseManifest(m);if(!session&&!sheetOpen&&typeof renderHome==='function')renderHome()}}).catch(()=>{});
+fetch('audio/manifest.json',{cache:'no-store'}).then(r=>r.ok?r.json():null).then(m=>{if(m){manifest=parseManifest(m);if(!session&&!sheetOpen&&typeof renderHome==='function')renderHome();setTimeout(prefetchAhead,3000)}}).catch(()=>{});
 const recVoices=(l=st.lang)=>manifest?Object.keys(manifest.voices[l]).filter(v=>manifest.voices[l][v].size):[];
 const recorded=(l=st.lang)=>Math.max(0,...recVoices(l).map(v=>manifest.voices[l][v].size));
 function clipFor(id){
@@ -102,6 +102,31 @@ function clipFor(id){
   const pref=st.recVoice[l]||'mix';
   const v=pref==='mix'?has[[...key].reduce((a,c)=>a+c.charCodeAt(0),0)%has.length]:has.includes(pref)?pref:has[0];
   return `audio/${l}/${v?v+'/':''}${encodeURIComponent(key)}.${manifest.ext}`;
+}
+/* Offline: quietly cache the clips of the current and next stage of every open unit.
+   The service worker stores whatever is fetched from audio/; this just asks for it ahead of time. */
+let prefetching=false;
+async function prefetchAhead(){
+  if(prefetching||st.autoDl===false||!manifest||!window.caches||!navigator.onLine||(navigator.connection&&navigator.connection.saveData))return;
+  prefetching=true;
+  try{
+    const name=(await caches.keys()).find(k=>k.startsWith('audio-'));
+    if(!name)return;
+    const cache=await caches.open(name),todo=[];
+    for(const u of openUnits()){
+      const inf=unitInfo(u),at=inf.stages.indexOf(inf.cur);
+      if(at<0)continue;
+      for(const s of inf.stages.slice(at,at+2))for(const id of [...unitIds(u,s.k),...gistsFor(u).filter(g=>g.st===s.k).map(g=>g.id)]){
+        const rel=clipFor(id);if(!rel)continue;
+        const a=new URL(rel,location.href);
+        if(!await cache.match(a.origin+a.pathname))todo.push(rel);
+      }
+    }
+    let failed=false;
+    const worker=async()=>{while(todo.length&&!failed&&st.autoDl!==false){try{const r=await fetch(todo.shift());if(!r.ok)failed=true}catch(e){failed=true}}};
+    await Promise.all([worker(),worker(),worker()]);
+  }catch(e){}
+  prefetching=false;
 }
 const audioLabel=()=>{const v=recVoices();return v.length?`recorded ${v.filter(Boolean).length>1?v.length+' voices':'voice'} · ${recorded()} clips`:'device speech'};
 function speak(id,slow=st.slow){
